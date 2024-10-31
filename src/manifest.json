@@ -19,9 +19,7 @@
   "content_scripts": [
     {
       "matches": [
-        "http://*/*",
-        "https://*/*",
-        "<all_urls>"
+        "*://colab.research.google.com/*"
       ],
       "js": [
         "contentScript.bundle.js"
@@ -31,15 +29,24 @@
       ]
     }
   ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "webNavigation"
+  ],
   "devtools_page": "devtools.html",
   "web_accessible_resources": [
     {
       "resources": [
         "content.styles.css",
         "icon-128.png",
-        "icon-34.png"
+        "icon-34.png",
+        "pageScript.js"
       ],
-      "matches": []
+      "matches": [
+        "<all_urls>"
+      ]
     }
   ],
   "commands": {

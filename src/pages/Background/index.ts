@@ -188,7 +188,7 @@ chrome.commands.onCommand.addListener(command => {
 
 chrome.webNavigation.onCompleted.addListener(
     async () => {
-        await chrome.action.openPopup();  // Ensure proper permissions in manifest
+        //await chrome.action.openPopup();  // Ensure proper permissions in manifest
     },
     {
         url: [
