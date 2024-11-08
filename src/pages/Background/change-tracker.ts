@@ -81,6 +81,8 @@ export class NotebookChangeTracker {
             newOrder.push(cell.id);
         });
 
+        this.cellOrder = newOrder;
+
         // Generate changes
         changes.push(...this.detectAddedCells(newState));
         changes.push(...this.detectRemovedCells(newState));
@@ -171,7 +173,7 @@ export class NotebookChangeTracker {
     }
 
     formatChangesForAI(changes: CellChange[]): string {
-        let changeLog = `@NOTEBOOK_CHANGES\n`;
+        let changeLog = `@CHANGELOG\n`;
 
         changes.forEach(change => {
             switch (change.type) {
@@ -204,7 +206,7 @@ export class NotebookChangeTracker {
             }
         });
 
-        changeLog += '@END_CHANGES';
+        changeLog += '@END_CHANGELOG';
         console.log('Change log:', changeLog);
         return changeLog;
     }

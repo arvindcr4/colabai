@@ -41244,7 +41244,7 @@ var _a;
 
 
 
-var Newtab = function () {
+const Newtab = () => {
     return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "App" },
         react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", { className: "App-header" },
             react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", { src: _assets_img_logo_svg__WEBPACK_IMPORTED_MODULE_1__, className: "App-logo", alt: "logo" }),
@@ -45708,7 +45708,7 @@ module.exports = getWDSMetadata;
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("5b3dc5fc52c76a908342")
+/******/ 		__webpack_require__.h = () => ("46c49f4532132f0e5f22")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

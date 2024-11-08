@@ -41100,7 +41100,7 @@ __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/r
 var _a;
 
 
-var Panel = function () {
+const Panel = () => {
     return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "container" },
         react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Dev Tools Panel")));
 };
@@ -45546,7 +45546,7 @@ module.exports = getWDSMetadata;
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("5b3dc5fc52c76a908342")
+/******/ 		__webpack_require__.h = () => ("46c49f4532132f0e5f22")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
