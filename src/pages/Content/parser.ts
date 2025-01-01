@@ -29,11 +29,6 @@ export function parseLines(streamingState: StreamingState, lines: string[]): Str
         const deleteMatch = line.match(deleteRegex);
 
         if (createMatch) {
-
-            if (streamingState.currentOperations.size > 0 && streamingState.currentOperations.values().next().value?.type === 'create') {
-                return streamingState;
-            }
-
             const operationId = `create-${Date.now()}-${Math.random()}`;
             const operation = {
                 type: 'create',

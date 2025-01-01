@@ -13,7 +13,7 @@ export const useAI = (openSubscriptionWindow: () => void, setPrompt: (prompt: st
     const messageManager = useMessages();
     const {streamingState, updateStreamingContent, resetStreamingState} = useStreamingState();
     const {pendingOperations, setPendingOperations, acceptAllChanges, rejectAllChanges} = usePendingOperations();
-    
+
     const { handleAIError } = useAIError(openSubscriptionWindow, (error) => {
         
         messageManager.addErrorMessage(error.message, error.action, error.actionText);

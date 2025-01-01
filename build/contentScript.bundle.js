@@ -46033,8 +46033,7 @@ function init(notebook) {
     container.style.display = 'flex';
     notebook.appendChild(container);
     const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(container); // createRoot(container!) if you use TypeScript
-    root.render(react__WEBPACK_IMPORTED_MODULE_2___default().createElement(react__WEBPACK_IMPORTED_MODULE_2__.StrictMode, null,
-        react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_App__WEBPACK_IMPORTED_MODULE_0__["default"], null)));
+    root.render(react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_App__WEBPACK_IMPORTED_MODULE_0__["default"], null));
 }
 
 
@@ -46374,7 +46373,7 @@ __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/r
 
 
 function parseLines(streamingState, lines) {
-    var _a, _b, _c, _d;
+    var _a, _b, _c;
     const createRegex = /@CREATE\[type=(markdown|code),\s*position=(top|bottom|after:(cell-[^\]]+)|before:(cell-[^\]]+))\]/;
     const editRegex = /@EDIT\[(cell-[^\]]+)\]/;
     const deleteRegex = /@DELETE\[(cell-[^\]]+)\]/;
@@ -46396,9 +46395,6 @@ function parseLines(streamingState, lines) {
         const editMatch = line.match(editRegex);
         const deleteMatch = line.match(deleteRegex);
         if (createMatch) {
-            if (streamingState.currentOperations.size > 0 && ((_a = streamingState.currentOperations.values().next().value) === null || _a === void 0 ? void 0 : _a.type) === 'create') {
-                return streamingState;
-            }
             const operationId = `create-${Date.now()}-${Math.random()}`;
             const operation = {
                 type: 'create',
@@ -46440,7 +46436,7 @@ function parseLines(streamingState, lines) {
                 cellId,
                 contentArray: [],
                 content: '',
-                originalContent: ((_b = streamingState.originalContent.find(cell => cell.id === cellId)) === null || _b === void 0 ? void 0 : _b.content) || ''
+                originalContent: ((_a = streamingState.originalContent.find(cell => cell.id === cellId)) === null || _a === void 0 ? void 0 : _a.content) || ''
             };
             streamingState.currentOperations.set(cellId, operation);
             (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)(operation);
@@ -46448,7 +46444,7 @@ function parseLines(streamingState, lines) {
         }
         else if (deleteMatch) {
             const cellId = deleteMatch[1];
-            const originalContent = ((_c = streamingState.originalContent.find(cell => cell.id === cellId)) === null || _c === void 0 ? void 0 : _c.content) || '';
+            const originalContent = ((_b = streamingState.originalContent.find(cell => cell.id === cellId)) === null || _b === void 0 ? void 0 : _b.content) || '';
             const operation = {
                 type: 'delete',
                 cellId,
@@ -46479,7 +46475,7 @@ function parseLines(streamingState, lines) {
             // Add content to current operations
             for (const operation of streamingState.currentOperations.values()) {
                 if (operation.type !== 'delete' && 'contentArray' in operation && operation.contentArray) {
-                    (_d = operation.contentArray) === null || _d === void 0 ? void 0 : _d.push(line);
+                    (_c = operation.contentArray) === null || _c === void 0 ? void 0 : _c.push(line);
                     operation.content = operation.contentArray.join('\n');
                     (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)({
                         type: 'edit',
@@ -85879,7 +85875,7 @@ function isUrl(fileUrlOrPath) {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("1427c7e5026065c35a77")
+/******/ 		__webpack_require__.h = () => ("6d5af0ff16906f5cc688")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

@@ -1,9 +1,9 @@
+
 import { createClient, Session, User } from '@supabase/supabase-js';
 import { generateAIContent, restartAI } from './ai-agent';
 import { AuthState } from '../../utils/types';
 import { FunctionsHttpError, FunctionsRelayError, FunctionsFetchError } from "@supabase/supabase-js";
 import { ErrorType, type AIError } from '../../utils/errors';
-import { StreamingManager } from './streaming-manager';
 
 // @ts-ignore
 import secrets from 'secrets';
@@ -26,9 +26,6 @@ const supabase = createClient(secrets.SUPABASE_URL, secrets.SUPABASE_KEY, {
     }
   }
 });
-
-// Initialize streaming manager
-const streamingManager = new StreamingManager();
 
 // // Initialize session from storage
 // (async () => {

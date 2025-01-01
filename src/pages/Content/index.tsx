@@ -33,9 +33,7 @@ function init(notebook: Element) {
 
     const root = createRoot(container!); // createRoot(container!) if you use TypeScript
     root.render(
-        <StrictMode>
-            <App />
-        </StrictMode>
+        <App />
     );
 
 }
