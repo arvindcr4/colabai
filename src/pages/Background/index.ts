@@ -1,290 +1,356 @@
-console.log('This is the background page.');
-console.log('Put the background scripts here.');
+import { createClient, Session, User } from '@supabase/supabase-js';
+import { generateAIContent, restartAI } from './ai-agent';
+import { AuthState } from '../../utils/types';
+import { FunctionsHttpError, FunctionsRelayError, FunctionsFetchError } from "@supabase/supabase-js";
+import { ErrorType, type AIError } from '../../utils/errors';
+import { StreamingManager } from './streaming-manager';
 
-import { NotebookChangeTracker, NotebookCell } from './change-tracker';
-import ExtPay from 'extpay';
+// @ts-ignore
+import secrets from 'secrets';
 
-let notebookTracker: NotebookChangeTracker;
-const messages: { role: string; content: string; }[] = [];
+const supabase = createClient(secrets.SUPABASE_URL, secrets.SUPABASE_KEY, {
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    storage: {
+      getItem: async (key) => {
+        const { [key]: value } = await chrome.storage.local.get(key);
+        return value;
+      },
+      setItem: async (key, value) => {
+        await chrome.storage.local.set({ [key]: value });
+      },
+      removeItem: async (key) => {
+        await chrome.storage.local.remove(key);
+      }
+    }
+  }
+});
 
-var extpay = new (ExtPay as any)('colab');
-extpay.startBackground();
+// Initialize streaming manager
+const streamingManager = new StreamingManager();
 
-console.log('Background Service Worker Loaded')
+// // Initialize session from storage
+// (async () => {
+//   const { data: { session }, error } = await supabase.auth.getSession();
+//   if (session) {
+//     const authState = await getUserAuthState(session);
+//     await updateAuthState(authState);
+//   }
+// })();
 
-chrome.runtime.onInstalled.addListener(async () => {
-    console.log('Extension installed')
-})
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    const { action, type } = request;
 
-chrome.action.setBadgeText({ text: 'ON' })
+    if (type === 'SUPABASE_REQUEST') {
+        handleSupabaseRequest(request.payload)
+            .then((result) => {
+                sendResponse({ success: true, data: result });
+            })
+            .catch((error) => {
+                console.error('Error in handleSupabaseRequest:', error);
+                sendResponse({ 
+                    success: false, 
+                    error: {
+                        message: error instanceof Error ? error.message : 'Unknown error occurred'
+                    }
+                });
+            });
+        return true;  // Indicate we will send response asynchronously
+    }
 
-chrome.action.onClicked.addListener(() => {
-    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-        const activeTab = tabs[0]
-        chrome.tabs.sendMessage(activeTab.id!, { message: 'clicked_browser_action' })
-    })
-})
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    const { action } = message;
+    if (type === 'UPDATE_SUBSCRIPTION_PLAN') {
+        // Broadcast the subscription plan update to all tabs
+        chrome.tabs.query({}, (tabs) => {
+          tabs.forEach((tab) => {
+            if (tab.id) {
+              chrome.tabs.sendMessage(tab.id, {
+                type: 'SUBSCRIPTION_PLAN_UPDATED',
+                payload: request.payload
+              });
+            }
+          });
+        });
+        sendResponse({ success: true });
+        return true;
+    }
+
     switch (action) {
         case 'generateAI':
             console.log("Generating...");
-            generateAIContent(message.prompt, message.content, message.model)
+            generateAIContent(request.prompt, request.content, supabase, request.model, request.plan)
                 .then(() => {
                     sendResponse({ success: true });
                 })
-                .catch(error => {
-                    console.error("Error generating AI content: ", error);
-                    sendResponse({ success: false, error: error.message })
+                .catch((error) => {
+                    console.error('Error generating AI content:', error);
+                    sendResponse({ success: false, error });
                 });
-            return true; // Indicate that the response will be sent asynchronously
+            return true;
+        case 'restartAI':
+            console.log("Restarting...");
+            restartAI();
+            sendResponse({ success: true });
+            return true;
+
+        case 'OPEN_POPUP':
+            const { popupUrl, width, height, left, top } = request.payload;
+            chrome.windows.create({
+                url: popupUrl,
+                type: 'popup',
+                width,
+                height,
+                left: left,
+                top: top
+            });
+            sendResponse({ success: true });
+            return true;
+
         default:
             sendResponse({ success: false, error: `Invalid action: ${action}` });
             return false;
     }
 });
 
-function trackNotebookChanges(currentCells: NotebookCell[]) {
-    const tracker = notebookTracker || new NotebookChangeTracker();
-    notebookTracker = tracker;
-    console.log('Tracking notebook changes');
+async function getSubscriptionDetails(userId: string) {
+  
+  const { data: subscriptions, error } = await supabase
+    .from('subscriptions')
+    .select('*')
+    .eq('profile_id', userId)
+    .in('status', ['active', 'pending_activation'])
+    .order('created_at', { ascending: false })
+    .limit(1);
 
-    return tracker.updateState(currentCells);
+  if (error) {
+    console.error('Error fetching subscription:', error);
+    return null;
+  }
+  
+  return subscriptions?.[0] || null;
 }
 
-async function generateAIContent(prompt: string, content: NotebookCell[], model = "gpt-3.5-turbo") {
-    console.log("Generating AI content...");
-    console.log("Previous content:", content);
-    const changeLog = trackNotebookChanges(content);
+async function handleSupabaseRequest(payload: any) {
+  const { operation, functionName, functionData, data } = payload;
+  
+  switch (operation) {
+    case 'GET_AUTH_STATE':
+      {
+      const authResponse = await supabase.auth.getSession();
 
-    console.log(changeLog);
+      if (!authResponse.data.session) {
+        return { user: null, session: null, subscriptionPlan: 'free' };
+      }
 
-    if (messages.length == 0)
-        messages.push({ role: "system", content: system_prompt });
+      return await getUserAuthState(authResponse.data.session);
+      }
+    case 'REFRESH_AUTH_STATE': // Refresh auth state across the extension
+      {
+        const authResponse = await supabase.auth.getSession();
 
-    messages.push({
-        role: "user",
-        content: `Changes since last message:\n\n${changeLog}\n\nUser request: ${prompt}`
+        if (!authResponse.data.session) {
+          return { user: null, session: null, subscriptionPlan: 'free' };
+        }
+  
+        const authState = await getUserAuthState(authResponse.data.session);
+
+        await updateAuthState(authState);
+        return authState;
+      }
+    case 'SIGN_IN_WITH_GOOGLE':
+      {
+      const response =  await supabase.auth.signInWithIdToken({
+        provider: 'google',
+        token: data.token,
+        options: {
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          }
+          
+        } as any,
+      });
+
+      return response;
+      }
+    case 'SIGN_OUT':
+      await supabase.auth.signOut();
+      await chrome.storage.local.clear(); // Clear all storage
+      return await updateAuthState({
+        user: null,
+        session: null,
+        subscriptionPlan: 'free',
+        subscriptionDetails: null
+      });
+    
+    case 'INVOKE_FUNCTION':
+      {
+      const session = await supabase.auth.getSession();
+      if (!session.data.session) {
+        throw new Error('User must be logged in to perform this action');
+      }
+
+      const { data: functionResponse, error } = await supabase.functions.invoke(
+        functionName,
+        {
+          body: functionData,
+          headers: {
+            Authorization: `Bearer ${session.data.session.access_token}`
+          }
+        }
+      );
+
+      
+      if (error instanceof FunctionsHttpError) {
+        const errorMessage = await error.context.json()
+        console.error('Supabase function error:', errorMessage);
+        throw errorMessage.error;
+    } else if (error instanceof FunctionsRelayError) {
+        throw {
+            type: ErrorType.SERVER,
+            message: 'Error during content streaming',
+            details: error
+        };
+    } else if (error instanceof FunctionsFetchError) {
+        throw {
+            type: ErrorType.SERVER,
+            message: 'Error during content streaming',
+            details: error
+        };
+    }
+
+      return functionResponse;
+    }
+    case 'ACTIVATE_SUBSCRIPTION': // Check if subscription is active after payment
+      {
+      const { subscriptionId } = data;
+      return await supabase.functions.invoke(`payment?subscription_id=${subscriptionId}`, {
+        method: 'GET'
+      });
+      }
+    case 'CANCEL_SUBSCRIPTION':
+      {
+        const { subscriptionId } = data;
+        if (!subscriptionId) {
+          throw new Error('Subscription ID is required');
+        }
+
+        const session = await supabase.auth.getSession();
+        if (!session.data.session?.access_token) {
+          throw new Error('User must be logged in');
+        }
+
+        const response = await supabase.functions.invoke('payment', {
+          method: 'DELETE',
+          body: { subscriptionId }
+        });
+
+        if (response.error) {
+          throw new Error(response.error.message);
+        }
+
+        // Refresh auth state after cancellation
+        const authState = await getUserAuthState(session.data.session);
+        await updateAuthState(authState);
+
+        return { success: true };
+      }
+    default:
+      throw new Error(`Unknown operation: ${operation}`);
+  }
+}
+
+async function updateAuthState(authState: AuthState) {
+  // Send to all extension components
+  chrome.runtime.sendMessage({ 
+    type: 'AUTH_STATE_CHANGED', 
+    payload: authState 
+  });
+
+  // Notify content scripts
+  const tabs = await chrome.tabs.query({});
+  for (const tab of tabs) {
+    if (tab.id) {
+      chrome.tabs.sendMessage(tab.id, {
+        type: 'AUTH_STATE_CHANGED',
+        payload: authState
+      }).catch(err => {
+        // Ignore errors from inactive tabs
+        console.debug('Failed to send message to tab:', tab.id, err);
+      });
+    }
+  }
+}
+
+supabase.auth.onAuthStateChange(async (event, session) => {
+  if (event === 'SIGNED_IN') {
+    if (!session?.user) {
+      throw new Error('User is not defined');
+    }
+
+    const authState = await getUserAuthState(session);
+    await updateAuthState(authState);
+  }
+
+  if (event === 'SIGNED_OUT') {
+    await updateAuthState({
+      user: null,
+      session: null,
+      subscriptionPlan: 'free',
+      subscriptionDetails: null
     });
+  }
 
-    console.log(messages);
-    try {
-
-        // Send request to lambda function
-        const response = await fetch('https://qgvdlmluaznyzdv4jkfrw3oqee0rvber.lambda-url.eu-north-1.on.aws/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer YOUR_AUTH_TOKEN'
-            },
-            body: JSON.stringify({
-                messages: messages,
-                model: model
-            })
-        })
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const reader = response.body?.getReader();
-        const decoder = new TextDecoder("utf-8");
-        let done = false;
-
-        if (reader == null) {
-            throw new Error("Response body is null");
-        }
-
-        while (!done) {
-            const { value, done: chunkDone } = await reader.read();
-            if (value) {
-                console.log(new TextDecoder().decode(value));
-
-                let textChunk = decoder.decode(value, { stream: true });
-                let boundary;
-                const data: any[] = [];
-
-                // Separate JSON objects that arrive together in a single chunk
-                while ((boundary = textChunk.indexOf("}{")) !== -1) {
-                    // Separate the first JSON object
-                    const jsonStr = textChunk.slice(0, boundary + 1);
-                    textChunk = textChunk.slice(boundary + 1);
-
-                    // Parse and process the JSON
-                    data.push(JSON.parse(jsonStr));
-                }
-
-                // Process the remaining JSON
-                data.push(JSON.parse(textChunk));
-
-                chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-                    data.forEach((data) => {
-                        chrome.tabs.sendMessage(tabs[0].id!, {
-                            action: 'streamed_response',
-                            content: data.content,
-                            done: data.done
-                        });
-                    });
-                });
-            }
-            done = chunkDone;
-        }
-
-    } catch (error) {
-        console.error("Error generating AI content: ", error);
+  if (event === 'USER_UPDATED') {
+    if (!session?.user) {
+      throw new Error('User is not defined');
     }
+
+    const authState = await getUserAuthState(session);
+    await updateAuthState(authState);
+  }
+});
+
+async function getUserAuthState(session: Session): Promise<AuthState> {
+  const user = session?.user as User;
+
+  let subscriptionDetails = null;
+  let subscriptionPlan = 'free';
+
+  if (user.id) {
+    subscriptionDetails = await getSubscriptionDetails(user.id);
+    if (subscriptionDetails) {
+      subscriptionPlan = subscriptionDetails.plan_id;
+    }
+  }
+
+  const authState = {
+    user,
+    session,
+    subscriptionPlan,
+    subscriptionDetails
+  };
+
+  return authState;
 }
-
-const system_prompt = `# Google Colab Cell Operations Guide
-
-## Basic Operations
-Use these commands to manipulate notebook cells:
-
-1. Create: 
-@CREATE[type=markdown|code, position=top|bottom|after:cell-{id}|before:cell-{id}]
-content
-@END
-
-2. Edit (remember that the content in the edit operation replaces all previous content):
-@EDIT[cell-{id}]
-content
-@END
-
-3. Delete:
-@DELETE[cell-{id}]
-
-## Response Structure
-- Start operations with '@START_CODE'
-- End operations with '@END_CODE'
-- Write explanatory text before/after markers
-- Keep responses brief and clear
-
-## Notebook Guidelines
-- Use H1 for main topic, H2/H3 for sections
-- Start with imports/setup
-- Include context in markdown cells before code
-- Write clean, commented code in logical chunks
-- End with summary/conclusion
-
-## Changelog
-Changes between '@CHANGELOG' and '@END_CHANGELOG' are informational only - do not include in responses.
-
-Remember:
-- Operations execute in sequence
-- Preserve original formatting between @CREATE/@EDIT and @END
-- Maintain proper code indentation
-- Avoid redundant and empty content
-- Use descriptive names and helpful comments`;
-
-// const system_prompt = `Google Colab Notebook Cell Manipulation Guidelines
-
-// You can perform the following operations on notebook cells. Use these command markers to specify operations:
-
-// Cell Operations:
-// 1. Create new cell:
-// @CREATE[type=markdown|code, position=top|bottom|after:cell-{cellId}|before:cell-{cellId}]
-// content
-// @END
-
-// 2. Delete cell:
-// @DELETE[cell-{cellId}]
-
-// 3. Edit existing cell (remember that in edit, the new content replaces all the previous content. So always write the whole cell from start to end):
-// @EDIT[cell-{cellId}]
-// new content
-// @END
-
-// These are the ONLY operations you can perform on notebook cells. Make sure to follow the correct syntax and structure for each operation.
-
-// Required Structure:
-// - Start with H1 title for main topic
-// - Use H2/H3 headers for sections/subsections
-// - Begin with imports/setup
-// - End with summary/conclusion
-
-// Markdown Cells:
-// - Use formatting: bold, italic, lists, tables
-// - Add context before code cells
-// - Include LaTeX for math equations
-// - Embed diagrams/charts where needed
-
-// Code Cells:
-// - Break into logical chunks
-// - Add helpful comments
-// - Use descriptive names
-// - Group related code together
-
-// Notebook Changes (Between @CHANGELOG and @END_CHANGELOG):
-// - You will receive a list of changes that happened to the notebook cells since the last message
-// - This will include changes you made as well as changes made by the user
-// - These are not commands, but a summary of changes that happened before. Don't include these in your response
-// - These changes are cumulative and will be sent in sequence
-
-// Start and End Markers:
-// - To start writing the operations use @START_CODE
-// - To end writing the operations use @END_CODE
-// - You can write in normal text before and after these markers, explaining what you are doing or replying to the user
-// - Be very brief and clear in your responses before and after the markers. Also don't attempt to write in markdown format
-
-// Sample Examples:
-
-// 1. Create new markdown cell after cell 123:
-// @CREATE[type=markdown, position=after:cell-123]
-// ## Data Processing
-// In this section, we'll clean our dataset
-// @END
-
-// 2. Create new code cell at bottom:
-// @CREATE[type=code, position=bottom]
-// def process_data(df):
-//     return df.dropna()
-// @END
-
-// 3. Edit existing cell:
-// @EDIT[cell-456]
-// import pandas as pd
-// import numpy as np
-// @END
-
-// 4. Delete cell:
-// @DELETE[cell-789]
-
-// Full Example:
-// Sure thing! Here's a sample structure for a data analysis project:
-// @START_CODE
-// @CREATE[type=markdown, position=top]
-// # Data Analysis Project
-// @END
-
-// @CREATE[type=code, position=bottom]
-// import pandas as pd
-// @END
-
-// @EDIT[cell-123]
-// df = pd.read_csv('data.csv')
-// @END
-// ...
-// @END_CODE
-// This will help you get started with your project. Let me know if you need any more help!
-
-// Remember:
-// - Each operation must use the correct syntax
-// - Cell IDs must be specified for position-dependent operations
-// - Operations are executed in sequence
-// - Content between @CREATE/@EDIT and @END maintains original formatting
-// - For code cells, ensure proper indentation is preserved
-// - Be smart with the layout. If part of the content is already present, don't repeat it. Remove unnecessary or redundant content.
-
-// Output Format:
-// The assistant should provide cell operations using the above syntax. Multiple operations can be specified in sequence. The final output should be a well-structured notebook with the requested changes.`;
-
-
-chrome.commands.onCommand.addListener(command => {
-    console.log(`Command: ${command}`)
-
-    if (command === 'refresh_extension') {
-        chrome.runtime.reload()
-    }
-})
 
 export { }
+
+chrome.commands.onCommand.addListener(command => {
+  
+  if (command === 'refresh_extension') {
+    chrome.runtime.reload()
+  }
+})
+
+chrome.action.onClicked.addListener(() => {
+  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+    const activeTab = tabs[0]
+    chrome.tabs.sendMessage(activeTab.id!, { message: 'clicked_browser_action' })
+  })
+})
+
+chrome.runtime.onInstalled.addListener(async () => {
+})
+
+// chrome.action.setBadgeText({ text: 'ON' })

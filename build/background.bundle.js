@@ -282,6 +282,8248 @@ module.exports = Object.freeze({
 
 /***/ }),
 
+/***/ "./node_modules/@supabase/auth-js/dist/module/AuthAdminApi.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@supabase/auth-js/dist/module/AuthAdminApi.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _GoTrueAdminApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GoTrueAdminApi */ "./node_modules/@supabase/auth-js/dist/module/GoTrueAdminApi.js");
+
+const AuthAdminApi = _GoTrueAdminApi__WEBPACK_IMPORTED_MODULE_0__["default"];
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AuthAdminApi);
+//# sourceMappingURL=AuthAdminApi.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/auth-js/dist/module/AuthClient.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@supabase/auth-js/dist/module/AuthClient.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _GoTrueClient__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GoTrueClient */ "./node_modules/@supabase/auth-js/dist/module/GoTrueClient.js");
+
+const AuthClient = _GoTrueClient__WEBPACK_IMPORTED_MODULE_0__["default"];
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AuthClient);
+//# sourceMappingURL=AuthClient.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/auth-js/dist/module/GoTrueAdminApi.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@supabase/auth-js/dist/module/GoTrueAdminApi.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ GoTrueAdminApi)
+/* harmony export */ });
+/* harmony import */ var _lib_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/fetch */ "./node_modules/@supabase/auth-js/dist/module/lib/fetch.js");
+/* harmony import */ var _lib_helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/helpers */ "./node_modules/@supabase/auth-js/dist/module/lib/helpers.js");
+/* harmony import */ var _lib_errors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/errors */ "./node_modules/@supabase/auth-js/dist/module/lib/errors.js");
+var __rest = (undefined && undefined.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
+
+
+
+class GoTrueAdminApi {
+    constructor({ url = '', headers = {}, fetch, }) {
+        this.url = url;
+        this.headers = headers;
+        this.fetch = (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_1__.resolveFetch)(fetch);
+        this.mfa = {
+            listFactors: this._listFactors.bind(this),
+            deleteFactor: this._deleteFactor.bind(this),
+        };
+    }
+    /**
+     * Removes a logged-in session.
+     * @param jwt A valid, logged-in JWT.
+     * @param scope The logout sope.
+     */
+    async signOut(jwt, scope = 'global') {
+        try {
+            await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_0__._request)(this.fetch, 'POST', `${this.url}/logout?scope=${scope}`, {
+                headers: this.headers,
+                jwt,
+                noResolveJson: true,
+            });
+            return { data: null, error: null };
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: null, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Sends an invite link to an email address.
+     * @param email The email address of the user.
+     * @param options Additional options to be included when inviting.
+     */
+    async inviteUserByEmail(email, options = {}) {
+        try {
+            return await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_0__._request)(this.fetch, 'POST', `${this.url}/invite`, {
+                body: { email, data: options.data },
+                headers: this.headers,
+                redirectTo: options.redirectTo,
+                xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_0__._userResponse,
+            });
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { user: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Generates email links and OTPs to be sent via a custom email provider.
+     * @param email The user's email.
+     * @param options.password User password. For signup only.
+     * @param options.data Optional user metadata. For signup only.
+     * @param options.redirectTo The redirect url which should be appended to the generated link
+     */
+    async generateLink(params) {
+        try {
+            const { options } = params, rest = __rest(params, ["options"]);
+            const body = Object.assign(Object.assign({}, rest), options);
+            if ('newEmail' in rest) {
+                // replace newEmail with new_email in request body
+                body.new_email = rest === null || rest === void 0 ? void 0 : rest.newEmail;
+                delete body['newEmail'];
+            }
+            return await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_0__._request)(this.fetch, 'POST', `${this.url}/admin/generate_link`, {
+                body: body,
+                headers: this.headers,
+                xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_0__._generateLinkResponse,
+                redirectTo: options === null || options === void 0 ? void 0 : options.redirectTo,
+            });
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return {
+                    data: {
+                        properties: null,
+                        user: null,
+                    },
+                    error,
+                };
+            }
+            throw error;
+        }
+    }
+    // User Admin API
+    /**
+     * Creates a new user.
+     * This function should only be called on a server. Never expose your `service_role` key in the browser.
+     */
+    async createUser(attributes) {
+        try {
+            return await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_0__._request)(this.fetch, 'POST', `${this.url}/admin/users`, {
+                body: attributes,
+                headers: this.headers,
+                xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_0__._userResponse,
+            });
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { user: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Get a list of users.
+     *
+     * This function should only be called on a server. Never expose your `service_role` key in the browser.
+     * @param params An object which supports `page` and `perPage` as numbers, to alter the paginated results.
+     */
+    async listUsers(params) {
+        var _a, _b, _c, _d, _e, _f, _g;
+        try {
+            const pagination = { nextPage: null, lastPage: 0, total: 0 };
+            const response = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_0__._request)(this.fetch, 'GET', `${this.url}/admin/users`, {
+                headers: this.headers,
+                noResolveJson: true,
+                query: {
+                    page: (_b = (_a = params === null || params === void 0 ? void 0 : params.page) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '',
+                    per_page: (_d = (_c = params === null || params === void 0 ? void 0 : params.perPage) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '',
+                },
+                xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_0__._noResolveJsonResponse,
+            });
+            if (response.error)
+                throw response.error;
+            const users = await response.json();
+            const total = (_e = response.headers.get('x-total-count')) !== null && _e !== void 0 ? _e : 0;
+            const links = (_g = (_f = response.headers.get('link')) === null || _f === void 0 ? void 0 : _f.split(',')) !== null && _g !== void 0 ? _g : [];
+            if (links.length > 0) {
+                links.forEach((link) => {
+                    const page = parseInt(link.split(';')[0].split('=')[1].substring(0, 1));
+                    const rel = JSON.parse(link.split(';')[1].split('=')[1]);
+                    pagination[`${rel}Page`] = page;
+                });
+                pagination.total = parseInt(total);
+            }
+            return { data: Object.assign(Object.assign({}, users), pagination), error: null };
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { users: [] }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Get user by id.
+     *
+     * @param uid The user's unique identifier
+     *
+     * This function should only be called on a server. Never expose your `service_role` key in the browser.
+     */
+    async getUserById(uid) {
+        try {
+            return await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_0__._request)(this.fetch, 'GET', `${this.url}/admin/users/${uid}`, {
+                headers: this.headers,
+                xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_0__._userResponse,
+            });
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { user: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Updates the user data.
+     *
+     * @param attributes The data you want to update.
+     *
+     * This function should only be called on a server. Never expose your `service_role` key in the browser.
+     */
+    async updateUserById(uid, attributes) {
+        try {
+            return await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_0__._request)(this.fetch, 'PUT', `${this.url}/admin/users/${uid}`, {
+                body: attributes,
+                headers: this.headers,
+                xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_0__._userResponse,
+            });
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { user: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Delete a user. Requires a `service_role` key.
+     *
+     * @param id The user id you want to remove.
+     * @param shouldSoftDelete If true, then the user will be soft-deleted (setting `deleted_at` to the current timestamp and disabling their account while preserving their data) from the auth schema.
+     * Defaults to false for backward compatibility.
+     *
+     * This function should only be called on a server. Never expose your `service_role` key in the browser.
+     */
+    async deleteUser(id, shouldSoftDelete = false) {
+        try {
+            return await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_0__._request)(this.fetch, 'DELETE', `${this.url}/admin/users/${id}`, {
+                headers: this.headers,
+                body: {
+                    should_soft_delete: shouldSoftDelete,
+                },
+                xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_0__._userResponse,
+            });
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { user: null }, error };
+            }
+            throw error;
+        }
+    }
+    async _listFactors(params) {
+        try {
+            const { data, error } = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_0__._request)(this.fetch, 'GET', `${this.url}/admin/users/${params.userId}/factors`, {
+                headers: this.headers,
+                xform: (factors) => {
+                    return { data: { factors }, error: null };
+                },
+            });
+            return { data, error };
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: null, error };
+            }
+            throw error;
+        }
+    }
+    async _deleteFactor(params) {
+        try {
+            const data = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_0__._request)(this.fetch, 'DELETE', `${this.url}/admin/users/${params.userId}/factors/${params.id}`, {
+                headers: this.headers,
+            });
+            return { data, error: null };
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: null, error };
+            }
+            throw error;
+        }
+    }
+}
+//# sourceMappingURL=GoTrueAdminApi.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/auth-js/dist/module/GoTrueClient.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@supabase/auth-js/dist/module/GoTrueClient.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ GoTrueClient)
+/* harmony export */ });
+/* harmony import */ var _GoTrueAdminApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GoTrueAdminApi */ "./node_modules/@supabase/auth-js/dist/module/GoTrueAdminApi.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/constants */ "./node_modules/@supabase/auth-js/dist/module/lib/constants.js");
+/* harmony import */ var _lib_errors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/errors */ "./node_modules/@supabase/auth-js/dist/module/lib/errors.js");
+/* harmony import */ var _lib_fetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lib/fetch */ "./node_modules/@supabase/auth-js/dist/module/lib/fetch.js");
+/* harmony import */ var _lib_helpers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./lib/helpers */ "./node_modules/@supabase/auth-js/dist/module/lib/helpers.js");
+/* harmony import */ var _lib_local_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/local-storage */ "./node_modules/@supabase/auth-js/dist/module/lib/local-storage.js");
+/* harmony import */ var _lib_polyfills__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./lib/polyfills */ "./node_modules/@supabase/auth-js/dist/module/lib/polyfills.js");
+/* harmony import */ var _lib_version__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./lib/version */ "./node_modules/@supabase/auth-js/dist/module/lib/version.js");
+/* harmony import */ var _lib_locks__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./lib/locks */ "./node_modules/@supabase/auth-js/dist/module/lib/locks.js");
+
+
+
+
+
+
+
+
+
+(0,_lib_polyfills__WEBPACK_IMPORTED_MODULE_6__.polyfillGlobalThis)(); // Make "globalThis" available
+const DEFAULT_OPTIONS = {
+    url: _lib_constants__WEBPACK_IMPORTED_MODULE_1__.GOTRUE_URL,
+    storageKey: _lib_constants__WEBPACK_IMPORTED_MODULE_1__.STORAGE_KEY,
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true,
+    headers: _lib_constants__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_HEADERS,
+    flowType: 'implicit',
+    debug: false,
+    hasCustomAuthorizationHeader: false,
+};
+/** Current session will be checked for refresh at this interval. */
+const AUTO_REFRESH_TICK_DURATION = 30 * 1000;
+/**
+ * A token refresh will be attempted this many ticks before the current session expires. */
+const AUTO_REFRESH_TICK_THRESHOLD = 3;
+async function lockNoOp(name, acquireTimeout, fn) {
+    return await fn();
+}
+class GoTrueClient {
+    /**
+     * Create a new client for use in the browser.
+     */
+    constructor(options) {
+        var _a, _b;
+        this.memoryStorage = null;
+        this.stateChangeEmitters = new Map();
+        this.autoRefreshTicker = null;
+        this.visibilityChangedCallback = null;
+        this.refreshingDeferred = null;
+        /**
+         * Keeps track of the async client initialization.
+         * When null or not yet resolved the auth state is `unknown`
+         * Once resolved the the auth state is known and it's save to call any further client methods.
+         * Keep extra care to never reject or throw uncaught errors
+         */
+        this.initializePromise = null;
+        this.detectSessionInUrl = true;
+        this.hasCustomAuthorizationHeader = false;
+        this.suppressGetSessionWarning = false;
+        this.lockAcquired = false;
+        this.pendingInLock = [];
+        /**
+         * Used to broadcast state change events to other tabs listening.
+         */
+        this.broadcastChannel = null;
+        this.logger = console.log;
+        this.instanceID = GoTrueClient.nextInstanceID;
+        GoTrueClient.nextInstanceID += 1;
+        if (this.instanceID > 0 && (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.isBrowser)()) {
+            console.warn('Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.');
+        }
+        const settings = Object.assign(Object.assign({}, DEFAULT_OPTIONS), options);
+        this.logDebugMessages = !!settings.debug;
+        if (typeof settings.debug === 'function') {
+            this.logger = settings.debug;
+        }
+        this.persistSession = settings.persistSession;
+        this.storageKey = settings.storageKey;
+        this.autoRefreshToken = settings.autoRefreshToken;
+        this.admin = new _GoTrueAdminApi__WEBPACK_IMPORTED_MODULE_0__["default"]({
+            url: settings.url,
+            headers: settings.headers,
+            fetch: settings.fetch,
+        });
+        this.url = settings.url;
+        this.headers = settings.headers;
+        this.fetch = (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.resolveFetch)(settings.fetch);
+        this.lock = settings.lock || lockNoOp;
+        this.detectSessionInUrl = settings.detectSessionInUrl;
+        this.flowType = settings.flowType;
+        this.hasCustomAuthorizationHeader = settings.hasCustomAuthorizationHeader;
+        if (settings.lock) {
+            this.lock = settings.lock;
+        }
+        else if ((0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.isBrowser)() && ((_a = globalThis === null || globalThis === void 0 ? void 0 : globalThis.navigator) === null || _a === void 0 ? void 0 : _a.locks)) {
+            this.lock = _lib_locks__WEBPACK_IMPORTED_MODULE_8__.navigatorLock;
+        }
+        else {
+            this.lock = lockNoOp;
+        }
+        this.mfa = {
+            verify: this._verify.bind(this),
+            enroll: this._enroll.bind(this),
+            unenroll: this._unenroll.bind(this),
+            challenge: this._challenge.bind(this),
+            listFactors: this._listFactors.bind(this),
+            challengeAndVerify: this._challengeAndVerify.bind(this),
+            getAuthenticatorAssuranceLevel: this._getAuthenticatorAssuranceLevel.bind(this),
+        };
+        if (this.persistSession) {
+            if (settings.storage) {
+                this.storage = settings.storage;
+            }
+            else {
+                if ((0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.supportsLocalStorage)()) {
+                    this.storage = _lib_local_storage__WEBPACK_IMPORTED_MODULE_5__.localStorageAdapter;
+                }
+                else {
+                    this.memoryStorage = {};
+                    this.storage = (0,_lib_local_storage__WEBPACK_IMPORTED_MODULE_5__.memoryLocalStorageAdapter)(this.memoryStorage);
+                }
+            }
+        }
+        else {
+            this.memoryStorage = {};
+            this.storage = (0,_lib_local_storage__WEBPACK_IMPORTED_MODULE_5__.memoryLocalStorageAdapter)(this.memoryStorage);
+        }
+        if ((0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.isBrowser)() && globalThis.BroadcastChannel && this.persistSession && this.storageKey) {
+            try {
+                this.broadcastChannel = new globalThis.BroadcastChannel(this.storageKey);
+            }
+            catch (e) {
+                console.error('Failed to create a new BroadcastChannel, multi-tab state changes will not be available', e);
+            }
+            (_b = this.broadcastChannel) === null || _b === void 0 ? void 0 : _b.addEventListener('message', async (event) => {
+                this._debug('received broadcast notification from other tab or client', event);
+                await this._notifyAllSubscribers(event.data.event, event.data.session, false); // broadcast = false so we don't get an endless loop of messages
+            });
+        }
+        this.initialize();
+    }
+    _debug(...args) {
+        if (this.logDebugMessages) {
+            this.logger(`GoTrueClient@${this.instanceID} (${_lib_version__WEBPACK_IMPORTED_MODULE_7__.version}) ${new Date().toISOString()}`, ...args);
+        }
+        return this;
+    }
+    /**
+     * Initializes the client session either from the url or from storage.
+     * This method is automatically called when instantiating the client, but should also be called
+     * manually when checking for an error from an auth redirect (oauth, magiclink, password recovery, etc).
+     */
+    async initialize() {
+        if (this.initializePromise) {
+            return await this.initializePromise;
+        }
+        this.initializePromise = (async () => {
+            return await this._acquireLock(-1, async () => {
+                return await this._initialize();
+            });
+        })();
+        return await this.initializePromise;
+    }
+    /**
+     * IMPORTANT:
+     * 1. Never throw in this method, as it is called from the constructor
+     * 2. Never return a session from this method as it would be cached over
+     *    the whole lifetime of the client
+     */
+    async _initialize() {
+        try {
+            const isPKCEFlow = (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.isBrowser)() ? await this._isPKCEFlow() : false;
+            this._debug('#_initialize()', 'begin', 'is PKCE flow', isPKCEFlow);
+            if (isPKCEFlow || (this.detectSessionInUrl && this._isImplicitGrantFlow())) {
+                const { data, error } = await this._getSessionFromURL(isPKCEFlow);
+                if (error) {
+                    this._debug('#_initialize()', 'error detecting session from URL', error);
+                    if ((error === null || error === void 0 ? void 0 : error.code) === 'identity_already_exists') {
+                        return { error };
+                    }
+                    // failed login attempt via url,
+                    // remove old session as in verifyOtp, signUp and signInWith*
+                    await this._removeSession();
+                    return { error };
+                }
+                const { session, redirectType } = data;
+                this._debug('#_initialize()', 'detected session in URL', session, 'redirect type', redirectType);
+                await this._saveSession(session);
+                setTimeout(async () => {
+                    if (redirectType === 'recovery') {
+                        await this._notifyAllSubscribers('PASSWORD_RECOVERY', session);
+                    }
+                    else {
+                        await this._notifyAllSubscribers('SIGNED_IN', session);
+                    }
+                }, 0);
+                return { error: null };
+            }
+            // no login attempt via callback url try to recover session from storage
+            await this._recoverAndRefresh();
+            return { error: null };
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { error };
+            }
+            return {
+                error: new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthUnknownError('Unexpected error during initialization', error),
+            };
+        }
+        finally {
+            await this._handleVisibilityChange();
+            this._debug('#_initialize()', 'end');
+        }
+    }
+    /**
+     * Creates a new anonymous user.
+     *
+     * @returns A session where the is_anonymous claim in the access token JWT set to true
+     */
+    async signInAnonymously(credentials) {
+        var _a, _b, _c;
+        try {
+            const res = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', `${this.url}/signup`, {
+                headers: this.headers,
+                body: {
+                    data: (_b = (_a = credentials === null || credentials === void 0 ? void 0 : credentials.options) === null || _a === void 0 ? void 0 : _a.data) !== null && _b !== void 0 ? _b : {},
+                    gotrue_meta_security: { captcha_token: (_c = credentials === null || credentials === void 0 ? void 0 : credentials.options) === null || _c === void 0 ? void 0 : _c.captchaToken },
+                },
+                xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_3__._sessionResponse,
+            });
+            const { data, error } = res;
+            if (error || !data) {
+                return { data: { user: null, session: null }, error: error };
+            }
+            const session = data.session;
+            const user = data.user;
+            if (data.session) {
+                await this._saveSession(data.session);
+                await this._notifyAllSubscribers('SIGNED_IN', session);
+            }
+            return { data: { user, session }, error: null };
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { user: null, session: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Creates a new user.
+     *
+     * Be aware that if a user account exists in the system you may get back an
+     * error message that attempts to hide this information from the user.
+     * This method has support for PKCE via email signups. The PKCE flow cannot be used when autoconfirm is enabled.
+     *
+     * @returns A logged-in session if the server has "autoconfirm" ON
+     * @returns A user if the server has "autoconfirm" OFF
+     */
+    async signUp(credentials) {
+        var _a, _b, _c;
+        try {
+            let res;
+            if ('email' in credentials) {
+                const { email, password, options } = credentials;
+                let codeChallenge = null;
+                let codeChallengeMethod = null;
+                if (this.flowType === 'pkce') {
+                    ;
+                    [codeChallenge, codeChallengeMethod] = await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.getCodeChallengeAndMethod)(this.storage, this.storageKey);
+                }
+                res = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', `${this.url}/signup`, {
+                    headers: this.headers,
+                    redirectTo: options === null || options === void 0 ? void 0 : options.emailRedirectTo,
+                    body: {
+                        email,
+                        password,
+                        data: (_a = options === null || options === void 0 ? void 0 : options.data) !== null && _a !== void 0 ? _a : {},
+                        gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken },
+                        code_challenge: codeChallenge,
+                        code_challenge_method: codeChallengeMethod,
+                    },
+                    xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_3__._sessionResponse,
+                });
+            }
+            else if ('phone' in credentials) {
+                const { phone, password, options } = credentials;
+                res = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', `${this.url}/signup`, {
+                    headers: this.headers,
+                    body: {
+                        phone,
+                        password,
+                        data: (_b = options === null || options === void 0 ? void 0 : options.data) !== null && _b !== void 0 ? _b : {},
+                        channel: (_c = options === null || options === void 0 ? void 0 : options.channel) !== null && _c !== void 0 ? _c : 'sms',
+                        gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken },
+                    },
+                    xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_3__._sessionResponse,
+                });
+            }
+            else {
+                throw new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthInvalidCredentialsError('You must provide either an email or phone number and a password');
+            }
+            const { data, error } = res;
+            if (error || !data) {
+                return { data: { user: null, session: null }, error: error };
+            }
+            const session = data.session;
+            const user = data.user;
+            if (data.session) {
+                await this._saveSession(data.session);
+                await this._notifyAllSubscribers('SIGNED_IN', session);
+            }
+            return { data: { user, session }, error: null };
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { user: null, session: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Log in an existing user with an email and password or phone and password.
+     *
+     * Be aware that you may get back an error message that will not distinguish
+     * between the cases where the account does not exist or that the
+     * email/phone and password combination is wrong or that the account can only
+     * be accessed via social login.
+     */
+    async signInWithPassword(credentials) {
+        try {
+            let res;
+            if ('email' in credentials) {
+                const { email, password, options } = credentials;
+                res = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', `${this.url}/token?grant_type=password`, {
+                    headers: this.headers,
+                    body: {
+                        email,
+                        password,
+                        gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken },
+                    },
+                    xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_3__._sessionResponsePassword,
+                });
+            }
+            else if ('phone' in credentials) {
+                const { phone, password, options } = credentials;
+                res = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', `${this.url}/token?grant_type=password`, {
+                    headers: this.headers,
+                    body: {
+                        phone,
+                        password,
+                        gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken },
+                    },
+                    xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_3__._sessionResponsePassword,
+                });
+            }
+            else {
+                throw new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthInvalidCredentialsError('You must provide either an email or phone number and a password');
+            }
+            const { data, error } = res;
+            if (error) {
+                return { data: { user: null, session: null }, error };
+            }
+            else if (!data || !data.session || !data.user) {
+                return { data: { user: null, session: null }, error: new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthInvalidTokenResponseError() };
+            }
+            if (data.session) {
+                await this._saveSession(data.session);
+                await this._notifyAllSubscribers('SIGNED_IN', data.session);
+            }
+            return {
+                data: Object.assign({ user: data.user, session: data.session }, (data.weak_password ? { weakPassword: data.weak_password } : null)),
+                error,
+            };
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { user: null, session: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Log in an existing user via a third-party provider.
+     * This method supports the PKCE flow.
+     */
+    async signInWithOAuth(credentials) {
+        var _a, _b, _c, _d;
+        return await this._handleProviderSignIn(credentials.provider, {
+            redirectTo: (_a = credentials.options) === null || _a === void 0 ? void 0 : _a.redirectTo,
+            scopes: (_b = credentials.options) === null || _b === void 0 ? void 0 : _b.scopes,
+            queryParams: (_c = credentials.options) === null || _c === void 0 ? void 0 : _c.queryParams,
+            skipBrowserRedirect: (_d = credentials.options) === null || _d === void 0 ? void 0 : _d.skipBrowserRedirect,
+        });
+    }
+    /**
+     * Log in an existing user by exchanging an Auth Code issued during the PKCE flow.
+     */
+    async exchangeCodeForSession(authCode) {
+        await this.initializePromise;
+        return this._acquireLock(-1, async () => {
+            return this._exchangeCodeForSession(authCode);
+        });
+    }
+    async _exchangeCodeForSession(authCode) {
+        const storageItem = await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.getItemAsync)(this.storage, `${this.storageKey}-code-verifier`);
+        const [codeVerifier, redirectType] = (storageItem !== null && storageItem !== void 0 ? storageItem : '').split('/');
+        try {
+            const { data, error } = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', `${this.url}/token?grant_type=pkce`, {
+                headers: this.headers,
+                body: {
+                    auth_code: authCode,
+                    code_verifier: codeVerifier,
+                },
+                xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_3__._sessionResponse,
+            });
+            await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.removeItemAsync)(this.storage, `${this.storageKey}-code-verifier`);
+            if (error) {
+                throw error;
+            }
+            if (!data || !data.session || !data.user) {
+                return {
+                    data: { user: null, session: null, redirectType: null },
+                    error: new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthInvalidTokenResponseError(),
+                };
+            }
+            if (data.session) {
+                await this._saveSession(data.session);
+                await this._notifyAllSubscribers('SIGNED_IN', data.session);
+            }
+            return { data: Object.assign(Object.assign({}, data), { redirectType: redirectType !== null && redirectType !== void 0 ? redirectType : null }), error };
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { user: null, session: null, redirectType: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Allows signing in with an OIDC ID token. The authentication provider used
+     * should be enabled and configured.
+     */
+    async signInWithIdToken(credentials) {
+        try {
+            const { options, provider, token, access_token, nonce } = credentials;
+            const res = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', `${this.url}/token?grant_type=id_token`, {
+                headers: this.headers,
+                body: {
+                    provider,
+                    id_token: token,
+                    access_token,
+                    nonce,
+                    gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken },
+                },
+                xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_3__._sessionResponse,
+            });
+            const { data, error } = res;
+            if (error) {
+                return { data: { user: null, session: null }, error };
+            }
+            else if (!data || !data.session || !data.user) {
+                return {
+                    data: { user: null, session: null },
+                    error: new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthInvalidTokenResponseError(),
+                };
+            }
+            if (data.session) {
+                await this._saveSession(data.session);
+                await this._notifyAllSubscribers('SIGNED_IN', data.session);
+            }
+            return { data, error };
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { user: null, session: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Log in a user using magiclink or a one-time password (OTP).
+     *
+     * If the `{{ .ConfirmationURL }}` variable is specified in the email template, a magiclink will be sent.
+     * If the `{{ .Token }}` variable is specified in the email template, an OTP will be sent.
+     * If you're using phone sign-ins, only an OTP will be sent. You won't be able to send a magiclink for phone sign-ins.
+     *
+     * Be aware that you may get back an error message that will not distinguish
+     * between the cases where the account does not exist or, that the account
+     * can only be accessed via social login.
+     *
+     * Do note that you will need to configure a Whatsapp sender on Twilio
+     * if you are using phone sign in with the 'whatsapp' channel. The whatsapp
+     * channel is not supported on other providers
+     * at this time.
+     * This method supports PKCE when an email is passed.
+     */
+    async signInWithOtp(credentials) {
+        var _a, _b, _c, _d, _e;
+        try {
+            if ('email' in credentials) {
+                const { email, options } = credentials;
+                let codeChallenge = null;
+                let codeChallengeMethod = null;
+                if (this.flowType === 'pkce') {
+                    ;
+                    [codeChallenge, codeChallengeMethod] = await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.getCodeChallengeAndMethod)(this.storage, this.storageKey);
+                }
+                const { error } = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', `${this.url}/otp`, {
+                    headers: this.headers,
+                    body: {
+                        email,
+                        data: (_a = options === null || options === void 0 ? void 0 : options.data) !== null && _a !== void 0 ? _a : {},
+                        create_user: (_b = options === null || options === void 0 ? void 0 : options.shouldCreateUser) !== null && _b !== void 0 ? _b : true,
+                        gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken },
+                        code_challenge: codeChallenge,
+                        code_challenge_method: codeChallengeMethod,
+                    },
+                    redirectTo: options === null || options === void 0 ? void 0 : options.emailRedirectTo,
+                });
+                return { data: { user: null, session: null }, error };
+            }
+            if ('phone' in credentials) {
+                const { phone, options } = credentials;
+                const { data, error } = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', `${this.url}/otp`, {
+                    headers: this.headers,
+                    body: {
+                        phone,
+                        data: (_c = options === null || options === void 0 ? void 0 : options.data) !== null && _c !== void 0 ? _c : {},
+                        create_user: (_d = options === null || options === void 0 ? void 0 : options.shouldCreateUser) !== null && _d !== void 0 ? _d : true,
+                        gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken },
+                        channel: (_e = options === null || options === void 0 ? void 0 : options.channel) !== null && _e !== void 0 ? _e : 'sms',
+                    },
+                });
+                return { data: { user: null, session: null, messageId: data === null || data === void 0 ? void 0 : data.message_id }, error };
+            }
+            throw new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthInvalidCredentialsError('You must provide either an email or phone number.');
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { user: null, session: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Log in a user given a User supplied OTP or TokenHash received through mobile or email.
+     */
+    async verifyOtp(params) {
+        var _a, _b;
+        try {
+            let redirectTo = undefined;
+            let captchaToken = undefined;
+            if ('options' in params) {
+                redirectTo = (_a = params.options) === null || _a === void 0 ? void 0 : _a.redirectTo;
+                captchaToken = (_b = params.options) === null || _b === void 0 ? void 0 : _b.captchaToken;
+            }
+            const { data, error } = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', `${this.url}/verify`, {
+                headers: this.headers,
+                body: Object.assign(Object.assign({}, params), { gotrue_meta_security: { captcha_token: captchaToken } }),
+                redirectTo,
+                xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_3__._sessionResponse,
+            });
+            if (error) {
+                throw error;
+            }
+            if (!data) {
+                throw new Error('An error occurred on token verification.');
+            }
+            const session = data.session;
+            const user = data.user;
+            if (session === null || session === void 0 ? void 0 : session.access_token) {
+                await this._saveSession(session);
+                await this._notifyAllSubscribers(params.type == 'recovery' ? 'PASSWORD_RECOVERY' : 'SIGNED_IN', session);
+            }
+            return { data: { user, session }, error: null };
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { user: null, session: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Attempts a single-sign on using an enterprise Identity Provider. A
+     * successful SSO attempt will redirect the current page to the identity
+     * provider authorization page. The redirect URL is implementation and SSO
+     * protocol specific.
+     *
+     * You can use it by providing a SSO domain. Typically you can extract this
+     * domain by asking users for their email address. If this domain is
+     * registered on the Auth instance the redirect will use that organization's
+     * currently active SSO Identity Provider for the login.
+     *
+     * If you have built an organization-specific login page, you can use the
+     * organization's SSO Identity Provider UUID directly instead.
+     */
+    async signInWithSSO(params) {
+        var _a, _b, _c;
+        try {
+            let codeChallenge = null;
+            let codeChallengeMethod = null;
+            if (this.flowType === 'pkce') {
+                ;
+                [codeChallenge, codeChallengeMethod] = await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.getCodeChallengeAndMethod)(this.storage, this.storageKey);
+            }
+            return await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', `${this.url}/sso`, {
+                body: Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, ('providerId' in params ? { provider_id: params.providerId } : null)), ('domain' in params ? { domain: params.domain } : null)), { redirect_to: (_b = (_a = params.options) === null || _a === void 0 ? void 0 : _a.redirectTo) !== null && _b !== void 0 ? _b : undefined }), (((_c = params === null || params === void 0 ? void 0 : params.options) === null || _c === void 0 ? void 0 : _c.captchaToken)
+                    ? { gotrue_meta_security: { captcha_token: params.options.captchaToken } }
+                    : null)), { skip_http_redirect: true, code_challenge: codeChallenge, code_challenge_method: codeChallengeMethod }),
+                headers: this.headers,
+                xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_3__._ssoResponse,
+            });
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: null, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Sends a reauthentication OTP to the user's email or phone number.
+     * Requires the user to be signed-in.
+     */
+    async reauthenticate() {
+        await this.initializePromise;
+        return await this._acquireLock(-1, async () => {
+            return await this._reauthenticate();
+        });
+    }
+    async _reauthenticate() {
+        try {
+            return await this._useSession(async (result) => {
+                const { data: { session }, error: sessionError, } = result;
+                if (sessionError)
+                    throw sessionError;
+                if (!session)
+                    throw new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthSessionMissingError();
+                const { error } = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'GET', `${this.url}/reauthenticate`, {
+                    headers: this.headers,
+                    jwt: session.access_token,
+                });
+                return { data: { user: null, session: null }, error };
+            });
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { user: null, session: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Resends an existing signup confirmation email, email change email, SMS OTP or phone change OTP.
+     */
+    async resend(credentials) {
+        try {
+            const endpoint = `${this.url}/resend`;
+            if ('email' in credentials) {
+                const { email, type, options } = credentials;
+                const { error } = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', endpoint, {
+                    headers: this.headers,
+                    body: {
+                        email,
+                        type,
+                        gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken },
+                    },
+                    redirectTo: options === null || options === void 0 ? void 0 : options.emailRedirectTo,
+                });
+                return { data: { user: null, session: null }, error };
+            }
+            else if ('phone' in credentials) {
+                const { phone, type, options } = credentials;
+                const { data, error } = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', endpoint, {
+                    headers: this.headers,
+                    body: {
+                        phone,
+                        type,
+                        gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken },
+                    },
+                });
+                return { data: { user: null, session: null, messageId: data === null || data === void 0 ? void 0 : data.message_id }, error };
+            }
+            throw new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthInvalidCredentialsError('You must provide either an email or phone number and a type');
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { user: null, session: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Returns the session, refreshing it if necessary.
+     *
+     * The session returned can be null if the session is not detected which can happen in the event a user is not signed-in or has logged out.
+     *
+     * **IMPORTANT:** This method loads values directly from the storage attached
+     * to the client. If that storage is based on request cookies for example,
+     * the values in it may not be authentic and therefore it's strongly advised
+     * against using this method and its results in such circumstances. A warning
+     * will be emitted if this is detected. Use {@link #getUser()} instead.
+     */
+    async getSession() {
+        await this.initializePromise;
+        const result = await this._acquireLock(-1, async () => {
+            return this._useSession(async (result) => {
+                return result;
+            });
+        });
+        return result;
+    }
+    /**
+     * Acquires a global lock based on the storage key.
+     */
+    async _acquireLock(acquireTimeout, fn) {
+        this._debug('#_acquireLock', 'begin', acquireTimeout);
+        try {
+            if (this.lockAcquired) {
+                const last = this.pendingInLock.length
+                    ? this.pendingInLock[this.pendingInLock.length - 1]
+                    : Promise.resolve();
+                const result = (async () => {
+                    await last;
+                    return await fn();
+                })();
+                this.pendingInLock.push((async () => {
+                    try {
+                        await result;
+                    }
+                    catch (e) {
+                        // we just care if it finished
+                    }
+                })());
+                return result;
+            }
+            return await this.lock(`lock:${this.storageKey}`, acquireTimeout, async () => {
+                this._debug('#_acquireLock', 'lock acquired for storage key', this.storageKey);
+                try {
+                    this.lockAcquired = true;
+                    const result = fn();
+                    this.pendingInLock.push((async () => {
+                        try {
+                            await result;
+                        }
+                        catch (e) {
+                            // we just care if it finished
+                        }
+                    })());
+                    await result;
+                    // keep draining the queue until there's nothing to wait on
+                    while (this.pendingInLock.length) {
+                        const waitOn = [...this.pendingInLock];
+                        await Promise.all(waitOn);
+                        this.pendingInLock.splice(0, waitOn.length);
+                    }
+                    return await result;
+                }
+                finally {
+                    this._debug('#_acquireLock', 'lock released for storage key', this.storageKey);
+                    this.lockAcquired = false;
+                }
+            });
+        }
+        finally {
+            this._debug('#_acquireLock', 'end');
+        }
+    }
+    /**
+     * Use instead of {@link #getSession} inside the library. It is
+     * semantically usually what you want, as getting a session involves some
+     * processing afterwards that requires only one client operating on the
+     * session at once across multiple tabs or processes.
+     */
+    async _useSession(fn) {
+        this._debug('#_useSession', 'begin');
+        try {
+            // the use of __loadSession here is the only correct use of the function!
+            const result = await this.__loadSession();
+            return await fn(result);
+        }
+        finally {
+            this._debug('#_useSession', 'end');
+        }
+    }
+    /**
+     * NEVER USE DIRECTLY!
+     *
+     * Always use {@link #_useSession}.
+     */
+    async __loadSession() {
+        this._debug('#__loadSession()', 'begin');
+        if (!this.lockAcquired) {
+            this._debug('#__loadSession()', 'used outside of an acquired lock!', new Error().stack);
+        }
+        try {
+            let currentSession = null;
+            const maybeSession = await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.getItemAsync)(this.storage, this.storageKey);
+            this._debug('#getSession()', 'session from storage', maybeSession);
+            if (maybeSession !== null) {
+                if (this._isValidSession(maybeSession)) {
+                    currentSession = maybeSession;
+                }
+                else {
+                    this._debug('#getSession()', 'session from storage is not valid');
+                    await this._removeSession();
+                }
+            }
+            if (!currentSession) {
+                return { data: { session: null }, error: null };
+            }
+            const hasExpired = currentSession.expires_at
+                ? currentSession.expires_at <= Date.now() / 1000
+                : false;
+            this._debug('#__loadSession()', `session has${hasExpired ? '' : ' not'} expired`, 'expires_at', currentSession.expires_at);
+            if (!hasExpired) {
+                if (this.storage.isServer) {
+                    let suppressWarning = this.suppressGetSessionWarning;
+                    const proxySession = new Proxy(currentSession, {
+                        get: (target, prop, receiver) => {
+                            if (!suppressWarning && prop === 'user') {
+                                // only show warning when the user object is being accessed from the server
+                                console.warn('Using the user object as returned from supabase.auth.getSession() or from some supabase.auth.onAuthStateChange() events could be insecure! This value comes directly from the storage medium (usually cookies on the server) and many not be authentic. Use supabase.auth.getUser() instead which authenticates the data by contacting the Supabase Auth server.');
+                                suppressWarning = true; // keeps this proxy instance from logging additional warnings
+                                this.suppressGetSessionWarning = true; // keeps this client's future proxy instances from warning
+                            }
+                            return Reflect.get(target, prop, receiver);
+                        },
+                    });
+                    currentSession = proxySession;
+                }
+                return { data: { session: currentSession }, error: null };
+            }
+            const { session, error } = await this._callRefreshToken(currentSession.refresh_token);
+            if (error) {
+                return { data: { session: null }, error };
+            }
+            return { data: { session }, error: null };
+        }
+        finally {
+            this._debug('#__loadSession()', 'end');
+        }
+    }
+    /**
+     * Gets the current user details if there is an existing session. This method
+     * performs a network request to the Supabase Auth server, so the returned
+     * value is authentic and can be used to base authorization rules on.
+     *
+     * @param jwt Takes in an optional access token JWT. If no JWT is provided, the JWT from the current session is used.
+     */
+    async getUser(jwt) {
+        if (jwt) {
+            return await this._getUser(jwt);
+        }
+        await this.initializePromise;
+        const result = await this._acquireLock(-1, async () => {
+            return await this._getUser();
+        });
+        return result;
+    }
+    async _getUser(jwt) {
+        try {
+            if (jwt) {
+                return await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'GET', `${this.url}/user`, {
+                    headers: this.headers,
+                    jwt: jwt,
+                    xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_3__._userResponse,
+                });
+            }
+            return await this._useSession(async (result) => {
+                var _a, _b, _c;
+                const { data, error } = result;
+                if (error) {
+                    throw error;
+                }
+                // returns an error if there is no access_token or custom authorization header
+                if (!((_a = data.session) === null || _a === void 0 ? void 0 : _a.access_token) && !this.hasCustomAuthorizationHeader) {
+                    return { data: { user: null }, error: new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthSessionMissingError() };
+                }
+                return await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'GET', `${this.url}/user`, {
+                    headers: this.headers,
+                    jwt: (_c = (_b = data.session) === null || _b === void 0 ? void 0 : _b.access_token) !== null && _c !== void 0 ? _c : undefined,
+                    xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_3__._userResponse,
+                });
+            });
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthSessionMissingError)(error)) {
+                    // JWT contains a `session_id` which does not correspond to an active
+                    // session in the database, indicating the user is signed out.
+                    await this._removeSession();
+                    await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.removeItemAsync)(this.storage, `${this.storageKey}-code-verifier`);
+                }
+                return { data: { user: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Updates user data for a logged in user.
+     */
+    async updateUser(attributes, options = {}) {
+        await this.initializePromise;
+        return await this._acquireLock(-1, async () => {
+            return await this._updateUser(attributes, options);
+        });
+    }
+    async _updateUser(attributes, options = {}) {
+        try {
+            return await this._useSession(async (result) => {
+                const { data: sessionData, error: sessionError } = result;
+                if (sessionError) {
+                    throw sessionError;
+                }
+                if (!sessionData.session) {
+                    throw new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthSessionMissingError();
+                }
+                const session = sessionData.session;
+                let codeChallenge = null;
+                let codeChallengeMethod = null;
+                if (this.flowType === 'pkce' && attributes.email != null) {
+                    ;
+                    [codeChallenge, codeChallengeMethod] = await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.getCodeChallengeAndMethod)(this.storage, this.storageKey);
+                }
+                const { data, error: userError } = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'PUT', `${this.url}/user`, {
+                    headers: this.headers,
+                    redirectTo: options === null || options === void 0 ? void 0 : options.emailRedirectTo,
+                    body: Object.assign(Object.assign({}, attributes), { code_challenge: codeChallenge, code_challenge_method: codeChallengeMethod }),
+                    jwt: session.access_token,
+                    xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_3__._userResponse,
+                });
+                if (userError)
+                    throw userError;
+                session.user = data.user;
+                await this._saveSession(session);
+                await this._notifyAllSubscribers('USER_UPDATED', session);
+                return { data: { user: session.user }, error: null };
+            });
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { user: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Decodes a JWT (without performing any validation).
+     */
+    _decodeJWT(jwt) {
+        return (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.decodeJWTPayload)(jwt);
+    }
+    /**
+     * Sets the session data from the current session. If the current session is expired, setSession will take care of refreshing it to obtain a new session.
+     * If the refresh token or access token in the current session is invalid, an error will be thrown.
+     * @param currentSession The current session that minimally contains an access token and refresh token.
+     */
+    async setSession(currentSession) {
+        await this.initializePromise;
+        return await this._acquireLock(-1, async () => {
+            return await this._setSession(currentSession);
+        });
+    }
+    async _setSession(currentSession) {
+        try {
+            if (!currentSession.access_token || !currentSession.refresh_token) {
+                throw new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthSessionMissingError();
+            }
+            const timeNow = Date.now() / 1000;
+            let expiresAt = timeNow;
+            let hasExpired = true;
+            let session = null;
+            const payload = (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.decodeJWTPayload)(currentSession.access_token);
+            if (payload.exp) {
+                expiresAt = payload.exp;
+                hasExpired = expiresAt <= timeNow;
+            }
+            if (hasExpired) {
+                const { session: refreshedSession, error } = await this._callRefreshToken(currentSession.refresh_token);
+                if (error) {
+                    return { data: { user: null, session: null }, error: error };
+                }
+                if (!refreshedSession) {
+                    return { data: { user: null, session: null }, error: null };
+                }
+                session = refreshedSession;
+            }
+            else {
+                const { data, error } = await this._getUser(currentSession.access_token);
+                if (error) {
+                    throw error;
+                }
+                session = {
+                    access_token: currentSession.access_token,
+                    refresh_token: currentSession.refresh_token,
+                    user: data.user,
+                    token_type: 'bearer',
+                    expires_in: expiresAt - timeNow,
+                    expires_at: expiresAt,
+                };
+                await this._saveSession(session);
+                await this._notifyAllSubscribers('SIGNED_IN', session);
+            }
+            return { data: { user: session.user, session }, error: null };
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { session: null, user: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Returns a new session, regardless of expiry status.
+     * Takes in an optional current session. If not passed in, then refreshSession() will attempt to retrieve it from getSession().
+     * If the current session's refresh token is invalid, an error will be thrown.
+     * @param currentSession The current session. If passed in, it must contain a refresh token.
+     */
+    async refreshSession(currentSession) {
+        await this.initializePromise;
+        return await this._acquireLock(-1, async () => {
+            return await this._refreshSession(currentSession);
+        });
+    }
+    async _refreshSession(currentSession) {
+        try {
+            return await this._useSession(async (result) => {
+                var _a;
+                if (!currentSession) {
+                    const { data, error } = result;
+                    if (error) {
+                        throw error;
+                    }
+                    currentSession = (_a = data.session) !== null && _a !== void 0 ? _a : undefined;
+                }
+                if (!(currentSession === null || currentSession === void 0 ? void 0 : currentSession.refresh_token)) {
+                    throw new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthSessionMissingError();
+                }
+                const { session, error } = await this._callRefreshToken(currentSession.refresh_token);
+                if (error) {
+                    return { data: { user: null, session: null }, error: error };
+                }
+                if (!session) {
+                    return { data: { user: null, session: null }, error: null };
+                }
+                return { data: { user: session.user, session }, error: null };
+            });
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { user: null, session: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Gets the session data from a URL string
+     */
+    async _getSessionFromURL(isPKCEFlow) {
+        try {
+            if (!(0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.isBrowser)())
+                throw new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthImplicitGrantRedirectError('No browser detected.');
+            if (this.flowType === 'implicit' && !this._isImplicitGrantFlow()) {
+                throw new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthImplicitGrantRedirectError('Not a valid implicit grant flow url.');
+            }
+            else if (this.flowType == 'pkce' && !isPKCEFlow) {
+                throw new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthPKCEGrantCodeExchangeError('Not a valid PKCE flow url.');
+            }
+            const params = (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.parseParametersFromURL)(window.location.href);
+            if (isPKCEFlow) {
+                if (!params.code)
+                    throw new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthPKCEGrantCodeExchangeError('No code detected.');
+                const { data, error } = await this._exchangeCodeForSession(params.code);
+                if (error)
+                    throw error;
+                const url = new URL(window.location.href);
+                url.searchParams.delete('code');
+                window.history.replaceState(window.history.state, '', url.toString());
+                return { data: { session: data.session, redirectType: null }, error: null };
+            }
+            if (params.error || params.error_description || params.error_code) {
+                throw new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthImplicitGrantRedirectError(params.error_description || 'Error in URL with unspecified error_description', {
+                    error: params.error || 'unspecified_error',
+                    code: params.error_code || 'unspecified_code',
+                });
+            }
+            const { provider_token, provider_refresh_token, access_token, refresh_token, expires_in, expires_at, token_type, } = params;
+            if (!access_token || !expires_in || !refresh_token || !token_type) {
+                throw new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthImplicitGrantRedirectError('No session defined in URL');
+            }
+            const timeNow = Math.round(Date.now() / 1000);
+            const expiresIn = parseInt(expires_in);
+            let expiresAt = timeNow + expiresIn;
+            if (expires_at) {
+                expiresAt = parseInt(expires_at);
+            }
+            const actuallyExpiresIn = expiresAt - timeNow;
+            if (actuallyExpiresIn * 1000 <= AUTO_REFRESH_TICK_DURATION) {
+                console.warn(`@supabase/gotrue-js: Session as retrieved from URL expires in ${actuallyExpiresIn}s, should have been closer to ${expiresIn}s`);
+            }
+            const issuedAt = expiresAt - expiresIn;
+            if (timeNow - issuedAt >= 120) {
+                console.warn('@supabase/gotrue-js: Session as retrieved from URL was issued over 120s ago, URL could be stale', issuedAt, expiresAt, timeNow);
+            }
+            else if (timeNow - issuedAt < 0) {
+                console.warn('@supabase/gotrue-js: Session as retrieved from URL was issued in the future? Check the device clock for skew', issuedAt, expiresAt, timeNow);
+            }
+            const { data, error } = await this._getUser(access_token);
+            if (error)
+                throw error;
+            const session = {
+                provider_token,
+                provider_refresh_token,
+                access_token,
+                expires_in: expiresIn,
+                expires_at: expiresAt,
+                refresh_token,
+                token_type,
+                user: data.user,
+            };
+            // Remove tokens from URL
+            window.location.hash = '';
+            this._debug('#_getSessionFromURL()', 'clearing window.location.hash');
+            return { data: { session, redirectType: params.type }, error: null };
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { session: null, redirectType: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Checks if the current URL contains parameters given by an implicit oauth grant flow (https://www.rfc-editor.org/rfc/rfc6749.html#section-4.2)
+     */
+    _isImplicitGrantFlow() {
+        const params = (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.parseParametersFromURL)(window.location.href);
+        return !!((0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.isBrowser)() && (params.access_token || params.error_description));
+    }
+    /**
+     * Checks if the current URL and backing storage contain parameters given by a PKCE flow
+     */
+    async _isPKCEFlow() {
+        const params = (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.parseParametersFromURL)(window.location.href);
+        const currentStorageContent = await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.getItemAsync)(this.storage, `${this.storageKey}-code-verifier`);
+        return !!(params.code && currentStorageContent);
+    }
+    /**
+     * Inside a browser context, `signOut()` will remove the logged in user from the browser session and log them out - removing all items from localstorage and then trigger a `"SIGNED_OUT"` event.
+     *
+     * For server-side management, you can revoke all refresh tokens for a user by passing a user's JWT through to `auth.api.signOut(JWT: string)`.
+     * There is no way to revoke a user's access token jwt until it expires. It is recommended to set a shorter expiry on the jwt for this reason.
+     *
+     * If using `others` scope, no `SIGNED_OUT` event is fired!
+     */
+    async signOut(options = { scope: 'global' }) {
+        await this.initializePromise;
+        return await this._acquireLock(-1, async () => {
+            return await this._signOut(options);
+        });
+    }
+    async _signOut({ scope } = { scope: 'global' }) {
+        return await this._useSession(async (result) => {
+            var _a;
+            const { data, error: sessionError } = result;
+            if (sessionError) {
+                return { error: sessionError };
+            }
+            const accessToken = (_a = data.session) === null || _a === void 0 ? void 0 : _a.access_token;
+            if (accessToken) {
+                const { error } = await this.admin.signOut(accessToken, scope);
+                if (error) {
+                    // ignore 404s since user might not exist anymore
+                    // ignore 401s since an invalid or expired JWT should sign out the current session
+                    if (!((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthApiError)(error) &&
+                        (error.status === 404 || error.status === 401 || error.status === 403))) {
+                        return { error };
+                    }
+                }
+            }
+            if (scope !== 'others') {
+                await this._removeSession();
+                await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.removeItemAsync)(this.storage, `${this.storageKey}-code-verifier`);
+            }
+            return { error: null };
+        });
+    }
+    /**
+     * Receive a notification every time an auth event happens.
+     * @param callback A callback function to be invoked when an auth event happens.
+     */
+    onAuthStateChange(callback) {
+        const id = (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.uuid)();
+        const subscription = {
+            id,
+            callback,
+            unsubscribe: () => {
+                this._debug('#unsubscribe()', 'state change callback with id removed', id);
+                this.stateChangeEmitters.delete(id);
+            },
+        };
+        this._debug('#onAuthStateChange()', 'registered callback with id', id);
+        this.stateChangeEmitters.set(id, subscription);
+        (async () => {
+            await this.initializePromise;
+            await this._acquireLock(-1, async () => {
+                this._emitInitialSession(id);
+            });
+        })();
+        return { data: { subscription } };
+    }
+    async _emitInitialSession(id) {
+        return await this._useSession(async (result) => {
+            var _a, _b;
+            try {
+                const { data: { session }, error, } = result;
+                if (error)
+                    throw error;
+                await ((_a = this.stateChangeEmitters.get(id)) === null || _a === void 0 ? void 0 : _a.callback('INITIAL_SESSION', session));
+                this._debug('INITIAL_SESSION', 'callback id', id, 'session', session);
+            }
+            catch (err) {
+                await ((_b = this.stateChangeEmitters.get(id)) === null || _b === void 0 ? void 0 : _b.callback('INITIAL_SESSION', null));
+                this._debug('INITIAL_SESSION', 'callback id', id, 'error', err);
+                console.error(err);
+            }
+        });
+    }
+    /**
+     * Sends a password reset request to an email address. This method supports the PKCE flow.
+     *
+     * @param email The email address of the user.
+     * @param options.redirectTo The URL to send the user to after they click the password reset link.
+     * @param options.captchaToken Verification token received when the user completes the captcha on the site.
+     */
+    async resetPasswordForEmail(email, options = {}) {
+        let codeChallenge = null;
+        let codeChallengeMethod = null;
+        if (this.flowType === 'pkce') {
+            ;
+            [codeChallenge, codeChallengeMethod] = await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.getCodeChallengeAndMethod)(this.storage, this.storageKey, true // isPasswordRecovery
+            );
+        }
+        try {
+            return await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', `${this.url}/recover`, {
+                body: {
+                    email,
+                    code_challenge: codeChallenge,
+                    code_challenge_method: codeChallengeMethod,
+                    gotrue_meta_security: { captcha_token: options.captchaToken },
+                },
+                headers: this.headers,
+                redirectTo: options.redirectTo,
+            });
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: null, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Gets all the identities linked to a user.
+     */
+    async getUserIdentities() {
+        var _a;
+        try {
+            const { data, error } = await this.getUser();
+            if (error)
+                throw error;
+            return { data: { identities: (_a = data.user.identities) !== null && _a !== void 0 ? _a : [] }, error: null };
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: null, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Links an oauth identity to an existing user.
+     * This method supports the PKCE flow.
+     */
+    async linkIdentity(credentials) {
+        var _a;
+        try {
+            const { data, error } = await this._useSession(async (result) => {
+                var _a, _b, _c, _d, _e;
+                const { data, error } = result;
+                if (error)
+                    throw error;
+                const url = await this._getUrlForProvider(`${this.url}/user/identities/authorize`, credentials.provider, {
+                    redirectTo: (_a = credentials.options) === null || _a === void 0 ? void 0 : _a.redirectTo,
+                    scopes: (_b = credentials.options) === null || _b === void 0 ? void 0 : _b.scopes,
+                    queryParams: (_c = credentials.options) === null || _c === void 0 ? void 0 : _c.queryParams,
+                    skipBrowserRedirect: true,
+                });
+                return await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'GET', url, {
+                    headers: this.headers,
+                    jwt: (_e = (_d = data.session) === null || _d === void 0 ? void 0 : _d.access_token) !== null && _e !== void 0 ? _e : undefined,
+                });
+            });
+            if (error)
+                throw error;
+            if ((0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.isBrowser)() && !((_a = credentials.options) === null || _a === void 0 ? void 0 : _a.skipBrowserRedirect)) {
+                window.location.assign(data === null || data === void 0 ? void 0 : data.url);
+            }
+            return { data: { provider: credentials.provider, url: data === null || data === void 0 ? void 0 : data.url }, error: null };
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { provider: credentials.provider, url: null }, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Unlinks an identity from a user by deleting it. The user will no longer be able to sign in with that identity once it's unlinked.
+     */
+    async unlinkIdentity(identity) {
+        try {
+            return await this._useSession(async (result) => {
+                var _a, _b;
+                const { data, error } = result;
+                if (error) {
+                    throw error;
+                }
+                return await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'DELETE', `${this.url}/user/identities/${identity.identity_id}`, {
+                    headers: this.headers,
+                    jwt: (_b = (_a = data.session) === null || _a === void 0 ? void 0 : _a.access_token) !== null && _b !== void 0 ? _b : undefined,
+                });
+            });
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: null, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * Generates a new JWT.
+     * @param refreshToken A valid refresh token that was returned on login.
+     */
+    async _refreshAccessToken(refreshToken) {
+        const debugName = `#_refreshAccessToken(${refreshToken.substring(0, 5)}...)`;
+        this._debug(debugName, 'begin');
+        try {
+            const startedAt = Date.now();
+            // will attempt to refresh the token with exponential backoff
+            return await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.retryable)(async (attempt) => {
+                if (attempt > 0) {
+                    await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.sleep)(200 * Math.pow(2, attempt - 1)); // 200, 400, 800, ...
+                }
+                this._debug(debugName, 'refreshing attempt', attempt);
+                return await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', `${this.url}/token?grant_type=refresh_token`, {
+                    body: { refresh_token: refreshToken },
+                    headers: this.headers,
+                    xform: _lib_fetch__WEBPACK_IMPORTED_MODULE_3__._sessionResponse,
+                });
+            }, (attempt, error) => {
+                const nextBackOffInterval = 200 * Math.pow(2, attempt);
+                return (error &&
+                    (0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthRetryableFetchError)(error) &&
+                    // retryable only if the request can be sent before the backoff overflows the tick duration
+                    Date.now() + nextBackOffInterval - startedAt < AUTO_REFRESH_TICK_DURATION);
+            });
+        }
+        catch (error) {
+            this._debug(debugName, 'error', error);
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: { session: null, user: null }, error };
+            }
+            throw error;
+        }
+        finally {
+            this._debug(debugName, 'end');
+        }
+    }
+    _isValidSession(maybeSession) {
+        const isValidSession = typeof maybeSession === 'object' &&
+            maybeSession !== null &&
+            'access_token' in maybeSession &&
+            'refresh_token' in maybeSession &&
+            'expires_at' in maybeSession;
+        return isValidSession;
+    }
+    async _handleProviderSignIn(provider, options) {
+        const url = await this._getUrlForProvider(`${this.url}/authorize`, provider, {
+            redirectTo: options.redirectTo,
+            scopes: options.scopes,
+            queryParams: options.queryParams,
+        });
+        this._debug('#_handleProviderSignIn()', 'provider', provider, 'options', options, 'url', url);
+        // try to open on the browser
+        if ((0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.isBrowser)() && !options.skipBrowserRedirect) {
+            window.location.assign(url);
+        }
+        return { data: { provider, url }, error: null };
+    }
+    /**
+     * Recovers the session from LocalStorage and refreshes the token
+     * Note: this method is async to accommodate for AsyncStorage e.g. in React native.
+     */
+    async _recoverAndRefresh() {
+        var _a;
+        const debugName = '#_recoverAndRefresh()';
+        this._debug(debugName, 'begin');
+        try {
+            const currentSession = await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.getItemAsync)(this.storage, this.storageKey);
+            this._debug(debugName, 'session from storage', currentSession);
+            if (!this._isValidSession(currentSession)) {
+                this._debug(debugName, 'session is not valid');
+                if (currentSession !== null) {
+                    await this._removeSession();
+                }
+                return;
+            }
+            const timeNow = Math.round(Date.now() / 1000);
+            const expiresWithMargin = ((_a = currentSession.expires_at) !== null && _a !== void 0 ? _a : Infinity) < timeNow + _lib_constants__WEBPACK_IMPORTED_MODULE_1__.EXPIRY_MARGIN;
+            this._debug(debugName, `session has${expiresWithMargin ? '' : ' not'} expired with margin of ${_lib_constants__WEBPACK_IMPORTED_MODULE_1__.EXPIRY_MARGIN}s`);
+            if (expiresWithMargin) {
+                if (this.autoRefreshToken && currentSession.refresh_token) {
+                    const { error } = await this._callRefreshToken(currentSession.refresh_token);
+                    if (error) {
+                        console.error(error);
+                        if (!(0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthRetryableFetchError)(error)) {
+                            this._debug(debugName, 'refresh failed with a non-retryable error, removing the session', error);
+                            await this._removeSession();
+                        }
+                    }
+                }
+            }
+            else {
+                // no need to persist currentSession again, as we just loaded it from
+                // local storage; persisting it again may overwrite a value saved by
+                // another client with access to the same local storage
+                await this._notifyAllSubscribers('SIGNED_IN', currentSession);
+            }
+        }
+        catch (err) {
+            this._debug(debugName, 'error', err);
+            console.error(err);
+            return;
+        }
+        finally {
+            this._debug(debugName, 'end');
+        }
+    }
+    async _callRefreshToken(refreshToken) {
+        var _a, _b;
+        if (!refreshToken) {
+            throw new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthSessionMissingError();
+        }
+        // refreshing is already in progress
+        if (this.refreshingDeferred) {
+            return this.refreshingDeferred.promise;
+        }
+        const debugName = `#_callRefreshToken(${refreshToken.substring(0, 5)}...)`;
+        this._debug(debugName, 'begin');
+        try {
+            this.refreshingDeferred = new _lib_helpers__WEBPACK_IMPORTED_MODULE_4__.Deferred();
+            const { data, error } = await this._refreshAccessToken(refreshToken);
+            if (error)
+                throw error;
+            if (!data.session)
+                throw new _lib_errors__WEBPACK_IMPORTED_MODULE_2__.AuthSessionMissingError();
+            await this._saveSession(data.session);
+            await this._notifyAllSubscribers('TOKEN_REFRESHED', data.session);
+            const result = { session: data.session, error: null };
+            this.refreshingDeferred.resolve(result);
+            return result;
+        }
+        catch (error) {
+            this._debug(debugName, 'error', error);
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                const result = { session: null, error };
+                if (!(0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthRetryableFetchError)(error)) {
+                    await this._removeSession();
+                }
+                (_a = this.refreshingDeferred) === null || _a === void 0 ? void 0 : _a.resolve(result);
+                return result;
+            }
+            (_b = this.refreshingDeferred) === null || _b === void 0 ? void 0 : _b.reject(error);
+            throw error;
+        }
+        finally {
+            this.refreshingDeferred = null;
+            this._debug(debugName, 'end');
+        }
+    }
+    async _notifyAllSubscribers(event, session, broadcast = true) {
+        const debugName = `#_notifyAllSubscribers(${event})`;
+        this._debug(debugName, 'begin', session, `broadcast = ${broadcast}`);
+        try {
+            if (this.broadcastChannel && broadcast) {
+                this.broadcastChannel.postMessage({ event, session });
+            }
+            const errors = [];
+            const promises = Array.from(this.stateChangeEmitters.values()).map(async (x) => {
+                try {
+                    await x.callback(event, session);
+                }
+                catch (e) {
+                    errors.push(e);
+                }
+            });
+            await Promise.all(promises);
+            if (errors.length > 0) {
+                for (let i = 0; i < errors.length; i += 1) {
+                    console.error(errors[i]);
+                }
+                throw errors[0];
+            }
+        }
+        finally {
+            this._debug(debugName, 'end');
+        }
+    }
+    /**
+     * set currentSession and currentUser
+     * process to _startAutoRefreshToken if possible
+     */
+    async _saveSession(session) {
+        this._debug('#_saveSession()', session);
+        // _saveSession is always called whenever a new session has been acquired
+        // so we can safely suppress the warning returned by future getSession calls
+        this.suppressGetSessionWarning = true;
+        await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.setItemAsync)(this.storage, this.storageKey, session);
+    }
+    async _removeSession() {
+        this._debug('#_removeSession()');
+        await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.removeItemAsync)(this.storage, this.storageKey);
+        await this._notifyAllSubscribers('SIGNED_OUT', null);
+    }
+    /**
+     * Removes any registered visibilitychange callback.
+     *
+     * {@see #startAutoRefresh}
+     * {@see #stopAutoRefresh}
+     */
+    _removeVisibilityChangedCallback() {
+        this._debug('#_removeVisibilityChangedCallback()');
+        const callback = this.visibilityChangedCallback;
+        this.visibilityChangedCallback = null;
+        try {
+            if (callback && (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.isBrowser)() && (window === null || window === void 0 ? void 0 : window.removeEventListener)) {
+                window.removeEventListener('visibilitychange', callback);
+            }
+        }
+        catch (e) {
+            console.error('removing visibilitychange callback failed', e);
+        }
+    }
+    /**
+     * This is the private implementation of {@link #startAutoRefresh}. Use this
+     * within the library.
+     */
+    async _startAutoRefresh() {
+        await this._stopAutoRefresh();
+        this._debug('#_startAutoRefresh()');
+        const ticker = setInterval(() => this._autoRefreshTokenTick(), AUTO_REFRESH_TICK_DURATION);
+        this.autoRefreshTicker = ticker;
+        if (ticker && typeof ticker === 'object' && typeof ticker.unref === 'function') {
+            // ticker is a NodeJS Timeout object that has an `unref` method
+            // https://nodejs.org/api/timers.html#timeoutunref
+            // When auto refresh is used in NodeJS (like for testing) the
+            // `setInterval` is preventing the process from being marked as
+            // finished and tests run endlessly. This can be prevented by calling
+            // `unref()` on the returned object.
+            ticker.unref();
+            // @ts-expect-error TS has no context of Deno
+        }
+        else if (typeof Deno !== 'undefined' && typeof Deno.unrefTimer === 'function') {
+            // similar like for NodeJS, but with the Deno API
+            // https://deno.land/api@latest?unstable&s=Deno.unrefTimer
+            // @ts-expect-error TS has no context of Deno
+            Deno.unrefTimer(ticker);
+        }
+        // run the tick immediately, but in the next pass of the event loop so that
+        // #_initialize can be allowed to complete without recursively waiting on
+        // itself
+        setTimeout(async () => {
+            await this.initializePromise;
+            await this._autoRefreshTokenTick();
+        }, 0);
+    }
+    /**
+     * This is the private implementation of {@link #stopAutoRefresh}. Use this
+     * within the library.
+     */
+    async _stopAutoRefresh() {
+        this._debug('#_stopAutoRefresh()');
+        const ticker = this.autoRefreshTicker;
+        this.autoRefreshTicker = null;
+        if (ticker) {
+            clearInterval(ticker);
+        }
+    }
+    /**
+     * Starts an auto-refresh process in the background. The session is checked
+     * every few seconds. Close to the time of expiration a process is started to
+     * refresh the session. If refreshing fails it will be retried for as long as
+     * necessary.
+     *
+     * If you set the {@link GoTrueClientOptions#autoRefreshToken} you don't need
+     * to call this function, it will be called for you.
+     *
+     * On browsers the refresh process works only when the tab/window is in the
+     * foreground to conserve resources as well as prevent race conditions and
+     * flooding auth with requests. If you call this method any managed
+     * visibility change callback will be removed and you must manage visibility
+     * changes on your own.
+     *
+     * On non-browser platforms the refresh process works *continuously* in the
+     * background, which may not be desirable. You should hook into your
+     * platform's foreground indication mechanism and call these methods
+     * appropriately to conserve resources.
+     *
+     * {@see #stopAutoRefresh}
+     */
+    async startAutoRefresh() {
+        this._removeVisibilityChangedCallback();
+        await this._startAutoRefresh();
+    }
+    /**
+     * Stops an active auto refresh process running in the background (if any).
+     *
+     * If you call this method any managed visibility change callback will be
+     * removed and you must manage visibility changes on your own.
+     *
+     * See {@link #startAutoRefresh} for more details.
+     */
+    async stopAutoRefresh() {
+        this._removeVisibilityChangedCallback();
+        await this._stopAutoRefresh();
+    }
+    /**
+     * Runs the auto refresh token tick.
+     */
+    async _autoRefreshTokenTick() {
+        this._debug('#_autoRefreshTokenTick()', 'begin');
+        try {
+            await this._acquireLock(0, async () => {
+                try {
+                    const now = Date.now();
+                    try {
+                        return await this._useSession(async (result) => {
+                            const { data: { session }, } = result;
+                            if (!session || !session.refresh_token || !session.expires_at) {
+                                this._debug('#_autoRefreshTokenTick()', 'no session');
+                                return;
+                            }
+                            // session will expire in this many ticks (or has already expired if <= 0)
+                            const expiresInTicks = Math.floor((session.expires_at * 1000 - now) / AUTO_REFRESH_TICK_DURATION);
+                            this._debug('#_autoRefreshTokenTick()', `access token expires in ${expiresInTicks} ticks, a tick lasts ${AUTO_REFRESH_TICK_DURATION}ms, refresh threshold is ${AUTO_REFRESH_TICK_THRESHOLD} ticks`);
+                            if (expiresInTicks <= AUTO_REFRESH_TICK_THRESHOLD) {
+                                await this._callRefreshToken(session.refresh_token);
+                            }
+                        });
+                    }
+                    catch (e) {
+                        console.error('Auto refresh tick failed with error. This is likely a transient error.', e);
+                    }
+                }
+                finally {
+                    this._debug('#_autoRefreshTokenTick()', 'end');
+                }
+            });
+        }
+        catch (e) {
+            if (e.isAcquireTimeout || e instanceof _lib_locks__WEBPACK_IMPORTED_MODULE_8__.LockAcquireTimeoutError) {
+                this._debug('auto refresh token tick lock not available');
+            }
+            else {
+                throw e;
+            }
+        }
+    }
+    /**
+     * Registers callbacks on the browser / platform, which in-turn run
+     * algorithms when the browser window/tab are in foreground. On non-browser
+     * platforms it assumes always foreground.
+     */
+    async _handleVisibilityChange() {
+        this._debug('#_handleVisibilityChange()');
+        if (!(0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.isBrowser)() || !(window === null || window === void 0 ? void 0 : window.addEventListener)) {
+            if (this.autoRefreshToken) {
+                // in non-browser environments the refresh token ticker runs always
+                this.startAutoRefresh();
+            }
+            return false;
+        }
+        try {
+            this.visibilityChangedCallback = async () => await this._onVisibilityChanged(false);
+            window === null || window === void 0 ? void 0 : window.addEventListener('visibilitychange', this.visibilityChangedCallback);
+            // now immediately call the visbility changed callback to setup with the
+            // current visbility state
+            await this._onVisibilityChanged(true); // initial call
+        }
+        catch (error) {
+            console.error('_handleVisibilityChange', error);
+        }
+    }
+    /**
+     * Callback registered with `window.addEventListener('visibilitychange')`.
+     */
+    async _onVisibilityChanged(calledFromInitialize) {
+        const methodName = `#_onVisibilityChanged(${calledFromInitialize})`;
+        this._debug(methodName, 'visibilityState', document.visibilityState);
+        if (document.visibilityState === 'visible') {
+            if (this.autoRefreshToken) {
+                // in browser environments the refresh token ticker runs only on focused tabs
+                // which prevents race conditions
+                this._startAutoRefresh();
+            }
+            if (!calledFromInitialize) {
+                // called when the visibility has changed, i.e. the browser
+                // transitioned from hidden -> visible so we need to see if the session
+                // should be recovered immediately... but to do that we need to acquire
+                // the lock first asynchronously
+                await this.initializePromise;
+                await this._acquireLock(-1, async () => {
+                    if (document.visibilityState !== 'visible') {
+                        this._debug(methodName, 'acquired the lock to recover the session, but the browser visibilityState is no longer visible, aborting');
+                        // visibility has changed while waiting for the lock, abort
+                        return;
+                    }
+                    // recover the session
+                    await this._recoverAndRefresh();
+                });
+            }
+        }
+        else if (document.visibilityState === 'hidden') {
+            if (this.autoRefreshToken) {
+                this._stopAutoRefresh();
+            }
+        }
+    }
+    /**
+     * Generates the relevant login URL for a third-party provider.
+     * @param options.redirectTo A URL or mobile address to send the user to after they are confirmed.
+     * @param options.scopes A space-separated list of scopes granted to the OAuth application.
+     * @param options.queryParams An object of key-value pairs containing query parameters granted to the OAuth application.
+     */
+    async _getUrlForProvider(url, provider, options) {
+        const urlParams = [`provider=${encodeURIComponent(provider)}`];
+        if (options === null || options === void 0 ? void 0 : options.redirectTo) {
+            urlParams.push(`redirect_to=${encodeURIComponent(options.redirectTo)}`);
+        }
+        if (options === null || options === void 0 ? void 0 : options.scopes) {
+            urlParams.push(`scopes=${encodeURIComponent(options.scopes)}`);
+        }
+        if (this.flowType === 'pkce') {
+            const [codeChallenge, codeChallengeMethod] = await (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_4__.getCodeChallengeAndMethod)(this.storage, this.storageKey);
+            const flowParams = new URLSearchParams({
+                code_challenge: `${encodeURIComponent(codeChallenge)}`,
+                code_challenge_method: `${encodeURIComponent(codeChallengeMethod)}`,
+            });
+            urlParams.push(flowParams.toString());
+        }
+        if (options === null || options === void 0 ? void 0 : options.queryParams) {
+            const query = new URLSearchParams(options.queryParams);
+            urlParams.push(query.toString());
+        }
+        if (options === null || options === void 0 ? void 0 : options.skipBrowserRedirect) {
+            urlParams.push(`skip_http_redirect=${options.skipBrowserRedirect}`);
+        }
+        return `${url}?${urlParams.join('&')}`;
+    }
+    async _unenroll(params) {
+        try {
+            return await this._useSession(async (result) => {
+                var _a;
+                const { data: sessionData, error: sessionError } = result;
+                if (sessionError) {
+                    return { data: null, error: sessionError };
+                }
+                return await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'DELETE', `${this.url}/factors/${params.factorId}`, {
+                    headers: this.headers,
+                    jwt: (_a = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a === void 0 ? void 0 : _a.access_token,
+                });
+            });
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: null, error };
+            }
+            throw error;
+        }
+    }
+    async _enroll(params) {
+        try {
+            return await this._useSession(async (result) => {
+                var _a, _b;
+                const { data: sessionData, error: sessionError } = result;
+                if (sessionError) {
+                    return { data: null, error: sessionError };
+                }
+                const body = Object.assign({ friendly_name: params.friendlyName, factor_type: params.factorType }, (params.factorType === 'phone' ? { phone: params.phone } : { issuer: params.issuer }));
+                const { data, error } = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', `${this.url}/factors`, {
+                    body,
+                    headers: this.headers,
+                    jwt: (_a = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a === void 0 ? void 0 : _a.access_token,
+                });
+                if (error) {
+                    return { data: null, error };
+                }
+                if (params.factorType === 'totp' && ((_b = data === null || data === void 0 ? void 0 : data.totp) === null || _b === void 0 ? void 0 : _b.qr_code)) {
+                    data.totp.qr_code = `data:image/svg+xml;utf-8,${data.totp.qr_code}`;
+                }
+                return { data, error: null };
+            });
+        }
+        catch (error) {
+            if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                return { data: null, error };
+            }
+            throw error;
+        }
+    }
+    /**
+     * {@see GoTrueMFAApi#verify}
+     */
+    async _verify(params) {
+        return this._acquireLock(-1, async () => {
+            try {
+                return await this._useSession(async (result) => {
+                    var _a;
+                    const { data: sessionData, error: sessionError } = result;
+                    if (sessionError) {
+                        return { data: null, error: sessionError };
+                    }
+                    const { data, error } = await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', `${this.url}/factors/${params.factorId}/verify`, {
+                        body: { code: params.code, challenge_id: params.challengeId },
+                        headers: this.headers,
+                        jwt: (_a = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a === void 0 ? void 0 : _a.access_token,
+                    });
+                    if (error) {
+                        return { data: null, error };
+                    }
+                    await this._saveSession(Object.assign({ expires_at: Math.round(Date.now() / 1000) + data.expires_in }, data));
+                    await this._notifyAllSubscribers('MFA_CHALLENGE_VERIFIED', data);
+                    return { data, error };
+                });
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * {@see GoTrueMFAApi#challenge}
+     */
+    async _challenge(params) {
+        return this._acquireLock(-1, async () => {
+            try {
+                return await this._useSession(async (result) => {
+                    var _a;
+                    const { data: sessionData, error: sessionError } = result;
+                    if (sessionError) {
+                        return { data: null, error: sessionError };
+                    }
+                    return await (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_3__._request)(this.fetch, 'POST', `${this.url}/factors/${params.factorId}/challenge`, {
+                        body: { channel: params.channel },
+                        headers: this.headers,
+                        jwt: (_a = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a === void 0 ? void 0 : _a.access_token,
+                    });
+                });
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_2__.isAuthError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * {@see GoTrueMFAApi#challengeAndVerify}
+     */
+    async _challengeAndVerify(params) {
+        // both _challenge and _verify independently acquire the lock, so no need
+        // to acquire it here
+        const { data: challengeData, error: challengeError } = await this._challenge({
+            factorId: params.factorId,
+        });
+        if (challengeError) {
+            return { data: null, error: challengeError };
+        }
+        return await this._verify({
+            factorId: params.factorId,
+            challengeId: challengeData.id,
+            code: params.code,
+        });
+    }
+    /**
+     * {@see GoTrueMFAApi#listFactors}
+     */
+    async _listFactors() {
+        // use #getUser instead of #_getUser as the former acquires a lock
+        const { data: { user }, error: userError, } = await this.getUser();
+        if (userError) {
+            return { data: null, error: userError };
+        }
+        const factors = (user === null || user === void 0 ? void 0 : user.factors) || [];
+        const totp = factors.filter((factor) => factor.factor_type === 'totp' && factor.status === 'verified');
+        const phone = factors.filter((factor) => factor.factor_type === 'phone' && factor.status === 'verified');
+        return {
+            data: {
+                all: factors,
+                totp,
+                phone,
+            },
+            error: null,
+        };
+    }
+    /**
+     * {@see GoTrueMFAApi#getAuthenticatorAssuranceLevel}
+     */
+    async _getAuthenticatorAssuranceLevel() {
+        return this._acquireLock(-1, async () => {
+            return await this._useSession(async (result) => {
+                var _a, _b;
+                const { data: { session }, error: sessionError, } = result;
+                if (sessionError) {
+                    return { data: null, error: sessionError };
+                }
+                if (!session) {
+                    return {
+                        data: { currentLevel: null, nextLevel: null, currentAuthenticationMethods: [] },
+                        error: null,
+                    };
+                }
+                const payload = this._decodeJWT(session.access_token);
+                let currentLevel = null;
+                if (payload.aal) {
+                    currentLevel = payload.aal;
+                }
+                let nextLevel = currentLevel;
+                const verifiedFactors = (_b = (_a = session.user.factors) === null || _a === void 0 ? void 0 : _a.filter((factor) => factor.status === 'verified')) !== null && _b !== void 0 ? _b : [];
+                if (verifiedFactors.length > 0) {
+                    nextLevel = 'aal2';
+                }
+                const currentAuthenticationMethods = payload.amr || [];
+                return { data: { currentLevel, nextLevel, currentAuthenticationMethods }, error: null };
+            });
+        });
+    }
+}
+GoTrueClient.nextInstanceID = 0;
+//# sourceMappingURL=GoTrueClient.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/auth-js/dist/module/index.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@supabase/auth-js/dist/module/index.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AuthAdminApi: () => (/* reexport safe */ _AuthAdminApi__WEBPACK_IMPORTED_MODULE_2__["default"]),
+/* harmony export */   AuthApiError: () => (/* reexport safe */ _lib_errors__WEBPACK_IMPORTED_MODULE_5__.AuthApiError),
+/* harmony export */   AuthClient: () => (/* reexport safe */ _AuthClient__WEBPACK_IMPORTED_MODULE_3__["default"]),
+/* harmony export */   AuthError: () => (/* reexport safe */ _lib_errors__WEBPACK_IMPORTED_MODULE_5__.AuthError),
+/* harmony export */   AuthImplicitGrantRedirectError: () => (/* reexport safe */ _lib_errors__WEBPACK_IMPORTED_MODULE_5__.AuthImplicitGrantRedirectError),
+/* harmony export */   AuthInvalidCredentialsError: () => (/* reexport safe */ _lib_errors__WEBPACK_IMPORTED_MODULE_5__.AuthInvalidCredentialsError),
+/* harmony export */   AuthInvalidTokenResponseError: () => (/* reexport safe */ _lib_errors__WEBPACK_IMPORTED_MODULE_5__.AuthInvalidTokenResponseError),
+/* harmony export */   AuthPKCEGrantCodeExchangeError: () => (/* reexport safe */ _lib_errors__WEBPACK_IMPORTED_MODULE_5__.AuthPKCEGrantCodeExchangeError),
+/* harmony export */   AuthRetryableFetchError: () => (/* reexport safe */ _lib_errors__WEBPACK_IMPORTED_MODULE_5__.AuthRetryableFetchError),
+/* harmony export */   AuthSessionMissingError: () => (/* reexport safe */ _lib_errors__WEBPACK_IMPORTED_MODULE_5__.AuthSessionMissingError),
+/* harmony export */   AuthUnknownError: () => (/* reexport safe */ _lib_errors__WEBPACK_IMPORTED_MODULE_5__.AuthUnknownError),
+/* harmony export */   AuthWeakPasswordError: () => (/* reexport safe */ _lib_errors__WEBPACK_IMPORTED_MODULE_5__.AuthWeakPasswordError),
+/* harmony export */   CustomAuthError: () => (/* reexport safe */ _lib_errors__WEBPACK_IMPORTED_MODULE_5__.CustomAuthError),
+/* harmony export */   GoTrueAdminApi: () => (/* reexport safe */ _GoTrueAdminApi__WEBPACK_IMPORTED_MODULE_0__["default"]),
+/* harmony export */   GoTrueClient: () => (/* reexport safe */ _GoTrueClient__WEBPACK_IMPORTED_MODULE_1__["default"]),
+/* harmony export */   NavigatorLockAcquireTimeoutError: () => (/* reexport safe */ _lib_locks__WEBPACK_IMPORTED_MODULE_6__.NavigatorLockAcquireTimeoutError),
+/* harmony export */   isAuthApiError: () => (/* reexport safe */ _lib_errors__WEBPACK_IMPORTED_MODULE_5__.isAuthApiError),
+/* harmony export */   isAuthError: () => (/* reexport safe */ _lib_errors__WEBPACK_IMPORTED_MODULE_5__.isAuthError),
+/* harmony export */   isAuthRetryableFetchError: () => (/* reexport safe */ _lib_errors__WEBPACK_IMPORTED_MODULE_5__.isAuthRetryableFetchError),
+/* harmony export */   isAuthSessionMissingError: () => (/* reexport safe */ _lib_errors__WEBPACK_IMPORTED_MODULE_5__.isAuthSessionMissingError),
+/* harmony export */   isAuthWeakPasswordError: () => (/* reexport safe */ _lib_errors__WEBPACK_IMPORTED_MODULE_5__.isAuthWeakPasswordError),
+/* harmony export */   lockInternals: () => (/* reexport safe */ _lib_locks__WEBPACK_IMPORTED_MODULE_6__.internals),
+/* harmony export */   navigatorLock: () => (/* reexport safe */ _lib_locks__WEBPACK_IMPORTED_MODULE_6__.navigatorLock)
+/* harmony export */ });
+/* harmony import */ var _GoTrueAdminApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GoTrueAdminApi */ "./node_modules/@supabase/auth-js/dist/module/GoTrueAdminApi.js");
+/* harmony import */ var _GoTrueClient__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GoTrueClient */ "./node_modules/@supabase/auth-js/dist/module/GoTrueClient.js");
+/* harmony import */ var _AuthAdminApi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AuthAdminApi */ "./node_modules/@supabase/auth-js/dist/module/AuthAdminApi.js");
+/* harmony import */ var _AuthClient__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AuthClient */ "./node_modules/@supabase/auth-js/dist/module/AuthClient.js");
+/* harmony import */ var _lib_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./lib/types */ "./node_modules/@supabase/auth-js/dist/module/lib/types.js");
+/* harmony import */ var _lib_errors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/errors */ "./node_modules/@supabase/auth-js/dist/module/lib/errors.js");
+/* harmony import */ var _lib_locks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./lib/locks */ "./node_modules/@supabase/auth-js/dist/module/lib/locks.js");
+
+
+
+
+
+
+
+
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/auth-js/dist/module/lib/constants.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@supabase/auth-js/dist/module/lib/constants.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   API_VERSIONS: () => (/* binding */ API_VERSIONS),
+/* harmony export */   API_VERSION_HEADER_NAME: () => (/* binding */ API_VERSION_HEADER_NAME),
+/* harmony export */   AUDIENCE: () => (/* binding */ AUDIENCE),
+/* harmony export */   DEFAULT_HEADERS: () => (/* binding */ DEFAULT_HEADERS),
+/* harmony export */   EXPIRY_MARGIN: () => (/* binding */ EXPIRY_MARGIN),
+/* harmony export */   GOTRUE_URL: () => (/* binding */ GOTRUE_URL),
+/* harmony export */   NETWORK_FAILURE: () => (/* binding */ NETWORK_FAILURE),
+/* harmony export */   STORAGE_KEY: () => (/* binding */ STORAGE_KEY)
+/* harmony export */ });
+/* harmony import */ var _version__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./version */ "./node_modules/@supabase/auth-js/dist/module/lib/version.js");
+
+const GOTRUE_URL = 'http://localhost:9999';
+const STORAGE_KEY = 'supabase.auth.token';
+const AUDIENCE = '';
+const DEFAULT_HEADERS = { 'X-Client-Info': `gotrue-js/${_version__WEBPACK_IMPORTED_MODULE_0__.version}` };
+const EXPIRY_MARGIN = 10; // in seconds
+const NETWORK_FAILURE = {
+    MAX_RETRIES: 10,
+    RETRY_INTERVAL: 2, // in deciseconds
+};
+const API_VERSION_HEADER_NAME = 'X-Supabase-Api-Version';
+const API_VERSIONS = {
+    '2024-01-01': {
+        timestamp: Date.parse('2024-01-01T00:00:00.0Z'),
+        name: '2024-01-01',
+    },
+};
+//# sourceMappingURL=constants.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/auth-js/dist/module/lib/errors.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@supabase/auth-js/dist/module/lib/errors.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AuthApiError: () => (/* binding */ AuthApiError),
+/* harmony export */   AuthError: () => (/* binding */ AuthError),
+/* harmony export */   AuthImplicitGrantRedirectError: () => (/* binding */ AuthImplicitGrantRedirectError),
+/* harmony export */   AuthInvalidCredentialsError: () => (/* binding */ AuthInvalidCredentialsError),
+/* harmony export */   AuthInvalidTokenResponseError: () => (/* binding */ AuthInvalidTokenResponseError),
+/* harmony export */   AuthPKCEGrantCodeExchangeError: () => (/* binding */ AuthPKCEGrantCodeExchangeError),
+/* harmony export */   AuthRetryableFetchError: () => (/* binding */ AuthRetryableFetchError),
+/* harmony export */   AuthSessionMissingError: () => (/* binding */ AuthSessionMissingError),
+/* harmony export */   AuthUnknownError: () => (/* binding */ AuthUnknownError),
+/* harmony export */   AuthWeakPasswordError: () => (/* binding */ AuthWeakPasswordError),
+/* harmony export */   CustomAuthError: () => (/* binding */ CustomAuthError),
+/* harmony export */   isAuthApiError: () => (/* binding */ isAuthApiError),
+/* harmony export */   isAuthError: () => (/* binding */ isAuthError),
+/* harmony export */   isAuthRetryableFetchError: () => (/* binding */ isAuthRetryableFetchError),
+/* harmony export */   isAuthSessionMissingError: () => (/* binding */ isAuthSessionMissingError),
+/* harmony export */   isAuthWeakPasswordError: () => (/* binding */ isAuthWeakPasswordError)
+/* harmony export */ });
+class AuthError extends Error {
+    constructor(message, status, code) {
+        super(message);
+        this.__isAuthError = true;
+        this.name = 'AuthError';
+        this.status = status;
+        this.code = code;
+    }
+}
+function isAuthError(error) {
+    return typeof error === 'object' && error !== null && '__isAuthError' in error;
+}
+class AuthApiError extends AuthError {
+    constructor(message, status, code) {
+        super(message, status, code);
+        this.name = 'AuthApiError';
+        this.status = status;
+        this.code = code;
+    }
+}
+function isAuthApiError(error) {
+    return isAuthError(error) && error.name === 'AuthApiError';
+}
+class AuthUnknownError extends AuthError {
+    constructor(message, originalError) {
+        super(message);
+        this.name = 'AuthUnknownError';
+        this.originalError = originalError;
+    }
+}
+class CustomAuthError extends AuthError {
+    constructor(message, name, status, code) {
+        super(message, status, code);
+        this.name = name;
+        this.status = status;
+    }
+}
+class AuthSessionMissingError extends CustomAuthError {
+    constructor() {
+        super('Auth session missing!', 'AuthSessionMissingError', 400, undefined);
+    }
+}
+function isAuthSessionMissingError(error) {
+    return isAuthError(error) && error.name === 'AuthSessionMissingError';
+}
+class AuthInvalidTokenResponseError extends CustomAuthError {
+    constructor() {
+        super('Auth session or user missing', 'AuthInvalidTokenResponseError', 500, undefined);
+    }
+}
+class AuthInvalidCredentialsError extends CustomAuthError {
+    constructor(message) {
+        super(message, 'AuthInvalidCredentialsError', 400, undefined);
+    }
+}
+class AuthImplicitGrantRedirectError extends CustomAuthError {
+    constructor(message, details = null) {
+        super(message, 'AuthImplicitGrantRedirectError', 500, undefined);
+        this.details = null;
+        this.details = details;
+    }
+    toJSON() {
+        return {
+            name: this.name,
+            message: this.message,
+            status: this.status,
+            details: this.details,
+        };
+    }
+}
+class AuthPKCEGrantCodeExchangeError extends CustomAuthError {
+    constructor(message, details = null) {
+        super(message, 'AuthPKCEGrantCodeExchangeError', 500, undefined);
+        this.details = null;
+        this.details = details;
+    }
+    toJSON() {
+        return {
+            name: this.name,
+            message: this.message,
+            status: this.status,
+            details: this.details,
+        };
+    }
+}
+class AuthRetryableFetchError extends CustomAuthError {
+    constructor(message, status) {
+        super(message, 'AuthRetryableFetchError', status, undefined);
+    }
+}
+function isAuthRetryableFetchError(error) {
+    return isAuthError(error) && error.name === 'AuthRetryableFetchError';
+}
+/**
+ * This error is thrown on certain methods when the password used is deemed
+ * weak. Inspect the reasons to identify what password strength rules are
+ * inadequate.
+ */
+class AuthWeakPasswordError extends CustomAuthError {
+    constructor(message, status, reasons) {
+        super(message, 'AuthWeakPasswordError', status, 'weak_password');
+        this.reasons = reasons;
+    }
+}
+function isAuthWeakPasswordError(error) {
+    return isAuthError(error) && error.name === 'AuthWeakPasswordError';
+}
+//# sourceMappingURL=errors.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/auth-js/dist/module/lib/fetch.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@supabase/auth-js/dist/module/lib/fetch.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   _generateLinkResponse: () => (/* binding */ _generateLinkResponse),
+/* harmony export */   _noResolveJsonResponse: () => (/* binding */ _noResolveJsonResponse),
+/* harmony export */   _request: () => (/* binding */ _request),
+/* harmony export */   _sessionResponse: () => (/* binding */ _sessionResponse),
+/* harmony export */   _sessionResponsePassword: () => (/* binding */ _sessionResponsePassword),
+/* harmony export */   _ssoResponse: () => (/* binding */ _ssoResponse),
+/* harmony export */   _userResponse: () => (/* binding */ _userResponse),
+/* harmony export */   handleError: () => (/* binding */ handleError)
+/* harmony export */ });
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./node_modules/@supabase/auth-js/dist/module/lib/constants.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers */ "./node_modules/@supabase/auth-js/dist/module/lib/helpers.js");
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./errors */ "./node_modules/@supabase/auth-js/dist/module/lib/errors.js");
+var __rest = (undefined && undefined.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
+
+
+
+const _getErrorMessage = (err) => err.msg || err.message || err.error_description || err.error || JSON.stringify(err);
+const NETWORK_ERROR_CODES = [502, 503, 504];
+async function handleError(error) {
+    var _a;
+    if (!(0,_helpers__WEBPACK_IMPORTED_MODULE_1__.looksLikeFetchResponse)(error)) {
+        throw new _errors__WEBPACK_IMPORTED_MODULE_2__.AuthRetryableFetchError(_getErrorMessage(error), 0);
+    }
+    if (NETWORK_ERROR_CODES.includes(error.status)) {
+        // status in 500...599 range - server had an error, request might be retryed.
+        throw new _errors__WEBPACK_IMPORTED_MODULE_2__.AuthRetryableFetchError(_getErrorMessage(error), error.status);
+    }
+    let data;
+    try {
+        data = await error.json();
+    }
+    catch (e) {
+        throw new _errors__WEBPACK_IMPORTED_MODULE_2__.AuthUnknownError(_getErrorMessage(e), e);
+    }
+    let errorCode = undefined;
+    const responseAPIVersion = (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.parseResponseAPIVersion)(error);
+    if (responseAPIVersion &&
+        responseAPIVersion.getTime() >= _constants__WEBPACK_IMPORTED_MODULE_0__.API_VERSIONS['2024-01-01'].timestamp &&
+        typeof data === 'object' &&
+        data &&
+        typeof data.code === 'string') {
+        errorCode = data.code;
+    }
+    else if (typeof data === 'object' && data && typeof data.error_code === 'string') {
+        errorCode = data.error_code;
+    }
+    if (!errorCode) {
+        // Legacy support for weak password errors, when there were no error codes
+        if (typeof data === 'object' &&
+            data &&
+            typeof data.weak_password === 'object' &&
+            data.weak_password &&
+            Array.isArray(data.weak_password.reasons) &&
+            data.weak_password.reasons.length &&
+            data.weak_password.reasons.reduce((a, i) => a && typeof i === 'string', true)) {
+            throw new _errors__WEBPACK_IMPORTED_MODULE_2__.AuthWeakPasswordError(_getErrorMessage(data), error.status, data.weak_password.reasons);
+        }
+    }
+    else if (errorCode === 'weak_password') {
+        throw new _errors__WEBPACK_IMPORTED_MODULE_2__.AuthWeakPasswordError(_getErrorMessage(data), error.status, ((_a = data.weak_password) === null || _a === void 0 ? void 0 : _a.reasons) || []);
+    }
+    else if (errorCode === 'session_not_found') {
+        // The `session_id` inside the JWT does not correspond to a row in the
+        // `sessions` table. This usually means the user has signed out, has been
+        // deleted, or their session has somehow been terminated.
+        throw new _errors__WEBPACK_IMPORTED_MODULE_2__.AuthSessionMissingError();
+    }
+    throw new _errors__WEBPACK_IMPORTED_MODULE_2__.AuthApiError(_getErrorMessage(data), error.status || 500, errorCode);
+}
+const _getRequestParams = (method, options, parameters, body) => {
+    const params = { method, headers: (options === null || options === void 0 ? void 0 : options.headers) || {} };
+    if (method === 'GET') {
+        return params;
+    }
+    params.headers = Object.assign({ 'Content-Type': 'application/json;charset=UTF-8' }, options === null || options === void 0 ? void 0 : options.headers);
+    params.body = JSON.stringify(body);
+    return Object.assign(Object.assign({}, params), parameters);
+};
+async function _request(fetcher, method, url, options) {
+    var _a;
+    const headers = Object.assign({}, options === null || options === void 0 ? void 0 : options.headers);
+    if (!headers[_constants__WEBPACK_IMPORTED_MODULE_0__.API_VERSION_HEADER_NAME]) {
+        headers[_constants__WEBPACK_IMPORTED_MODULE_0__.API_VERSION_HEADER_NAME] = _constants__WEBPACK_IMPORTED_MODULE_0__.API_VERSIONS['2024-01-01'].name;
+    }
+    if (options === null || options === void 0 ? void 0 : options.jwt) {
+        headers['Authorization'] = `Bearer ${options.jwt}`;
+    }
+    const qs = (_a = options === null || options === void 0 ? void 0 : options.query) !== null && _a !== void 0 ? _a : {};
+    if (options === null || options === void 0 ? void 0 : options.redirectTo) {
+        qs['redirect_to'] = options.redirectTo;
+    }
+    const queryString = Object.keys(qs).length ? '?' + new URLSearchParams(qs).toString() : '';
+    const data = await _handleRequest(fetcher, method, url + queryString, {
+        headers,
+        noResolveJson: options === null || options === void 0 ? void 0 : options.noResolveJson,
+    }, {}, options === null || options === void 0 ? void 0 : options.body);
+    return (options === null || options === void 0 ? void 0 : options.xform) ? options === null || options === void 0 ? void 0 : options.xform(data) : { data: Object.assign({}, data), error: null };
+}
+async function _handleRequest(fetcher, method, url, options, parameters, body) {
+    const requestParams = _getRequestParams(method, options, parameters, body);
+    let result;
+    try {
+        result = await fetcher(url, Object.assign({}, requestParams));
+    }
+    catch (e) {
+        console.error(e);
+        // fetch failed, likely due to a network or CORS error
+        throw new _errors__WEBPACK_IMPORTED_MODULE_2__.AuthRetryableFetchError(_getErrorMessage(e), 0);
+    }
+    if (!result.ok) {
+        await handleError(result);
+    }
+    if (options === null || options === void 0 ? void 0 : options.noResolveJson) {
+        return result;
+    }
+    try {
+        return await result.json();
+    }
+    catch (e) {
+        await handleError(e);
+    }
+}
+function _sessionResponse(data) {
+    var _a;
+    let session = null;
+    if (hasSession(data)) {
+        session = Object.assign({}, data);
+        if (!data.expires_at) {
+            session.expires_at = (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.expiresAt)(data.expires_in);
+        }
+    }
+    const user = (_a = data.user) !== null && _a !== void 0 ? _a : data;
+    return { data: { session, user }, error: null };
+}
+function _sessionResponsePassword(data) {
+    const response = _sessionResponse(data);
+    if (!response.error &&
+        data.weak_password &&
+        typeof data.weak_password === 'object' &&
+        Array.isArray(data.weak_password.reasons) &&
+        data.weak_password.reasons.length &&
+        data.weak_password.message &&
+        typeof data.weak_password.message === 'string' &&
+        data.weak_password.reasons.reduce((a, i) => a && typeof i === 'string', true)) {
+        response.data.weak_password = data.weak_password;
+    }
+    return response;
+}
+function _userResponse(data) {
+    var _a;
+    const user = (_a = data.user) !== null && _a !== void 0 ? _a : data;
+    return { data: { user }, error: null };
+}
+function _ssoResponse(data) {
+    return { data, error: null };
+}
+function _generateLinkResponse(data) {
+    const { action_link, email_otp, hashed_token, redirect_to, verification_type } = data, rest = __rest(data, ["action_link", "email_otp", "hashed_token", "redirect_to", "verification_type"]);
+    const properties = {
+        action_link,
+        email_otp,
+        hashed_token,
+        redirect_to,
+        verification_type,
+    };
+    const user = Object.assign({}, rest);
+    return {
+        data: {
+            properties,
+            user,
+        },
+        error: null,
+    };
+}
+function _noResolveJsonResponse(data) {
+    return data;
+}
+/**
+ * hasSession checks if the response object contains a valid session
+ * @param data A response object
+ * @returns true if a session is in the response
+ */
+function hasSession(data) {
+    return data.access_token && data.refresh_token && data.expires_in;
+}
+//# sourceMappingURL=fetch.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/auth-js/dist/module/lib/helpers.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@supabase/auth-js/dist/module/lib/helpers.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Deferred: () => (/* binding */ Deferred),
+/* harmony export */   decodeBase64URL: () => (/* binding */ decodeBase64URL),
+/* harmony export */   decodeJWTPayload: () => (/* binding */ decodeJWTPayload),
+/* harmony export */   expiresAt: () => (/* binding */ expiresAt),
+/* harmony export */   generatePKCEChallenge: () => (/* binding */ generatePKCEChallenge),
+/* harmony export */   generatePKCEVerifier: () => (/* binding */ generatePKCEVerifier),
+/* harmony export */   getCodeChallengeAndMethod: () => (/* binding */ getCodeChallengeAndMethod),
+/* harmony export */   getItemAsync: () => (/* binding */ getItemAsync),
+/* harmony export */   isBrowser: () => (/* binding */ isBrowser),
+/* harmony export */   looksLikeFetchResponse: () => (/* binding */ looksLikeFetchResponse),
+/* harmony export */   parseParametersFromURL: () => (/* binding */ parseParametersFromURL),
+/* harmony export */   parseResponseAPIVersion: () => (/* binding */ parseResponseAPIVersion),
+/* harmony export */   removeItemAsync: () => (/* binding */ removeItemAsync),
+/* harmony export */   resolveFetch: () => (/* binding */ resolveFetch),
+/* harmony export */   retryable: () => (/* binding */ retryable),
+/* harmony export */   setItemAsync: () => (/* binding */ setItemAsync),
+/* harmony export */   sleep: () => (/* binding */ sleep),
+/* harmony export */   supportsLocalStorage: () => (/* binding */ supportsLocalStorage),
+/* harmony export */   uuid: () => (/* binding */ uuid)
+/* harmony export */ });
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./node_modules/@supabase/auth-js/dist/module/lib/constants.js");
+
+function expiresAt(expiresIn) {
+    const timeNow = Math.round(Date.now() / 1000);
+    return timeNow + expiresIn;
+}
+function uuid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        const r = (Math.random() * 16) | 0, v = c == 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+    });
+}
+const isBrowser = () => typeof document !== 'undefined';
+const localStorageWriteTests = {
+    tested: false,
+    writable: false,
+};
+/**
+ * Checks whether localStorage is supported on this browser.
+ */
+const supportsLocalStorage = () => {
+    if (!isBrowser()) {
+        return false;
+    }
+    try {
+        if (typeof globalThis.localStorage !== 'object') {
+            return false;
+        }
+    }
+    catch (e) {
+        // DOM exception when accessing `localStorage`
+        return false;
+    }
+    if (localStorageWriteTests.tested) {
+        return localStorageWriteTests.writable;
+    }
+    const randomKey = `lswt-${Math.random()}${Math.random()}`;
+    try {
+        globalThis.localStorage.setItem(randomKey, randomKey);
+        globalThis.localStorage.removeItem(randomKey);
+        localStorageWriteTests.tested = true;
+        localStorageWriteTests.writable = true;
+    }
+    catch (e) {
+        // localStorage can't be written to
+        // https://www.chromium.org/for-testers/bug-reporting-guidelines/uncaught-securityerror-failed-to-read-the-localstorage-property-from-window-access-is-denied-for-this-document
+        localStorageWriteTests.tested = true;
+        localStorageWriteTests.writable = false;
+    }
+    return localStorageWriteTests.writable;
+};
+/**
+ * Extracts parameters encoded in the URL both in the query and fragment.
+ */
+function parseParametersFromURL(href) {
+    const result = {};
+    const url = new URL(href);
+    if (url.hash && url.hash[0] === '#') {
+        try {
+            const hashSearchParams = new URLSearchParams(url.hash.substring(1));
+            hashSearchParams.forEach((value, key) => {
+                result[key] = value;
+            });
+        }
+        catch (e) {
+            // hash is not a query string
+        }
+    }
+    // search parameters take precedence over hash parameters
+    url.searchParams.forEach((value, key) => {
+        result[key] = value;
+    });
+    return result;
+}
+const resolveFetch = (customFetch) => {
+    let _fetch;
+    if (customFetch) {
+        _fetch = customFetch;
+    }
+    else if (typeof fetch === 'undefined') {
+        _fetch = (...args) => Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! @supabase/node-fetch */ "./node_modules/@supabase/node-fetch/browser.js")).then(({ default: fetch }) => fetch(...args));
+    }
+    else {
+        _fetch = fetch;
+    }
+    return (...args) => _fetch(...args);
+};
+const looksLikeFetchResponse = (maybeResponse) => {
+    return (typeof maybeResponse === 'object' &&
+        maybeResponse !== null &&
+        'status' in maybeResponse &&
+        'ok' in maybeResponse &&
+        'json' in maybeResponse &&
+        typeof maybeResponse.json === 'function');
+};
+// Storage helpers
+const setItemAsync = async (storage, key, data) => {
+    await storage.setItem(key, JSON.stringify(data));
+};
+const getItemAsync = async (storage, key) => {
+    const value = await storage.getItem(key);
+    if (!value) {
+        return null;
+    }
+    try {
+        return JSON.parse(value);
+    }
+    catch (_a) {
+        return value;
+    }
+};
+const removeItemAsync = async (storage, key) => {
+    await storage.removeItem(key);
+};
+function decodeBase64URL(value) {
+    const key = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+    let base64 = '';
+    let chr1, chr2, chr3;
+    let enc1, enc2, enc3, enc4;
+    let i = 0;
+    value = value.replace('-', '+').replace('_', '/');
+    while (i < value.length) {
+        enc1 = key.indexOf(value.charAt(i++));
+        enc2 = key.indexOf(value.charAt(i++));
+        enc3 = key.indexOf(value.charAt(i++));
+        enc4 = key.indexOf(value.charAt(i++));
+        chr1 = (enc1 << 2) | (enc2 >> 4);
+        chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+        chr3 = ((enc3 & 3) << 6) | enc4;
+        base64 = base64 + String.fromCharCode(chr1);
+        if (enc3 != 64 && chr2 != 0) {
+            base64 = base64 + String.fromCharCode(chr2);
+        }
+        if (enc4 != 64 && chr3 != 0) {
+            base64 = base64 + String.fromCharCode(chr3);
+        }
+    }
+    return base64;
+}
+/**
+ * A deferred represents some asynchronous work that is not yet finished, which
+ * may or may not culminate in a value.
+ * Taken from: https://github.com/mike-north/types/blob/master/src/async.ts
+ */
+class Deferred {
+    constructor() {
+        // eslint-disable-next-line @typescript-eslint/no-extra-semi
+        ;
+        this.promise = new Deferred.promiseConstructor((res, rej) => {
+            // eslint-disable-next-line @typescript-eslint/no-extra-semi
+            ;
+            this.resolve = res;
+            this.reject = rej;
+        });
+    }
+}
+Deferred.promiseConstructor = Promise;
+// Taken from: https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
+function decodeJWTPayload(token) {
+    // Regex checks for base64url format
+    const base64UrlRegex = /^([a-z0-9_-]{4})*($|[a-z0-9_-]{3}=?$|[a-z0-9_-]{2}(==)?$)$/i;
+    const parts = token.split('.');
+    if (parts.length !== 3) {
+        throw new Error('JWT is not valid: not a JWT structure');
+    }
+    if (!base64UrlRegex.test(parts[1])) {
+        throw new Error('JWT is not valid: payload is not in base64url format');
+    }
+    const base64Url = parts[1];
+    return JSON.parse(decodeBase64URL(base64Url));
+}
+/**
+ * Creates a promise that resolves to null after some time.
+ */
+async function sleep(time) {
+    return await new Promise((accept) => {
+        setTimeout(() => accept(null), time);
+    });
+}
+/**
+ * Converts the provided async function into a retryable function. Each result
+ * or thrown error is sent to the isRetryable function which should return true
+ * if the function should run again.
+ */
+function retryable(fn, isRetryable) {
+    const promise = new Promise((accept, reject) => {
+        // eslint-disable-next-line @typescript-eslint/no-extra-semi
+        ;
+        (async () => {
+            for (let attempt = 0; attempt < Infinity; attempt++) {
+                try {
+                    const result = await fn(attempt);
+                    if (!isRetryable(attempt, null, result)) {
+                        accept(result);
+                        return;
+                    }
+                }
+                catch (e) {
+                    if (!isRetryable(attempt, e)) {
+                        reject(e);
+                        return;
+                    }
+                }
+            }
+        })();
+    });
+    return promise;
+}
+function dec2hex(dec) {
+    return ('0' + dec.toString(16)).substr(-2);
+}
+// Functions below taken from: https://stackoverflow.com/questions/63309409/creating-a-code-verifier-and-challenge-for-pkce-auth-on-spotify-api-in-reactjs
+function generatePKCEVerifier() {
+    const verifierLength = 56;
+    const array = new Uint32Array(verifierLength);
+    if (typeof crypto === 'undefined') {
+        const charSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
+        const charSetLen = charSet.length;
+        let verifier = '';
+        for (let i = 0; i < verifierLength; i++) {
+            verifier += charSet.charAt(Math.floor(Math.random() * charSetLen));
+        }
+        return verifier;
+    }
+    crypto.getRandomValues(array);
+    return Array.from(array, dec2hex).join('');
+}
+async function sha256(randomString) {
+    const encoder = new TextEncoder();
+    const encodedData = encoder.encode(randomString);
+    const hash = await crypto.subtle.digest('SHA-256', encodedData);
+    const bytes = new Uint8Array(hash);
+    return Array.from(bytes)
+        .map((c) => String.fromCharCode(c))
+        .join('');
+}
+function base64urlencode(str) {
+    return btoa(str).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+async function generatePKCEChallenge(verifier) {
+    const hasCryptoSupport = typeof crypto !== 'undefined' &&
+        typeof crypto.subtle !== 'undefined' &&
+        typeof TextEncoder !== 'undefined';
+    if (!hasCryptoSupport) {
+        console.warn('WebCrypto API is not supported. Code challenge method will default to use plain instead of sha256.');
+        return verifier;
+    }
+    const hashed = await sha256(verifier);
+    return base64urlencode(hashed);
+}
+async function getCodeChallengeAndMethod(storage, storageKey, isPasswordRecovery = false) {
+    const codeVerifier = generatePKCEVerifier();
+    let storedCodeVerifier = codeVerifier;
+    if (isPasswordRecovery) {
+        storedCodeVerifier += '/PASSWORD_RECOVERY';
+    }
+    await setItemAsync(storage, `${storageKey}-code-verifier`, storedCodeVerifier);
+    const codeChallenge = await generatePKCEChallenge(codeVerifier);
+    const codeChallengeMethod = codeVerifier === codeChallenge ? 'plain' : 's256';
+    return [codeChallenge, codeChallengeMethod];
+}
+/** Parses the API version which is 2YYY-MM-DD. */
+const API_VERSION_REGEX = /^2[0-9]{3}-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/i;
+function parseResponseAPIVersion(response) {
+    const apiVersion = response.headers.get(_constants__WEBPACK_IMPORTED_MODULE_0__.API_VERSION_HEADER_NAME);
+    if (!apiVersion) {
+        return null;
+    }
+    if (!apiVersion.match(API_VERSION_REGEX)) {
+        return null;
+    }
+    try {
+        const date = new Date(`${apiVersion}T00:00:00.0Z`);
+        return date;
+    }
+    catch (e) {
+        return null;
+    }
+}
+//# sourceMappingURL=helpers.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/auth-js/dist/module/lib/local-storage.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@supabase/auth-js/dist/module/lib/local-storage.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   localStorageAdapter: () => (/* binding */ localStorageAdapter),
+/* harmony export */   memoryLocalStorageAdapter: () => (/* binding */ memoryLocalStorageAdapter)
+/* harmony export */ });
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers */ "./node_modules/@supabase/auth-js/dist/module/lib/helpers.js");
+
+/**
+ * Provides safe access to the globalThis.localStorage property.
+ */
+const localStorageAdapter = {
+    getItem: (key) => {
+        if (!(0,_helpers__WEBPACK_IMPORTED_MODULE_0__.supportsLocalStorage)()) {
+            return null;
+        }
+        return globalThis.localStorage.getItem(key);
+    },
+    setItem: (key, value) => {
+        if (!(0,_helpers__WEBPACK_IMPORTED_MODULE_0__.supportsLocalStorage)()) {
+            return;
+        }
+        globalThis.localStorage.setItem(key, value);
+    },
+    removeItem: (key) => {
+        if (!(0,_helpers__WEBPACK_IMPORTED_MODULE_0__.supportsLocalStorage)()) {
+            return;
+        }
+        globalThis.localStorage.removeItem(key);
+    },
+};
+/**
+ * Returns a localStorage-like object that stores the key-value pairs in
+ * memory.
+ */
+function memoryLocalStorageAdapter(store = {}) {
+    return {
+        getItem: (key) => {
+            return store[key] || null;
+        },
+        setItem: (key, value) => {
+            store[key] = value;
+        },
+        removeItem: (key) => {
+            delete store[key];
+        },
+    };
+}
+//# sourceMappingURL=local-storage.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/auth-js/dist/module/lib/locks.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@supabase/auth-js/dist/module/lib/locks.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   LockAcquireTimeoutError: () => (/* binding */ LockAcquireTimeoutError),
+/* harmony export */   NavigatorLockAcquireTimeoutError: () => (/* binding */ NavigatorLockAcquireTimeoutError),
+/* harmony export */   internals: () => (/* binding */ internals),
+/* harmony export */   navigatorLock: () => (/* binding */ navigatorLock)
+/* harmony export */ });
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers */ "./node_modules/@supabase/auth-js/dist/module/lib/helpers.js");
+
+/**
+ * @experimental
+ */
+const internals = {
+    /**
+     * @experimental
+     */
+    debug: !!(globalThis &&
+        (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.supportsLocalStorage)() &&
+        globalThis.localStorage &&
+        globalThis.localStorage.getItem('supabase.gotrue-js.locks.debug') === 'true'),
+};
+/**
+ * An error thrown when a lock cannot be acquired after some amount of time.
+ *
+ * Use the {@link #isAcquireTimeout} property instead of checking with `instanceof`.
+ */
+class LockAcquireTimeoutError extends Error {
+    constructor(message) {
+        super(message);
+        this.isAcquireTimeout = true;
+    }
+}
+class NavigatorLockAcquireTimeoutError extends LockAcquireTimeoutError {
+}
+/**
+ * Implements a global exclusive lock using the Navigator LockManager API. It
+ * is available on all browsers released after 2022-03-15 with Safari being the
+ * last one to release support. If the API is not available, this function will
+ * throw. Make sure you check availablility before configuring {@link
+ * GoTrueClient}.
+ *
+ * You can turn on debugging by setting the `supabase.gotrue-js.locks.debug`
+ * local storage item to `true`.
+ *
+ * Internals:
+ *
+ * Since the LockManager API does not preserve stack traces for the async
+ * function passed in the `request` method, a trick is used where acquiring the
+ * lock releases a previously started promise to run the operation in the `fn`
+ * function. The lock waits for that promise to finish (with or without error),
+ * while the function will finally wait for the result anyway.
+ *
+ * @param name Name of the lock to be acquired.
+ * @param acquireTimeout If negative, no timeout. If 0 an error is thrown if
+ *                       the lock can't be acquired without waiting. If positive, the lock acquire
+ *                       will time out after so many milliseconds. An error is
+ *                       a timeout if it has `isAcquireTimeout` set to true.
+ * @param fn The operation to run once the lock is acquired.
+ */
+async function navigatorLock(name, acquireTimeout, fn) {
+    if (internals.debug) {
+        console.log('@supabase/gotrue-js: navigatorLock: acquire lock', name, acquireTimeout);
+    }
+    const abortController = new globalThis.AbortController();
+    if (acquireTimeout > 0) {
+        setTimeout(() => {
+            abortController.abort();
+            if (internals.debug) {
+                console.log('@supabase/gotrue-js: navigatorLock acquire timed out', name);
+            }
+        }, acquireTimeout);
+    }
+    // MDN article: https://developer.mozilla.org/en-US/docs/Web/API/LockManager/request
+    return await globalThis.navigator.locks.request(name, acquireTimeout === 0
+        ? {
+            mode: 'exclusive',
+            ifAvailable: true,
+        }
+        : {
+            mode: 'exclusive',
+            signal: abortController.signal,
+        }, async (lock) => {
+        if (lock) {
+            if (internals.debug) {
+                console.log('@supabase/gotrue-js: navigatorLock: acquired', name, lock.name);
+            }
+            try {
+                return await fn();
+            }
+            finally {
+                if (internals.debug) {
+                    console.log('@supabase/gotrue-js: navigatorLock: released', name, lock.name);
+                }
+            }
+        }
+        else {
+            if (acquireTimeout === 0) {
+                if (internals.debug) {
+                    console.log('@supabase/gotrue-js: navigatorLock: not immediately available', name);
+                }
+                throw new NavigatorLockAcquireTimeoutError(`Acquiring an exclusive Navigator LockManager lock "${name}" immediately failed`);
+            }
+            else {
+                if (internals.debug) {
+                    try {
+                        const result = await globalThis.navigator.locks.query();
+                        console.log('@supabase/gotrue-js: Navigator LockManager state', JSON.stringify(result, null, '  '));
+                    }
+                    catch (e) {
+                        console.warn('@supabase/gotrue-js: Error when querying Navigator LockManager state', e);
+                    }
+                }
+                // Browser is not following the Navigator LockManager spec, it
+                // returned a null lock when we didn't use ifAvailable. So we can
+                // pretend the lock is acquired in the name of backward compatibility
+                // and user experience and just run the function.
+                console.warn('@supabase/gotrue-js: Navigator LockManager returned a null lock when using #request without ifAvailable set to true, it appears this browser is not following the LockManager spec https://developer.mozilla.org/en-US/docs/Web/API/LockManager/request');
+                return await fn();
+            }
+        }
+    });
+}
+//# sourceMappingURL=locks.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/auth-js/dist/module/lib/polyfills.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@supabase/auth-js/dist/module/lib/polyfills.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   polyfillGlobalThis: () => (/* binding */ polyfillGlobalThis)
+/* harmony export */ });
+/**
+ * https://mathiasbynens.be/notes/globalthis
+ */
+function polyfillGlobalThis() {
+    if (typeof globalThis === 'object')
+        return;
+    try {
+        Object.defineProperty(Object.prototype, '__magic__', {
+            get: function () {
+                return this;
+            },
+            configurable: true,
+        });
+        // @ts-expect-error 'Allow access to magic'
+        __magic__.globalThis = __magic__;
+        // @ts-expect-error 'Allow access to magic'
+        delete Object.prototype.__magic__;
+    }
+    catch (e) {
+        if (typeof self !== 'undefined') {
+            // @ts-expect-error 'Allow access to globals'
+            self.globalThis = self;
+        }
+    }
+}
+//# sourceMappingURL=polyfills.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/auth-js/dist/module/lib/types.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@supabase/auth-js/dist/module/lib/types.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+//# sourceMappingURL=types.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/auth-js/dist/module/lib/version.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@supabase/auth-js/dist/module/lib/version.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   version: () => (/* binding */ version)
+/* harmony export */ });
+const version = '2.65.1';
+//# sourceMappingURL=version.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/functions-js/dist/module/FunctionsClient.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/@supabase/functions-js/dist/module/FunctionsClient.js ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   FunctionsClient: () => (/* binding */ FunctionsClient)
+/* harmony export */ });
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper */ "./node_modules/@supabase/functions-js/dist/module/helper.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./node_modules/@supabase/functions-js/dist/module/types.js");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+class FunctionsClient {
+    constructor(url, { headers = {}, customFetch, region = _types__WEBPACK_IMPORTED_MODULE_0__.FunctionRegion.Any, } = {}) {
+        this.url = url;
+        this.headers = headers;
+        this.region = region;
+        this.fetch = (0,_helper__WEBPACK_IMPORTED_MODULE_1__.resolveFetch)(customFetch);
+    }
+    /**
+     * Updates the authorization header
+     * @param token - the new jwt token sent in the authorisation header
+     */
+    setAuth(token) {
+        this.headers.Authorization = `Bearer ${token}`;
+    }
+    /**
+     * Invokes a function
+     * @param functionName - The name of the Function to invoke.
+     * @param options - Options for invoking the Function.
+     */
+    invoke(functionName, options = {}) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { headers, method, body: functionArgs } = options;
+                let _headers = {};
+                let { region } = options;
+                if (!region) {
+                    region = this.region;
+                }
+                if (region && region !== 'any') {
+                    _headers['x-region'] = region;
+                }
+                let body;
+                if (functionArgs &&
+                    ((headers && !Object.prototype.hasOwnProperty.call(headers, 'Content-Type')) || !headers)) {
+                    if ((typeof Blob !== 'undefined' && functionArgs instanceof Blob) ||
+                        functionArgs instanceof ArrayBuffer) {
+                        // will work for File as File inherits Blob
+                        // also works for ArrayBuffer as it is the same underlying structure as a Blob
+                        _headers['Content-Type'] = 'application/octet-stream';
+                        body = functionArgs;
+                    }
+                    else if (typeof functionArgs === 'string') {
+                        // plain string
+                        _headers['Content-Type'] = 'text/plain';
+                        body = functionArgs;
+                    }
+                    else if (typeof FormData !== 'undefined' && functionArgs instanceof FormData) {
+                        // don't set content-type headers
+                        // Request will automatically add the right boundary value
+                        body = functionArgs;
+                    }
+                    else {
+                        // default, assume this is JSON
+                        _headers['Content-Type'] = 'application/json';
+                        body = JSON.stringify(functionArgs);
+                    }
+                }
+                const response = yield this.fetch(`${this.url}/${functionName}`, {
+                    method: method || 'POST',
+                    // headers priority is (high to low):
+                    // 1. invoke-level headers
+                    // 2. client-level headers
+                    // 3. default Content-Type header
+                    headers: Object.assign(Object.assign(Object.assign({}, _headers), this.headers), headers),
+                    body,
+                }).catch((fetchError) => {
+                    throw new _types__WEBPACK_IMPORTED_MODULE_0__.FunctionsFetchError(fetchError);
+                });
+                const isRelayError = response.headers.get('x-relay-error');
+                if (isRelayError && isRelayError === 'true') {
+                    throw new _types__WEBPACK_IMPORTED_MODULE_0__.FunctionsRelayError(response);
+                }
+                if (!response.ok) {
+                    throw new _types__WEBPACK_IMPORTED_MODULE_0__.FunctionsHttpError(response);
+                }
+                let responseType = ((_a = response.headers.get('Content-Type')) !== null && _a !== void 0 ? _a : 'text/plain').split(';')[0].trim();
+                let data;
+                if (responseType === 'application/json') {
+                    data = yield response.json();
+                }
+                else if (responseType === 'application/octet-stream') {
+                    data = yield response.blob();
+                }
+                else if (responseType === 'text/event-stream') {
+                    data = response;
+                }
+                else if (responseType === 'multipart/form-data') {
+                    data = yield response.formData();
+                }
+                else {
+                    // default to text
+                    data = yield response.text();
+                }
+                return { data, error: null };
+            }
+            catch (error) {
+                return { data: null, error };
+            }
+        });
+    }
+}
+//# sourceMappingURL=FunctionsClient.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/functions-js/dist/module/helper.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@supabase/functions-js/dist/module/helper.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   resolveFetch: () => (/* binding */ resolveFetch)
+/* harmony export */ });
+const resolveFetch = (customFetch) => {
+    let _fetch;
+    if (customFetch) {
+        _fetch = customFetch;
+    }
+    else if (typeof fetch === 'undefined') {
+        _fetch = (...args) => Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! @supabase/node-fetch */ "./node_modules/@supabase/node-fetch/browser.js")).then(({ default: fetch }) => fetch(...args));
+    }
+    else {
+        _fetch = fetch;
+    }
+    return (...args) => _fetch(...args);
+};
+//# sourceMappingURL=helper.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/functions-js/dist/module/types.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@supabase/functions-js/dist/module/types.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   FunctionRegion: () => (/* binding */ FunctionRegion),
+/* harmony export */   FunctionsError: () => (/* binding */ FunctionsError),
+/* harmony export */   FunctionsFetchError: () => (/* binding */ FunctionsFetchError),
+/* harmony export */   FunctionsHttpError: () => (/* binding */ FunctionsHttpError),
+/* harmony export */   FunctionsRelayError: () => (/* binding */ FunctionsRelayError)
+/* harmony export */ });
+class FunctionsError extends Error {
+    constructor(message, name = 'FunctionsError', context) {
+        super(message);
+        this.name = name;
+        this.context = context;
+    }
+}
+class FunctionsFetchError extends FunctionsError {
+    constructor(context) {
+        super('Failed to send a request to the Edge Function', 'FunctionsFetchError', context);
+    }
+}
+class FunctionsRelayError extends FunctionsError {
+    constructor(context) {
+        super('Relay Error invoking the Edge Function', 'FunctionsRelayError', context);
+    }
+}
+class FunctionsHttpError extends FunctionsError {
+    constructor(context) {
+        super('Edge Function returned a non-2xx status code', 'FunctionsHttpError', context);
+    }
+}
+// Define the enum for the 'region' property
+var FunctionRegion;
+(function (FunctionRegion) {
+    FunctionRegion["Any"] = "any";
+    FunctionRegion["ApNortheast1"] = "ap-northeast-1";
+    FunctionRegion["ApNortheast2"] = "ap-northeast-2";
+    FunctionRegion["ApSouth1"] = "ap-south-1";
+    FunctionRegion["ApSoutheast1"] = "ap-southeast-1";
+    FunctionRegion["ApSoutheast2"] = "ap-southeast-2";
+    FunctionRegion["CaCentral1"] = "ca-central-1";
+    FunctionRegion["EuCentral1"] = "eu-central-1";
+    FunctionRegion["EuWest1"] = "eu-west-1";
+    FunctionRegion["EuWest2"] = "eu-west-2";
+    FunctionRegion["EuWest3"] = "eu-west-3";
+    FunctionRegion["SaEast1"] = "sa-east-1";
+    FunctionRegion["UsEast1"] = "us-east-1";
+    FunctionRegion["UsWest1"] = "us-west-1";
+    FunctionRegion["UsWest2"] = "us-west-2";
+})(FunctionRegion || (FunctionRegion = {}));
+//# sourceMappingURL=types.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/node-fetch/browser.js":
+/*!******************************************************!*\
+  !*** ./node_modules/@supabase/node-fetch/browser.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Headers: () => (/* binding */ Headers),
+/* harmony export */   Request: () => (/* binding */ Request),
+/* harmony export */   Response: () => (/* binding */ Response),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   fetch: () => (/* binding */ fetch)
+/* harmony export */ });
+
+
+// ref: https://github.com/tc39/proposal-global
+var getGlobal = function() {
+    // the only reliable means to get the global object is
+    // `Function('return this')()`
+    // However, this causes CSP violations in Chrome apps.
+    if (typeof self !== 'undefined') { return self; }
+    if (typeof window !== 'undefined') { return window; }
+    if (typeof __webpack_require__.g !== 'undefined') { return __webpack_require__.g; }
+    throw new Error('unable to locate global object');
+}
+
+var globalObject = getGlobal();
+
+const fetch = globalObject.fetch;
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (globalObject.fetch.bind(globalObject));
+
+const Headers = globalObject.Headers;
+const Request = globalObject.Request;
+const Response = globalObject.Response;
+
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestBuilder.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestBuilder.js ***!
+  \**************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+// @ts-ignore
+const node_fetch_1 = __importDefault(__webpack_require__(/*! @supabase/node-fetch */ "./node_modules/@supabase/node-fetch/browser.js"));
+const PostgrestError_1 = __importDefault(__webpack_require__(/*! ./PostgrestError */ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestError.js"));
+class PostgrestBuilder {
+    constructor(builder) {
+        this.shouldThrowOnError = false;
+        this.method = builder.method;
+        this.url = builder.url;
+        this.headers = builder.headers;
+        this.schema = builder.schema;
+        this.body = builder.body;
+        this.shouldThrowOnError = builder.shouldThrowOnError;
+        this.signal = builder.signal;
+        this.isMaybeSingle = builder.isMaybeSingle;
+        if (builder.fetch) {
+            this.fetch = builder.fetch;
+        }
+        else if (typeof fetch === 'undefined') {
+            this.fetch = node_fetch_1.default;
+        }
+        else {
+            this.fetch = fetch;
+        }
+    }
+    /**
+     * If there's an error with the query, throwOnError will reject the promise by
+     * throwing the error instead of returning it as part of a successful response.
+     *
+     * {@link https://github.com/supabase/supabase-js/issues/92}
+     */
+    throwOnError() {
+        this.shouldThrowOnError = true;
+        return this;
+    }
+    /**
+     * Set an HTTP header for the request.
+     */
+    setHeader(name, value) {
+        this.headers = Object.assign({}, this.headers);
+        this.headers[name] = value;
+        return this;
+    }
+    then(onfulfilled, onrejected) {
+        // https://postgrest.org/en/stable/api.html#switching-schemas
+        if (this.schema === undefined) {
+            // skip
+        }
+        else if (['GET', 'HEAD'].includes(this.method)) {
+            this.headers['Accept-Profile'] = this.schema;
+        }
+        else {
+            this.headers['Content-Profile'] = this.schema;
+        }
+        if (this.method !== 'GET' && this.method !== 'HEAD') {
+            this.headers['Content-Type'] = 'application/json';
+        }
+        // NOTE: Invoke w/o `this` to avoid illegal invocation error.
+        // https://github.com/supabase/postgrest-js/pull/247
+        const _fetch = this.fetch;
+        let res = _fetch(this.url.toString(), {
+            method: this.method,
+            headers: this.headers,
+            body: JSON.stringify(this.body),
+            signal: this.signal,
+        }).then(async (res) => {
+            var _a, _b, _c;
+            let error = null;
+            let data = null;
+            let count = null;
+            let status = res.status;
+            let statusText = res.statusText;
+            if (res.ok) {
+                if (this.method !== 'HEAD') {
+                    const body = await res.text();
+                    if (body === '') {
+                        // Prefer: return=minimal
+                    }
+                    else if (this.headers['Accept'] === 'text/csv') {
+                        data = body;
+                    }
+                    else if (this.headers['Accept'] &&
+                        this.headers['Accept'].includes('application/vnd.pgrst.plan+text')) {
+                        data = body;
+                    }
+                    else {
+                        data = JSON.parse(body);
+                    }
+                }
+                const countHeader = (_a = this.headers['Prefer']) === null || _a === void 0 ? void 0 : _a.match(/count=(exact|planned|estimated)/);
+                const contentRange = (_b = res.headers.get('content-range')) === null || _b === void 0 ? void 0 : _b.split('/');
+                if (countHeader && contentRange && contentRange.length > 1) {
+                    count = parseInt(contentRange[1]);
+                }
+                // Temporary partial fix for https://github.com/supabase/postgrest-js/issues/361
+                // Issue persists e.g. for `.insert([...]).select().maybeSingle()`
+                if (this.isMaybeSingle && this.method === 'GET' && Array.isArray(data)) {
+                    if (data.length > 1) {
+                        error = {
+                            // https://github.com/PostgREST/postgrest/blob/a867d79c42419af16c18c3fb019eba8df992626f/src/PostgREST/Error.hs#L553
+                            code: 'PGRST116',
+                            details: `Results contain ${data.length} rows, application/vnd.pgrst.object+json requires 1 row`,
+                            hint: null,
+                            message: 'JSON object requested, multiple (or no) rows returned',
+                        };
+                        data = null;
+                        count = null;
+                        status = 406;
+                        statusText = 'Not Acceptable';
+                    }
+                    else if (data.length === 1) {
+                        data = data[0];
+                    }
+                    else {
+                        data = null;
+                    }
+                }
+            }
+            else {
+                const body = await res.text();
+                try {
+                    error = JSON.parse(body);
+                    // Workaround for https://github.com/supabase/postgrest-js/issues/295
+                    if (Array.isArray(error) && res.status === 404) {
+                        data = [];
+                        error = null;
+                        status = 200;
+                        statusText = 'OK';
+                    }
+                }
+                catch (_d) {
+                    // Workaround for https://github.com/supabase/postgrest-js/issues/295
+                    if (res.status === 404 && body === '') {
+                        status = 204;
+                        statusText = 'No Content';
+                    }
+                    else {
+                        error = {
+                            message: body,
+                        };
+                    }
+                }
+                if (error && this.isMaybeSingle && ((_c = error === null || error === void 0 ? void 0 : error.details) === null || _c === void 0 ? void 0 : _c.includes('0 rows'))) {
+                    error = null;
+                    status = 200;
+                    statusText = 'OK';
+                }
+                if (error && this.shouldThrowOnError) {
+                    throw new PostgrestError_1.default(error);
+                }
+            }
+            const postgrestResponse = {
+                error,
+                data,
+                count,
+                status,
+                statusText,
+            };
+            return postgrestResponse;
+        });
+        if (!this.shouldThrowOnError) {
+            res = res.catch((fetchError) => {
+                var _a, _b, _c;
+                return ({
+                    error: {
+                        message: `${(_a = fetchError === null || fetchError === void 0 ? void 0 : fetchError.name) !== null && _a !== void 0 ? _a : 'FetchError'}: ${fetchError === null || fetchError === void 0 ? void 0 : fetchError.message}`,
+                        details: `${(_b = fetchError === null || fetchError === void 0 ? void 0 : fetchError.stack) !== null && _b !== void 0 ? _b : ''}`,
+                        hint: '',
+                        code: `${(_c = fetchError === null || fetchError === void 0 ? void 0 : fetchError.code) !== null && _c !== void 0 ? _c : ''}`,
+                    },
+                    data: null,
+                    count: null,
+                    status: 0,
+                    statusText: '',
+                });
+            });
+        }
+        return res.then(onfulfilled, onrejected);
+    }
+}
+exports["default"] = PostgrestBuilder;
+//# sourceMappingURL=PostgrestBuilder.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestClient.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestClient.js ***!
+  \*************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const PostgrestQueryBuilder_1 = __importDefault(__webpack_require__(/*! ./PostgrestQueryBuilder */ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestQueryBuilder.js"));
+const PostgrestFilterBuilder_1 = __importDefault(__webpack_require__(/*! ./PostgrestFilterBuilder */ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestFilterBuilder.js"));
+const constants_1 = __webpack_require__(/*! ./constants */ "./node_modules/@supabase/postgrest-js/dist/cjs/constants.js");
+/**
+ * PostgREST client.
+ *
+ * @typeParam Database - Types for the schema from the [type
+ * generator](https://supabase.com/docs/reference/javascript/next/typescript-support)
+ *
+ * @typeParam SchemaName - Postgres schema to switch to. Must be a string
+ * literal, the same one passed to the constructor. If the schema is not
+ * `"public"`, this must be supplied manually.
+ */
+class PostgrestClient {
+    // TODO: Add back shouldThrowOnError once we figure out the typings
+    /**
+     * Creates a PostgREST client.
+     *
+     * @param url - URL of the PostgREST endpoint
+     * @param options - Named parameters
+     * @param options.headers - Custom headers
+     * @param options.schema - Postgres schema to switch to
+     * @param options.fetch - Custom fetch
+     */
+    constructor(url, { headers = {}, schema, fetch, } = {}) {
+        this.url = url;
+        this.headers = Object.assign(Object.assign({}, constants_1.DEFAULT_HEADERS), headers);
+        this.schemaName = schema;
+        this.fetch = fetch;
+    }
+    /**
+     * Perform a query on a table or a view.
+     *
+     * @param relation - The table or view name to query
+     */
+    from(relation) {
+        const url = new URL(`${this.url}/${relation}`);
+        return new PostgrestQueryBuilder_1.default(url, {
+            headers: Object.assign({}, this.headers),
+            schema: this.schemaName,
+            fetch: this.fetch,
+        });
+    }
+    /**
+     * Select a schema to query or perform an function (rpc) call.
+     *
+     * The schema needs to be on the list of exposed schemas inside Supabase.
+     *
+     * @param schema - The schema to query
+     */
+    schema(schema) {
+        return new PostgrestClient(this.url, {
+            headers: this.headers,
+            schema,
+            fetch: this.fetch,
+        });
+    }
+    /**
+     * Perform a function call.
+     *
+     * @param fn - The function name to call
+     * @param args - The arguments to pass to the function call
+     * @param options - Named parameters
+     * @param options.head - When set to `true`, `data` will not be returned.
+     * Useful if you only need the count.
+     * @param options.get - When set to `true`, the function will be called with
+     * read-only access mode.
+     * @param options.count - Count algorithm to use to count rows returned by the
+     * function. Only applicable for [set-returning
+     * functions](https://www.postgresql.org/docs/current/functions-srf.html).
+     *
+     * `"exact"`: Exact but slow count algorithm. Performs a `COUNT(*)` under the
+     * hood.
+     *
+     * `"planned"`: Approximated but fast count algorithm. Uses the Postgres
+     * statistics under the hood.
+     *
+     * `"estimated"`: Uses exact count for low numbers and planned count for high
+     * numbers.
+     */
+    rpc(fn, args = {}, { head = false, get = false, count, } = {}) {
+        let method;
+        const url = new URL(`${this.url}/rpc/${fn}`);
+        let body;
+        if (head || get) {
+            method = head ? 'HEAD' : 'GET';
+            Object.entries(args)
+                // params with undefined value needs to be filtered out, otherwise it'll
+                // show up as `?param=undefined`
+                .filter(([_, value]) => value !== undefined)
+                // array values need special syntax
+                .map(([name, value]) => [name, Array.isArray(value) ? `{${value.join(',')}}` : `${value}`])
+                .forEach(([name, value]) => {
+                url.searchParams.append(name, value);
+            });
+        }
+        else {
+            method = 'POST';
+            body = args;
+        }
+        const headers = Object.assign({}, this.headers);
+        if (count) {
+            headers['Prefer'] = `count=${count}`;
+        }
+        return new PostgrestFilterBuilder_1.default({
+            method,
+            url,
+            headers,
+            schema: this.schemaName,
+            body,
+            fetch: this.fetch,
+            allowEmpty: false,
+        });
+    }
+}
+exports["default"] = PostgrestClient;
+//# sourceMappingURL=PostgrestClient.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestError.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestError.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+/**
+ * Error format
+ *
+ * {@link https://postgrest.org/en/stable/api.html?highlight=options#errors-and-http-status-codes}
+ */
+class PostgrestError extends Error {
+    constructor(context) {
+        super(context.message);
+        this.name = 'PostgrestError';
+        this.details = context.details;
+        this.hint = context.hint;
+        this.code = context.code;
+    }
+}
+exports["default"] = PostgrestError;
+//# sourceMappingURL=PostgrestError.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestFilterBuilder.js":
+/*!********************************************************************************!*\
+  !*** ./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestFilterBuilder.js ***!
+  \********************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const PostgrestTransformBuilder_1 = __importDefault(__webpack_require__(/*! ./PostgrestTransformBuilder */ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestTransformBuilder.js"));
+class PostgrestFilterBuilder extends PostgrestTransformBuilder_1.default {
+    /**
+     * Match only rows where `column` is equal to `value`.
+     *
+     * To check if the value of `column` is NULL, you should use `.is()` instead.
+     *
+     * @param column - The column to filter on
+     * @param value - The value to filter with
+     */
+    eq(column, value) {
+        this.url.searchParams.append(column, `eq.${value}`);
+        return this;
+    }
+    /**
+     * Match only rows where `column` is not equal to `value`.
+     *
+     * @param column - The column to filter on
+     * @param value - The value to filter with
+     */
+    neq(column, value) {
+        this.url.searchParams.append(column, `neq.${value}`);
+        return this;
+    }
+    /**
+     * Match only rows where `column` is greater than `value`.
+     *
+     * @param column - The column to filter on
+     * @param value - The value to filter with
+     */
+    gt(column, value) {
+        this.url.searchParams.append(column, `gt.${value}`);
+        return this;
+    }
+    /**
+     * Match only rows where `column` is greater than or equal to `value`.
+     *
+     * @param column - The column to filter on
+     * @param value - The value to filter with
+     */
+    gte(column, value) {
+        this.url.searchParams.append(column, `gte.${value}`);
+        return this;
+    }
+    /**
+     * Match only rows where `column` is less than `value`.
+     *
+     * @param column - The column to filter on
+     * @param value - The value to filter with
+     */
+    lt(column, value) {
+        this.url.searchParams.append(column, `lt.${value}`);
+        return this;
+    }
+    /**
+     * Match only rows where `column` is less than or equal to `value`.
+     *
+     * @param column - The column to filter on
+     * @param value - The value to filter with
+     */
+    lte(column, value) {
+        this.url.searchParams.append(column, `lte.${value}`);
+        return this;
+    }
+    /**
+     * Match only rows where `column` matches `pattern` case-sensitively.
+     *
+     * @param column - The column to filter on
+     * @param pattern - The pattern to match with
+     */
+    like(column, pattern) {
+        this.url.searchParams.append(column, `like.${pattern}`);
+        return this;
+    }
+    /**
+     * Match only rows where `column` matches all of `patterns` case-sensitively.
+     *
+     * @param column - The column to filter on
+     * @param patterns - The patterns to match with
+     */
+    likeAllOf(column, patterns) {
+        this.url.searchParams.append(column, `like(all).{${patterns.join(',')}}`);
+        return this;
+    }
+    /**
+     * Match only rows where `column` matches any of `patterns` case-sensitively.
+     *
+     * @param column - The column to filter on
+     * @param patterns - The patterns to match with
+     */
+    likeAnyOf(column, patterns) {
+        this.url.searchParams.append(column, `like(any).{${patterns.join(',')}}`);
+        return this;
+    }
+    /**
+     * Match only rows where `column` matches `pattern` case-insensitively.
+     *
+     * @param column - The column to filter on
+     * @param pattern - The pattern to match with
+     */
+    ilike(column, pattern) {
+        this.url.searchParams.append(column, `ilike.${pattern}`);
+        return this;
+    }
+    /**
+     * Match only rows where `column` matches all of `patterns` case-insensitively.
+     *
+     * @param column - The column to filter on
+     * @param patterns - The patterns to match with
+     */
+    ilikeAllOf(column, patterns) {
+        this.url.searchParams.append(column, `ilike(all).{${patterns.join(',')}}`);
+        return this;
+    }
+    /**
+     * Match only rows where `column` matches any of `patterns` case-insensitively.
+     *
+     * @param column - The column to filter on
+     * @param patterns - The patterns to match with
+     */
+    ilikeAnyOf(column, patterns) {
+        this.url.searchParams.append(column, `ilike(any).{${patterns.join(',')}}`);
+        return this;
+    }
+    /**
+     * Match only rows where `column` IS `value`.
+     *
+     * For non-boolean columns, this is only relevant for checking if the value of
+     * `column` is NULL by setting `value` to `null`.
+     *
+     * For boolean columns, you can also set `value` to `true` or `false` and it
+     * will behave the same way as `.eq()`.
+     *
+     * @param column - The column to filter on
+     * @param value - The value to filter with
+     */
+    is(column, value) {
+        this.url.searchParams.append(column, `is.${value}`);
+        return this;
+    }
+    /**
+     * Match only rows where `column` is included in the `values` array.
+     *
+     * @param column - The column to filter on
+     * @param values - The values array to filter with
+     */
+    in(column, values) {
+        const cleanedValues = Array.from(new Set(values))
+            .map((s) => {
+            // handle postgrest reserved characters
+            // https://postgrest.org/en/v7.0.0/api.html#reserved-characters
+            if (typeof s === 'string' && new RegExp('[,()]').test(s))
+                return `"${s}"`;
+            else
+                return `${s}`;
+        })
+            .join(',');
+        this.url.searchParams.append(column, `in.(${cleanedValues})`);
+        return this;
+    }
+    /**
+     * Only relevant for jsonb, array, and range columns. Match only rows where
+     * `column` contains every element appearing in `value`.
+     *
+     * @param column - The jsonb, array, or range column to filter on
+     * @param value - The jsonb, array, or range value to filter with
+     */
+    contains(column, value) {
+        if (typeof value === 'string') {
+            // range types can be inclusive '[', ']' or exclusive '(', ')' so just
+            // keep it simple and accept a string
+            this.url.searchParams.append(column, `cs.${value}`);
+        }
+        else if (Array.isArray(value)) {
+            // array
+            this.url.searchParams.append(column, `cs.{${value.join(',')}}`);
+        }
+        else {
+            // json
+            this.url.searchParams.append(column, `cs.${JSON.stringify(value)}`);
+        }
+        return this;
+    }
+    /**
+     * Only relevant for jsonb, array, and range columns. Match only rows where
+     * every element appearing in `column` is contained by `value`.
+     *
+     * @param column - The jsonb, array, or range column to filter on
+     * @param value - The jsonb, array, or range value to filter with
+     */
+    containedBy(column, value) {
+        if (typeof value === 'string') {
+            // range
+            this.url.searchParams.append(column, `cd.${value}`);
+        }
+        else if (Array.isArray(value)) {
+            // array
+            this.url.searchParams.append(column, `cd.{${value.join(',')}}`);
+        }
+        else {
+            // json
+            this.url.searchParams.append(column, `cd.${JSON.stringify(value)}`);
+        }
+        return this;
+    }
+    /**
+     * Only relevant for range columns. Match only rows where every element in
+     * `column` is greater than any element in `range`.
+     *
+     * @param column - The range column to filter on
+     * @param range - The range to filter with
+     */
+    rangeGt(column, range) {
+        this.url.searchParams.append(column, `sr.${range}`);
+        return this;
+    }
+    /**
+     * Only relevant for range columns. Match only rows where every element in
+     * `column` is either contained in `range` or greater than any element in
+     * `range`.
+     *
+     * @param column - The range column to filter on
+     * @param range - The range to filter with
+     */
+    rangeGte(column, range) {
+        this.url.searchParams.append(column, `nxl.${range}`);
+        return this;
+    }
+    /**
+     * Only relevant for range columns. Match only rows where every element in
+     * `column` is less than any element in `range`.
+     *
+     * @param column - The range column to filter on
+     * @param range - The range to filter with
+     */
+    rangeLt(column, range) {
+        this.url.searchParams.append(column, `sl.${range}`);
+        return this;
+    }
+    /**
+     * Only relevant for range columns. Match only rows where every element in
+     * `column` is either contained in `range` or less than any element in
+     * `range`.
+     *
+     * @param column - The range column to filter on
+     * @param range - The range to filter with
+     */
+    rangeLte(column, range) {
+        this.url.searchParams.append(column, `nxr.${range}`);
+        return this;
+    }
+    /**
+     * Only relevant for range columns. Match only rows where `column` is
+     * mutually exclusive to `range` and there can be no element between the two
+     * ranges.
+     *
+     * @param column - The range column to filter on
+     * @param range - The range to filter with
+     */
+    rangeAdjacent(column, range) {
+        this.url.searchParams.append(column, `adj.${range}`);
+        return this;
+    }
+    /**
+     * Only relevant for array and range columns. Match only rows where
+     * `column` and `value` have an element in common.
+     *
+     * @param column - The array or range column to filter on
+     * @param value - The array or range value to filter with
+     */
+    overlaps(column, value) {
+        if (typeof value === 'string') {
+            // range
+            this.url.searchParams.append(column, `ov.${value}`);
+        }
+        else {
+            // array
+            this.url.searchParams.append(column, `ov.{${value.join(',')}}`);
+        }
+        return this;
+    }
+    /**
+     * Only relevant for text and tsvector columns. Match only rows where
+     * `column` matches the query string in `query`.
+     *
+     * @param column - The text or tsvector column to filter on
+     * @param query - The query text to match with
+     * @param options - Named parameters
+     * @param options.config - The text search configuration to use
+     * @param options.type - Change how the `query` text is interpreted
+     */
+    textSearch(column, query, { config, type } = {}) {
+        let typePart = '';
+        if (type === 'plain') {
+            typePart = 'pl';
+        }
+        else if (type === 'phrase') {
+            typePart = 'ph';
+        }
+        else if (type === 'websearch') {
+            typePart = 'w';
+        }
+        const configPart = config === undefined ? '' : `(${config})`;
+        this.url.searchParams.append(column, `${typePart}fts${configPart}.${query}`);
+        return this;
+    }
+    /**
+     * Match only rows where each column in `query` keys is equal to its
+     * associated value. Shorthand for multiple `.eq()`s.
+     *
+     * @param query - The object to filter with, with column names as keys mapped
+     * to their filter values
+     */
+    match(query) {
+        Object.entries(query).forEach(([column, value]) => {
+            this.url.searchParams.append(column, `eq.${value}`);
+        });
+        return this;
+    }
+    /**
+     * Match only rows which doesn't satisfy the filter.
+     *
+     * Unlike most filters, `opearator` and `value` are used as-is and need to
+     * follow [PostgREST
+     * syntax](https://postgrest.org/en/stable/api.html#operators). You also need
+     * to make sure they are properly sanitized.
+     *
+     * @param column - The column to filter on
+     * @param operator - The operator to be negated to filter with, following
+     * PostgREST syntax
+     * @param value - The value to filter with, following PostgREST syntax
+     */
+    not(column, operator, value) {
+        this.url.searchParams.append(column, `not.${operator}.${value}`);
+        return this;
+    }
+    /**
+     * Match only rows which satisfy at least one of the filters.
+     *
+     * Unlike most filters, `filters` is used as-is and needs to follow [PostgREST
+     * syntax](https://postgrest.org/en/stable/api.html#operators). You also need
+     * to make sure it's properly sanitized.
+     *
+     * It's currently not possible to do an `.or()` filter across multiple tables.
+     *
+     * @param filters - The filters to use, following PostgREST syntax
+     * @param options - Named parameters
+     * @param options.referencedTable - Set this to filter on referenced tables
+     * instead of the parent table
+     * @param options.foreignTable - Deprecated, use `referencedTable` instead
+     */
+    or(filters, { foreignTable, referencedTable = foreignTable, } = {}) {
+        const key = referencedTable ? `${referencedTable}.or` : 'or';
+        this.url.searchParams.append(key, `(${filters})`);
+        return this;
+    }
+    /**
+     * Match only rows which satisfy the filter. This is an escape hatch - you
+     * should use the specific filter methods wherever possible.
+     *
+     * Unlike most filters, `opearator` and `value` are used as-is and need to
+     * follow [PostgREST
+     * syntax](https://postgrest.org/en/stable/api.html#operators). You also need
+     * to make sure they are properly sanitized.
+     *
+     * @param column - The column to filter on
+     * @param operator - The operator to filter with, following PostgREST syntax
+     * @param value - The value to filter with, following PostgREST syntax
+     */
+    filter(column, operator, value) {
+        this.url.searchParams.append(column, `${operator}.${value}`);
+        return this;
+    }
+}
+exports["default"] = PostgrestFilterBuilder;
+//# sourceMappingURL=PostgrestFilterBuilder.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestQueryBuilder.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestQueryBuilder.js ***!
+  \*******************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const PostgrestFilterBuilder_1 = __importDefault(__webpack_require__(/*! ./PostgrestFilterBuilder */ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestFilterBuilder.js"));
+class PostgrestQueryBuilder {
+    constructor(url, { headers = {}, schema, fetch, }) {
+        this.url = url;
+        this.headers = headers;
+        this.schema = schema;
+        this.fetch = fetch;
+    }
+    /**
+     * Perform a SELECT query on the table or view.
+     *
+     * @param columns - The columns to retrieve, separated by commas. Columns can be renamed when returned with `customName:columnName`
+     *
+     * @param options - Named parameters
+     *
+     * @param options.head - When set to `true`, `data` will not be returned.
+     * Useful if you only need the count.
+     *
+     * @param options.count - Count algorithm to use to count rows in the table or view.
+     *
+     * `"exact"`: Exact but slow count algorithm. Performs a `COUNT(*)` under the
+     * hood.
+     *
+     * `"planned"`: Approximated but fast count algorithm. Uses the Postgres
+     * statistics under the hood.
+     *
+     * `"estimated"`: Uses exact count for low numbers and planned count for high
+     * numbers.
+     */
+    select(columns, { head = false, count, } = {}) {
+        const method = head ? 'HEAD' : 'GET';
+        // Remove whitespaces except when quoted
+        let quoted = false;
+        const cleanedColumns = (columns !== null && columns !== void 0 ? columns : '*')
+            .split('')
+            .map((c) => {
+            if (/\s/.test(c) && !quoted) {
+                return '';
+            }
+            if (c === '"') {
+                quoted = !quoted;
+            }
+            return c;
+        })
+            .join('');
+        this.url.searchParams.set('select', cleanedColumns);
+        if (count) {
+            this.headers['Prefer'] = `count=${count}`;
+        }
+        return new PostgrestFilterBuilder_1.default({
+            method,
+            url: this.url,
+            headers: this.headers,
+            schema: this.schema,
+            fetch: this.fetch,
+            allowEmpty: false,
+        });
+    }
+    /**
+     * Perform an INSERT into the table or view.
+     *
+     * By default, inserted rows are not returned. To return it, chain the call
+     * with `.select()`.
+     *
+     * @param values - The values to insert. Pass an object to insert a single row
+     * or an array to insert multiple rows.
+     *
+     * @param options - Named parameters
+     *
+     * @param options.count - Count algorithm to use to count inserted rows.
+     *
+     * `"exact"`: Exact but slow count algorithm. Performs a `COUNT(*)` under the
+     * hood.
+     *
+     * `"planned"`: Approximated but fast count algorithm. Uses the Postgres
+     * statistics under the hood.
+     *
+     * `"estimated"`: Uses exact count for low numbers and planned count for high
+     * numbers.
+     *
+     * @param options.defaultToNull - Make missing fields default to `null`.
+     * Otherwise, use the default value for the column. Only applies for bulk
+     * inserts.
+     */
+    insert(values, { count, defaultToNull = true, } = {}) {
+        const method = 'POST';
+        const prefersHeaders = [];
+        if (this.headers['Prefer']) {
+            prefersHeaders.push(this.headers['Prefer']);
+        }
+        if (count) {
+            prefersHeaders.push(`count=${count}`);
+        }
+        if (!defaultToNull) {
+            prefersHeaders.push('missing=default');
+        }
+        this.headers['Prefer'] = prefersHeaders.join(',');
+        if (Array.isArray(values)) {
+            const columns = values.reduce((acc, x) => acc.concat(Object.keys(x)), []);
+            if (columns.length > 0) {
+                const uniqueColumns = [...new Set(columns)].map((column) => `"${column}"`);
+                this.url.searchParams.set('columns', uniqueColumns.join(','));
+            }
+        }
+        return new PostgrestFilterBuilder_1.default({
+            method,
+            url: this.url,
+            headers: this.headers,
+            schema: this.schema,
+            body: values,
+            fetch: this.fetch,
+            allowEmpty: false,
+        });
+    }
+    /**
+     * Perform an UPSERT on the table or view. Depending on the column(s) passed
+     * to `onConflict`, `.upsert()` allows you to perform the equivalent of
+     * `.insert()` if a row with the corresponding `onConflict` columns doesn't
+     * exist, or if it does exist, perform an alternative action depending on
+     * `ignoreDuplicates`.
+     *
+     * By default, upserted rows are not returned. To return it, chain the call
+     * with `.select()`.
+     *
+     * @param values - The values to upsert with. Pass an object to upsert a
+     * single row or an array to upsert multiple rows.
+     *
+     * @param options - Named parameters
+     *
+     * @param options.onConflict - Comma-separated UNIQUE column(s) to specify how
+     * duplicate rows are determined. Two rows are duplicates if all the
+     * `onConflict` columns are equal.
+     *
+     * @param options.ignoreDuplicates - If `true`, duplicate rows are ignored. If
+     * `false`, duplicate rows are merged with existing rows.
+     *
+     * @param options.count - Count algorithm to use to count upserted rows.
+     *
+     * `"exact"`: Exact but slow count algorithm. Performs a `COUNT(*)` under the
+     * hood.
+     *
+     * `"planned"`: Approximated but fast count algorithm. Uses the Postgres
+     * statistics under the hood.
+     *
+     * `"estimated"`: Uses exact count for low numbers and planned count for high
+     * numbers.
+     *
+     * @param options.defaultToNull - Make missing fields default to `null`.
+     * Otherwise, use the default value for the column. This only applies when
+     * inserting new rows, not when merging with existing rows under
+     * `ignoreDuplicates: false`. This also only applies when doing bulk upserts.
+     */
+    upsert(values, { onConflict, ignoreDuplicates = false, count, defaultToNull = true, } = {}) {
+        const method = 'POST';
+        const prefersHeaders = [`resolution=${ignoreDuplicates ? 'ignore' : 'merge'}-duplicates`];
+        if (onConflict !== undefined)
+            this.url.searchParams.set('on_conflict', onConflict);
+        if (this.headers['Prefer']) {
+            prefersHeaders.push(this.headers['Prefer']);
+        }
+        if (count) {
+            prefersHeaders.push(`count=${count}`);
+        }
+        if (!defaultToNull) {
+            prefersHeaders.push('missing=default');
+        }
+        this.headers['Prefer'] = prefersHeaders.join(',');
+        if (Array.isArray(values)) {
+            const columns = values.reduce((acc, x) => acc.concat(Object.keys(x)), []);
+            if (columns.length > 0) {
+                const uniqueColumns = [...new Set(columns)].map((column) => `"${column}"`);
+                this.url.searchParams.set('columns', uniqueColumns.join(','));
+            }
+        }
+        return new PostgrestFilterBuilder_1.default({
+            method,
+            url: this.url,
+            headers: this.headers,
+            schema: this.schema,
+            body: values,
+            fetch: this.fetch,
+            allowEmpty: false,
+        });
+    }
+    /**
+     * Perform an UPDATE on the table or view.
+     *
+     * By default, updated rows are not returned. To return it, chain the call
+     * with `.select()` after filters.
+     *
+     * @param values - The values to update with
+     *
+     * @param options - Named parameters
+     *
+     * @param options.count - Count algorithm to use to count updated rows.
+     *
+     * `"exact"`: Exact but slow count algorithm. Performs a `COUNT(*)` under the
+     * hood.
+     *
+     * `"planned"`: Approximated but fast count algorithm. Uses the Postgres
+     * statistics under the hood.
+     *
+     * `"estimated"`: Uses exact count for low numbers and planned count for high
+     * numbers.
+     */
+    update(values, { count, } = {}) {
+        const method = 'PATCH';
+        const prefersHeaders = [];
+        if (this.headers['Prefer']) {
+            prefersHeaders.push(this.headers['Prefer']);
+        }
+        if (count) {
+            prefersHeaders.push(`count=${count}`);
+        }
+        this.headers['Prefer'] = prefersHeaders.join(',');
+        return new PostgrestFilterBuilder_1.default({
+            method,
+            url: this.url,
+            headers: this.headers,
+            schema: this.schema,
+            body: values,
+            fetch: this.fetch,
+            allowEmpty: false,
+        });
+    }
+    /**
+     * Perform a DELETE on the table or view.
+     *
+     * By default, deleted rows are not returned. To return it, chain the call
+     * with `.select()` after filters.
+     *
+     * @param options - Named parameters
+     *
+     * @param options.count - Count algorithm to use to count deleted rows.
+     *
+     * `"exact"`: Exact but slow count algorithm. Performs a `COUNT(*)` under the
+     * hood.
+     *
+     * `"planned"`: Approximated but fast count algorithm. Uses the Postgres
+     * statistics under the hood.
+     *
+     * `"estimated"`: Uses exact count for low numbers and planned count for high
+     * numbers.
+     */
+    delete({ count, } = {}) {
+        const method = 'DELETE';
+        const prefersHeaders = [];
+        if (count) {
+            prefersHeaders.push(`count=${count}`);
+        }
+        if (this.headers['Prefer']) {
+            prefersHeaders.unshift(this.headers['Prefer']);
+        }
+        this.headers['Prefer'] = prefersHeaders.join(',');
+        return new PostgrestFilterBuilder_1.default({
+            method,
+            url: this.url,
+            headers: this.headers,
+            schema: this.schema,
+            fetch: this.fetch,
+            allowEmpty: false,
+        });
+    }
+}
+exports["default"] = PostgrestQueryBuilder;
+//# sourceMappingURL=PostgrestQueryBuilder.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestTransformBuilder.js":
+/*!***********************************************************************************!*\
+  !*** ./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestTransformBuilder.js ***!
+  \***********************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const PostgrestBuilder_1 = __importDefault(__webpack_require__(/*! ./PostgrestBuilder */ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestBuilder.js"));
+class PostgrestTransformBuilder extends PostgrestBuilder_1.default {
+    /**
+     * Perform a SELECT on the query result.
+     *
+     * By default, `.insert()`, `.update()`, `.upsert()`, and `.delete()` do not
+     * return modified rows. By calling this method, modified rows are returned in
+     * `data`.
+     *
+     * @param columns - The columns to retrieve, separated by commas
+     */
+    select(columns) {
+        // Remove whitespaces except when quoted
+        let quoted = false;
+        const cleanedColumns = (columns !== null && columns !== void 0 ? columns : '*')
+            .split('')
+            .map((c) => {
+            if (/\s/.test(c) && !quoted) {
+                return '';
+            }
+            if (c === '"') {
+                quoted = !quoted;
+            }
+            return c;
+        })
+            .join('');
+        this.url.searchParams.set('select', cleanedColumns);
+        if (this.headers['Prefer']) {
+            this.headers['Prefer'] += ',';
+        }
+        this.headers['Prefer'] += 'return=representation';
+        return this;
+    }
+    /**
+     * Order the query result by `column`.
+     *
+     * You can call this method multiple times to order by multiple columns.
+     *
+     * You can order referenced tables, but it only affects the ordering of the
+     * parent table if you use `!inner` in the query.
+     *
+     * @param column - The column to order by
+     * @param options - Named parameters
+     * @param options.ascending - If `true`, the result will be in ascending order
+     * @param options.nullsFirst - If `true`, `null`s appear first. If `false`,
+     * `null`s appear last.
+     * @param options.referencedTable - Set this to order a referenced table by
+     * its columns
+     * @param options.foreignTable - Deprecated, use `options.referencedTable`
+     * instead
+     */
+    order(column, { ascending = true, nullsFirst, foreignTable, referencedTable = foreignTable, } = {}) {
+        const key = referencedTable ? `${referencedTable}.order` : 'order';
+        const existingOrder = this.url.searchParams.get(key);
+        this.url.searchParams.set(key, `${existingOrder ? `${existingOrder},` : ''}${column}.${ascending ? 'asc' : 'desc'}${nullsFirst === undefined ? '' : nullsFirst ? '.nullsfirst' : '.nullslast'}`);
+        return this;
+    }
+    /**
+     * Limit the query result by `count`.
+     *
+     * @param count - The maximum number of rows to return
+     * @param options - Named parameters
+     * @param options.referencedTable - Set this to limit rows of referenced
+     * tables instead of the parent table
+     * @param options.foreignTable - Deprecated, use `options.referencedTable`
+     * instead
+     */
+    limit(count, { foreignTable, referencedTable = foreignTable, } = {}) {
+        const key = typeof referencedTable === 'undefined' ? 'limit' : `${referencedTable}.limit`;
+        this.url.searchParams.set(key, `${count}`);
+        return this;
+    }
+    /**
+     * Limit the query result by starting at an offset `from` and ending at the offset `to`.
+     * Only records within this range are returned.
+     * This respects the query order and if there is no order clause the range could behave unexpectedly.
+     * The `from` and `to` values are 0-based and inclusive: `range(1, 3)` will include the second, third
+     * and fourth rows of the query.
+     *
+     * @param from - The starting index from which to limit the result
+     * @param to - The last index to which to limit the result
+     * @param options - Named parameters
+     * @param options.referencedTable - Set this to limit rows of referenced
+     * tables instead of the parent table
+     * @param options.foreignTable - Deprecated, use `options.referencedTable`
+     * instead
+     */
+    range(from, to, { foreignTable, referencedTable = foreignTable, } = {}) {
+        const keyOffset = typeof referencedTable === 'undefined' ? 'offset' : `${referencedTable}.offset`;
+        const keyLimit = typeof referencedTable === 'undefined' ? 'limit' : `${referencedTable}.limit`;
+        this.url.searchParams.set(keyOffset, `${from}`);
+        // Range is inclusive, so add 1
+        this.url.searchParams.set(keyLimit, `${to - from + 1}`);
+        return this;
+    }
+    /**
+     * Set the AbortSignal for the fetch request.
+     *
+     * @param signal - The AbortSignal to use for the fetch request
+     */
+    abortSignal(signal) {
+        this.signal = signal;
+        return this;
+    }
+    /**
+     * Return `data` as a single object instead of an array of objects.
+     *
+     * Query result must be one row (e.g. using `.limit(1)`), otherwise this
+     * returns an error.
+     */
+    single() {
+        this.headers['Accept'] = 'application/vnd.pgrst.object+json';
+        return this;
+    }
+    /**
+     * Return `data` as a single object instead of an array of objects.
+     *
+     * Query result must be zero or one row (e.g. using `.limit(1)`), otherwise
+     * this returns an error.
+     */
+    maybeSingle() {
+        // Temporary partial fix for https://github.com/supabase/postgrest-js/issues/361
+        // Issue persists e.g. for `.insert([...]).select().maybeSingle()`
+        if (this.method === 'GET') {
+            this.headers['Accept'] = 'application/json';
+        }
+        else {
+            this.headers['Accept'] = 'application/vnd.pgrst.object+json';
+        }
+        this.isMaybeSingle = true;
+        return this;
+    }
+    /**
+     * Return `data` as a string in CSV format.
+     */
+    csv() {
+        this.headers['Accept'] = 'text/csv';
+        return this;
+    }
+    /**
+     * Return `data` as an object in [GeoJSON](https://geojson.org) format.
+     */
+    geojson() {
+        this.headers['Accept'] = 'application/geo+json';
+        return this;
+    }
+    /**
+     * Return `data` as the EXPLAIN plan for the query.
+     *
+     * You need to enable the
+     * [db_plan_enabled](https://supabase.com/docs/guides/database/debugging-performance#enabling-explain)
+     * setting before using this method.
+     *
+     * @param options - Named parameters
+     *
+     * @param options.analyze - If `true`, the query will be executed and the
+     * actual run time will be returned
+     *
+     * @param options.verbose - If `true`, the query identifier will be returned
+     * and `data` will include the output columns of the query
+     *
+     * @param options.settings - If `true`, include information on configuration
+     * parameters that affect query planning
+     *
+     * @param options.buffers - If `true`, include information on buffer usage
+     *
+     * @param options.wal - If `true`, include information on WAL record generation
+     *
+     * @param options.format - The format of the output, can be `"text"` (default)
+     * or `"json"`
+     */
+    explain({ analyze = false, verbose = false, settings = false, buffers = false, wal = false, format = 'text', } = {}) {
+        var _a;
+        const options = [
+            analyze ? 'analyze' : null,
+            verbose ? 'verbose' : null,
+            settings ? 'settings' : null,
+            buffers ? 'buffers' : null,
+            wal ? 'wal' : null,
+        ]
+            .filter(Boolean)
+            .join('|');
+        // An Accept header can carry multiple media types but postgrest-js always sends one
+        const forMediatype = (_a = this.headers['Accept']) !== null && _a !== void 0 ? _a : 'application/json';
+        this.headers['Accept'] = `application/vnd.pgrst.plan+${format}; for="${forMediatype}"; options=${options};`;
+        if (format === 'json')
+            return this;
+        else
+            return this;
+    }
+    /**
+     * Rollback the query.
+     *
+     * `data` will still be returned, but the query is not committed.
+     */
+    rollback() {
+        var _a;
+        if (((_a = this.headers['Prefer']) !== null && _a !== void 0 ? _a : '').trim().length > 0) {
+            this.headers['Prefer'] += ',tx=rollback';
+        }
+        else {
+            this.headers['Prefer'] = 'tx=rollback';
+        }
+        return this;
+    }
+    /**
+     * Override the type of the returned `data`.
+     *
+     * @typeParam NewResult - The new result type to override with
+     */
+    returns() {
+        return this;
+    }
+}
+exports["default"] = PostgrestTransformBuilder;
+//# sourceMappingURL=PostgrestTransformBuilder.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/postgrest-js/dist/cjs/constants.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@supabase/postgrest-js/dist/cjs/constants.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DEFAULT_HEADERS = void 0;
+const version_1 = __webpack_require__(/*! ./version */ "./node_modules/@supabase/postgrest-js/dist/cjs/version.js");
+exports.DEFAULT_HEADERS = { 'X-Client-Info': `postgrest-js/${version_1.version}` };
+//# sourceMappingURL=constants.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/postgrest-js/dist/cjs/index.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@supabase/postgrest-js/dist/cjs/index.js ***!
+  \***************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PostgrestError = exports.PostgrestBuilder = exports.PostgrestTransformBuilder = exports.PostgrestFilterBuilder = exports.PostgrestQueryBuilder = exports.PostgrestClient = void 0;
+// Always update wrapper.mjs when updating this file.
+const PostgrestClient_1 = __importDefault(__webpack_require__(/*! ./PostgrestClient */ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestClient.js"));
+exports.PostgrestClient = PostgrestClient_1.default;
+const PostgrestQueryBuilder_1 = __importDefault(__webpack_require__(/*! ./PostgrestQueryBuilder */ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestQueryBuilder.js"));
+exports.PostgrestQueryBuilder = PostgrestQueryBuilder_1.default;
+const PostgrestFilterBuilder_1 = __importDefault(__webpack_require__(/*! ./PostgrestFilterBuilder */ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestFilterBuilder.js"));
+exports.PostgrestFilterBuilder = PostgrestFilterBuilder_1.default;
+const PostgrestTransformBuilder_1 = __importDefault(__webpack_require__(/*! ./PostgrestTransformBuilder */ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestTransformBuilder.js"));
+exports.PostgrestTransformBuilder = PostgrestTransformBuilder_1.default;
+const PostgrestBuilder_1 = __importDefault(__webpack_require__(/*! ./PostgrestBuilder */ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestBuilder.js"));
+exports.PostgrestBuilder = PostgrestBuilder_1.default;
+const PostgrestError_1 = __importDefault(__webpack_require__(/*! ./PostgrestError */ "./node_modules/@supabase/postgrest-js/dist/cjs/PostgrestError.js"));
+exports.PostgrestError = PostgrestError_1.default;
+exports["default"] = {
+    PostgrestClient: PostgrestClient_1.default,
+    PostgrestQueryBuilder: PostgrestQueryBuilder_1.default,
+    PostgrestFilterBuilder: PostgrestFilterBuilder_1.default,
+    PostgrestTransformBuilder: PostgrestTransformBuilder_1.default,
+    PostgrestBuilder: PostgrestBuilder_1.default,
+    PostgrestError: PostgrestError_1.default,
+};
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/postgrest-js/dist/cjs/version.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@supabase/postgrest-js/dist/cjs/version.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.version = void 0;
+exports.version = '0.0.0-automated';
+//# sourceMappingURL=version.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/realtime-js/dist/module/RealtimeChannel.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@supabase/realtime-js/dist/module/RealtimeChannel.js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   REALTIME_CHANNEL_STATES: () => (/* binding */ REALTIME_CHANNEL_STATES),
+/* harmony export */   REALTIME_LISTEN_TYPES: () => (/* binding */ REALTIME_LISTEN_TYPES),
+/* harmony export */   REALTIME_POSTGRES_CHANGES_LISTEN_EVENT: () => (/* binding */ REALTIME_POSTGRES_CHANGES_LISTEN_EVENT),
+/* harmony export */   REALTIME_SUBSCRIBE_STATES: () => (/* binding */ REALTIME_SUBSCRIBE_STATES),
+/* harmony export */   "default": () => (/* binding */ RealtimeChannel)
+/* harmony export */ });
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/constants */ "./node_modules/@supabase/realtime-js/dist/module/lib/constants.js");
+/* harmony import */ var _lib_push__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/push */ "./node_modules/@supabase/realtime-js/dist/module/lib/push.js");
+/* harmony import */ var _lib_timer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/timer */ "./node_modules/@supabase/realtime-js/dist/module/lib/timer.js");
+/* harmony import */ var _RealtimePresence__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RealtimePresence */ "./node_modules/@supabase/realtime-js/dist/module/RealtimePresence.js");
+/* harmony import */ var _lib_transformers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./lib/transformers */ "./node_modules/@supabase/realtime-js/dist/module/lib/transformers.js");
+
+
+
+
+
+
+var REALTIME_POSTGRES_CHANGES_LISTEN_EVENT;
+(function (REALTIME_POSTGRES_CHANGES_LISTEN_EVENT) {
+    REALTIME_POSTGRES_CHANGES_LISTEN_EVENT["ALL"] = "*";
+    REALTIME_POSTGRES_CHANGES_LISTEN_EVENT["INSERT"] = "INSERT";
+    REALTIME_POSTGRES_CHANGES_LISTEN_EVENT["UPDATE"] = "UPDATE";
+    REALTIME_POSTGRES_CHANGES_LISTEN_EVENT["DELETE"] = "DELETE";
+})(REALTIME_POSTGRES_CHANGES_LISTEN_EVENT || (REALTIME_POSTGRES_CHANGES_LISTEN_EVENT = {}));
+var REALTIME_LISTEN_TYPES;
+(function (REALTIME_LISTEN_TYPES) {
+    REALTIME_LISTEN_TYPES["BROADCAST"] = "broadcast";
+    REALTIME_LISTEN_TYPES["PRESENCE"] = "presence";
+    REALTIME_LISTEN_TYPES["POSTGRES_CHANGES"] = "postgres_changes";
+    REALTIME_LISTEN_TYPES["SYSTEM"] = "system";
+})(REALTIME_LISTEN_TYPES || (REALTIME_LISTEN_TYPES = {}));
+var REALTIME_SUBSCRIBE_STATES;
+(function (REALTIME_SUBSCRIBE_STATES) {
+    REALTIME_SUBSCRIBE_STATES["SUBSCRIBED"] = "SUBSCRIBED";
+    REALTIME_SUBSCRIBE_STATES["TIMED_OUT"] = "TIMED_OUT";
+    REALTIME_SUBSCRIBE_STATES["CLOSED"] = "CLOSED";
+    REALTIME_SUBSCRIBE_STATES["CHANNEL_ERROR"] = "CHANNEL_ERROR";
+})(REALTIME_SUBSCRIBE_STATES || (REALTIME_SUBSCRIBE_STATES = {}));
+const REALTIME_CHANNEL_STATES = _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_STATES;
+/** A channel is the basic building block of Realtime
+ * and narrows the scope of data flow to subscribed clients.
+ * You can think of a channel as a chatroom where participants are able to see who's online
+ * and send and receive messages.
+ */
+class RealtimeChannel {
+    constructor(
+    /** Topic name can be any string. */
+    topic, params = { config: {} }, socket) {
+        this.topic = topic;
+        this.params = params;
+        this.socket = socket;
+        this.bindings = {};
+        this.state = _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_STATES.closed;
+        this.joinedOnce = false;
+        this.pushBuffer = [];
+        this.subTopic = topic.replace(/^realtime:/i, '');
+        this.params.config = Object.assign({
+            broadcast: { ack: false, self: false },
+            presence: { key: '' },
+            private: false,
+        }, params.config);
+        this.timeout = this.socket.timeout;
+        this.joinPush = new _lib_push__WEBPACK_IMPORTED_MODULE_1__["default"](this, _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_EVENTS.join, this.params, this.timeout);
+        this.rejoinTimer = new _lib_timer__WEBPACK_IMPORTED_MODULE_2__["default"](() => this._rejoinUntilConnected(), this.socket.reconnectAfterMs);
+        this.joinPush.receive('ok', () => {
+            this.state = _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_STATES.joined;
+            this.rejoinTimer.reset();
+            this.pushBuffer.forEach((pushEvent) => pushEvent.send());
+            this.pushBuffer = [];
+        });
+        this._onClose(() => {
+            this.rejoinTimer.reset();
+            this.socket.log('channel', `close ${this.topic} ${this._joinRef()}`);
+            this.state = _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_STATES.closed;
+            this.socket._remove(this);
+        });
+        this._onError((reason) => {
+            if (this._isLeaving() || this._isClosed()) {
+                return;
+            }
+            this.socket.log('channel', `error ${this.topic}`, reason);
+            this.state = _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_STATES.errored;
+            this.rejoinTimer.scheduleTimeout();
+        });
+        this.joinPush.receive('timeout', () => {
+            if (!this._isJoining()) {
+                return;
+            }
+            this.socket.log('channel', `timeout ${this.topic}`, this.joinPush.timeout);
+            this.state = _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_STATES.errored;
+            this.rejoinTimer.scheduleTimeout();
+        });
+        this._on(_lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_EVENTS.reply, {}, (payload, ref) => {
+            this._trigger(this._replyEventName(ref), payload);
+        });
+        this.presence = new _RealtimePresence__WEBPACK_IMPORTED_MODULE_3__["default"](this);
+        this.broadcastEndpointURL =
+            (0,_lib_transformers__WEBPACK_IMPORTED_MODULE_4__.httpEndpointURL)(this.socket.endPoint) + '/api/broadcast';
+        this.private = this.params.config.private || false;
+    }
+    /** Subscribe registers your client with the server */
+    subscribe(callback, timeout = this.timeout) {
+        var _a, _b;
+        if (!this.socket.isConnected()) {
+            this.socket.connect();
+        }
+        if (this.joinedOnce) {
+            throw `tried to subscribe multiple times. 'subscribe' can only be called a single time per channel instance`;
+        }
+        else {
+            const { config: { broadcast, presence, private: isPrivate }, } = this.params;
+            this._onError((e) => callback && callback('CHANNEL_ERROR', e));
+            this._onClose(() => callback && callback('CLOSED'));
+            const accessTokenPayload = {};
+            const config = {
+                broadcast,
+                presence,
+                postgres_changes: (_b = (_a = this.bindings.postgres_changes) === null || _a === void 0 ? void 0 : _a.map((r) => r.filter)) !== null && _b !== void 0 ? _b : [],
+                private: isPrivate,
+            };
+            if (this.socket.accessToken) {
+                accessTokenPayload.access_token = this.socket.accessToken;
+            }
+            this.updateJoinPayload(Object.assign({ config }, accessTokenPayload));
+            this.joinedOnce = true;
+            this._rejoin(timeout);
+            this.joinPush
+                .receive('ok', ({ postgres_changes: serverPostgresFilters, }) => {
+                var _a;
+                this.socket.accessToken &&
+                    this.socket.setAuth(this.socket.accessToken);
+                if (serverPostgresFilters === undefined) {
+                    callback && callback('SUBSCRIBED');
+                    return;
+                }
+                else {
+                    const clientPostgresBindings = this.bindings.postgres_changes;
+                    const bindingsLen = (_a = clientPostgresBindings === null || clientPostgresBindings === void 0 ? void 0 : clientPostgresBindings.length) !== null && _a !== void 0 ? _a : 0;
+                    const newPostgresBindings = [];
+                    for (let i = 0; i < bindingsLen; i++) {
+                        const clientPostgresBinding = clientPostgresBindings[i];
+                        const { filter: { event, schema, table, filter }, } = clientPostgresBinding;
+                        const serverPostgresFilter = serverPostgresFilters && serverPostgresFilters[i];
+                        if (serverPostgresFilter &&
+                            serverPostgresFilter.event === event &&
+                            serverPostgresFilter.schema === schema &&
+                            serverPostgresFilter.table === table &&
+                            serverPostgresFilter.filter === filter) {
+                            newPostgresBindings.push(Object.assign(Object.assign({}, clientPostgresBinding), { id: serverPostgresFilter.id }));
+                        }
+                        else {
+                            this.unsubscribe();
+                            callback &&
+                                callback('CHANNEL_ERROR', new Error('mismatch between server and client bindings for postgres changes'));
+                            return;
+                        }
+                    }
+                    this.bindings.postgres_changes = newPostgresBindings;
+                    callback && callback('SUBSCRIBED');
+                    return;
+                }
+            })
+                .receive('error', (error) => {
+                callback &&
+                    callback('CHANNEL_ERROR', new Error(JSON.stringify(Object.values(error).join(', ') || 'error')));
+                return;
+            })
+                .receive('timeout', () => {
+                callback && callback('TIMED_OUT');
+                return;
+            });
+        }
+        return this;
+    }
+    presenceState() {
+        return this.presence.state;
+    }
+    async track(payload, opts = {}) {
+        return await this.send({
+            type: 'presence',
+            event: 'track',
+            payload,
+        }, opts.timeout || this.timeout);
+    }
+    async untrack(opts = {}) {
+        return await this.send({
+            type: 'presence',
+            event: 'untrack',
+        }, opts);
+    }
+    on(type, filter, callback) {
+        return this._on(type, filter, callback);
+    }
+    /**
+     * Sends a message into the channel.
+     *
+     * @param args Arguments to send to channel
+     * @param args.type The type of event to send
+     * @param args.event The name of the event being sent
+     * @param args.payload Payload to be sent
+     * @param opts Options to be used during the send process
+     */
+    async send(args, opts = {}) {
+        var _a, _b;
+        if (!this._canPush() && args.type === 'broadcast') {
+            const { event, payload: endpoint_payload } = args;
+            const options = {
+                method: 'POST',
+                headers: {
+                    Authorization: this.socket.accessToken
+                        ? `Bearer ${this.socket.accessToken}`
+                        : '',
+                    apikey: this.socket.apiKey ? this.socket.apiKey : '',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    messages: [
+                        {
+                            topic: this.subTopic,
+                            event,
+                            payload: endpoint_payload,
+                            private: this.private,
+                        },
+                    ],
+                }),
+            };
+            try {
+                const response = await this._fetchWithTimeout(this.broadcastEndpointURL, options, (_a = opts.timeout) !== null && _a !== void 0 ? _a : this.timeout);
+                await ((_b = response.body) === null || _b === void 0 ? void 0 : _b.cancel());
+                return response.ok ? 'ok' : 'error';
+            }
+            catch (error) {
+                if (error.name === 'AbortError') {
+                    return 'timed out';
+                }
+                else {
+                    return 'error';
+                }
+            }
+        }
+        else {
+            return new Promise((resolve) => {
+                var _a, _b, _c;
+                const push = this._push(args.type, args, opts.timeout || this.timeout);
+                if (args.type === 'broadcast' && !((_c = (_b = (_a = this.params) === null || _a === void 0 ? void 0 : _a.config) === null || _b === void 0 ? void 0 : _b.broadcast) === null || _c === void 0 ? void 0 : _c.ack)) {
+                    resolve('ok');
+                }
+                push.receive('ok', () => resolve('ok'));
+                push.receive('error', () => resolve('error'));
+                push.receive('timeout', () => resolve('timed out'));
+            });
+        }
+    }
+    updateJoinPayload(payload) {
+        this.joinPush.updatePayload(payload);
+    }
+    /**
+     * Leaves the channel.
+     *
+     * Unsubscribes from server events, and instructs channel to terminate on server.
+     * Triggers onClose() hooks.
+     *
+     * To receive leave acknowledgements, use the a `receive` hook to bind to the server ack, ie:
+     * channel.unsubscribe().receive("ok", () => alert("left!") )
+     */
+    unsubscribe(timeout = this.timeout) {
+        this.state = _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_STATES.leaving;
+        const onClose = () => {
+            this.socket.log('channel', `leave ${this.topic}`);
+            this._trigger(_lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_EVENTS.close, 'leave', this._joinRef());
+        };
+        this.rejoinTimer.reset();
+        // Destroy joinPush to avoid connection timeouts during unscription phase
+        this.joinPush.destroy();
+        return new Promise((resolve) => {
+            const leavePush = new _lib_push__WEBPACK_IMPORTED_MODULE_1__["default"](this, _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_EVENTS.leave, {}, timeout);
+            leavePush
+                .receive('ok', () => {
+                onClose();
+                resolve('ok');
+            })
+                .receive('timeout', () => {
+                onClose();
+                resolve('timed out');
+            })
+                .receive('error', () => {
+                resolve('error');
+            });
+            leavePush.send();
+            if (!this._canPush()) {
+                leavePush.trigger('ok', {});
+            }
+        });
+    }
+    /** @internal */
+    async _fetchWithTimeout(url, options, timeout) {
+        const controller = new AbortController();
+        const id = setTimeout(() => controller.abort(), timeout);
+        const response = await this.socket.fetch(url, Object.assign(Object.assign({}, options), { signal: controller.signal }));
+        clearTimeout(id);
+        return response;
+    }
+    /** @internal */
+    _push(event, payload, timeout = this.timeout) {
+        if (!this.joinedOnce) {
+            throw `tried to push '${event}' to '${this.topic}' before joining. Use channel.subscribe() before pushing events`;
+        }
+        let pushEvent = new _lib_push__WEBPACK_IMPORTED_MODULE_1__["default"](this, event, payload, timeout);
+        if (this._canPush()) {
+            pushEvent.send();
+        }
+        else {
+            pushEvent.startTimeout();
+            this.pushBuffer.push(pushEvent);
+        }
+        return pushEvent;
+    }
+    /**
+     * Overridable message hook
+     *
+     * Receives all events for specialized message handling before dispatching to the channel callbacks.
+     * Must return the payload, modified or unmodified.
+     *
+     * @internal
+     */
+    _onMessage(_event, payload, _ref) {
+        return payload;
+    }
+    /** @internal */
+    _isMember(topic) {
+        return this.topic === topic;
+    }
+    /** @internal */
+    _joinRef() {
+        return this.joinPush.ref;
+    }
+    /** @internal */
+    _trigger(type, payload, ref) {
+        var _a, _b;
+        const typeLower = type.toLocaleLowerCase();
+        const { close, error, leave, join } = _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_EVENTS;
+        const events = [close, error, leave, join];
+        if (ref && events.indexOf(typeLower) >= 0 && ref !== this._joinRef()) {
+            return;
+        }
+        let handledPayload = this._onMessage(typeLower, payload, ref);
+        if (payload && !handledPayload) {
+            throw 'channel onMessage callbacks must return the payload, modified or unmodified';
+        }
+        if (['insert', 'update', 'delete'].includes(typeLower)) {
+            (_a = this.bindings.postgres_changes) === null || _a === void 0 ? void 0 : _a.filter((bind) => {
+                var _a, _b, _c;
+                return (((_a = bind.filter) === null || _a === void 0 ? void 0 : _a.event) === '*' ||
+                    ((_c = (_b = bind.filter) === null || _b === void 0 ? void 0 : _b.event) === null || _c === void 0 ? void 0 : _c.toLocaleLowerCase()) === typeLower);
+            }).map((bind) => bind.callback(handledPayload, ref));
+        }
+        else {
+            (_b = this.bindings[typeLower]) === null || _b === void 0 ? void 0 : _b.filter((bind) => {
+                var _a, _b, _c, _d, _e, _f;
+                if (['broadcast', 'presence', 'postgres_changes'].includes(typeLower)) {
+                    if ('id' in bind) {
+                        const bindId = bind.id;
+                        const bindEvent = (_a = bind.filter) === null || _a === void 0 ? void 0 : _a.event;
+                        return (bindId &&
+                            ((_b = payload.ids) === null || _b === void 0 ? void 0 : _b.includes(bindId)) &&
+                            (bindEvent === '*' ||
+                                (bindEvent === null || bindEvent === void 0 ? void 0 : bindEvent.toLocaleLowerCase()) ===
+                                    ((_c = payload.data) === null || _c === void 0 ? void 0 : _c.type.toLocaleLowerCase())));
+                    }
+                    else {
+                        const bindEvent = (_e = (_d = bind === null || bind === void 0 ? void 0 : bind.filter) === null || _d === void 0 ? void 0 : _d.event) === null || _e === void 0 ? void 0 : _e.toLocaleLowerCase();
+                        return (bindEvent === '*' ||
+                            bindEvent === ((_f = payload === null || payload === void 0 ? void 0 : payload.event) === null || _f === void 0 ? void 0 : _f.toLocaleLowerCase()));
+                    }
+                }
+                else {
+                    return bind.type.toLocaleLowerCase() === typeLower;
+                }
+            }).map((bind) => {
+                if (typeof handledPayload === 'object' && 'ids' in handledPayload) {
+                    const postgresChanges = handledPayload.data;
+                    const { schema, table, commit_timestamp, type, errors } = postgresChanges;
+                    const enrichedPayload = {
+                        schema: schema,
+                        table: table,
+                        commit_timestamp: commit_timestamp,
+                        eventType: type,
+                        new: {},
+                        old: {},
+                        errors: errors,
+                    };
+                    handledPayload = Object.assign(Object.assign({}, enrichedPayload), this._getPayloadRecords(postgresChanges));
+                }
+                bind.callback(handledPayload, ref);
+            });
+        }
+    }
+    /** @internal */
+    _isClosed() {
+        return this.state === _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_STATES.closed;
+    }
+    /** @internal */
+    _isJoined() {
+        return this.state === _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_STATES.joined;
+    }
+    /** @internal */
+    _isJoining() {
+        return this.state === _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_STATES.joining;
+    }
+    /** @internal */
+    _isLeaving() {
+        return this.state === _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_STATES.leaving;
+    }
+    /** @internal */
+    _replyEventName(ref) {
+        return `chan_reply_${ref}`;
+    }
+    /** @internal */
+    _on(type, filter, callback) {
+        const typeLower = type.toLocaleLowerCase();
+        const binding = {
+            type: typeLower,
+            filter: filter,
+            callback: callback,
+        };
+        if (this.bindings[typeLower]) {
+            this.bindings[typeLower].push(binding);
+        }
+        else {
+            this.bindings[typeLower] = [binding];
+        }
+        return this;
+    }
+    /** @internal */
+    _off(type, filter) {
+        const typeLower = type.toLocaleLowerCase();
+        this.bindings[typeLower] = this.bindings[typeLower].filter((bind) => {
+            var _a;
+            return !(((_a = bind.type) === null || _a === void 0 ? void 0 : _a.toLocaleLowerCase()) === typeLower &&
+                RealtimeChannel.isEqual(bind.filter, filter));
+        });
+        return this;
+    }
+    /** @internal */
+    static isEqual(obj1, obj2) {
+        if (Object.keys(obj1).length !== Object.keys(obj2).length) {
+            return false;
+        }
+        for (const k in obj1) {
+            if (obj1[k] !== obj2[k]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    /** @internal */
+    _rejoinUntilConnected() {
+        this.rejoinTimer.scheduleTimeout();
+        if (this.socket.isConnected()) {
+            this._rejoin();
+        }
+    }
+    /**
+     * Registers a callback that will be executed when the channel closes.
+     *
+     * @internal
+     */
+    _onClose(callback) {
+        this._on(_lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_EVENTS.close, {}, callback);
+    }
+    /**
+     * Registers a callback that will be executed when the channel encounteres an error.
+     *
+     * @internal
+     */
+    _onError(callback) {
+        this._on(_lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_EVENTS.error, {}, (reason) => callback(reason));
+    }
+    /**
+     * Returns `true` if the socket is connected and the channel has been joined.
+     *
+     * @internal
+     */
+    _canPush() {
+        return this.socket.isConnected() && this._isJoined();
+    }
+    /** @internal */
+    _rejoin(timeout = this.timeout) {
+        if (this._isLeaving()) {
+            return;
+        }
+        this.socket._leaveOpenTopic(this.topic);
+        this.state = _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_STATES.joining;
+        this.joinPush.resend(timeout);
+    }
+    /** @internal */
+    _getPayloadRecords(payload) {
+        const records = {
+            new: {},
+            old: {},
+        };
+        if (payload.type === 'INSERT' || payload.type === 'UPDATE') {
+            records.new = _lib_transformers__WEBPACK_IMPORTED_MODULE_4__.convertChangeData(payload.columns, payload.record);
+        }
+        if (payload.type === 'UPDATE' || payload.type === 'DELETE') {
+            records.old = _lib_transformers__WEBPACK_IMPORTED_MODULE_4__.convertChangeData(payload.columns, payload.old_record);
+        }
+        return records;
+    }
+}
+//# sourceMappingURL=RealtimeChannel.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/realtime-js/dist/module/RealtimeClient.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@supabase/realtime-js/dist/module/RealtimeClient.js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ RealtimeClient)
+/* harmony export */ });
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/constants */ "./node_modules/@supabase/realtime-js/dist/module/lib/constants.js");
+/* harmony import */ var _lib_serializer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/serializer */ "./node_modules/@supabase/realtime-js/dist/module/lib/serializer.js");
+/* harmony import */ var _lib_timer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/timer */ "./node_modules/@supabase/realtime-js/dist/module/lib/timer.js");
+/* harmony import */ var _lib_transformers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lib/transformers */ "./node_modules/@supabase/realtime-js/dist/module/lib/transformers.js");
+/* harmony import */ var _RealtimeChannel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RealtimeChannel */ "./node_modules/@supabase/realtime-js/dist/module/RealtimeChannel.js");
+
+
+
+
+
+const noop = () => { };
+const NATIVE_WEBSOCKET_AVAILABLE = typeof WebSocket !== 'undefined';
+const WORKER_SCRIPT = `
+  addEventListener("message", (e) => {
+    if (e.data.event === "start") {
+      setInterval(() => postMessage({ event: "keepAlive" }), e.data.interval);
+    }
+  });`;
+class RealtimeClient {
+    /**
+     * Initializes the Socket.
+     *
+     * @param endPoint The string WebSocket endpoint, ie, "ws://example.com/socket", "wss://example.com", "/socket" (inherited host & protocol)
+     * @param httpEndpoint The string HTTP endpoint, ie, "https://example.com", "/" (inherited host & protocol)
+     * @param options.transport The Websocket Transport, for example WebSocket.
+     * @param options.timeout The default timeout in milliseconds to trigger push timeouts.
+     * @param options.params The optional params to pass when connecting.
+     * @param options.headers The optional headers to pass when connecting.
+     * @param options.heartbeatIntervalMs The millisec interval to send a heartbeat message.
+     * @param options.logger The optional function for specialized logging, ie: logger: (kind, msg, data) => { console.log(`${kind}: ${msg}`, data) }
+     * @param options.encode The function to encode outgoing messages. Defaults to JSON: (payload, callback) => callback(JSON.stringify(payload))
+     * @param options.decode The function to decode incoming messages. Defaults to Serializer's decode.
+     * @param options.reconnectAfterMs he optional function that returns the millsec reconnect interval. Defaults to stepped backoff off.
+     * @param options.worker Use Web Worker to set a side flow. Defaults to false.
+     * @param options.workerUrl The URL of the worker script. Defaults to https://realtime.supabase.com/worker.js that includes a heartbeat event call to keep the connection alive.
+     */
+    constructor(endPoint, options) {
+        var _a;
+        this.accessToken = null;
+        this.apiKey = null;
+        this.channels = [];
+        this.endPoint = '';
+        this.httpEndpoint = '';
+        this.headers = _lib_constants__WEBPACK_IMPORTED_MODULE_0__.DEFAULT_HEADERS;
+        this.params = {};
+        this.timeout = _lib_constants__WEBPACK_IMPORTED_MODULE_0__.DEFAULT_TIMEOUT;
+        this.heartbeatIntervalMs = 30000;
+        this.heartbeatTimer = undefined;
+        this.pendingHeartbeatRef = null;
+        this.ref = 0;
+        this.logger = noop;
+        this.conn = null;
+        this.sendBuffer = [];
+        this.serializer = new _lib_serializer__WEBPACK_IMPORTED_MODULE_1__["default"]();
+        this.stateChangeCallbacks = {
+            open: [],
+            close: [],
+            error: [],
+            message: [],
+        };
+        /**
+         * Use either custom fetch, if provided, or default fetch to make HTTP requests
+         *
+         * @internal
+         */
+        this._resolveFetch = (customFetch) => {
+            let _fetch;
+            if (customFetch) {
+                _fetch = customFetch;
+            }
+            else if (typeof fetch === 'undefined') {
+                _fetch = (...args) => Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! @supabase/node-fetch */ "./node_modules/@supabase/node-fetch/browser.js")).then(({ default: fetch }) => fetch(...args));
+            }
+            else {
+                _fetch = fetch;
+            }
+            return (...args) => _fetch(...args);
+        };
+        this.endPoint = `${endPoint}/${_lib_constants__WEBPACK_IMPORTED_MODULE_0__.TRANSPORTS.websocket}`;
+        this.httpEndpoint = (0,_lib_transformers__WEBPACK_IMPORTED_MODULE_3__.httpEndpointURL)(endPoint);
+        if (options === null || options === void 0 ? void 0 : options.transport) {
+            this.transport = options.transport;
+        }
+        else {
+            this.transport = null;
+        }
+        if (options === null || options === void 0 ? void 0 : options.params)
+            this.params = options.params;
+        if (options === null || options === void 0 ? void 0 : options.headers)
+            this.headers = Object.assign(Object.assign({}, this.headers), options.headers);
+        if (options === null || options === void 0 ? void 0 : options.timeout)
+            this.timeout = options.timeout;
+        if (options === null || options === void 0 ? void 0 : options.logger)
+            this.logger = options.logger;
+        if (options === null || options === void 0 ? void 0 : options.heartbeatIntervalMs)
+            this.heartbeatIntervalMs = options.heartbeatIntervalMs;
+        const accessToken = (_a = options === null || options === void 0 ? void 0 : options.params) === null || _a === void 0 ? void 0 : _a.apikey;
+        if (accessToken) {
+            this.accessToken = accessToken;
+            this.apiKey = accessToken;
+        }
+        this.reconnectAfterMs = (options === null || options === void 0 ? void 0 : options.reconnectAfterMs)
+            ? options.reconnectAfterMs
+            : (tries) => {
+                return [1000, 2000, 5000, 10000][tries - 1] || 10000;
+            };
+        this.encode = (options === null || options === void 0 ? void 0 : options.encode)
+            ? options.encode
+            : (payload, callback) => {
+                return callback(JSON.stringify(payload));
+            };
+        this.decode = (options === null || options === void 0 ? void 0 : options.decode)
+            ? options.decode
+            : this.serializer.decode.bind(this.serializer);
+        this.reconnectTimer = new _lib_timer__WEBPACK_IMPORTED_MODULE_2__["default"](async () => {
+            this.disconnect();
+            this.connect();
+        }, this.reconnectAfterMs);
+        this.fetch = this._resolveFetch(options === null || options === void 0 ? void 0 : options.fetch);
+        if (options === null || options === void 0 ? void 0 : options.worker) {
+            if (typeof window !== 'undefined' && !window.Worker) {
+                throw new Error('Web Worker is not supported');
+            }
+            this.worker = (options === null || options === void 0 ? void 0 : options.worker) || false;
+            this.workerUrl = options === null || options === void 0 ? void 0 : options.workerUrl;
+        }
+    }
+    /**
+     * Connects the socket, unless already connected.
+     */
+    connect() {
+        if (this.conn) {
+            return;
+        }
+        if (this.transport) {
+            this.conn = new this.transport(this._endPointURL(), undefined, {
+                headers: this.headers,
+            });
+            return;
+        }
+        if (NATIVE_WEBSOCKET_AVAILABLE) {
+            this.conn = new WebSocket(this._endPointURL());
+            this.setupConnection();
+            return;
+        }
+        this.conn = new WSWebSocketDummy(this._endPointURL(), undefined, {
+            close: () => {
+                this.conn = null;
+            },
+        });
+        __webpack_require__.e(/*! import() */ "node_modules_ws_browser_js").then(__webpack_require__.t.bind(__webpack_require__, /*! ws */ "./node_modules/ws/browser.js", 23)).then(({ default: WS }) => {
+            this.conn = new WS(this._endPointURL(), undefined, {
+                headers: this.headers,
+            });
+            this.setupConnection();
+        });
+    }
+    /**
+     * Disconnects the socket.
+     *
+     * @param code A numeric status code to send on disconnect.
+     * @param reason A custom reason for the disconnect.
+     */
+    disconnect(code, reason) {
+        if (this.conn) {
+            this.conn.onclose = function () { }; // noop
+            if (code) {
+                this.conn.close(code, reason !== null && reason !== void 0 ? reason : '');
+            }
+            else {
+                this.conn.close();
+            }
+            this.conn = null;
+            // remove open handles
+            this.heartbeatTimer && clearInterval(this.heartbeatTimer);
+            this.reconnectTimer.reset();
+        }
+    }
+    /**
+     * Returns all created channels
+     */
+    getChannels() {
+        return this.channels;
+    }
+    /**
+     * Unsubscribes and removes a single channel
+     * @param channel A RealtimeChannel instance
+     */
+    async removeChannel(channel) {
+        const status = await channel.unsubscribe();
+        if (this.channels.length === 0) {
+            this.disconnect();
+        }
+        return status;
+    }
+    /**
+     * Unsubscribes and removes all channels
+     */
+    async removeAllChannels() {
+        const values_1 = await Promise.all(this.channels.map((channel) => channel.unsubscribe()));
+        this.disconnect();
+        return values_1;
+    }
+    /**
+     * Logs the message.
+     *
+     * For customized logging, `this.logger` can be overridden.
+     */
+    log(kind, msg, data) {
+        this.logger(kind, msg, data);
+    }
+    /**
+     * Returns the current state of the socket.
+     */
+    connectionState() {
+        switch (this.conn && this.conn.readyState) {
+            case _lib_constants__WEBPACK_IMPORTED_MODULE_0__.SOCKET_STATES.connecting:
+                return _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CONNECTION_STATE.Connecting;
+            case _lib_constants__WEBPACK_IMPORTED_MODULE_0__.SOCKET_STATES.open:
+                return _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CONNECTION_STATE.Open;
+            case _lib_constants__WEBPACK_IMPORTED_MODULE_0__.SOCKET_STATES.closing:
+                return _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CONNECTION_STATE.Closing;
+            default:
+                return _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CONNECTION_STATE.Closed;
+        }
+    }
+    /**
+     * Returns `true` is the connection is open.
+     */
+    isConnected() {
+        return this.connectionState() === _lib_constants__WEBPACK_IMPORTED_MODULE_0__.CONNECTION_STATE.Open;
+    }
+    channel(topic, params = { config: {} }) {
+        const chan = new _RealtimeChannel__WEBPACK_IMPORTED_MODULE_4__["default"](`realtime:${topic}`, params, this);
+        this.channels.push(chan);
+        return chan;
+    }
+    /**
+     * Push out a message if the socket is connected.
+     *
+     * If the socket is not connected, the message gets enqueued within a local buffer, and sent out when a connection is next established.
+     */
+    push(data) {
+        const { topic, event, payload, ref } = data;
+        const callback = () => {
+            this.encode(data, (result) => {
+                var _a;
+                (_a = this.conn) === null || _a === void 0 ? void 0 : _a.send(result);
+            });
+        };
+        this.log('push', `${topic} ${event} (${ref})`, payload);
+        if (this.isConnected()) {
+            callback();
+        }
+        else {
+            this.sendBuffer.push(callback);
+        }
+    }
+    /**
+     * Sets the JWT access token used for channel subscription authorization and Realtime RLS.
+     *
+     * @param token A JWT string.
+     */
+    setAuth(token) {
+        this.accessToken = token;
+        this.channels.forEach((channel) => {
+            token && channel.updateJoinPayload({ access_token: token });
+            if (channel.joinedOnce && channel._isJoined()) {
+                channel._push(_lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_EVENTS.access_token, { access_token: token });
+            }
+        });
+    }
+    /**
+     * Return the next message ref, accounting for overflows
+     *
+     * @internal
+     */
+    _makeRef() {
+        let newRef = this.ref + 1;
+        if (newRef === this.ref) {
+            this.ref = 0;
+        }
+        else {
+            this.ref = newRef;
+        }
+        return this.ref.toString();
+    }
+    /**
+     * Unsubscribe from channels with the specified topic.
+     *
+     * @internal
+     */
+    _leaveOpenTopic(topic) {
+        let dupChannel = this.channels.find((c) => c.topic === topic && (c._isJoined() || c._isJoining()));
+        if (dupChannel) {
+            this.log('transport', `leaving duplicate topic "${topic}"`);
+            dupChannel.unsubscribe();
+        }
+    }
+    /**
+     * Removes a subscription from the socket.
+     *
+     * @param channel An open subscription.
+     *
+     * @internal
+     */
+    _remove(channel) {
+        this.channels = this.channels.filter((c) => c._joinRef() !== channel._joinRef());
+    }
+    /**
+     * Sets up connection handlers.
+     *
+     * @internal
+     */
+    setupConnection() {
+        if (this.conn) {
+            this.conn.binaryType = 'arraybuffer';
+            this.conn.onopen = () => this._onConnOpen();
+            this.conn.onerror = (error) => this._onConnError(error);
+            this.conn.onmessage = (event) => this._onConnMessage(event);
+            this.conn.onclose = (event) => this._onConnClose(event);
+        }
+    }
+    /**
+     * Returns the URL of the websocket.
+     *
+     * @internal
+     */
+    _endPointURL() {
+        return this._appendParams(this.endPoint, Object.assign({}, this.params, { vsn: _lib_constants__WEBPACK_IMPORTED_MODULE_0__.VSN }));
+    }
+    /** @internal */
+    _onConnMessage(rawMessage) {
+        this.decode(rawMessage.data, (msg) => {
+            let { topic, event, payload, ref } = msg;
+            if ((ref && ref === this.pendingHeartbeatRef) ||
+                event === (payload === null || payload === void 0 ? void 0 : payload.type)) {
+                this.pendingHeartbeatRef = null;
+            }
+            this.log('receive', `${payload.status || ''} ${topic} ${event} ${(ref && '(' + ref + ')') || ''}`, payload);
+            this.channels
+                .filter((channel) => channel._isMember(topic))
+                .forEach((channel) => channel._trigger(event, payload, ref));
+            this.stateChangeCallbacks.message.forEach((callback) => callback(msg));
+        });
+    }
+    /** @internal */
+    async _onConnOpen() {
+        this.log('transport', `connected to ${this._endPointURL()}`);
+        this._flushSendBuffer();
+        this.reconnectTimer.reset();
+        if (!this.worker) {
+            this.heartbeatTimer && clearInterval(this.heartbeatTimer);
+            this.heartbeatTimer = setInterval(() => this._sendHeartbeat(), this.heartbeatIntervalMs);
+        }
+        else {
+            if (this.workerUrl) {
+                this.log('worker', `starting worker for from ${this.workerUrl}`);
+            }
+            else {
+                this.log('worker', `starting default worker`);
+            }
+            const objectUrl = this._workerObjectUrl(this.workerUrl);
+            this.workerRef = new Worker(objectUrl);
+            this.workerRef.onerror = (error) => {
+                this.log('worker', 'worker error', error.message);
+                this.workerRef.terminate();
+            };
+            this.workerRef.onmessage = (event) => {
+                if (event.data.event === 'keepAlive') {
+                    this._sendHeartbeat();
+                }
+            };
+            this.workerRef.postMessage({
+                event: 'start',
+                interval: this.heartbeatIntervalMs,
+            });
+        }
+        this.stateChangeCallbacks.open.forEach((callback) => callback());
+    }
+    /** @internal */
+    _onConnClose(event) {
+        this.log('transport', 'close', event);
+        this._triggerChanError();
+        this.heartbeatTimer && clearInterval(this.heartbeatTimer);
+        this.reconnectTimer.scheduleTimeout();
+        this.stateChangeCallbacks.close.forEach((callback) => callback(event));
+    }
+    /** @internal */
+    _onConnError(error) {
+        this.log('transport', error.message);
+        this._triggerChanError();
+        this.stateChangeCallbacks.error.forEach((callback) => callback(error));
+    }
+    /** @internal */
+    _triggerChanError() {
+        this.channels.forEach((channel) => channel._trigger(_lib_constants__WEBPACK_IMPORTED_MODULE_0__.CHANNEL_EVENTS.error));
+    }
+    /** @internal */
+    _appendParams(url, params) {
+        if (Object.keys(params).length === 0) {
+            return url;
+        }
+        const prefix = url.match(/\?/) ? '&' : '?';
+        const query = new URLSearchParams(params);
+        return `${url}${prefix}${query}`;
+    }
+    /** @internal */
+    _flushSendBuffer() {
+        if (this.isConnected() && this.sendBuffer.length > 0) {
+            this.sendBuffer.forEach((callback) => callback());
+            this.sendBuffer = [];
+        }
+    }
+    /** @internal */
+    _sendHeartbeat() {
+        var _a;
+        if (!this.isConnected()) {
+            return;
+        }
+        if (this.pendingHeartbeatRef) {
+            this.pendingHeartbeatRef = null;
+            this.log('transport', 'heartbeat timeout. Attempting to re-establish connection');
+            (_a = this.conn) === null || _a === void 0 ? void 0 : _a.close(_lib_constants__WEBPACK_IMPORTED_MODULE_0__.WS_CLOSE_NORMAL, 'hearbeat timeout');
+            return;
+        }
+        this.pendingHeartbeatRef = this._makeRef();
+        this.push({
+            topic: 'phoenix',
+            event: 'heartbeat',
+            payload: {},
+            ref: this.pendingHeartbeatRef,
+        });
+        this.setAuth(this.accessToken);
+    }
+    _workerObjectUrl(url) {
+        let result_url;
+        if (url) {
+            result_url = url;
+        }
+        else {
+            const blob = new Blob([WORKER_SCRIPT], { type: 'application/javascript' });
+            result_url = URL.createObjectURL(blob);
+        }
+        return result_url;
+    }
+}
+class WSWebSocketDummy {
+    constructor(address, _protocols, options) {
+        this.binaryType = 'arraybuffer';
+        this.onclose = () => { };
+        this.onerror = () => { };
+        this.onmessage = () => { };
+        this.onopen = () => { };
+        this.readyState = _lib_constants__WEBPACK_IMPORTED_MODULE_0__.SOCKET_STATES.connecting;
+        this.send = () => { };
+        this.url = null;
+        this.url = address;
+        this.close = options.close;
+    }
+}
+//# sourceMappingURL=RealtimeClient.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/realtime-js/dist/module/RealtimePresence.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/@supabase/realtime-js/dist/module/RealtimePresence.js ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   REALTIME_PRESENCE_LISTEN_EVENTS: () => (/* binding */ REALTIME_PRESENCE_LISTEN_EVENTS),
+/* harmony export */   "default": () => (/* binding */ RealtimePresence)
+/* harmony export */ });
+/*
+  This file draws heavily from https://github.com/phoenixframework/phoenix/blob/d344ec0a732ab4ee204215b31de69cf4be72e3bf/assets/js/phoenix/presence.js
+  License: https://github.com/phoenixframework/phoenix/blob/d344ec0a732ab4ee204215b31de69cf4be72e3bf/LICENSE.md
+*/
+var REALTIME_PRESENCE_LISTEN_EVENTS;
+(function (REALTIME_PRESENCE_LISTEN_EVENTS) {
+    REALTIME_PRESENCE_LISTEN_EVENTS["SYNC"] = "sync";
+    REALTIME_PRESENCE_LISTEN_EVENTS["JOIN"] = "join";
+    REALTIME_PRESENCE_LISTEN_EVENTS["LEAVE"] = "leave";
+})(REALTIME_PRESENCE_LISTEN_EVENTS || (REALTIME_PRESENCE_LISTEN_EVENTS = {}));
+class RealtimePresence {
+    /**
+     * Initializes the Presence.
+     *
+     * @param channel - The RealtimeChannel
+     * @param opts - The options,
+     *        for example `{events: {state: 'state', diff: 'diff'}}`
+     */
+    constructor(channel, opts) {
+        this.channel = channel;
+        this.state = {};
+        this.pendingDiffs = [];
+        this.joinRef = null;
+        this.caller = {
+            onJoin: () => { },
+            onLeave: () => { },
+            onSync: () => { },
+        };
+        const events = (opts === null || opts === void 0 ? void 0 : opts.events) || {
+            state: 'presence_state',
+            diff: 'presence_diff',
+        };
+        this.channel._on(events.state, {}, (newState) => {
+            const { onJoin, onLeave, onSync } = this.caller;
+            this.joinRef = this.channel._joinRef();
+            this.state = RealtimePresence.syncState(this.state, newState, onJoin, onLeave);
+            this.pendingDiffs.forEach((diff) => {
+                this.state = RealtimePresence.syncDiff(this.state, diff, onJoin, onLeave);
+            });
+            this.pendingDiffs = [];
+            onSync();
+        });
+        this.channel._on(events.diff, {}, (diff) => {
+            const { onJoin, onLeave, onSync } = this.caller;
+            if (this.inPendingSyncState()) {
+                this.pendingDiffs.push(diff);
+            }
+            else {
+                this.state = RealtimePresence.syncDiff(this.state, diff, onJoin, onLeave);
+                onSync();
+            }
+        });
+        this.onJoin((key, currentPresences, newPresences) => {
+            this.channel._trigger('presence', {
+                event: 'join',
+                key,
+                currentPresences,
+                newPresences,
+            });
+        });
+        this.onLeave((key, currentPresences, leftPresences) => {
+            this.channel._trigger('presence', {
+                event: 'leave',
+                key,
+                currentPresences,
+                leftPresences,
+            });
+        });
+        this.onSync(() => {
+            this.channel._trigger('presence', { event: 'sync' });
+        });
+    }
+    /**
+     * Used to sync the list of presences on the server with the
+     * client's state.
+     *
+     * An optional `onJoin` and `onLeave` callback can be provided to
+     * react to changes in the client's local presences across
+     * disconnects and reconnects with the server.
+     *
+     * @internal
+     */
+    static syncState(currentState, newState, onJoin, onLeave) {
+        const state = this.cloneDeep(currentState);
+        const transformedState = this.transformState(newState);
+        const joins = {};
+        const leaves = {};
+        this.map(state, (key, presences) => {
+            if (!transformedState[key]) {
+                leaves[key] = presences;
+            }
+        });
+        this.map(transformedState, (key, newPresences) => {
+            const currentPresences = state[key];
+            if (currentPresences) {
+                const newPresenceRefs = newPresences.map((m) => m.presence_ref);
+                const curPresenceRefs = currentPresences.map((m) => m.presence_ref);
+                const joinedPresences = newPresences.filter((m) => curPresenceRefs.indexOf(m.presence_ref) < 0);
+                const leftPresences = currentPresences.filter((m) => newPresenceRefs.indexOf(m.presence_ref) < 0);
+                if (joinedPresences.length > 0) {
+                    joins[key] = joinedPresences;
+                }
+                if (leftPresences.length > 0) {
+                    leaves[key] = leftPresences;
+                }
+            }
+            else {
+                joins[key] = newPresences;
+            }
+        });
+        return this.syncDiff(state, { joins, leaves }, onJoin, onLeave);
+    }
+    /**
+     * Used to sync a diff of presence join and leave events from the
+     * server, as they happen.
+     *
+     * Like `syncState`, `syncDiff` accepts optional `onJoin` and
+     * `onLeave` callbacks to react to a user joining or leaving from a
+     * device.
+     *
+     * @internal
+     */
+    static syncDiff(state, diff, onJoin, onLeave) {
+        const { joins, leaves } = {
+            joins: this.transformState(diff.joins),
+            leaves: this.transformState(diff.leaves),
+        };
+        if (!onJoin) {
+            onJoin = () => { };
+        }
+        if (!onLeave) {
+            onLeave = () => { };
+        }
+        this.map(joins, (key, newPresences) => {
+            var _a;
+            const currentPresences = (_a = state[key]) !== null && _a !== void 0 ? _a : [];
+            state[key] = this.cloneDeep(newPresences);
+            if (currentPresences.length > 0) {
+                const joinedPresenceRefs = state[key].map((m) => m.presence_ref);
+                const curPresences = currentPresences.filter((m) => joinedPresenceRefs.indexOf(m.presence_ref) < 0);
+                state[key].unshift(...curPresences);
+            }
+            onJoin(key, currentPresences, newPresences);
+        });
+        this.map(leaves, (key, leftPresences) => {
+            let currentPresences = state[key];
+            if (!currentPresences)
+                return;
+            const presenceRefsToRemove = leftPresences.map((m) => m.presence_ref);
+            currentPresences = currentPresences.filter((m) => presenceRefsToRemove.indexOf(m.presence_ref) < 0);
+            state[key] = currentPresences;
+            onLeave(key, currentPresences, leftPresences);
+            if (currentPresences.length === 0)
+                delete state[key];
+        });
+        return state;
+    }
+    /** @internal */
+    static map(obj, func) {
+        return Object.getOwnPropertyNames(obj).map((key) => func(key, obj[key]));
+    }
+    /**
+     * Remove 'metas' key
+     * Change 'phx_ref' to 'presence_ref'
+     * Remove 'phx_ref' and 'phx_ref_prev'
+     *
+     * @example
+     * // returns {
+     *  abc123: [
+     *    { presence_ref: '2', user_id: 1 },
+     *    { presence_ref: '3', user_id: 2 }
+     *  ]
+     * }
+     * RealtimePresence.transformState({
+     *  abc123: {
+     *    metas: [
+     *      { phx_ref: '2', phx_ref_prev: '1' user_id: 1 },
+     *      { phx_ref: '3', user_id: 2 }
+     *    ]
+     *  }
+     * })
+     *
+     * @internal
+     */
+    static transformState(state) {
+        state = this.cloneDeep(state);
+        return Object.getOwnPropertyNames(state).reduce((newState, key) => {
+            const presences = state[key];
+            if ('metas' in presences) {
+                newState[key] = presences.metas.map((presence) => {
+                    presence['presence_ref'] = presence['phx_ref'];
+                    delete presence['phx_ref'];
+                    delete presence['phx_ref_prev'];
+                    return presence;
+                });
+            }
+            else {
+                newState[key] = presences;
+            }
+            return newState;
+        }, {});
+    }
+    /** @internal */
+    static cloneDeep(obj) {
+        return JSON.parse(JSON.stringify(obj));
+    }
+    /** @internal */
+    onJoin(callback) {
+        this.caller.onJoin = callback;
+    }
+    /** @internal */
+    onLeave(callback) {
+        this.caller.onLeave = callback;
+    }
+    /** @internal */
+    onSync(callback) {
+        this.caller.onSync = callback;
+    }
+    /** @internal */
+    inPendingSyncState() {
+        return !this.joinRef || this.joinRef !== this.channel._joinRef();
+    }
+}
+//# sourceMappingURL=RealtimePresence.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/realtime-js/dist/module/index.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@supabase/realtime-js/dist/module/index.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   REALTIME_CHANNEL_STATES: () => (/* reexport safe */ _RealtimeChannel__WEBPACK_IMPORTED_MODULE_1__.REALTIME_CHANNEL_STATES),
+/* harmony export */   REALTIME_LISTEN_TYPES: () => (/* reexport safe */ _RealtimeChannel__WEBPACK_IMPORTED_MODULE_1__.REALTIME_LISTEN_TYPES),
+/* harmony export */   REALTIME_POSTGRES_CHANGES_LISTEN_EVENT: () => (/* reexport safe */ _RealtimeChannel__WEBPACK_IMPORTED_MODULE_1__.REALTIME_POSTGRES_CHANGES_LISTEN_EVENT),
+/* harmony export */   REALTIME_PRESENCE_LISTEN_EVENTS: () => (/* reexport safe */ _RealtimePresence__WEBPACK_IMPORTED_MODULE_2__.REALTIME_PRESENCE_LISTEN_EVENTS),
+/* harmony export */   REALTIME_SUBSCRIBE_STATES: () => (/* reexport safe */ _RealtimeChannel__WEBPACK_IMPORTED_MODULE_1__.REALTIME_SUBSCRIBE_STATES),
+/* harmony export */   RealtimeChannel: () => (/* reexport safe */ _RealtimeChannel__WEBPACK_IMPORTED_MODULE_1__["default"]),
+/* harmony export */   RealtimeClient: () => (/* reexport safe */ _RealtimeClient__WEBPACK_IMPORTED_MODULE_0__["default"]),
+/* harmony export */   RealtimePresence: () => (/* reexport safe */ _RealtimePresence__WEBPACK_IMPORTED_MODULE_2__["default"])
+/* harmony export */ });
+/* harmony import */ var _RealtimeClient__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RealtimeClient */ "./node_modules/@supabase/realtime-js/dist/module/RealtimeClient.js");
+/* harmony import */ var _RealtimeChannel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RealtimeChannel */ "./node_modules/@supabase/realtime-js/dist/module/RealtimeChannel.js");
+/* harmony import */ var _RealtimePresence__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RealtimePresence */ "./node_modules/@supabase/realtime-js/dist/module/RealtimePresence.js");
+
+
+
+
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/realtime-js/dist/module/lib/constants.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@supabase/realtime-js/dist/module/lib/constants.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CHANNEL_EVENTS: () => (/* binding */ CHANNEL_EVENTS),
+/* harmony export */   CHANNEL_STATES: () => (/* binding */ CHANNEL_STATES),
+/* harmony export */   CONNECTION_STATE: () => (/* binding */ CONNECTION_STATE),
+/* harmony export */   DEFAULT_HEADERS: () => (/* binding */ DEFAULT_HEADERS),
+/* harmony export */   DEFAULT_TIMEOUT: () => (/* binding */ DEFAULT_TIMEOUT),
+/* harmony export */   SOCKET_STATES: () => (/* binding */ SOCKET_STATES),
+/* harmony export */   TRANSPORTS: () => (/* binding */ TRANSPORTS),
+/* harmony export */   VSN: () => (/* binding */ VSN),
+/* harmony export */   WS_CLOSE_NORMAL: () => (/* binding */ WS_CLOSE_NORMAL)
+/* harmony export */ });
+/* harmony import */ var _version__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./version */ "./node_modules/@supabase/realtime-js/dist/module/lib/version.js");
+
+const DEFAULT_HEADERS = { 'X-Client-Info': `realtime-js/${_version__WEBPACK_IMPORTED_MODULE_0__.version}` };
+const VSN = '1.0.0';
+const DEFAULT_TIMEOUT = 10000;
+const WS_CLOSE_NORMAL = 1000;
+var SOCKET_STATES;
+(function (SOCKET_STATES) {
+    SOCKET_STATES[SOCKET_STATES["connecting"] = 0] = "connecting";
+    SOCKET_STATES[SOCKET_STATES["open"] = 1] = "open";
+    SOCKET_STATES[SOCKET_STATES["closing"] = 2] = "closing";
+    SOCKET_STATES[SOCKET_STATES["closed"] = 3] = "closed";
+})(SOCKET_STATES || (SOCKET_STATES = {}));
+var CHANNEL_STATES;
+(function (CHANNEL_STATES) {
+    CHANNEL_STATES["closed"] = "closed";
+    CHANNEL_STATES["errored"] = "errored";
+    CHANNEL_STATES["joined"] = "joined";
+    CHANNEL_STATES["joining"] = "joining";
+    CHANNEL_STATES["leaving"] = "leaving";
+})(CHANNEL_STATES || (CHANNEL_STATES = {}));
+var CHANNEL_EVENTS;
+(function (CHANNEL_EVENTS) {
+    CHANNEL_EVENTS["close"] = "phx_close";
+    CHANNEL_EVENTS["error"] = "phx_error";
+    CHANNEL_EVENTS["join"] = "phx_join";
+    CHANNEL_EVENTS["reply"] = "phx_reply";
+    CHANNEL_EVENTS["leave"] = "phx_leave";
+    CHANNEL_EVENTS["access_token"] = "access_token";
+})(CHANNEL_EVENTS || (CHANNEL_EVENTS = {}));
+var TRANSPORTS;
+(function (TRANSPORTS) {
+    TRANSPORTS["websocket"] = "websocket";
+})(TRANSPORTS || (TRANSPORTS = {}));
+var CONNECTION_STATE;
+(function (CONNECTION_STATE) {
+    CONNECTION_STATE["Connecting"] = "connecting";
+    CONNECTION_STATE["Open"] = "open";
+    CONNECTION_STATE["Closing"] = "closing";
+    CONNECTION_STATE["Closed"] = "closed";
+})(CONNECTION_STATE || (CONNECTION_STATE = {}));
+//# sourceMappingURL=constants.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/realtime-js/dist/module/lib/push.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@supabase/realtime-js/dist/module/lib/push.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Push)
+/* harmony export */ });
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/constants */ "./node_modules/@supabase/realtime-js/dist/module/lib/constants.js");
+
+class Push {
+    /**
+     * Initializes the Push
+     *
+     * @param channel The Channel
+     * @param event The event, for example `"phx_join"`
+     * @param payload The payload, for example `{user_id: 123}`
+     * @param timeout The push timeout in milliseconds
+     */
+    constructor(channel, event, payload = {}, timeout = _lib_constants__WEBPACK_IMPORTED_MODULE_0__.DEFAULT_TIMEOUT) {
+        this.channel = channel;
+        this.event = event;
+        this.payload = payload;
+        this.timeout = timeout;
+        this.sent = false;
+        this.timeoutTimer = undefined;
+        this.ref = '';
+        this.receivedResp = null;
+        this.recHooks = [];
+        this.refEvent = null;
+    }
+    resend(timeout) {
+        this.timeout = timeout;
+        this._cancelRefEvent();
+        this.ref = '';
+        this.refEvent = null;
+        this.receivedResp = null;
+        this.sent = false;
+        this.send();
+    }
+    send() {
+        if (this._hasReceived('timeout')) {
+            return;
+        }
+        this.startTimeout();
+        this.sent = true;
+        this.channel.socket.push({
+            topic: this.channel.topic,
+            event: this.event,
+            payload: this.payload,
+            ref: this.ref,
+            join_ref: this.channel._joinRef(),
+        });
+    }
+    updatePayload(payload) {
+        this.payload = Object.assign(Object.assign({}, this.payload), payload);
+    }
+    receive(status, callback) {
+        var _a;
+        if (this._hasReceived(status)) {
+            callback((_a = this.receivedResp) === null || _a === void 0 ? void 0 : _a.response);
+        }
+        this.recHooks.push({ status, callback });
+        return this;
+    }
+    startTimeout() {
+        if (this.timeoutTimer) {
+            return;
+        }
+        this.ref = this.channel.socket._makeRef();
+        this.refEvent = this.channel._replyEventName(this.ref);
+        const callback = (payload) => {
+            this._cancelRefEvent();
+            this._cancelTimeout();
+            this.receivedResp = payload;
+            this._matchReceive(payload);
+        };
+        this.channel._on(this.refEvent, {}, callback);
+        this.timeoutTimer = setTimeout(() => {
+            this.trigger('timeout', {});
+        }, this.timeout);
+    }
+    trigger(status, response) {
+        if (this.refEvent)
+            this.channel._trigger(this.refEvent, { status, response });
+    }
+    destroy() {
+        this._cancelRefEvent();
+        this._cancelTimeout();
+    }
+    _cancelRefEvent() {
+        if (!this.refEvent) {
+            return;
+        }
+        this.channel._off(this.refEvent, {});
+    }
+    _cancelTimeout() {
+        clearTimeout(this.timeoutTimer);
+        this.timeoutTimer = undefined;
+    }
+    _matchReceive({ status, response, }) {
+        this.recHooks
+            .filter((h) => h.status === status)
+            .forEach((h) => h.callback(response));
+    }
+    _hasReceived(status) {
+        return this.receivedResp && this.receivedResp.status === status;
+    }
+}
+//# sourceMappingURL=push.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/realtime-js/dist/module/lib/serializer.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@supabase/realtime-js/dist/module/lib/serializer.js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Serializer)
+/* harmony export */ });
+// This file draws heavily from https://github.com/phoenixframework/phoenix/commit/cf098e9cf7a44ee6479d31d911a97d3c7430c6fe
+// License: https://github.com/phoenixframework/phoenix/blob/master/LICENSE.md
+class Serializer {
+    constructor() {
+        this.HEADER_LENGTH = 1;
+    }
+    decode(rawPayload, callback) {
+        if (rawPayload.constructor === ArrayBuffer) {
+            return callback(this._binaryDecode(rawPayload));
+        }
+        if (typeof rawPayload === 'string') {
+            return callback(JSON.parse(rawPayload));
+        }
+        return callback({});
+    }
+    _binaryDecode(buffer) {
+        const view = new DataView(buffer);
+        const decoder = new TextDecoder();
+        return this._decodeBroadcast(buffer, view, decoder);
+    }
+    _decodeBroadcast(buffer, view, decoder) {
+        const topicSize = view.getUint8(1);
+        const eventSize = view.getUint8(2);
+        let offset = this.HEADER_LENGTH + 2;
+        const topic = decoder.decode(buffer.slice(offset, offset + topicSize));
+        offset = offset + topicSize;
+        const event = decoder.decode(buffer.slice(offset, offset + eventSize));
+        offset = offset + eventSize;
+        const data = JSON.parse(decoder.decode(buffer.slice(offset, buffer.byteLength)));
+        return { ref: null, topic: topic, event: event, payload: data };
+    }
+}
+//# sourceMappingURL=serializer.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/realtime-js/dist/module/lib/timer.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@supabase/realtime-js/dist/module/lib/timer.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Timer)
+/* harmony export */ });
+/**
+ * Creates a timer that accepts a `timerCalc` function to perform calculated timeout retries, such as exponential backoff.
+ *
+ * @example
+ *    let reconnectTimer = new Timer(() => this.connect(), function(tries){
+ *      return [1000, 5000, 10000][tries - 1] || 10000
+ *    })
+ *    reconnectTimer.scheduleTimeout() // fires after 1000
+ *    reconnectTimer.scheduleTimeout() // fires after 5000
+ *    reconnectTimer.reset()
+ *    reconnectTimer.scheduleTimeout() // fires after 1000
+ */
+class Timer {
+    constructor(callback, timerCalc) {
+        this.callback = callback;
+        this.timerCalc = timerCalc;
+        this.timer = undefined;
+        this.tries = 0;
+        this.callback = callback;
+        this.timerCalc = timerCalc;
+    }
+    reset() {
+        this.tries = 0;
+        clearTimeout(this.timer);
+    }
+    // Cancels any previous scheduleTimeout and schedules callback
+    scheduleTimeout() {
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+            this.tries = this.tries + 1;
+            this.callback();
+        }, this.timerCalc(this.tries + 1));
+    }
+}
+//# sourceMappingURL=timer.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/realtime-js/dist/module/lib/transformers.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/@supabase/realtime-js/dist/module/lib/transformers.js ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PostgresTypes: () => (/* binding */ PostgresTypes),
+/* harmony export */   convertCell: () => (/* binding */ convertCell),
+/* harmony export */   convertChangeData: () => (/* binding */ convertChangeData),
+/* harmony export */   convertColumn: () => (/* binding */ convertColumn),
+/* harmony export */   httpEndpointURL: () => (/* binding */ httpEndpointURL),
+/* harmony export */   toArray: () => (/* binding */ toArray),
+/* harmony export */   toBoolean: () => (/* binding */ toBoolean),
+/* harmony export */   toJson: () => (/* binding */ toJson),
+/* harmony export */   toNumber: () => (/* binding */ toNumber),
+/* harmony export */   toTimestampString: () => (/* binding */ toTimestampString)
+/* harmony export */ });
+/**
+ * Helpers to convert the change Payload into native JS types.
+ */
+// Adapted from epgsql (src/epgsql_binary.erl), this module licensed under
+// 3-clause BSD found here: https://raw.githubusercontent.com/epgsql/epgsql/devel/LICENSE
+var PostgresTypes;
+(function (PostgresTypes) {
+    PostgresTypes["abstime"] = "abstime";
+    PostgresTypes["bool"] = "bool";
+    PostgresTypes["date"] = "date";
+    PostgresTypes["daterange"] = "daterange";
+    PostgresTypes["float4"] = "float4";
+    PostgresTypes["float8"] = "float8";
+    PostgresTypes["int2"] = "int2";
+    PostgresTypes["int4"] = "int4";
+    PostgresTypes["int4range"] = "int4range";
+    PostgresTypes["int8"] = "int8";
+    PostgresTypes["int8range"] = "int8range";
+    PostgresTypes["json"] = "json";
+    PostgresTypes["jsonb"] = "jsonb";
+    PostgresTypes["money"] = "money";
+    PostgresTypes["numeric"] = "numeric";
+    PostgresTypes["oid"] = "oid";
+    PostgresTypes["reltime"] = "reltime";
+    PostgresTypes["text"] = "text";
+    PostgresTypes["time"] = "time";
+    PostgresTypes["timestamp"] = "timestamp";
+    PostgresTypes["timestamptz"] = "timestamptz";
+    PostgresTypes["timetz"] = "timetz";
+    PostgresTypes["tsrange"] = "tsrange";
+    PostgresTypes["tstzrange"] = "tstzrange";
+})(PostgresTypes || (PostgresTypes = {}));
+/**
+ * Takes an array of columns and an object of string values then converts each string value
+ * to its mapped type.
+ *
+ * @param {{name: String, type: String}[]} columns
+ * @param {Object} record
+ * @param {Object} options The map of various options that can be applied to the mapper
+ * @param {Array} options.skipTypes The array of types that should not be converted
+ *
+ * @example convertChangeData([{name: 'first_name', type: 'text'}, {name: 'age', type: 'int4'}], {first_name: 'Paul', age:'33'}, {})
+ * //=>{ first_name: 'Paul', age: 33 }
+ */
+const convertChangeData = (columns, record, options = {}) => {
+    var _a;
+    const skipTypes = (_a = options.skipTypes) !== null && _a !== void 0 ? _a : [];
+    return Object.keys(record).reduce((acc, rec_key) => {
+        acc[rec_key] = convertColumn(rec_key, columns, record, skipTypes);
+        return acc;
+    }, {});
+};
+/**
+ * Converts the value of an individual column.
+ *
+ * @param {String} columnName The column that you want to convert
+ * @param {{name: String, type: String}[]} columns All of the columns
+ * @param {Object} record The map of string values
+ * @param {Array} skipTypes An array of types that should not be converted
+ * @return {object} Useless information
+ *
+ * @example convertColumn('age', [{name: 'first_name', type: 'text'}, {name: 'age', type: 'int4'}], {first_name: 'Paul', age: '33'}, [])
+ * //=> 33
+ * @example convertColumn('age', [{name: 'first_name', type: 'text'}, {name: 'age', type: 'int4'}], {first_name: 'Paul', age: '33'}, ['int4'])
+ * //=> "33"
+ */
+const convertColumn = (columnName, columns, record, skipTypes) => {
+    const column = columns.find((x) => x.name === columnName);
+    const colType = column === null || column === void 0 ? void 0 : column.type;
+    const value = record[columnName];
+    if (colType && !skipTypes.includes(colType)) {
+        return convertCell(colType, value);
+    }
+    return noop(value);
+};
+/**
+ * If the value of the cell is `null`, returns null.
+ * Otherwise converts the string value to the correct type.
+ * @param {String} type A postgres column type
+ * @param {String} value The cell value
+ *
+ * @example convertCell('bool', 't')
+ * //=> true
+ * @example convertCell('int8', '10')
+ * //=> 10
+ * @example convertCell('_int4', '{1,2,3,4}')
+ * //=> [1,2,3,4]
+ */
+const convertCell = (type, value) => {
+    // if data type is an array
+    if (type.charAt(0) === '_') {
+        const dataType = type.slice(1, type.length);
+        return toArray(value, dataType);
+    }
+    // If not null, convert to correct type.
+    switch (type) {
+        case PostgresTypes.bool:
+            return toBoolean(value);
+        case PostgresTypes.float4:
+        case PostgresTypes.float8:
+        case PostgresTypes.int2:
+        case PostgresTypes.int4:
+        case PostgresTypes.int8:
+        case PostgresTypes.numeric:
+        case PostgresTypes.oid:
+            return toNumber(value);
+        case PostgresTypes.json:
+        case PostgresTypes.jsonb:
+            return toJson(value);
+        case PostgresTypes.timestamp:
+            return toTimestampString(value); // Format to be consistent with PostgREST
+        case PostgresTypes.abstime: // To allow users to cast it based on Timezone
+        case PostgresTypes.date: // To allow users to cast it based on Timezone
+        case PostgresTypes.daterange:
+        case PostgresTypes.int4range:
+        case PostgresTypes.int8range:
+        case PostgresTypes.money:
+        case PostgresTypes.reltime: // To allow users to cast it based on Timezone
+        case PostgresTypes.text:
+        case PostgresTypes.time: // To allow users to cast it based on Timezone
+        case PostgresTypes.timestamptz: // To allow users to cast it based on Timezone
+        case PostgresTypes.timetz: // To allow users to cast it based on Timezone
+        case PostgresTypes.tsrange:
+        case PostgresTypes.tstzrange:
+            return noop(value);
+        default:
+            // Return the value for remaining types
+            return noop(value);
+    }
+};
+const noop = (value) => {
+    return value;
+};
+const toBoolean = (value) => {
+    switch (value) {
+        case 't':
+            return true;
+        case 'f':
+            return false;
+        default:
+            return value;
+    }
+};
+const toNumber = (value) => {
+    if (typeof value === 'string') {
+        const parsedValue = parseFloat(value);
+        if (!Number.isNaN(parsedValue)) {
+            return parsedValue;
+        }
+    }
+    return value;
+};
+const toJson = (value) => {
+    if (typeof value === 'string') {
+        try {
+            return JSON.parse(value);
+        }
+        catch (error) {
+            console.log(`JSON parse error: ${error}`);
+            return value;
+        }
+    }
+    return value;
+};
+/**
+ * Converts a Postgres Array into a native JS array
+ *
+ * @example toArray('{}', 'int4')
+ * //=> []
+ * @example toArray('{"[2021-01-01,2021-12-31)","(2021-01-01,2021-12-32]"}', 'daterange')
+ * //=> ['[2021-01-01,2021-12-31)', '(2021-01-01,2021-12-32]']
+ * @example toArray([1,2,3,4], 'int4')
+ * //=> [1,2,3,4]
+ */
+const toArray = (value, type) => {
+    if (typeof value !== 'string') {
+        return value;
+    }
+    const lastIdx = value.length - 1;
+    const closeBrace = value[lastIdx];
+    const openBrace = value[0];
+    // Confirm value is a Postgres array by checking curly brackets
+    if (openBrace === '{' && closeBrace === '}') {
+        let arr;
+        const valTrim = value.slice(1, lastIdx);
+        // TODO: find a better solution to separate Postgres array data
+        try {
+            arr = JSON.parse('[' + valTrim + ']');
+        }
+        catch (_) {
+            // WARNING: splitting on comma does not cover all edge cases
+            arr = valTrim ? valTrim.split(',') : [];
+        }
+        return arr.map((val) => convertCell(type, val));
+    }
+    return value;
+};
+/**
+ * Fixes timestamp to be ISO-8601. Swaps the space between the date and time for a 'T'
+ * See https://github.com/supabase/supabase/issues/18
+ *
+ * @example toTimestampString('2019-09-10 00:00:00')
+ * //=> '2019-09-10T00:00:00'
+ */
+const toTimestampString = (value) => {
+    if (typeof value === 'string') {
+        return value.replace(' ', 'T');
+    }
+    return value;
+};
+const httpEndpointURL = (socketUrl) => {
+    let url = socketUrl;
+    url = url.replace(/^ws/i, 'http');
+    url = url.replace(/(\/socket\/websocket|\/socket|\/websocket)\/?$/i, '');
+    return url.replace(/\/+$/, '');
+};
+//# sourceMappingURL=transformers.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/realtime-js/dist/module/lib/version.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@supabase/realtime-js/dist/module/lib/version.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   version: () => (/* binding */ version)
+/* harmony export */ });
+const version = '2.10.7';
+//# sourceMappingURL=version.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/storage-js/dist/module/StorageClient.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/@supabase/storage-js/dist/module/StorageClient.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   StorageClient: () => (/* binding */ StorageClient)
+/* harmony export */ });
+/* harmony import */ var _packages_StorageFileApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./packages/StorageFileApi */ "./node_modules/@supabase/storage-js/dist/module/packages/StorageFileApi.js");
+/* harmony import */ var _packages_StorageBucketApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./packages/StorageBucketApi */ "./node_modules/@supabase/storage-js/dist/module/packages/StorageBucketApi.js");
+
+
+class StorageClient extends _packages_StorageBucketApi__WEBPACK_IMPORTED_MODULE_0__["default"] {
+    constructor(url, headers = {}, fetch) {
+        super(url, headers, fetch);
+    }
+    /**
+     * Perform file operation in a bucket.
+     *
+     * @param id The bucket id to operate on.
+     */
+    from(id) {
+        return new _packages_StorageFileApi__WEBPACK_IMPORTED_MODULE_1__["default"](this.url, this.headers, id, this.fetch);
+    }
+}
+//# sourceMappingURL=StorageClient.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/storage-js/dist/module/lib/constants.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/@supabase/storage-js/dist/module/lib/constants.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DEFAULT_HEADERS: () => (/* binding */ DEFAULT_HEADERS)
+/* harmony export */ });
+/* harmony import */ var _version__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./version */ "./node_modules/@supabase/storage-js/dist/module/lib/version.js");
+
+const DEFAULT_HEADERS = { 'X-Client-Info': `storage-js/${_version__WEBPACK_IMPORTED_MODULE_0__.version}` };
+//# sourceMappingURL=constants.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/storage-js/dist/module/lib/errors.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@supabase/storage-js/dist/module/lib/errors.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   StorageApiError: () => (/* binding */ StorageApiError),
+/* harmony export */   StorageError: () => (/* binding */ StorageError),
+/* harmony export */   StorageUnknownError: () => (/* binding */ StorageUnknownError),
+/* harmony export */   isStorageError: () => (/* binding */ isStorageError)
+/* harmony export */ });
+class StorageError extends Error {
+    constructor(message) {
+        super(message);
+        this.__isStorageError = true;
+        this.name = 'StorageError';
+    }
+}
+function isStorageError(error) {
+    return typeof error === 'object' && error !== null && '__isStorageError' in error;
+}
+class StorageApiError extends StorageError {
+    constructor(message, status) {
+        super(message);
+        this.name = 'StorageApiError';
+        this.status = status;
+    }
+    toJSON() {
+        return {
+            name: this.name,
+            message: this.message,
+            status: this.status,
+        };
+    }
+}
+class StorageUnknownError extends StorageError {
+    constructor(message, originalError) {
+        super(message);
+        this.name = 'StorageUnknownError';
+        this.originalError = originalError;
+    }
+}
+//# sourceMappingURL=errors.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/storage-js/dist/module/lib/fetch.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@supabase/storage-js/dist/module/lib/fetch.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   get: () => (/* binding */ get),
+/* harmony export */   head: () => (/* binding */ head),
+/* harmony export */   post: () => (/* binding */ post),
+/* harmony export */   put: () => (/* binding */ put),
+/* harmony export */   remove: () => (/* binding */ remove)
+/* harmony export */ });
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./errors */ "./node_modules/@supabase/storage-js/dist/module/lib/errors.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers */ "./node_modules/@supabase/storage-js/dist/module/lib/helpers.js");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+const _getErrorMessage = (err) => err.msg || err.message || err.error_description || err.error || JSON.stringify(err);
+const handleError = (error, reject, options) => __awaiter(void 0, void 0, void 0, function* () {
+    const Res = yield (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.resolveResponse)();
+    if (error instanceof Res && !(options === null || options === void 0 ? void 0 : options.noResolveJson)) {
+        error
+            .json()
+            .then((err) => {
+            reject(new _errors__WEBPACK_IMPORTED_MODULE_1__.StorageApiError(_getErrorMessage(err), error.status || 500));
+        })
+            .catch((err) => {
+            reject(new _errors__WEBPACK_IMPORTED_MODULE_1__.StorageUnknownError(_getErrorMessage(err), err));
+        });
+    }
+    else {
+        reject(new _errors__WEBPACK_IMPORTED_MODULE_1__.StorageUnknownError(_getErrorMessage(error), error));
+    }
+});
+const _getRequestParams = (method, options, parameters, body) => {
+    const params = { method, headers: (options === null || options === void 0 ? void 0 : options.headers) || {} };
+    if (method === 'GET') {
+        return params;
+    }
+    params.headers = Object.assign({ 'Content-Type': 'application/json' }, options === null || options === void 0 ? void 0 : options.headers);
+    if (body) {
+        params.body = JSON.stringify(body);
+    }
+    return Object.assign(Object.assign({}, params), parameters);
+};
+function _handleRequest(fetcher, method, url, options, parameters, body) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve, reject) => {
+            fetcher(url, _getRequestParams(method, options, parameters, body))
+                .then((result) => {
+                if (!result.ok)
+                    throw result;
+                if (options === null || options === void 0 ? void 0 : options.noResolveJson)
+                    return result;
+                return result.json();
+            })
+                .then((data) => resolve(data))
+                .catch((error) => handleError(error, reject, options));
+        });
+    });
+}
+function get(fetcher, url, options, parameters) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return _handleRequest(fetcher, 'GET', url, options, parameters);
+    });
+}
+function post(fetcher, url, body, options, parameters) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return _handleRequest(fetcher, 'POST', url, options, parameters, body);
+    });
+}
+function put(fetcher, url, body, options, parameters) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return _handleRequest(fetcher, 'PUT', url, options, parameters, body);
+    });
+}
+function head(fetcher, url, options, parameters) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return _handleRequest(fetcher, 'HEAD', url, Object.assign(Object.assign({}, options), { noResolveJson: true }), parameters);
+    });
+}
+function remove(fetcher, url, body, options, parameters) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return _handleRequest(fetcher, 'DELETE', url, options, parameters, body);
+    });
+}
+//# sourceMappingURL=fetch.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/storage-js/dist/module/lib/helpers.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@supabase/storage-js/dist/module/lib/helpers.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   recursiveToCamel: () => (/* binding */ recursiveToCamel),
+/* harmony export */   resolveFetch: () => (/* binding */ resolveFetch),
+/* harmony export */   resolveResponse: () => (/* binding */ resolveResponse)
+/* harmony export */ });
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+const resolveFetch = (customFetch) => {
+    let _fetch;
+    if (customFetch) {
+        _fetch = customFetch;
+    }
+    else if (typeof fetch === 'undefined') {
+        _fetch = (...args) => Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! @supabase/node-fetch */ "./node_modules/@supabase/node-fetch/browser.js")).then(({ default: fetch }) => fetch(...args));
+    }
+    else {
+        _fetch = fetch;
+    }
+    return (...args) => _fetch(...args);
+};
+const resolveResponse = () => __awaiter(void 0, void 0, void 0, function* () {
+    if (typeof Response === 'undefined') {
+        // @ts-ignore
+        return (yield Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! @supabase/node-fetch */ "./node_modules/@supabase/node-fetch/browser.js"))).Response;
+    }
+    return Response;
+});
+const recursiveToCamel = (item) => {
+    if (Array.isArray(item)) {
+        return item.map((el) => recursiveToCamel(el));
+    }
+    else if (typeof item === 'function' || item !== Object(item)) {
+        return item;
+    }
+    const result = {};
+    Object.entries(item).forEach(([key, value]) => {
+        const newKey = key.replace(/([-_][a-z])/gi, (c) => c.toUpperCase().replace(/[-_]/g, ''));
+        result[newKey] = recursiveToCamel(value);
+    });
+    return result;
+};
+//# sourceMappingURL=helpers.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/storage-js/dist/module/lib/version.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@supabase/storage-js/dist/module/lib/version.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   version: () => (/* binding */ version)
+/* harmony export */ });
+// generated by genversion
+const version = '2.7.1';
+//# sourceMappingURL=version.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/storage-js/dist/module/packages/StorageBucketApi.js":
+/*!************************************************************************************!*\
+  !*** ./node_modules/@supabase/storage-js/dist/module/packages/StorageBucketApi.js ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ StorageBucketApi)
+/* harmony export */ });
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/constants */ "./node_modules/@supabase/storage-js/dist/module/lib/constants.js");
+/* harmony import */ var _lib_errors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/errors */ "./node_modules/@supabase/storage-js/dist/module/lib/errors.js");
+/* harmony import */ var _lib_fetch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/fetch */ "./node_modules/@supabase/storage-js/dist/module/lib/fetch.js");
+/* harmony import */ var _lib_helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/helpers */ "./node_modules/@supabase/storage-js/dist/module/lib/helpers.js");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+
+class StorageBucketApi {
+    constructor(url, headers = {}, fetch) {
+        this.url = url;
+        this.headers = Object.assign(Object.assign({}, _lib_constants__WEBPACK_IMPORTED_MODULE_0__.DEFAULT_HEADERS), headers);
+        this.fetch = (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_1__.resolveFetch)(fetch);
+    }
+    /**
+     * Retrieves the details of all Storage buckets within an existing project.
+     */
+    listBuckets() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_2__.get)(this.fetch, `${this.url}/bucket`, { headers: this.headers });
+                return { data, error: null };
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_3__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * Retrieves the details of an existing Storage bucket.
+     *
+     * @param id The unique identifier of the bucket you would like to retrieve.
+     */
+    getBucket(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_2__.get)(this.fetch, `${this.url}/bucket/${id}`, { headers: this.headers });
+                return { data, error: null };
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_3__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * Creates a new Storage bucket
+     *
+     * @param id A unique identifier for the bucket you are creating.
+     * @param options.public The visibility of the bucket. Public buckets don't require an authorization token to download objects, but still require a valid token for all other operations. By default, buckets are private.
+     * @param options.fileSizeLimit specifies the max file size in bytes that can be uploaded to this bucket.
+     * The global file size limit takes precedence over this value.
+     * The default value is null, which doesn't set a per bucket file size limit.
+     * @param options.allowedMimeTypes specifies the allowed mime types that this bucket can accept during upload.
+     * The default value is null, which allows files with all mime types to be uploaded.
+     * Each mime type specified can be a wildcard, e.g. image/*, or a specific mime type, e.g. image/png.
+     * @returns newly created bucket id
+     */
+    createBucket(id, options = {
+        public: false,
+    }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_2__.post)(this.fetch, `${this.url}/bucket`, {
+                    id,
+                    name: id,
+                    public: options.public,
+                    file_size_limit: options.fileSizeLimit,
+                    allowed_mime_types: options.allowedMimeTypes,
+                }, { headers: this.headers });
+                return { data, error: null };
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_3__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * Updates a Storage bucket
+     *
+     * @param id A unique identifier for the bucket you are updating.
+     * @param options.public The visibility of the bucket. Public buckets don't require an authorization token to download objects, but still require a valid token for all other operations.
+     * @param options.fileSizeLimit specifies the max file size in bytes that can be uploaded to this bucket.
+     * The global file size limit takes precedence over this value.
+     * The default value is null, which doesn't set a per bucket file size limit.
+     * @param options.allowedMimeTypes specifies the allowed mime types that this bucket can accept during upload.
+     * The default value is null, which allows files with all mime types to be uploaded.
+     * Each mime type specified can be a wildcard, e.g. image/*, or a specific mime type, e.g. image/png.
+     */
+    updateBucket(id, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_2__.put)(this.fetch, `${this.url}/bucket/${id}`, {
+                    id,
+                    name: id,
+                    public: options.public,
+                    file_size_limit: options.fileSizeLimit,
+                    allowed_mime_types: options.allowedMimeTypes,
+                }, { headers: this.headers });
+                return { data, error: null };
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_3__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * Removes all objects inside a single bucket.
+     *
+     * @param id The unique identifier of the bucket you would like to empty.
+     */
+    emptyBucket(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_2__.post)(this.fetch, `${this.url}/bucket/${id}/empty`, {}, { headers: this.headers });
+                return { data, error: null };
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_3__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * Deletes an existing bucket. A bucket can't be deleted with existing objects inside it.
+     * You must first `empty()` the bucket.
+     *
+     * @param id The unique identifier of the bucket you would like to delete.
+     */
+    deleteBucket(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_2__.remove)(this.fetch, `${this.url}/bucket/${id}`, {}, { headers: this.headers });
+                return { data, error: null };
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_3__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+}
+//# sourceMappingURL=StorageBucketApi.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/storage-js/dist/module/packages/StorageFileApi.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/@supabase/storage-js/dist/module/packages/StorageFileApi.js ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ StorageFileApi)
+/* harmony export */ });
+/* harmony import */ var _lib_errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/errors */ "./node_modules/@supabase/storage-js/dist/module/lib/errors.js");
+/* harmony import */ var _lib_fetch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/fetch */ "./node_modules/@supabase/storage-js/dist/module/lib/fetch.js");
+/* harmony import */ var _lib_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/helpers */ "./node_modules/@supabase/storage-js/dist/module/lib/helpers.js");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+const DEFAULT_SEARCH_OPTIONS = {
+    limit: 100,
+    offset: 0,
+    sortBy: {
+        column: 'name',
+        order: 'asc',
+    },
+};
+const DEFAULT_FILE_OPTIONS = {
+    cacheControl: '3600',
+    contentType: 'text/plain;charset=UTF-8',
+    upsert: false,
+};
+class StorageFileApi {
+    constructor(url, headers = {}, bucketId, fetch) {
+        this.url = url;
+        this.headers = headers;
+        this.bucketId = bucketId;
+        this.fetch = (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_0__.resolveFetch)(fetch);
+    }
+    /**
+     * Uploads a file to an existing bucket or replaces an existing file at the specified path with a new one.
+     *
+     * @param method HTTP method.
+     * @param path The relative file path. Should be of the format `folder/subfolder/filename.png`. The bucket must already exist before attempting to upload.
+     * @param fileBody The body of the file to be stored in the bucket.
+     */
+    uploadOrUpdate(method, path, fileBody, fileOptions) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let body;
+                const options = Object.assign(Object.assign({}, DEFAULT_FILE_OPTIONS), fileOptions);
+                let headers = Object.assign(Object.assign({}, this.headers), (method === 'POST' && { 'x-upsert': String(options.upsert) }));
+                const metadata = options.metadata;
+                if (typeof Blob !== 'undefined' && fileBody instanceof Blob) {
+                    body = new FormData();
+                    body.append('cacheControl', options.cacheControl);
+                    if (metadata) {
+                        body.append('metadata', this.encodeMetadata(metadata));
+                    }
+                    body.append('', fileBody);
+                }
+                else if (typeof FormData !== 'undefined' && fileBody instanceof FormData) {
+                    body = fileBody;
+                    body.append('cacheControl', options.cacheControl);
+                    if (metadata) {
+                        body.append('metadata', this.encodeMetadata(metadata));
+                    }
+                }
+                else {
+                    body = fileBody;
+                    headers['cache-control'] = `max-age=${options.cacheControl}`;
+                    headers['content-type'] = options.contentType;
+                    if (metadata) {
+                        headers['x-metadata'] = this.toBase64(this.encodeMetadata(metadata));
+                    }
+                }
+                if (fileOptions === null || fileOptions === void 0 ? void 0 : fileOptions.headers) {
+                    headers = Object.assign(Object.assign({}, headers), fileOptions.headers);
+                }
+                const cleanPath = this._removeEmptyFolders(path);
+                const _path = this._getFinalPath(cleanPath);
+                const res = yield this.fetch(`${this.url}/object/${_path}`, Object.assign({ method, body: body, headers }, ((options === null || options === void 0 ? void 0 : options.duplex) ? { duplex: options.duplex } : {})));
+                const data = yield res.json();
+                if (res.ok) {
+                    return {
+                        data: { path: cleanPath, id: data.Id, fullPath: data.Key },
+                        error: null,
+                    };
+                }
+                else {
+                    const error = data;
+                    return { data: null, error };
+                }
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_1__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * Uploads a file to an existing bucket.
+     *
+     * @param path The file path, including the file name. Should be of the format `folder/subfolder/filename.png`. The bucket must already exist before attempting to upload.
+     * @param fileBody The body of the file to be stored in the bucket.
+     */
+    upload(path, fileBody, fileOptions) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.uploadOrUpdate('POST', path, fileBody, fileOptions);
+        });
+    }
+    /**
+     * Upload a file with a token generated from `createSignedUploadUrl`.
+     * @param path The file path, including the file name. Should be of the format `folder/subfolder/filename.png`. The bucket must already exist before attempting to upload.
+     * @param token The token generated from `createSignedUploadUrl`
+     * @param fileBody The body of the file to be stored in the bucket.
+     */
+    uploadToSignedUrl(path, token, fileBody, fileOptions) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const cleanPath = this._removeEmptyFolders(path);
+            const _path = this._getFinalPath(cleanPath);
+            const url = new URL(this.url + `/object/upload/sign/${_path}`);
+            url.searchParams.set('token', token);
+            try {
+                let body;
+                const options = Object.assign({ upsert: DEFAULT_FILE_OPTIONS.upsert }, fileOptions);
+                const headers = Object.assign(Object.assign({}, this.headers), { 'x-upsert': String(options.upsert) });
+                if (typeof Blob !== 'undefined' && fileBody instanceof Blob) {
+                    body = new FormData();
+                    body.append('cacheControl', options.cacheControl);
+                    body.append('', fileBody);
+                }
+                else if (typeof FormData !== 'undefined' && fileBody instanceof FormData) {
+                    body = fileBody;
+                    body.append('cacheControl', options.cacheControl);
+                }
+                else {
+                    body = fileBody;
+                    headers['cache-control'] = `max-age=${options.cacheControl}`;
+                    headers['content-type'] = options.contentType;
+                }
+                const res = yield this.fetch(url.toString(), {
+                    method: 'PUT',
+                    body: body,
+                    headers,
+                });
+                const data = yield res.json();
+                if (res.ok) {
+                    return {
+                        data: { path: cleanPath, fullPath: data.Key },
+                        error: null,
+                    };
+                }
+                else {
+                    const error = data;
+                    return { data: null, error };
+                }
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_1__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * Creates a signed upload URL.
+     * Signed upload URLs can be used to upload files to the bucket without further authentication.
+     * They are valid for 2 hours.
+     * @param path The file path, including the current file name. For example `folder/image.png`.
+     * @param options.upsert If set to true, allows the file to be overwritten if it already exists.
+     */
+    createSignedUploadUrl(path, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let _path = this._getFinalPath(path);
+                const headers = Object.assign({}, this.headers);
+                if (options === null || options === void 0 ? void 0 : options.upsert) {
+                    headers['x-upsert'] = 'true';
+                }
+                const data = yield (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_2__.post)(this.fetch, `${this.url}/object/upload/sign/${_path}`, {}, { headers });
+                const url = new URL(this.url + data.url);
+                const token = url.searchParams.get('token');
+                if (!token) {
+                    throw new _lib_errors__WEBPACK_IMPORTED_MODULE_1__.StorageError('No token returned by API');
+                }
+                return { data: { signedUrl: url.toString(), path, token }, error: null };
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_1__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * Replaces an existing file at the specified path with a new one.
+     *
+     * @param path The relative file path. Should be of the format `folder/subfolder/filename.png`. The bucket must already exist before attempting to update.
+     * @param fileBody The body of the file to be stored in the bucket.
+     */
+    update(path, fileBody, fileOptions) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.uploadOrUpdate('PUT', path, fileBody, fileOptions);
+        });
+    }
+    /**
+     * Moves an existing file to a new path in the same bucket.
+     *
+     * @param fromPath The original file path, including the current file name. For example `folder/image.png`.
+     * @param toPath The new file path, including the new file name. For example `folder/image-new.png`.
+     * @param options The destination options.
+     */
+    move(fromPath, toPath, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_2__.post)(this.fetch, `${this.url}/object/move`, {
+                    bucketId: this.bucketId,
+                    sourceKey: fromPath,
+                    destinationKey: toPath,
+                    destinationBucket: options === null || options === void 0 ? void 0 : options.destinationBucket,
+                }, { headers: this.headers });
+                return { data, error: null };
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_1__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * Copies an existing file to a new path in the same bucket.
+     *
+     * @param fromPath The original file path, including the current file name. For example `folder/image.png`.
+     * @param toPath The new file path, including the new file name. For example `folder/image-copy.png`.
+     * @param options The destination options.
+     */
+    copy(fromPath, toPath, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_2__.post)(this.fetch, `${this.url}/object/copy`, {
+                    bucketId: this.bucketId,
+                    sourceKey: fromPath,
+                    destinationKey: toPath,
+                    destinationBucket: options === null || options === void 0 ? void 0 : options.destinationBucket,
+                }, { headers: this.headers });
+                return { data: { path: data.Key }, error: null };
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_1__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * Creates a signed URL. Use a signed URL to share a file for a fixed amount of time.
+     *
+     * @param path The file path, including the current file name. For example `folder/image.png`.
+     * @param expiresIn The number of seconds until the signed URL expires. For example, `60` for a URL which is valid for one minute.
+     * @param options.download triggers the file as a download if set to true. Set this parameter as the name of the file if you want to trigger the download with a different filename.
+     * @param options.transform Transform the asset before serving it to the client.
+     */
+    createSignedUrl(path, expiresIn, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let _path = this._getFinalPath(path);
+                let data = yield (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_2__.post)(this.fetch, `${this.url}/object/sign/${_path}`, Object.assign({ expiresIn }, ((options === null || options === void 0 ? void 0 : options.transform) ? { transform: options.transform } : {})), { headers: this.headers });
+                const downloadQueryParam = (options === null || options === void 0 ? void 0 : options.download)
+                    ? `&download=${options.download === true ? '' : options.download}`
+                    : '';
+                const signedUrl = encodeURI(`${this.url}${data.signedURL}${downloadQueryParam}`);
+                data = { signedUrl };
+                return { data, error: null };
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_1__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * Creates multiple signed URLs. Use a signed URL to share a file for a fixed amount of time.
+     *
+     * @param paths The file paths to be downloaded, including the current file names. For example `['folder/image.png', 'folder2/image2.png']`.
+     * @param expiresIn The number of seconds until the signed URLs expire. For example, `60` for URLs which are valid for one minute.
+     * @param options.download triggers the file as a download if set to true. Set this parameter as the name of the file if you want to trigger the download with a different filename.
+     */
+    createSignedUrls(paths, expiresIn, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_2__.post)(this.fetch, `${this.url}/object/sign/${this.bucketId}`, { expiresIn, paths }, { headers: this.headers });
+                const downloadQueryParam = (options === null || options === void 0 ? void 0 : options.download)
+                    ? `&download=${options.download === true ? '' : options.download}`
+                    : '';
+                return {
+                    data: data.map((datum) => (Object.assign(Object.assign({}, datum), { signedUrl: datum.signedURL
+                            ? encodeURI(`${this.url}${datum.signedURL}${downloadQueryParam}`)
+                            : null }))),
+                    error: null,
+                };
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_1__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * Downloads a file from a private bucket. For public buckets, make a request to the URL returned from `getPublicUrl` instead.
+     *
+     * @param path The full path and file name of the file to be downloaded. For example `folder/image.png`.
+     * @param options.transform Transform the asset before serving it to the client.
+     */
+    download(path, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const wantsTransformation = typeof (options === null || options === void 0 ? void 0 : options.transform) !== 'undefined';
+            const renderPath = wantsTransformation ? 'render/image/authenticated' : 'object';
+            const transformationQuery = this.transformOptsToQueryString((options === null || options === void 0 ? void 0 : options.transform) || {});
+            const queryString = transformationQuery ? `?${transformationQuery}` : '';
+            try {
+                const _path = this._getFinalPath(path);
+                const res = yield (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_2__.get)(this.fetch, `${this.url}/${renderPath}/${_path}${queryString}`, {
+                    headers: this.headers,
+                    noResolveJson: true,
+                });
+                const data = yield res.blob();
+                return { data, error: null };
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_1__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * Retrieves the details of an existing file.
+     * @param path
+     */
+    info(path) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const _path = this._getFinalPath(path);
+            try {
+                const data = yield (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_2__.get)(this.fetch, `${this.url}/object/info/${_path}`, {
+                    headers: this.headers,
+                });
+                return { data: (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_0__.recursiveToCamel)(data), error: null };
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_1__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * Checks the existence of a file.
+     * @param path
+     */
+    exists(path) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const _path = this._getFinalPath(path);
+            try {
+                yield (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_2__.head)(this.fetch, `${this.url}/object/${_path}`, {
+                    headers: this.headers,
+                });
+                return { data: true, error: null };
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_1__.isStorageError)(error) && error instanceof _lib_errors__WEBPACK_IMPORTED_MODULE_1__.StorageUnknownError) {
+                    const originalError = error.originalError;
+                    if ([400, 404].includes(originalError === null || originalError === void 0 ? void 0 : originalError.status)) {
+                        return { data: false, error };
+                    }
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * A simple convenience function to get the URL for an asset in a public bucket. If you do not want to use this function, you can construct the public URL by concatenating the bucket URL with the path to the asset.
+     * This function does not verify if the bucket is public. If a public URL is created for a bucket which is not public, you will not be able to download the asset.
+     *
+     * @param path The path and name of the file to generate the public URL for. For example `folder/image.png`.
+     * @param options.download Triggers the file as a download if set to true. Set this parameter as the name of the file if you want to trigger the download with a different filename.
+     * @param options.transform Transform the asset before serving it to the client.
+     */
+    getPublicUrl(path, options) {
+        const _path = this._getFinalPath(path);
+        const _queryString = [];
+        const downloadQueryParam = (options === null || options === void 0 ? void 0 : options.download)
+            ? `download=${options.download === true ? '' : options.download}`
+            : '';
+        if (downloadQueryParam !== '') {
+            _queryString.push(downloadQueryParam);
+        }
+        const wantsTransformation = typeof (options === null || options === void 0 ? void 0 : options.transform) !== 'undefined';
+        const renderPath = wantsTransformation ? 'render/image' : 'object';
+        const transformationQuery = this.transformOptsToQueryString((options === null || options === void 0 ? void 0 : options.transform) || {});
+        if (transformationQuery !== '') {
+            _queryString.push(transformationQuery);
+        }
+        let queryString = _queryString.join('&');
+        if (queryString !== '') {
+            queryString = `?${queryString}`;
+        }
+        return {
+            data: { publicUrl: encodeURI(`${this.url}/${renderPath}/public/${_path}${queryString}`) },
+        };
+    }
+    /**
+     * Deletes files within the same bucket
+     *
+     * @param paths An array of files to delete, including the path and file name. For example [`'folder/image.png'`].
+     */
+    remove(paths) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_2__.remove)(this.fetch, `${this.url}/object/${this.bucketId}`, { prefixes: paths }, { headers: this.headers });
+                return { data, error: null };
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_1__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    /**
+     * Get file metadata
+     * @param id the file id to retrieve metadata
+     */
+    // async getMetadata(
+    //   id: string
+    // ): Promise<
+    //   | {
+    //       data: Metadata
+    //       error: null
+    //     }
+    //   | {
+    //       data: null
+    //       error: StorageError
+    //     }
+    // > {
+    //   try {
+    //     const data = await get(this.fetch, `${this.url}/metadata/${id}`, { headers: this.headers })
+    //     return { data, error: null }
+    //   } catch (error) {
+    //     if (isStorageError(error)) {
+    //       return { data: null, error }
+    //     }
+    //     throw error
+    //   }
+    // }
+    /**
+     * Update file metadata
+     * @param id the file id to update metadata
+     * @param meta the new file metadata
+     */
+    // async updateMetadata(
+    //   id: string,
+    //   meta: Metadata
+    // ): Promise<
+    //   | {
+    //       data: Metadata
+    //       error: null
+    //     }
+    //   | {
+    //       data: null
+    //       error: StorageError
+    //     }
+    // > {
+    //   try {
+    //     const data = await post(
+    //       this.fetch,
+    //       `${this.url}/metadata/${id}`,
+    //       { ...meta },
+    //       { headers: this.headers }
+    //     )
+    //     return { data, error: null }
+    //   } catch (error) {
+    //     if (isStorageError(error)) {
+    //       return { data: null, error }
+    //     }
+    //     throw error
+    //   }
+    // }
+    /**
+     * Lists all the files within a bucket.
+     * @param path The folder path.
+     */
+    list(path, options, parameters) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const body = Object.assign(Object.assign(Object.assign({}, DEFAULT_SEARCH_OPTIONS), options), { prefix: path || '' });
+                const data = yield (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_2__.post)(this.fetch, `${this.url}/object/list/${this.bucketId}`, body, { headers: this.headers }, parameters);
+                return { data, error: null };
+            }
+            catch (error) {
+                if ((0,_lib_errors__WEBPACK_IMPORTED_MODULE_1__.isStorageError)(error)) {
+                    return { data: null, error };
+                }
+                throw error;
+            }
+        });
+    }
+    encodeMetadata(metadata) {
+        return JSON.stringify(metadata);
+    }
+    toBase64(data) {
+        if (typeof Buffer !== 'undefined') {
+            return Buffer.from(data).toString('base64');
+        }
+        return btoa(data);
+    }
+    _getFinalPath(path) {
+        return `${this.bucketId}/${path}`;
+    }
+    _removeEmptyFolders(path) {
+        return path.replace(/^\/|\/$/g, '').replace(/\/+/g, '/');
+    }
+    transformOptsToQueryString(transform) {
+        const params = [];
+        if (transform.width) {
+            params.push(`width=${transform.width}`);
+        }
+        if (transform.height) {
+            params.push(`height=${transform.height}`);
+        }
+        if (transform.resize) {
+            params.push(`resize=${transform.resize}`);
+        }
+        if (transform.format) {
+            params.push(`format=${transform.format}`);
+        }
+        if (transform.quality) {
+            params.push(`quality=${transform.quality}`);
+        }
+        return params.join('&');
+    }
+}
+//# sourceMappingURL=StorageFileApi.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/supabase-js/dist/module/SupabaseClient.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@supabase/supabase-js/dist/module/SupabaseClient.js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SupabaseClient)
+/* harmony export */ });
+/* harmony import */ var _supabase_functions_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @supabase/functions-js */ "./node_modules/@supabase/functions-js/dist/module/FunctionsClient.js");
+/* harmony import */ var _supabase_postgrest_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @supabase/postgrest-js */ "./node_modules/@supabase/postgrest-js/dist/esm/wrapper.mjs");
+/* harmony import */ var _supabase_realtime_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @supabase/realtime-js */ "./node_modules/@supabase/realtime-js/dist/module/index.js");
+/* harmony import */ var _supabase_storage_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @supabase/storage-js */ "./node_modules/@supabase/storage-js/dist/module/StorageClient.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lib/constants */ "./node_modules/@supabase/supabase-js/dist/module/lib/constants.js");
+/* harmony import */ var _lib_fetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./lib/fetch */ "./node_modules/@supabase/supabase-js/dist/module/lib/fetch.js");
+/* harmony import */ var _lib_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/helpers */ "./node_modules/@supabase/supabase-js/dist/module/lib/helpers.js");
+/* harmony import */ var _lib_SupabaseAuthClient__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./lib/SupabaseAuthClient */ "./node_modules/@supabase/supabase-js/dist/module/lib/SupabaseAuthClient.js");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+
+
+
+
+
+/**
+ * Supabase Client.
+ *
+ * An isomorphic Javascript client for interacting with Postgres.
+ */
+class SupabaseClient {
+    /**
+     * Create a new client for use in the browser.
+     * @param supabaseUrl The unique Supabase URL which is supplied when you create a new project in your project dashboard.
+     * @param supabaseKey The unique Supabase Key which is supplied when you create a new project in your project dashboard.
+     * @param options.db.schema You can switch in between schemas. The schema needs to be on the list of exposed schemas inside Supabase.
+     * @param options.auth.autoRefreshToken Set to "true" if you want to automatically refresh the token before expiring.
+     * @param options.auth.persistSession Set to "true" if you want to automatically save the user session into local storage.
+     * @param options.auth.detectSessionInUrl Set to "true" if you want to automatically detects OAuth grants in the URL and signs in the user.
+     * @param options.realtime Options passed along to realtime-js constructor.
+     * @param options.global.fetch A custom fetch implementation.
+     * @param options.global.headers Any additional headers to send with each network request.
+     */
+    constructor(supabaseUrl, supabaseKey, options) {
+        var _a, _b, _c;
+        this.supabaseUrl = supabaseUrl;
+        this.supabaseKey = supabaseKey;
+        if (!supabaseUrl)
+            throw new Error('supabaseUrl is required.');
+        if (!supabaseKey)
+            throw new Error('supabaseKey is required.');
+        const _supabaseUrl = (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_2__.stripTrailingSlash)(supabaseUrl);
+        this.realtimeUrl = `${_supabaseUrl}/realtime/v1`.replace(/^http/i, 'ws');
+        this.authUrl = `${_supabaseUrl}/auth/v1`;
+        this.storageUrl = `${_supabaseUrl}/storage/v1`;
+        this.functionsUrl = `${_supabaseUrl}/functions/v1`;
+        // default storage key uses the supabase project ref as a namespace
+        const defaultStorageKey = `sb-${new URL(this.authUrl).hostname.split('.')[0]}-auth-token`;
+        const DEFAULTS = {
+            db: _lib_constants__WEBPACK_IMPORTED_MODULE_3__.DEFAULT_DB_OPTIONS,
+            realtime: _lib_constants__WEBPACK_IMPORTED_MODULE_3__.DEFAULT_REALTIME_OPTIONS,
+            auth: Object.assign(Object.assign({}, _lib_constants__WEBPACK_IMPORTED_MODULE_3__.DEFAULT_AUTH_OPTIONS), { storageKey: defaultStorageKey }),
+            global: _lib_constants__WEBPACK_IMPORTED_MODULE_3__.DEFAULT_GLOBAL_OPTIONS,
+        };
+        const settings = (0,_lib_helpers__WEBPACK_IMPORTED_MODULE_2__.applySettingDefaults)(options !== null && options !== void 0 ? options : {}, DEFAULTS);
+        this.storageKey = (_a = settings.auth.storageKey) !== null && _a !== void 0 ? _a : '';
+        this.headers = (_b = settings.global.headers) !== null && _b !== void 0 ? _b : {};
+        if (!settings.accessToken) {
+            this.auth = this._initSupabaseAuthClient((_c = settings.auth) !== null && _c !== void 0 ? _c : {}, this.headers, settings.global.fetch);
+        }
+        else {
+            this.accessToken = settings.accessToken;
+            this.auth = new Proxy({}, {
+                get: (_, prop) => {
+                    throw new Error(`@supabase/supabase-js: Supabase Client is configured with the accessToken option, accessing supabase.auth.${String(prop)} is not possible`);
+                },
+            });
+        }
+        this.fetch = (0,_lib_fetch__WEBPACK_IMPORTED_MODULE_4__.fetchWithAuth)(supabaseKey, this._getAccessToken.bind(this), settings.global.fetch);
+        this.realtime = this._initRealtimeClient(Object.assign({ headers: this.headers }, settings.realtime));
+        this.rest = new _supabase_postgrest_js__WEBPACK_IMPORTED_MODULE_0__.PostgrestClient(`${_supabaseUrl}/rest/v1`, {
+            headers: this.headers,
+            schema: settings.db.schema,
+            fetch: this.fetch,
+        });
+        if (!settings.accessToken) {
+            this._listenForAuthEvents();
+        }
+    }
+    /**
+     * Supabase Functions allows you to deploy and invoke edge functions.
+     */
+    get functions() {
+        return new _supabase_functions_js__WEBPACK_IMPORTED_MODULE_5__.FunctionsClient(this.functionsUrl, {
+            headers: this.headers,
+            customFetch: this.fetch,
+        });
+    }
+    /**
+     * Supabase Storage allows you to manage user-generated content, such as photos or videos.
+     */
+    get storage() {
+        return new _supabase_storage_js__WEBPACK_IMPORTED_MODULE_6__.StorageClient(this.storageUrl, this.headers, this.fetch);
+    }
+    /**
+     * Perform a query on a table or a view.
+     *
+     * @param relation - The table or view name to query
+     */
+    from(relation) {
+        return this.rest.from(relation);
+    }
+    // NOTE: signatures must be kept in sync with PostgrestClient.schema
+    /**
+     * Select a schema to query or perform an function (rpc) call.
+     *
+     * The schema needs to be on the list of exposed schemas inside Supabase.
+     *
+     * @param schema - The schema to query
+     */
+    schema(schema) {
+        return this.rest.schema(schema);
+    }
+    // NOTE: signatures must be kept in sync with PostgrestClient.rpc
+    /**
+     * Perform a function call.
+     *
+     * @param fn - The function name to call
+     * @param args - The arguments to pass to the function call
+     * @param options - Named parameters
+     * @param options.head - When set to `true`, `data` will not be returned.
+     * Useful if you only need the count.
+     * @param options.get - When set to `true`, the function will be called with
+     * read-only access mode.
+     * @param options.count - Count algorithm to use to count rows returned by the
+     * function. Only applicable for [set-returning
+     * functions](https://www.postgresql.org/docs/current/functions-srf.html).
+     *
+     * `"exact"`: Exact but slow count algorithm. Performs a `COUNT(*)` under the
+     * hood.
+     *
+     * `"planned"`: Approximated but fast count algorithm. Uses the Postgres
+     * statistics under the hood.
+     *
+     * `"estimated"`: Uses exact count for low numbers and planned count for high
+     * numbers.
+     */
+    rpc(fn, args = {}, options = {}) {
+        return this.rest.rpc(fn, args, options);
+    }
+    /**
+     * Creates a Realtime channel with Broadcast, Presence, and Postgres Changes.
+     *
+     * @param {string} name - The name of the Realtime channel.
+     * @param {Object} opts - The options to pass to the Realtime channel.
+     *
+     */
+    channel(name, opts = { config: {} }) {
+        return this.realtime.channel(name, opts);
+    }
+    /**
+     * Returns all Realtime channels.
+     */
+    getChannels() {
+        return this.realtime.getChannels();
+    }
+    /**
+     * Unsubscribes and removes Realtime channel from Realtime client.
+     *
+     * @param {RealtimeChannel} channel - The name of the Realtime channel.
+     *
+     */
+    removeChannel(channel) {
+        return this.realtime.removeChannel(channel);
+    }
+    /**
+     * Unsubscribes and removes all Realtime channels from Realtime client.
+     */
+    removeAllChannels() {
+        return this.realtime.removeAllChannels();
+    }
+    _getAccessToken() {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this.accessToken) {
+                return yield this.accessToken();
+            }
+            const { data } = yield this.auth.getSession();
+            return (_b = (_a = data.session) === null || _a === void 0 ? void 0 : _a.access_token) !== null && _b !== void 0 ? _b : null;
+        });
+    }
+    _initSupabaseAuthClient({ autoRefreshToken, persistSession, detectSessionInUrl, storage, storageKey, flowType, lock, debug, }, headers, fetch) {
+        var _a;
+        const authHeaders = {
+            Authorization: `Bearer ${this.supabaseKey}`,
+            apikey: `${this.supabaseKey}`,
+        };
+        return new _lib_SupabaseAuthClient__WEBPACK_IMPORTED_MODULE_7__.SupabaseAuthClient({
+            url: this.authUrl,
+            headers: Object.assign(Object.assign({}, authHeaders), headers),
+            storageKey: storageKey,
+            autoRefreshToken,
+            persistSession,
+            detectSessionInUrl,
+            storage,
+            flowType,
+            lock,
+            debug,
+            fetch,
+            // auth checks if there is a custom authorizaiton header using this flag
+            // so it knows whether to return an error when getUser is called with no session
+            hasCustomAuthorizationHeader: (_a = 'Authorization' in this.headers) !== null && _a !== void 0 ? _a : false,
+        });
+    }
+    _initRealtimeClient(options) {
+        return new _supabase_realtime_js__WEBPACK_IMPORTED_MODULE_1__.RealtimeClient(this.realtimeUrl, Object.assign(Object.assign({}, options), { params: Object.assign({ apikey: this.supabaseKey }, options === null || options === void 0 ? void 0 : options.params) }));
+    }
+    _listenForAuthEvents() {
+        let data = this.auth.onAuthStateChange((event, session) => {
+            this._handleTokenChanged(event, 'CLIENT', session === null || session === void 0 ? void 0 : session.access_token);
+        });
+        return data;
+    }
+    _handleTokenChanged(event, source, token) {
+        if ((event === 'TOKEN_REFRESHED' || event === 'SIGNED_IN') &&
+            this.changedAccessToken !== token) {
+            // Token has changed
+            this.realtime.setAuth(token !== null && token !== void 0 ? token : null);
+            this.changedAccessToken = token;
+        }
+        else if (event === 'SIGNED_OUT') {
+            // Token is removed
+            this.realtime.setAuth(this.supabaseKey);
+            if (source == 'STORAGE')
+                this.auth.signOut();
+            this.changedAccessToken = undefined;
+        }
+    }
+}
+//# sourceMappingURL=SupabaseClient.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/supabase-js/dist/module/index.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@supabase/supabase-js/dist/module/index.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AuthAdminApi: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.AuthAdminApi),
+/* harmony export */   AuthApiError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.AuthApiError),
+/* harmony export */   AuthClient: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.AuthClient),
+/* harmony export */   AuthError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.AuthError),
+/* harmony export */   AuthImplicitGrantRedirectError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.AuthImplicitGrantRedirectError),
+/* harmony export */   AuthInvalidCredentialsError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.AuthInvalidCredentialsError),
+/* harmony export */   AuthInvalidTokenResponseError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.AuthInvalidTokenResponseError),
+/* harmony export */   AuthPKCEGrantCodeExchangeError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.AuthPKCEGrantCodeExchangeError),
+/* harmony export */   AuthRetryableFetchError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.AuthRetryableFetchError),
+/* harmony export */   AuthSessionMissingError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.AuthSessionMissingError),
+/* harmony export */   AuthUnknownError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.AuthUnknownError),
+/* harmony export */   AuthWeakPasswordError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.AuthWeakPasswordError),
+/* harmony export */   CustomAuthError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.CustomAuthError),
+/* harmony export */   FunctionRegion: () => (/* reexport safe */ _supabase_functions_js__WEBPACK_IMPORTED_MODULE_1__.FunctionRegion),
+/* harmony export */   FunctionsError: () => (/* reexport safe */ _supabase_functions_js__WEBPACK_IMPORTED_MODULE_1__.FunctionsError),
+/* harmony export */   FunctionsFetchError: () => (/* reexport safe */ _supabase_functions_js__WEBPACK_IMPORTED_MODULE_1__.FunctionsFetchError),
+/* harmony export */   FunctionsHttpError: () => (/* reexport safe */ _supabase_functions_js__WEBPACK_IMPORTED_MODULE_1__.FunctionsHttpError),
+/* harmony export */   FunctionsRelayError: () => (/* reexport safe */ _supabase_functions_js__WEBPACK_IMPORTED_MODULE_1__.FunctionsRelayError),
+/* harmony export */   GoTrueAdminApi: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.GoTrueAdminApi),
+/* harmony export */   GoTrueClient: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.GoTrueClient),
+/* harmony export */   NavigatorLockAcquireTimeoutError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.NavigatorLockAcquireTimeoutError),
+/* harmony export */   REALTIME_CHANNEL_STATES: () => (/* reexport safe */ _supabase_realtime_js__WEBPACK_IMPORTED_MODULE_2__.REALTIME_CHANNEL_STATES),
+/* harmony export */   REALTIME_LISTEN_TYPES: () => (/* reexport safe */ _supabase_realtime_js__WEBPACK_IMPORTED_MODULE_2__.REALTIME_LISTEN_TYPES),
+/* harmony export */   REALTIME_POSTGRES_CHANGES_LISTEN_EVENT: () => (/* reexport safe */ _supabase_realtime_js__WEBPACK_IMPORTED_MODULE_2__.REALTIME_POSTGRES_CHANGES_LISTEN_EVENT),
+/* harmony export */   REALTIME_PRESENCE_LISTEN_EVENTS: () => (/* reexport safe */ _supabase_realtime_js__WEBPACK_IMPORTED_MODULE_2__.REALTIME_PRESENCE_LISTEN_EVENTS),
+/* harmony export */   REALTIME_SUBSCRIBE_STATES: () => (/* reexport safe */ _supabase_realtime_js__WEBPACK_IMPORTED_MODULE_2__.REALTIME_SUBSCRIBE_STATES),
+/* harmony export */   RealtimeChannel: () => (/* reexport safe */ _supabase_realtime_js__WEBPACK_IMPORTED_MODULE_2__.RealtimeChannel),
+/* harmony export */   RealtimeClient: () => (/* reexport safe */ _supabase_realtime_js__WEBPACK_IMPORTED_MODULE_2__.RealtimeClient),
+/* harmony export */   RealtimePresence: () => (/* reexport safe */ _supabase_realtime_js__WEBPACK_IMPORTED_MODULE_2__.RealtimePresence),
+/* harmony export */   SupabaseClient: () => (/* reexport safe */ _SupabaseClient__WEBPACK_IMPORTED_MODULE_3__["default"]),
+/* harmony export */   createClient: () => (/* binding */ createClient),
+/* harmony export */   isAuthApiError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.isAuthApiError),
+/* harmony export */   isAuthError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.isAuthError),
+/* harmony export */   isAuthRetryableFetchError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.isAuthRetryableFetchError),
+/* harmony export */   isAuthSessionMissingError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.isAuthSessionMissingError),
+/* harmony export */   isAuthWeakPasswordError: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.isAuthWeakPasswordError),
+/* harmony export */   lockInternals: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.lockInternals),
+/* harmony export */   navigatorLock: () => (/* reexport safe */ _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.navigatorLock)
+/* harmony export */ });
+/* harmony import */ var _SupabaseClient__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SupabaseClient */ "./node_modules/@supabase/supabase-js/dist/module/SupabaseClient.js");
+/* harmony import */ var _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @supabase/auth-js */ "./node_modules/@supabase/auth-js/dist/module/index.js");
+/* harmony import */ var _supabase_functions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @supabase/functions-js */ "./node_modules/@supabase/functions-js/dist/module/types.js");
+/* harmony import */ var _supabase_realtime_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @supabase/realtime-js */ "./node_modules/@supabase/realtime-js/dist/module/index.js");
+
+
+
+
+
+/**
+ * Creates a new Supabase Client.
+ */
+const createClient = (supabaseUrl, supabaseKey, options) => {
+    return new _SupabaseClient__WEBPACK_IMPORTED_MODULE_3__["default"](supabaseUrl, supabaseKey, options);
+};
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/supabase-js/dist/module/lib/SupabaseAuthClient.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/@supabase/supabase-js/dist/module/lib/SupabaseAuthClient.js ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SupabaseAuthClient: () => (/* binding */ SupabaseAuthClient)
+/* harmony export */ });
+/* harmony import */ var _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @supabase/auth-js */ "./node_modules/@supabase/auth-js/dist/module/index.js");
+
+class SupabaseAuthClient extends _supabase_auth_js__WEBPACK_IMPORTED_MODULE_0__.AuthClient {
+    constructor(options) {
+        super(options);
+    }
+}
+//# sourceMappingURL=SupabaseAuthClient.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/supabase-js/dist/module/lib/constants.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@supabase/supabase-js/dist/module/lib/constants.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DEFAULT_AUTH_OPTIONS: () => (/* binding */ DEFAULT_AUTH_OPTIONS),
+/* harmony export */   DEFAULT_DB_OPTIONS: () => (/* binding */ DEFAULT_DB_OPTIONS),
+/* harmony export */   DEFAULT_GLOBAL_OPTIONS: () => (/* binding */ DEFAULT_GLOBAL_OPTIONS),
+/* harmony export */   DEFAULT_HEADERS: () => (/* binding */ DEFAULT_HEADERS),
+/* harmony export */   DEFAULT_REALTIME_OPTIONS: () => (/* binding */ DEFAULT_REALTIME_OPTIONS)
+/* harmony export */ });
+/* harmony import */ var _version__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./version */ "./node_modules/@supabase/supabase-js/dist/module/lib/version.js");
+
+let JS_ENV = '';
+// @ts-ignore
+if (typeof Deno !== 'undefined') {
+    JS_ENV = 'deno';
+}
+else if (typeof document !== 'undefined') {
+    JS_ENV = 'web';
+}
+else if (typeof navigator !== 'undefined' && navigator.product === 'ReactNative') {
+    JS_ENV = 'react-native';
+}
+else {
+    JS_ENV = 'node';
+}
+const DEFAULT_HEADERS = { 'X-Client-Info': `supabase-js-${JS_ENV}/${_version__WEBPACK_IMPORTED_MODULE_0__.version}` };
+const DEFAULT_GLOBAL_OPTIONS = {
+    headers: DEFAULT_HEADERS,
+};
+const DEFAULT_DB_OPTIONS = {
+    schema: 'public',
+};
+const DEFAULT_AUTH_OPTIONS = {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true,
+    flowType: 'implicit',
+};
+const DEFAULT_REALTIME_OPTIONS = {};
+//# sourceMappingURL=constants.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/supabase-js/dist/module/lib/fetch.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@supabase/supabase-js/dist/module/lib/fetch.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   fetchWithAuth: () => (/* binding */ fetchWithAuth),
+/* harmony export */   resolveFetch: () => (/* binding */ resolveFetch),
+/* harmony export */   resolveHeadersConstructor: () => (/* binding */ resolveHeadersConstructor)
+/* harmony export */ });
+/* harmony import */ var _supabase_node_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @supabase/node-fetch */ "./node_modules/@supabase/node-fetch/browser.js");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+// @ts-ignore
+
+const resolveFetch = (customFetch) => {
+    let _fetch;
+    if (customFetch) {
+        _fetch = customFetch;
+    }
+    else if (typeof fetch === 'undefined') {
+        _fetch = _supabase_node_fetch__WEBPACK_IMPORTED_MODULE_0__["default"];
+    }
+    else {
+        _fetch = fetch;
+    }
+    return (...args) => _fetch(...args);
+};
+const resolveHeadersConstructor = () => {
+    if (typeof Headers === 'undefined') {
+        return _supabase_node_fetch__WEBPACK_IMPORTED_MODULE_0__.Headers;
+    }
+    return Headers;
+};
+const fetchWithAuth = (supabaseKey, getAccessToken, customFetch) => {
+    const fetch = resolveFetch(customFetch);
+    const HeadersConstructor = resolveHeadersConstructor();
+    return (input, init) => __awaiter(void 0, void 0, void 0, function* () {
+        var _a;
+        const accessToken = (_a = (yield getAccessToken())) !== null && _a !== void 0 ? _a : supabaseKey;
+        let headers = new HeadersConstructor(init === null || init === void 0 ? void 0 : init.headers);
+        if (!headers.has('apikey')) {
+            headers.set('apikey', supabaseKey);
+        }
+        if (!headers.has('Authorization')) {
+            headers.set('Authorization', `Bearer ${accessToken}`);
+        }
+        return fetch(input, Object.assign(Object.assign({}, init), { headers }));
+    });
+};
+//# sourceMappingURL=fetch.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/supabase-js/dist/module/lib/helpers.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@supabase/supabase-js/dist/module/lib/helpers.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   applySettingDefaults: () => (/* binding */ applySettingDefaults),
+/* harmony export */   isBrowser: () => (/* binding */ isBrowser),
+/* harmony export */   stripTrailingSlash: () => (/* binding */ stripTrailingSlash),
+/* harmony export */   uuid: () => (/* binding */ uuid)
+/* harmony export */ });
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+function uuid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (Math.random() * 16) | 0, v = c == 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+    });
+}
+function stripTrailingSlash(url) {
+    return url.replace(/\/$/, '');
+}
+const isBrowser = () => typeof window !== 'undefined';
+function applySettingDefaults(options, defaults) {
+    const { db: dbOptions, auth: authOptions, realtime: realtimeOptions, global: globalOptions, } = options;
+    const { db: DEFAULT_DB_OPTIONS, auth: DEFAULT_AUTH_OPTIONS, realtime: DEFAULT_REALTIME_OPTIONS, global: DEFAULT_GLOBAL_OPTIONS, } = defaults;
+    const result = {
+        db: Object.assign(Object.assign({}, DEFAULT_DB_OPTIONS), dbOptions),
+        auth: Object.assign(Object.assign({}, DEFAULT_AUTH_OPTIONS), authOptions),
+        realtime: Object.assign(Object.assign({}, DEFAULT_REALTIME_OPTIONS), realtimeOptions),
+        global: Object.assign(Object.assign({}, DEFAULT_GLOBAL_OPTIONS), globalOptions),
+        accessToken: () => __awaiter(this, void 0, void 0, function* () { return ''; }),
+    };
+    if (options.accessToken) {
+        result.accessToken = options.accessToken;
+    }
+    else {
+        // hack around Required<>
+        delete result.accessToken;
+    }
+    return result;
+}
+//# sourceMappingURL=helpers.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@supabase/supabase-js/dist/module/lib/version.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@supabase/supabase-js/dist/module/lib/version.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   version: () => (/* binding */ version)
+/* harmony export */ });
+const version = '2.46.1';
+//# sourceMappingURL=version.js.map
+
+/***/ }),
+
 /***/ "./node_modules/ansi-html-community/index.js":
 /*!***************************************************!*\
   !*** ./node_modules/ansi-html-community/index.js ***!
@@ -5858,348 +14100,6 @@ function eventTargetAgnosticAddListener(emitter, name, listener, flags) {
 
 /***/ }),
 
-/***/ "./node_modules/extpay/dist/ExtPay.module.js":
-/*!***************************************************!*\
-  !*** ./node_modules/extpay/dist/ExtPay.module.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! webextension-polyfill */ "./node_modules/webextension-polyfill/dist/browser-polyfill.js");
-/* harmony import */ var webextension_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__);
-
-
-// Sign up at https://extensionpay.com to use this library. AGPLv3 licensed.
-
-
-// For running as a content script. Receive a message from the successful payments page
-// and pass it on to the background page to query if the user has paid.
-if (typeof window !== 'undefined') {
-    window.addEventListener('message', (event) => {
-        if (event.origin !== 'https://extensionpay.com') return;
-        if (event.source != window) return;
-        if (event.data === 'fetch-user' || event.data === 'trial-start') {
-            webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.runtime.sendMessage(event.data);
-        }
-    }, false);
-}
-
-function ExtPay(extension_id) {
-
-    const HOST = `https://extensionpay.com`;
-    const EXTENSION_URL = `${HOST}/extension/${extension_id}`;
-
-    function timeout(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-    async function get(key) {
-        try {
-            return await webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.storage.sync.get(key)
-        } catch(e) {
-            // if sync not available (like with Firefox temp addons), fall back to local
-            return await webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.storage.local.get(key)
-        }
-    }
-    async function set(dict) {
-        try {
-            return await webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.storage.sync.set(dict)
-        } catch(e) {
-            // if sync not available (like with Firefox temp addons), fall back to local
-            return await webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.storage.local.set(dict)
-        }
-    }
-
-    // ----- start configuration checks
-    webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.management && webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.management.getSelf().then(async (ext_info) => {
-        if (!ext_info.permissions.includes('storage')) {
-            var permissions = ext_info.hostPermissions.concat(ext_info.permissions);
-            throw `ExtPay Setup Error: please include the "storage" permission in manifest.json["permissions"] or else ExtensionPay won't work correctly.
-
-You can copy and paste this to your manifest.json file to fix this error:
-
-"permissions": [
-    ${permissions.map(x => `"    ${x}"`).join(',\n')}${permissions.length > 0 ? ',' : ''}
-    "storage"
-]
-`
-        }
-
-    });
-    // ----- end configuration checks
-
-    // run on "install"
-    get(['extensionpay_installed_at', 'extensionpay_user']).then(async (storage) => {
-        if (storage.extensionpay_installed_at) return;
-
-        // Migration code: before v2.1 installedAt came from the server
-        // so use that stored datetime instead of making a new one.
-        const user = storage.extensionpay_user;
-        const date = user ? user.installedAt : (new Date()).toISOString();
-        await set({'extensionpay_installed_at': date});
-    });
-
-    const paid_callbacks = [];
-    const trial_callbacks =  [];
-
-    async function create_key() {
-        var body = {};
-        var ext_info;
-        if (webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.management) {
-            ext_info = await webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.management.getSelf();
-        } else if (webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.runtime) {
-            ext_info = await webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.runtime.sendMessage('extpay-extinfo'); // ask background page for ext info
-            if (!ext_info) {
-                // Safari doesn't support browser.management for some reason
-                const is_dev_mode = !('update_url' in webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.runtime.getManifest());
-                ext_info = {installType: is_dev_mode ? 'development' : 'normal'};
-            }
-        } else {
-            throw 'ExtPay needs to be run in a browser extension context'
-        }
-
-        if (ext_info.installType == 'development') {
-            body.development = true;
-        } 
-
-        const resp = await fetch(`${EXTENSION_URL}/api/new-key`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify(body),
-        });
-        if (!resp.ok) {
-            throw resp.status, `${HOST}/home`
-        }
-        const api_key = await resp.json();
-        await set({extensionpay_api_key: api_key});
-        return api_key;
-    }
-
-    async function get_key() {
-        const storage = await get(['extensionpay_api_key']);
-        if (storage.extensionpay_api_key) {
-            return storage.extensionpay_api_key;
-        }
-        return null;
-    }
-
-    const datetime_re = /^\d\d\d\d-\d\d-\d\dT/;
-
-    async function fetch_user() {
-        var storage = await get(['extensionpay_user', 'extensionpay_installed_at']);
-        const api_key = await get_key();
-        if (!api_key) {
-            return {
-                paid: false,
-                paidAt: null,
-                installedAt: storage.extensionpay_installed_at ? new Date(storage.extensionpay_installed_at) : new Date(), // sometimes this function gets called before the initial install time can be flushed to storage
-                trialStartedAt: null,
-            }
-        }
-
-        const resp = await fetch(`${EXTENSION_URL}/api/user?api_key=${api_key}`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-            }
-        });
-        // TODO: think harder about error states and what users will want (bad connection, server error, id not found)
-        if (!resp.ok) throw 'ExtPay error while fetching user: '+(await resp.text())
-
-        const user_data = await resp.json();
-
-        const parsed_user = {};
-        for (var [key, value] of Object.entries(user_data)) {
-            if (value && value.match && value.match(datetime_re)) {
-                value = new Date(value);
-            }
-            parsed_user[key] = value;
-        }
-        parsed_user.installedAt = new Date(storage.extensionpay_installed_at);
-          
-
-        if (parsed_user.paidAt) {
-            if (!storage.extensionpay_user || (storage.extensionpay_user && !storage.extensionpay_user.paidAt)) {
-                paid_callbacks.forEach(cb => cb(parsed_user));
-            }
-        }
-        if (parsed_user.trialStartedAt) {
-            if (!storage.extensionpay_user || (storage.extensionpay_user && !storage.extensionpay_user.trialStartedAt)) {
-                trial_callbacks.forEach(cb => cb(parsed_user));
-            }
-
-        }
-        await set({extensionpay_user: user_data});
-
-        return parsed_user;
-    }
-
-    async function payment_page_link() {
-        var api_key = await get_key();
-        if (!api_key) {
-            api_key = await create_key();
-        }
-        return `${EXTENSION_URL}?api_key=${api_key}`
-    }
-
-    async function open_popup(url, width, height) {
-        if (webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.windows && webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.windows.create) {
-            const current_window = await webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.windows.getCurrent();
-            // https://stackoverflow.com/a/68456858
-            const left = Math.round((current_window.width - width) * 0.5 + current_window.left);
-            const top = Math.round((current_window.height - height) * 0.5 + current_window.top);
-            try {
-                webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.windows.create({
-                    url: url,
-                    type: "popup",
-                    focused: true,
-                    width,
-                    height,
-                    left,
-                    top
-                });
-            } catch(e) {
-                // firefox doesn't support 'focused'
-                webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.windows.create({
-                    url: url,
-                    type: "popup",
-                    width,
-                    height,
-                    left,
-                    top
-                });
-            }
-        } else {
-            // for opening from a content script
-            // https://developer.mozilla.org/en-US/docs/Web/API/Window/open
-            window.open(url, null, `toolbar=no,location=no,directories=no,status=no,menubar=no,width=${width},height=${height},left=450`);
-        }
-    }
-
-    async function open_payment_page() {
-        const url = await payment_page_link();
-        open_popup(url, 500, 800);
-    }
-
-    async function open_trial_page(period) {
-        // let user have period string like '1 week' e.g. "start your 1 week free trial"
-
-        var api_key = await get_key();
-        if (!api_key) {
-            api_key = await create_key();
-        }
-        var url = `${EXTENSION_URL}/trial?api_key=${api_key}`;
-        if (period) {
-            url += `&period=${period}`;
-        }
-        open_popup(url, 500, 650);
-    }
-    async function open_login_page() {
-        var api_key = await get_key();
-        if (!api_key) {
-            api_key = await create_key();
-        }
-        const url = `${EXTENSION_URL}/reactivate?api_key=${api_key}`;
-        open_popup(url, 500, 800);
-    }
-
-    var polling = false;
-    async function poll_user_paid() {
-        // keep trying to fetch user in case stripe webhook is late
-        if (polling) return;
-        polling = true;
-        var user = await fetch_user();
-        for (var i=0; i < 2*60; ++i) {
-            if (user.paidAt) {
-                polling = false;
-                return user;
-            }
-            await timeout(1000);
-            user = await fetch_user();
-        }
-        polling = false;
-    }
-
-
-    
-    return {
-        getUser: function() {
-            return fetch_user()
-        },
-        onPaid: {
-            addListener: function(callback) {
-                const content_script_template = `"content_scripts": [
-                {
-            "matches": ["${HOST}/*"],
-            "js": ["ExtPay.js"],
-            "run_at": "document_start"
-        }]`;
-                const manifest = webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.runtime.getManifest();
-                if (!manifest.content_scripts) {
-                    throw `ExtPay setup error: To use the onPaid callback handler, please include ExtPay as a content script in your manifest.json. You can copy the example below into your manifest.json or check the docs: https://github.com/Glench/ExtPay#2-configure-your-manifestjson
-
-        ${content_script_template}`
-                }
-                const extpay_content_script_entry = manifest.content_scripts.find(obj => {
-                    // removing port number because firefox ignores content scripts with port number
-                    return obj.matches.includes(HOST.replace(':3000', '')+'/*')
-                });
-                if (!extpay_content_script_entry) {
-                    throw `ExtPay setup error: To use the onPaid callback handler, please include ExtPay as a content script in your manifest.json matching "${HOST}/*". You can copy the example below into your manifest.json or check the docs: https://github.com/Glench/ExtPay#2-configure-your-manifestjson
-
-        ${content_script_template}`
-                } else {
-                    if (!extpay_content_script_entry.run_at || extpay_content_script_entry.run_at !== 'document_start') {
-                        throw `ExtPay setup error: To use the onPaid callback handler, please make sure the ExtPay content script in your manifest.json runs at document start. You can copy the example below into your manifest.json or check the docs: https://github.com/Glench/ExtPay#2-configure-your-manifestjson
-
-        ${content_script_template}`
-                    }
-                }
-
-                paid_callbacks.push(callback);
-            },
-            // removeListener: function(callback) {
-            //     // TODO
-            // }
-        },
-        openPaymentPage: open_payment_page,
-        openTrialPage: open_trial_page,
-        openLoginPage: open_login_page,
-        onTrialStarted: {
-            addListener: function(callback) {
-                trial_callbacks.push(callback);
-            }
-        },
-        startBackground: function() {
-            webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.runtime.onMessage.addListener(function(message, sender, send_response) {
-                console.log('service worker got message! Here it is:', message);
-                if (message == 'fetch-user') {
-                    // Only called via extensionpay.com/extension/[extension-id]/paid -> content_script when user successfully pays.
-                    // It's possible attackers could trigger this but that is basically harmless. It would just query the user.
-                    poll_user_paid();
-                } else if (message == 'trial-start') {
-                    // no need to poll since the trial confirmation page has already set trialStartedAt
-                    fetch_user(); 
-                } else if (message == 'extpay-extinfo' && webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.management) {
-                    // get this message from content scripts which can't access browser.management
-                    return webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.management.getSelf()
-                } 
-            });
-        }
-    }
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ExtPay);
-
-
-/***/ }),
-
 /***/ "./node_modules/html-entities/lib/index.js":
 /*!*************************************************!*\
   !*** ./node_modules/html-entities/lib/index.js ***!
@@ -7119,6 +15019,59 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./secrets.development.js":
+/*!********************************!*\
+  !*** ./secrets.development.js ***!
+  \********************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  SUPABASE_URL: 'https://ommzbdvzcohiooroyzxw.supabase.co',
+  SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9tbXpiZHZ6Y29oaW9vcm95enh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1Nzk1MTIsImV4cCI6MjA0NzE1NTUxMn0.YZeaKt0Ic0oFnRKrGsJGA8-kNkq7a2_8VkDnY-fN9Gs'
+});
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
 /***/ "./node_modules/stackframe/stackframe.js":
 /*!***********************************************!*\
   !*** ./node_modules/stackframe/stackframe.js ***!
@@ -7271,6 +15224,317 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
+/***/ "./src/pages/Background/ai-agent.ts":
+/*!******************************************!*\
+  !*** ./src/pages/Background/ai-agent.ts ***!
+  \******************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   generateAIContent: () => (/* binding */ generateAIContent),
+/* harmony export */   restartAI: () => (/* binding */ restartAI)
+/* harmony export */ });
+/* harmony import */ var _change_tracker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./change-tracker */ "./src/pages/Background/change-tracker.ts");
+/* harmony import */ var _utils_errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/errors */ "./src/utils/errors.ts");
+/* harmony import */ var _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @supabase/supabase-js */ "./node_modules/@supabase/functions-js/dist/module/types.js");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+let notebookTracker;
+const changeLogs = [];
+const prompts = [];
+const responses = [];
+function trackNotebookChanges(currentCells) {
+    const tracker = notebookTracker || new _change_tracker__WEBPACK_IMPORTED_MODULE_0__.NotebookChangeTracker();
+    notebookTracker = tracker;
+    return tracker.updateState(currentCells);
+}
+function generateAIContent(prompt, content, supabase, model = "gpt-4o-mini", plan = 'free') {
+    var _a;
+    return __awaiter(this, void 0, void 0, function* () {
+        trackNotebookChanges(content);
+        // Get current notebook state with full content for referenced cells
+        let notebookState = notebookTracker.getLastState([], false);
+        const shouldReduceContent = plan === 'free' ? notebookState.length > 20000 : notebookState.length > 200000;
+        console.log('Should reduce content:', shouldReduceContent);
+        if (shouldReduceContent) {
+            const requiredCellIds = yield sendToContextEnhancer(supabase, prompt, model);
+            // Extract cell IDs from focused and surrounding cell tags
+            const focusedCellRegex = /(cell-\S+)/g;
+            (_a = prompt.match(focusedCellRegex)) === null || _a === void 0 ? void 0 : _a.forEach((cellId) => {
+                if (!requiredCellIds.includes(cellId)) {
+                    requiredCellIds.push(cellId);
+                }
+            });
+            notebookState = notebookTracker.getLastState(requiredCellIds, true);
+        }
+        // Keep only the last 3 interactions to manage context size
+        // if (changeLogs.length > 3) {
+        //     changeLogs.shift();
+        // }
+        // changeLogs.push(changeLog);
+        if (prompts.length > 3) {
+            prompts.shift();
+        }
+        prompts.push(prompt);
+        const messages = [];
+        for (let i = 0; i < prompts.length - 1; i++) {
+            if (prompts[i])
+                messages.push({ role: 'user', content: prompts[i] });
+            if (responses[i])
+                messages.push({ role: 'assistant', content: responses[i] });
+        }
+        messages.push({
+            role: 'user',
+            content: `This is the current notebook state for reference: <notebook_state>${notebookState}</notebook_state>. ${prompt}`
+        });
+        try {
+            const data = yield sendAI(supabase, messages, model);
+            yield getStreamedResponse(data);
+        }
+        catch (error) {
+            // Convert network errors to our error type
+            if (error instanceof TypeError && error.message.includes('network')) {
+                error = {
+                    type: _utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType.NETWORK,
+                    message: 'Network connection error',
+                    details: error
+                };
+            }
+            // Ensure the error is propagated to the content script
+            chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+                chrome.tabs.sendMessage(tabs[0].id, {
+                    action: 'ai_error',
+                    error
+                });
+            });
+        }
+    });
+}
+function sendToContextEnhancer(supabase, prompt, model = "gpt-4o-mini") {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const requiredCellIds = [];
+            const notebookState = notebookTracker.getLastState();
+            const data = yield sendAI(supabase, [
+                { role: 'user', content: `Current notebook state: ${notebookState}
+            Prompt: ${prompt}` },
+            ], model, true);
+            const ids = JSON.parse(data).cellIds;
+            console.log('Required cell IDs:', ids);
+            if (ids && ids.length > 0) {
+                requiredCellIds.push(...ids);
+            }
+            return requiredCellIds;
+        }
+        catch (error) {
+            // Convert network errors to our error type
+            if (error instanceof TypeError && error.message.includes('network')) {
+                error = {
+                    type: _utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType.NETWORK,
+                    message: 'Network connection error',
+                    details: error
+                };
+            }
+            // Ensure the error is propagated to the content script
+            chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+                chrome.tabs.sendMessage(tabs[0].id, {
+                    action: 'ai_error',
+                    error
+                });
+            });
+        }
+        return [];
+    });
+}
+function sendAI(supabase, messages, model = "gpt-4o-mini", contextEnhancer = false) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { data, error } = yield supabase.functions.invoke('ai-agent', {
+            body: {
+                messages,
+                model,
+                contextEnhancer
+            }
+        });
+        console.log(`Sent to ${contextEnhancer ? "context enhancer" : "AI agent"}:`, messages);
+        if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_2__.FunctionsHttpError) {
+            const errorMessage = yield error.context.json();
+            console.error('Supabase function error:', errorMessage);
+            throw errorMessage.error;
+        }
+        else if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_2__.FunctionsRelayError) {
+            throw {
+                type: _utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType.SERVER,
+                message: 'Error during content streaming',
+                details: error
+            };
+        }
+        else if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_2__.FunctionsFetchError) {
+            throw {
+                type: _utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType.SERVER,
+                message: 'Error during content streaming',
+                details: error
+            };
+        }
+        return data;
+    });
+}
+function getStreamedResponse(data) {
+    var _a;
+    return __awaiter(this, void 0, void 0, function* () {
+        const reader = (_a = data.body) === null || _a === void 0 ? void 0 : _a.getReader();
+        const decoder = new TextDecoder("utf-8");
+        let done = false;
+        let buffer = ''; // Buffer to store incomplete lines
+        let response = '';
+        if (reader == null) {
+            throw {
+                type: _utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType.SERVER,
+                message: "Response body is null"
+            };
+        }
+        while (!done) {
+            const { value, done: chunkDone } = yield reader.read();
+            if (value) {
+                // Append new chunk to buffer and split by newlines
+                buffer += decoder.decode(value, { stream: true });
+                const lines = buffer.split('\n');
+                // Process all complete lines (keeping the last potentially incomplete line in buffer)
+                buffer = lines.pop() || '';
+                for (const line of lines) {
+                    if (line.trim()) {
+                        try {
+                            const data = JSON.parse(line);
+                            // Check if this is an error message
+                            if (data.error) {
+                                throw data.error;
+                            }
+                            if (data.messages_remaining !== undefined) {
+                                chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+                                    chrome.tabs.sendMessage(tabs[0].id, {
+                                        action: 'messages_remaining',
+                                        messagesRemaining: data.messages_remaining
+                                    });
+                                });
+                            }
+                            else if (data.content !== undefined) {
+                                chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+                                    chrome.tabs.sendMessage(tabs[0].id, {
+                                        action: 'streamed_response',
+                                        content: data.content,
+                                        done: data.done
+                                    });
+                                });
+                                console.log('Response:', data.content);
+                                response += data.content;
+                            }
+                        }
+                        catch (error) {
+                            // If this is a structured error from the server, propagate it
+                            if (error.type && Object.values(_utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType).includes(error.type)) {
+                                throw error;
+                            }
+                            console.error('Error parsing JSON:', error, 'Line:', line);
+                            throw {
+                                type: _utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType.SERVER,
+                                message: 'Error parsing server response',
+                                details: { error, line }
+                            };
+                        }
+                    }
+                }
+            }
+            done = chunkDone;
+            if (done) {
+                console.log('Response:', response);
+                responses.push(response);
+            }
+        }
+        // Process any remaining complete line in buffer
+        if (buffer.trim()) {
+            try {
+                const data = JSON.parse(buffer);
+                if (data.error) {
+                    throw data.error;
+                }
+                if (data.content !== undefined) {
+                    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+                        chrome.tabs.sendMessage(tabs[0].id, {
+                            action: 'streamed_response',
+                            content: data.content,
+                            done: data.done
+                        });
+                    });
+                }
+            }
+            catch (error) {
+                console.error('Error parsing final buffer:', error);
+                throw {
+                    type: _utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType.SERVER,
+                    message: 'Error parsing final server response',
+                    details: { error, buffer }
+                };
+            }
+        }
+    });
+}
+function restartAI() {
+    return __awaiter(this, void 0, void 0, function* () {
+        prompts.length = 0;
+        changeLogs.length = 0;
+        notebookTracker = new _change_tracker__WEBPACK_IMPORTED_MODULE_0__.NotebookChangeTracker();
+    });
+}
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
 /***/ "./src/pages/Background/change-tracker.ts":
 /*!************************************************!*\
   !*** ./src/pages/Background/change-tracker.ts ***!
@@ -7283,11 +15547,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   NotebookCell: () => (/* binding */ NotebookCell),
 /* harmony export */   NotebookChangeTracker: () => (/* binding */ NotebookChangeTracker)
 /* harmony export */ });
+/* harmony import */ var _code_simplifier__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./code-simplifier */ "./src/pages/Background/code-simplifier.ts");
 /* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
 /* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
 
-// Structure to represent a notebook cell
+
 class NotebookCell {
     constructor({ id, type, content, index }) {
         this.id = id;
@@ -7326,7 +15591,6 @@ class NotebookChangeTracker {
         // Update state
         this.lastState = newState;
         this.cellOrder = newOrder;
-        console.log('Changes:', changes);
         return this.formatChangesForAI(changes);
     }
     detectAddedCells(newState) {
@@ -7427,8 +15691,130 @@ class NotebookChangeTracker {
             }
         });
         changeLog += '@END_CHANGELOG';
-        console.log('Change log:', changeLog);
         return changeLog;
+    }
+    getLastState(referencedCellIds = [], reduced = true) {
+        // Create a summarized version of each cell
+        const summarizedCells = Array.from(this.lastState.values()).map(cell => {
+            const isReferenced = referencedCellIds.includes(cell.id);
+            const content = isReferenced ? cell.content : (reduced && cell.type === 'code' ? _code_simplifier__WEBPACK_IMPORTED_MODULE_0__["default"].simplifyCode(cell.content) : cell.content);
+            return {
+                id: cell.id,
+                type: cell.type,
+                // Include full content for referenced cells, preview for others
+                content: content
+            };
+        });
+        return JSON.stringify(summarizedCells);
+    }
+}
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Background/code-simplifier.ts":
+/*!*************************************************!*\
+  !*** ./src/pages/Background/code-simplifier.ts ***!
+  \*************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ CodeSimplifier)
+/* harmony export */ });
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+class CodeSimplifier {
+    // Simplify code by removing detailed implementations and preserving structure
+    static simplifyCode(code) {
+        if (!code)
+            return '';
+        // Preserve imports and function/class definitions
+        const simplified = this.applySimplificationRules(code);
+        return simplified.trim();
+    }
+    static applySimplificationRules(code) {
+        // Rule 1: Remove content inside parentheses
+        const withoutParenthesesContent = this.removeParenthesesContent(code);
+        // Rule 2: Simplify function and method implementations
+        const withSimplifiedFunctions = this.simplifyFunctionImplementations(withoutParenthesesContent);
+        // Rule 3: Remove comments
+        const withoutComments = this.removeComments(withSimplifiedFunctions);
+        // Additional rules
+        const finalSimplified = this.additionalSimplifications(withoutComments);
+        return finalSimplified;
+    }
+    static removeParenthesesContent(code) {
+        // Handle multi-line parentheses content
+        return code.replace(/\((?:[^)(]*|\((?:[^)(]*|\([^)(]*\))*\))*\)/g, '(...)');
+    }
+    static simplifyFunctionImplementations(code) {
+        // Regex to match function and method definitions
+        const functionRegex = /((def|class)\s+\w+\s*\([^)]*\))\s*:[\s\S]*?(?=\n\S|\Z)/gm;
+        return code.replace(functionRegex, (match, definition) => {
+            // Keep only the function/method signature
+            const cleanDefinition = definition.split(':')[0] + ':';
+            if (definition.startsWith('class')) {
+                return cleanDefinition + '\n    ...';
+            }
+            return cleanDefinition + '\n    ...';
+        });
+    }
+    static removeComments(code) {
+        // Remove single-line comments
+        const withoutSingleLineComments = code.replace(/#.*$/gm, '');
+        // Remove multi-line docstrings and comments
+        const withoutMultiLineComments = withoutSingleLineComments
+            .replace(/"""[\s\S]*?"""/g, '')
+            .replace(/'''[\s\S]*?'''/g, '');
+        return withoutMultiLineComments;
+    }
+    static additionalSimplifications(code) {
+        // Additional simplification rules
+        return code
+            // Remove excessive whitespace
+            .replace(/^\s+$/gm, '')
+            // Remove multiple consecutive blank lines
+            .replace(/\n{3,}/g, '\n\n')
+            // Trim each line
+            .split('\n')
+            .map(line => line.trim())
+            .filter(line => line.length > 0)
+            .join('\n');
     }
 }
 
@@ -7474,8 +15860,12 @@ if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Pr
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _change_tracker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./change-tracker */ "./src/pages/Background/change-tracker.ts");
-/* harmony import */ var extpay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! extpay */ "./node_modules/extpay/dist/ExtPay.module.js");
+/* harmony import */ var _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @supabase/supabase-js */ "./node_modules/@supabase/supabase-js/dist/module/index.js");
+/* harmony import */ var _ai_agent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ai-agent */ "./src/pages/Background/ai-agent.ts");
+/* harmony import */ var _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @supabase/supabase-js */ "./node_modules/@supabase/functions-js/dist/module/types.js");
+/* harmony import */ var _utils_errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/errors */ "./src/utils/errors.ts");
+/* harmony import */ var _streaming_manager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./streaming-manager */ "./src/pages/Background/streaming-manager.ts");
+/* harmony import */ var secrets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! secrets */ "./secrets.development.js");
 /* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
 /* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
@@ -7489,248 +15879,316 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-console.log('This is the background page.');
-console.log('Put the background scripts here.');
 
 
-let notebookTracker;
-const messages = [];
-var extpay = new extpay__WEBPACK_IMPORTED_MODULE_1__["default"]('colab');
-extpay.startBackground();
-console.log('Background Service Worker Loaded');
-chrome.runtime.onInstalled.addListener(() => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('Extension installed');
+
+
+
+// @ts-ignore
+
+const supabase = (0,_supabase_supabase_js__WEBPACK_IMPORTED_MODULE_4__.createClient)(secrets__WEBPACK_IMPORTED_MODULE_3__["default"].SUPABASE_URL, secrets__WEBPACK_IMPORTED_MODULE_3__["default"].SUPABASE_KEY, {
+    auth: {
+        autoRefreshToken: true,
+        persistSession: true,
+        storage: {
+            getItem: (key) => __awaiter(void 0, void 0, void 0, function* () {
+                const { [key]: value } = yield chrome.storage.local.get(key);
+                return value;
+            }),
+            setItem: (key, value) => __awaiter(void 0, void 0, void 0, function* () {
+                yield chrome.storage.local.set({ [key]: value });
+            }),
+            removeItem: (key) => __awaiter(void 0, void 0, void 0, function* () {
+                yield chrome.storage.local.remove(key);
+            })
+        }
+    }
+});
+// Initialize streaming manager
+const streamingManager = new _streaming_manager__WEBPACK_IMPORTED_MODULE_2__.StreamingManager();
+// // Initialize session from storage
+// (async () => {
+//   const { data: { session }, error } = await supabase.auth.getSession();
+//   if (session) {
+//     const authState = await getUserAuthState(session);
+//     await updateAuthState(authState);
+//   }
+// })();
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    const { action, type } = request;
+    if (type === 'SUPABASE_REQUEST') {
+        handleSupabaseRequest(request.payload)
+            .then((result) => {
+            sendResponse({ success: true, data: result });
+        })
+            .catch((error) => {
+            console.error('Error in handleSupabaseRequest:', error);
+            sendResponse({
+                success: false,
+                error: {
+                    message: error instanceof Error ? error.message : 'Unknown error occurred'
+                }
+            });
+        });
+        return true; // Indicate we will send response asynchronously
+    }
+    if (type === 'UPDATE_SUBSCRIPTION_PLAN') {
+        // Broadcast the subscription plan update to all tabs
+        chrome.tabs.query({}, (tabs) => {
+            tabs.forEach((tab) => {
+                if (tab.id) {
+                    chrome.tabs.sendMessage(tab.id, {
+                        type: 'SUBSCRIPTION_PLAN_UPDATED',
+                        payload: request.payload
+                    });
+                }
+            });
+        });
+        sendResponse({ success: true });
+        return true;
+    }
+    switch (action) {
+        case 'generateAI':
+            console.log("Generating...");
+            (0,_ai_agent__WEBPACK_IMPORTED_MODULE_0__.generateAIContent)(request.prompt, request.content, supabase, request.model, request.plan)
+                .then(() => {
+                sendResponse({ success: true });
+            })
+                .catch((error) => {
+                console.error('Error generating AI content:', error);
+                sendResponse({ success: false, error });
+            });
+            return true;
+        case 'restartAI':
+            console.log("Restarting...");
+            (0,_ai_agent__WEBPACK_IMPORTED_MODULE_0__.restartAI)();
+            sendResponse({ success: true });
+            return true;
+        case 'OPEN_POPUP':
+            const { popupUrl, width, height, left, top } = request.payload;
+            chrome.windows.create({
+                url: popupUrl,
+                type: 'popup',
+                width,
+                height,
+                left: left,
+                top: top
+            });
+            sendResponse({ success: true });
+            return true;
+        default:
+            sendResponse({ success: false, error: `Invalid action: ${action}` });
+            return false;
+    }
+});
+function getSubscriptionDetails(userId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { data: subscriptions, error } = yield supabase
+            .from('subscriptions')
+            .select('*')
+            .eq('profile_id', userId)
+            .in('status', ['active', 'pending_activation'])
+            .order('created_at', { ascending: false })
+            .limit(1);
+        if (error) {
+            console.error('Error fetching subscription:', error);
+            return null;
+        }
+        return (subscriptions === null || subscriptions === void 0 ? void 0 : subscriptions[0]) || null;
+    });
+}
+function handleSupabaseRequest(payload) {
+    var _a;
+    return __awaiter(this, void 0, void 0, function* () {
+        const { operation, functionName, functionData, data } = payload;
+        switch (operation) {
+            case 'GET_AUTH_STATE':
+                {
+                    const authResponse = yield supabase.auth.getSession();
+                    if (!authResponse.data.session) {
+                        return { user: null, session: null, subscriptionPlan: 'free' };
+                    }
+                    return yield getUserAuthState(authResponse.data.session);
+                }
+            case 'REFRESH_AUTH_STATE': // Refresh auth state across the extension
+                {
+                    const authResponse = yield supabase.auth.getSession();
+                    if (!authResponse.data.session) {
+                        return { user: null, session: null, subscriptionPlan: 'free' };
+                    }
+                    const authState = yield getUserAuthState(authResponse.data.session);
+                    yield updateAuthState(authState);
+                    return authState;
+                }
+            case 'SIGN_IN_WITH_GOOGLE':
+                {
+                    const response = yield supabase.auth.signInWithIdToken({
+                        provider: 'google',
+                        token: data.token,
+                        options: {
+                            queryParams: {
+                                access_type: 'offline',
+                                prompt: 'consent',
+                            }
+                        },
+                    });
+                    return response;
+                }
+            case 'SIGN_OUT':
+                yield supabase.auth.signOut();
+                yield chrome.storage.local.clear(); // Clear all storage
+                return yield updateAuthState({
+                    user: null,
+                    session: null,
+                    subscriptionPlan: 'free',
+                    subscriptionDetails: null
+                });
+            case 'INVOKE_FUNCTION':
+                {
+                    const session = yield supabase.auth.getSession();
+                    if (!session.data.session) {
+                        throw new Error('User must be logged in to perform this action');
+                    }
+                    const { data: functionResponse, error } = yield supabase.functions.invoke(functionName, {
+                        body: functionData,
+                        headers: {
+                            Authorization: `Bearer ${session.data.session.access_token}`
+                        }
+                    });
+                    if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_5__.FunctionsHttpError) {
+                        const errorMessage = yield error.context.json();
+                        console.error('Supabase function error:', errorMessage);
+                        throw errorMessage.error;
+                    }
+                    else if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_5__.FunctionsRelayError) {
+                        throw {
+                            type: _utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType.SERVER,
+                            message: 'Error during content streaming',
+                            details: error
+                        };
+                    }
+                    else if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_5__.FunctionsFetchError) {
+                        throw {
+                            type: _utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType.SERVER,
+                            message: 'Error during content streaming',
+                            details: error
+                        };
+                    }
+                    return functionResponse;
+                }
+            case 'ACTIVATE_SUBSCRIPTION': // Check if subscription is active after payment
+                {
+                    const { subscriptionId } = data;
+                    return yield supabase.functions.invoke(`payment?subscription_id=${subscriptionId}`, {
+                        method: 'GET'
+                    });
+                }
+            case 'CANCEL_SUBSCRIPTION':
+                {
+                    const { subscriptionId } = data;
+                    if (!subscriptionId) {
+                        throw new Error('Subscription ID is required');
+                    }
+                    const session = yield supabase.auth.getSession();
+                    if (!((_a = session.data.session) === null || _a === void 0 ? void 0 : _a.access_token)) {
+                        throw new Error('User must be logged in');
+                    }
+                    const response = yield supabase.functions.invoke('payment', {
+                        method: 'DELETE',
+                        body: { subscriptionId }
+                    });
+                    if (response.error) {
+                        throw new Error(response.error.message);
+                    }
+                    // Refresh auth state after cancellation
+                    const authState = yield getUserAuthState(session.data.session);
+                    yield updateAuthState(authState);
+                    return { success: true };
+                }
+            default:
+                throw new Error(`Unknown operation: ${operation}`);
+        }
+    });
+}
+function updateAuthState(authState) {
+    return __awaiter(this, void 0, void 0, function* () {
+        // Send to all extension components
+        chrome.runtime.sendMessage({
+            type: 'AUTH_STATE_CHANGED',
+            payload: authState
+        });
+        // Notify content scripts
+        const tabs = yield chrome.tabs.query({});
+        for (const tab of tabs) {
+            if (tab.id) {
+                chrome.tabs.sendMessage(tab.id, {
+                    type: 'AUTH_STATE_CHANGED',
+                    payload: authState
+                }).catch(err => {
+                    // Ignore errors from inactive tabs
+                    console.debug('Failed to send message to tab:', tab.id, err);
+                });
+            }
+        }
+    });
+}
+supabase.auth.onAuthStateChange((event, session) => __awaiter(void 0, void 0, void 0, function* () {
+    if (event === 'SIGNED_IN') {
+        if (!(session === null || session === void 0 ? void 0 : session.user)) {
+            throw new Error('User is not defined');
+        }
+        const authState = yield getUserAuthState(session);
+        yield updateAuthState(authState);
+    }
+    if (event === 'SIGNED_OUT') {
+        yield updateAuthState({
+            user: null,
+            session: null,
+            subscriptionPlan: 'free',
+            subscriptionDetails: null
+        });
+    }
+    if (event === 'USER_UPDATED') {
+        if (!(session === null || session === void 0 ? void 0 : session.user)) {
+            throw new Error('User is not defined');
+        }
+        const authState = yield getUserAuthState(session);
+        yield updateAuthState(authState);
+    }
 }));
-chrome.action.setBadgeText({ text: 'ON' });
+function getUserAuthState(session) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const user = session === null || session === void 0 ? void 0 : session.user;
+        let subscriptionDetails = null;
+        let subscriptionPlan = 'free';
+        if (user.id) {
+            subscriptionDetails = yield getSubscriptionDetails(user.id);
+            if (subscriptionDetails) {
+                subscriptionPlan = subscriptionDetails.plan_id;
+            }
+        }
+        const authState = {
+            user,
+            session,
+            subscriptionPlan,
+            subscriptionDetails
+        };
+        return authState;
+    });
+}
+chrome.commands.onCommand.addListener(command => {
+    if (command === 'refresh_extension') {
+        chrome.runtime.reload();
+    }
+});
 chrome.action.onClicked.addListener(() => {
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
         const activeTab = tabs[0];
         chrome.tabs.sendMessage(activeTab.id, { message: 'clicked_browser_action' });
     });
 });
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    const { action } = message;
-    switch (action) {
-        case 'generateAI':
-            console.log("Generating...");
-            generateAIContent(message.prompt, message.content, message.model)
-                .then(() => {
-                sendResponse({ success: true });
-            })
-                .catch(error => {
-                console.error("Error generating AI content: ", error);
-                sendResponse({ success: false, error: error.message });
-            });
-            return true; // Indicate that the response will be sent asynchronously
-        default:
-            sendResponse({ success: false, error: `Invalid action: ${action}` });
-            return false;
-    }
-});
-function trackNotebookChanges(currentCells) {
-    const tracker = notebookTracker || new _change_tracker__WEBPACK_IMPORTED_MODULE_0__.NotebookChangeTracker();
-    notebookTracker = tracker;
-    console.log('Tracking notebook changes');
-    return tracker.updateState(currentCells);
-}
-function generateAIContent(prompt, content, model = "gpt-3.5-turbo") {
-    var _a;
-    return __awaiter(this, void 0, void 0, function* () {
-        console.log("Generating AI content...");
-        console.log("Previous content:", content);
-        const changeLog = trackNotebookChanges(content);
-        console.log(changeLog);
-        if (messages.length == 0)
-            messages.push({ role: "system", content: system_prompt });
-        messages.push({
-            role: "user",
-            content: `Changes since last message:\n\n${changeLog}\n\nUser request: ${prompt}`
-        });
-        console.log(messages);
-        try {
-            // Send request to lambda function
-            const response = yield fetch('https://qgvdlmluaznyzdv4jkfrw3oqee0rvber.lambda-url.eu-north-1.on.aws/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer YOUR_AUTH_TOKEN'
-                },
-                body: JSON.stringify({
-                    messages: messages,
-                    model: model
-                })
-            });
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const reader = (_a = response.body) === null || _a === void 0 ? void 0 : _a.getReader();
-            const decoder = new TextDecoder("utf-8");
-            let done = false;
-            if (reader == null) {
-                throw new Error("Response body is null");
-            }
-            while (!done) {
-                const { value, done: chunkDone } = yield reader.read();
-                if (value) {
-                    console.log(new TextDecoder().decode(value));
-                    let textChunk = decoder.decode(value, { stream: true });
-                    let boundary;
-                    const data = [];
-                    // Separate JSON objects that arrive together in a single chunk
-                    while ((boundary = textChunk.indexOf("}{")) !== -1) {
-                        // Separate the first JSON object
-                        const jsonStr = textChunk.slice(0, boundary + 1);
-                        textChunk = textChunk.slice(boundary + 1);
-                        // Parse and process the JSON
-                        data.push(JSON.parse(jsonStr));
-                    }
-                    // Process the remaining JSON
-                    data.push(JSON.parse(textChunk));
-                    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-                        data.forEach((data) => {
-                            chrome.tabs.sendMessage(tabs[0].id, {
-                                action: 'streamed_response',
-                                content: data.content,
-                                done: data.done
-                            });
-                        });
-                    });
-                }
-                done = chunkDone;
-            }
-        }
-        catch (error) {
-            console.error("Error generating AI content: ", error);
-        }
-    });
-}
-const system_prompt = `# Google Colab Cell Operations Guide
-
-## Basic Operations
-Use these commands to manipulate notebook cells:
-
-1. Create: 
-@CREATE[type=markdown|code, position=top|bottom|after:cell-{id}|before:cell-{id}]
-content
-@END
-
-2. Edit (remember that the content in the edit operation replaces all previous content):
-@EDIT[cell-{id}]
-content
-@END
-
-3. Delete:
-@DELETE[cell-{id}]
-
-## Response Structure
-- Start operations with '@START_CODE'
-- End operations with '@END_CODE'
-- Write explanatory text before/after markers
-- Keep responses brief and clear
-
-## Notebook Guidelines
-- Use H1 for main topic, H2/H3 for sections
-- Start with imports/setup
-- Include context in markdown cells before code
-- Write clean, commented code in logical chunks
-- End with summary/conclusion
-
-## Changelog
-Changes between '@CHANGELOG' and '@END_CHANGELOG' are informational only - do not include in responses.
-
-Remember:
-- Operations execute in sequence
-- Preserve original formatting between @CREATE/@EDIT and @END
-- Maintain proper code indentation
-- Avoid redundant and empty content
-- Use descriptive names and helpful comments`;
-// const system_prompt = `Google Colab Notebook Cell Manipulation Guidelines
-// You can perform the following operations on notebook cells. Use these command markers to specify operations:
-// Cell Operations:
-// 1. Create new cell:
-// @CREATE[type=markdown|code, position=top|bottom|after:cell-{cellId}|before:cell-{cellId}]
-// content
-// @END
-// 2. Delete cell:
-// @DELETE[cell-{cellId}]
-// 3. Edit existing cell (remember that in edit, the new content replaces all the previous content. So always write the whole cell from start to end):
-// @EDIT[cell-{cellId}]
-// new content
-// @END
-// These are the ONLY operations you can perform on notebook cells. Make sure to follow the correct syntax and structure for each operation.
-// Required Structure:
-// - Start with H1 title for main topic
-// - Use H2/H3 headers for sections/subsections
-// - Begin with imports/setup
-// - End with summary/conclusion
-// Markdown Cells:
-// - Use formatting: bold, italic, lists, tables
-// - Add context before code cells
-// - Include LaTeX for math equations
-// - Embed diagrams/charts where needed
-// Code Cells:
-// - Break into logical chunks
-// - Add helpful comments
-// - Use descriptive names
-// - Group related code together
-// Notebook Changes (Between @CHANGELOG and @END_CHANGELOG):
-// - You will receive a list of changes that happened to the notebook cells since the last message
-// - This will include changes you made as well as changes made by the user
-// - These are not commands, but a summary of changes that happened before. Don't include these in your response
-// - These changes are cumulative and will be sent in sequence
-// Start and End Markers:
-// - To start writing the operations use @START_CODE
-// - To end writing the operations use @END_CODE
-// - You can write in normal text before and after these markers, explaining what you are doing or replying to the user
-// - Be very brief and clear in your responses before and after the markers. Also don't attempt to write in markdown format
-// Sample Examples:
-// 1. Create new markdown cell after cell 123:
-// @CREATE[type=markdown, position=after:cell-123]
-// ## Data Processing
-// In this section, we'll clean our dataset
-// @END
-// 2. Create new code cell at bottom:
-// @CREATE[type=code, position=bottom]
-// def process_data(df):
-//     return df.dropna()
-// @END
-// 3. Edit existing cell:
-// @EDIT[cell-456]
-// import pandas as pd
-// import numpy as np
-// @END
-// 4. Delete cell:
-// @DELETE[cell-789]
-// Full Example:
-// Sure thing! Here's a sample structure for a data analysis project:
-// @START_CODE
-// @CREATE[type=markdown, position=top]
-// # Data Analysis Project
-// @END
-// @CREATE[type=code, position=bottom]
-// import pandas as pd
-// @END
-// @EDIT[cell-123]
-// df = pd.read_csv('data.csv')
-// @END
-// ...
-// @END_CODE
-// This will help you get started with your project. Let me know if you need any more help!
-// Remember:
-// - Each operation must use the correct syntax
-// - Cell IDs must be specified for position-dependent operations
-// - Operations are executed in sequence
-// - Content between @CREATE/@EDIT and @END maintains original formatting
-// - For code cells, ensure proper indentation is preserved
-// - Be smart with the layout. If part of the content is already present, don't repeat it. Remove unnecessary or redundant content.
-// Output Format:
-// The assistant should provide cell operations using the above syntax. Multiple operations can be specified in sequence. The final output should be a well-structured notebook with the requested changes.`;
-chrome.commands.onCommand.addListener(command => {
-    console.log(`Command: ${command}`);
-    if (command === 'refresh_extension') {
-        chrome.runtime.reload();
-    }
-});
+chrome.runtime.onInstalled.addListener(() => __awaiter(void 0, void 0, void 0, function* () {
+}));
 
 
 const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
@@ -7766,1246 +16224,804 @@ if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Pr
 
 /***/ }),
 
-/***/ "./node_modules/webextension-polyfill/dist/browser-polyfill.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/webextension-polyfill/dist/browser-polyfill.js ***!
-  \*********************************************************************/
-/***/ (function(module, exports) {
+/***/ "./src/pages/Background/streaming-manager.ts":
+/*!***************************************************!*\
+  !*** ./src/pages/Background/streaming-manager.ts ***!
+  \***************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
-  if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else { var mod; }
-})(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this, function (module) {
-  /* webextension-polyfill - v0.7.0 - Tue Nov 10 2020 20:24:04 */
-
-  /* -*- Mode: indent-tabs-mode: nil; js-indent-level: 2 -*- */
-
-  /* vim: set sts=2 sw=2 et tw=80: */
-
-  /* This Source Code Form is subject to the terms of the Mozilla Public
-   * License, v. 2.0. If a copy of the MPL was not distributed with this
-   * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-  "use strict";
-
-  if (typeof browser === "undefined" || Object.getPrototypeOf(browser) !== Object.prototype) {
-    const CHROME_SEND_MESSAGE_CALLBACK_NO_RESPONSE_MESSAGE = "The message port closed before a response was received.";
-    const SEND_RESPONSE_DEPRECATION_WARNING = "Returning a Promise is the preferred way to send a reply from an onMessage/onMessageExternal listener, as the sendResponse will be removed from the specs (See https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/runtime/onMessage)"; // Wrapping the bulk of this polyfill in a one-time-use function is a minor
-    // optimization for Firefox. Since Spidermonkey does not fully parse the
-    // contents of a function until the first time it's called, and since it will
-    // never actually need to be called, this allows the polyfill to be included
-    // in Firefox nearly for free.
-
-    const wrapAPIs = extensionAPIs => {
-      // NOTE: apiMetadata is associated to the content of the api-metadata.json file
-      // at build time by replacing the following "include" with the content of the
-      // JSON file.
-      const apiMetadata = {
-        "alarms": {
-          "clear": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "clearAll": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "get": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "getAll": {
-            "minArgs": 0,
-            "maxArgs": 0
-          }
-        },
-        "bookmarks": {
-          "create": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "get": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getChildren": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getRecent": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getSubTree": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getTree": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "move": {
-            "minArgs": 2,
-            "maxArgs": 2
-          },
-          "remove": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeTree": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "search": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "update": {
-            "minArgs": 2,
-            "maxArgs": 2
-          }
-        },
-        "browserAction": {
-          "disable": {
-            "minArgs": 0,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "enable": {
-            "minArgs": 0,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "getBadgeBackgroundColor": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getBadgeText": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getPopup": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getTitle": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "openPopup": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "setBadgeBackgroundColor": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "setBadgeText": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "setIcon": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "setPopup": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "setTitle": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          }
-        },
-        "browsingData": {
-          "remove": {
-            "minArgs": 2,
-            "maxArgs": 2
-          },
-          "removeCache": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeCookies": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeDownloads": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeFormData": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeHistory": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeLocalStorage": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removePasswords": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removePluginData": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "settings": {
-            "minArgs": 0,
-            "maxArgs": 0
-          }
-        },
-        "commands": {
-          "getAll": {
-            "minArgs": 0,
-            "maxArgs": 0
-          }
-        },
-        "contextMenus": {
-          "remove": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeAll": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "update": {
-            "minArgs": 2,
-            "maxArgs": 2
-          }
-        },
-        "cookies": {
-          "get": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getAll": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getAllCookieStores": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "remove": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "set": {
-            "minArgs": 1,
-            "maxArgs": 1
-          }
-        },
-        "devtools": {
-          "inspectedWindow": {
-            "eval": {
-              "minArgs": 1,
-              "maxArgs": 2,
-              "singleCallbackArg": false
-            }
-          },
-          "panels": {
-            "create": {
-              "minArgs": 3,
-              "maxArgs": 3,
-              "singleCallbackArg": true
-            },
-            "elements": {
-              "createSidebarPane": {
-                "minArgs": 1,
-                "maxArgs": 1
-              }
-            }
-          }
-        },
-        "downloads": {
-          "cancel": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "download": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "erase": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getFileIcon": {
-            "minArgs": 1,
-            "maxArgs": 2
-          },
-          "open": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "pause": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeFile": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "resume": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "search": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "show": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          }
-        },
-        "extension": {
-          "isAllowedFileSchemeAccess": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "isAllowedIncognitoAccess": {
-            "minArgs": 0,
-            "maxArgs": 0
-          }
-        },
-        "history": {
-          "addUrl": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "deleteAll": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "deleteRange": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "deleteUrl": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getVisits": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "search": {
-            "minArgs": 1,
-            "maxArgs": 1
-          }
-        },
-        "i18n": {
-          "detectLanguage": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getAcceptLanguages": {
-            "minArgs": 0,
-            "maxArgs": 0
-          }
-        },
-        "identity": {
-          "launchWebAuthFlow": {
-            "minArgs": 1,
-            "maxArgs": 1
-          }
-        },
-        "idle": {
-          "queryState": {
-            "minArgs": 1,
-            "maxArgs": 1
-          }
-        },
-        "management": {
-          "get": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getAll": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "getSelf": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "setEnabled": {
-            "minArgs": 2,
-            "maxArgs": 2
-          },
-          "uninstallSelf": {
-            "minArgs": 0,
-            "maxArgs": 1
-          }
-        },
-        "notifications": {
-          "clear": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "create": {
-            "minArgs": 1,
-            "maxArgs": 2
-          },
-          "getAll": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "getPermissionLevel": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "update": {
-            "minArgs": 2,
-            "maxArgs": 2
-          }
-        },
-        "pageAction": {
-          "getPopup": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getTitle": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "hide": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "setIcon": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "setPopup": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "setTitle": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "show": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          }
-        },
-        "permissions": {
-          "contains": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getAll": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "remove": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "request": {
-            "minArgs": 1,
-            "maxArgs": 1
-          }
-        },
-        "runtime": {
-          "getBackgroundPage": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "getPlatformInfo": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "openOptionsPage": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "requestUpdateCheck": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "sendMessage": {
-            "minArgs": 1,
-            "maxArgs": 3
-          },
-          "sendNativeMessage": {
-            "minArgs": 2,
-            "maxArgs": 2
-          },
-          "setUninstallURL": {
-            "minArgs": 1,
-            "maxArgs": 1
-          }
-        },
-        "sessions": {
-          "getDevices": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "getRecentlyClosed": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "restore": {
-            "minArgs": 0,
-            "maxArgs": 1
-          }
-        },
-        "storage": {
-          "local": {
-            "clear": {
-              "minArgs": 0,
-              "maxArgs": 0
-            },
-            "get": {
-              "minArgs": 0,
-              "maxArgs": 1
-            },
-            "getBytesInUse": {
-              "minArgs": 0,
-              "maxArgs": 1
-            },
-            "remove": {
-              "minArgs": 1,
-              "maxArgs": 1
-            },
-            "set": {
-              "minArgs": 1,
-              "maxArgs": 1
-            }
-          },
-          "managed": {
-            "get": {
-              "minArgs": 0,
-              "maxArgs": 1
-            },
-            "getBytesInUse": {
-              "minArgs": 0,
-              "maxArgs": 1
-            }
-          },
-          "sync": {
-            "clear": {
-              "minArgs": 0,
-              "maxArgs": 0
-            },
-            "get": {
-              "minArgs": 0,
-              "maxArgs": 1
-            },
-            "getBytesInUse": {
-              "minArgs": 0,
-              "maxArgs": 1
-            },
-            "remove": {
-              "minArgs": 1,
-              "maxArgs": 1
-            },
-            "set": {
-              "minArgs": 1,
-              "maxArgs": 1
-            }
-          }
-        },
-        "tabs": {
-          "captureVisibleTab": {
-            "minArgs": 0,
-            "maxArgs": 2
-          },
-          "create": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "detectLanguage": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "discard": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "duplicate": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "executeScript": {
-            "minArgs": 1,
-            "maxArgs": 2
-          },
-          "get": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getCurrent": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "getZoom": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "getZoomSettings": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "goBack": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "goForward": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "highlight": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "insertCSS": {
-            "minArgs": 1,
-            "maxArgs": 2
-          },
-          "move": {
-            "minArgs": 2,
-            "maxArgs": 2
-          },
-          "query": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "reload": {
-            "minArgs": 0,
-            "maxArgs": 2
-          },
-          "remove": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeCSS": {
-            "minArgs": 1,
-            "maxArgs": 2
-          },
-          "sendMessage": {
-            "minArgs": 2,
-            "maxArgs": 3
-          },
-          "setZoom": {
-            "minArgs": 1,
-            "maxArgs": 2
-          },
-          "setZoomSettings": {
-            "minArgs": 1,
-            "maxArgs": 2
-          },
-          "update": {
-            "minArgs": 1,
-            "maxArgs": 2
-          }
-        },
-        "topSites": {
-          "get": {
-            "minArgs": 0,
-            "maxArgs": 0
-          }
-        },
-        "webNavigation": {
-          "getAllFrames": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getFrame": {
-            "minArgs": 1,
-            "maxArgs": 1
-          }
-        },
-        "webRequest": {
-          "handlerBehaviorChanged": {
-            "minArgs": 0,
-            "maxArgs": 0
-          }
-        },
-        "windows": {
-          "create": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "get": {
-            "minArgs": 1,
-            "maxArgs": 2
-          },
-          "getAll": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "getCurrent": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "getLastFocused": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "remove": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "update": {
-            "minArgs": 2,
-            "maxArgs": 2
-          }
-        }
-      };
-
-      if (Object.keys(apiMetadata).length === 0) {
-        throw new Error("api-metadata.json has not been included in browser-polyfill");
-      }
-      /**
-       * A WeakMap subclass which creates and stores a value for any key which does
-       * not exist when accessed, but behaves exactly as an ordinary WeakMap
-       * otherwise.
-       *
-       * @param {function} createItem
-       *        A function which will be called in order to create the value for any
-       *        key which does not exist, the first time it is accessed. The
-       *        function receives, as its only argument, the key being created.
-       */
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   StreamingManager: () => (/* binding */ StreamingManager)
+/* harmony export */ });
+/* harmony import */ var _Content_parser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Content/parser */ "./src/pages/Content/parser.ts");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
 
 
-      class DefaultWeakMap extends WeakMap {
-        constructor(createItem, items = undefined) {
-          super(items);
-          this.createItem = createItem;
-        }
-
-        get(key) {
-          if (!this.has(key)) {
-            this.set(key, this.createItem(key));
-          }
-
-          return super.get(key);
-        }
-
-      }
-      /**
-       * Returns true if the given object is an object with a `then` method, and can
-       * therefore be assumed to behave as a Promise.
-       *
-       * @param {*} value The value to test.
-       * @returns {boolean} True if the value is thenable.
-       */
-
-
-      const isThenable = value => {
-        return value && typeof value === "object" && typeof value.then === "function";
-      };
-      /**
-       * Creates and returns a function which, when called, will resolve or reject
-       * the given promise based on how it is called:
-       *
-       * - If, when called, `chrome.runtime.lastError` contains a non-null object,
-       *   the promise is rejected with that value.
-       * - If the function is called with exactly one argument, the promise is
-       *   resolved to that value.
-       * - Otherwise, the promise is resolved to an array containing all of the
-       *   function's arguments.
-       *
-       * @param {object} promise
-       *        An object containing the resolution and rejection functions of a
-       *        promise.
-       * @param {function} promise.resolve
-       *        The promise's resolution function.
-       * @param {function} promise.rejection
-       *        The promise's rejection function.
-       * @param {object} metadata
-       *        Metadata about the wrapped method which has created the callback.
-       * @param {integer} metadata.maxResolvedArgs
-       *        The maximum number of arguments which may be passed to the
-       *        callback created by the wrapped async function.
-       *
-       * @returns {function}
-       *        The generated callback function.
-       */
-
-
-      const makeCallback = (promise, metadata) => {
-        return (...callbackArgs) => {
-          if (extensionAPIs.runtime.lastError) {
-            promise.reject(extensionAPIs.runtime.lastError);
-          } else if (metadata.singleCallbackArg || callbackArgs.length <= 1 && metadata.singleCallbackArg !== false) {
-            promise.resolve(callbackArgs[0]);
-          } else {
-            promise.resolve(callbackArgs);
-          }
+class StreamingManager {
+    constructor() {
+        this.port = null;
+        this.streamingState = {
+            buffer: '',
+            fullResponse: '',
+            textContent: '',
+            isCodeBlock: false,
+            appliedOperations: new Map(),
+            currentOperations: new Map(),
+            originalContent: []
         };
-      };
-
-      const pluralizeArguments = numArgs => numArgs == 1 ? "argument" : "arguments";
-      /**
-       * Creates a wrapper function for a method with the given name and metadata.
-       *
-       * @param {string} name
-       *        The name of the method which is being wrapped.
-       * @param {object} metadata
-       *        Metadata about the method being wrapped.
-       * @param {integer} metadata.minArgs
-       *        The minimum number of arguments which must be passed to the
-       *        function. If called with fewer than this number of arguments, the
-       *        wrapper will raise an exception.
-       * @param {integer} metadata.maxArgs
-       *        The maximum number of arguments which may be passed to the
-       *        function. If called with more than this number of arguments, the
-       *        wrapper will raise an exception.
-       * @param {integer} metadata.maxResolvedArgs
-       *        The maximum number of arguments which may be passed to the
-       *        callback created by the wrapped async function.
-       *
-       * @returns {function(object, ...*)}
-       *       The generated wrapper function.
-       */
-
-
-      const wrapAsyncFunction = (name, metadata) => {
-        return function asyncFunctionWrapper(target, ...args) {
-          if (args.length < metadata.minArgs) {
-            throw new Error(`Expected at least ${metadata.minArgs} ${pluralizeArguments(metadata.minArgs)} for ${name}(), got ${args.length}`);
-          }
-
-          if (args.length > metadata.maxArgs) {
-            throw new Error(`Expected at most ${metadata.maxArgs} ${pluralizeArguments(metadata.maxArgs)} for ${name}(), got ${args.length}`);
-          }
-
-          return new Promise((resolve, reject) => {
-            if (metadata.fallbackToNoCallback) {
-              // This API method has currently no callback on Chrome, but it return a promise on Firefox,
-              // and so the polyfill will try to call it with a callback first, and it will fallback
-              // to not passing the callback if the first call fails.
-              try {
-                target[name](...args, makeCallback({
-                  resolve,
-                  reject
-                }, metadata));
-              } catch (cbError) {
-                console.warn(`${name} API method doesn't seem to support the callback parameter, ` + "falling back to call it without a callback: ", cbError);
-                target[name](...args); // Update the API method metadata, so that the next API calls will not try to
-                // use the unsupported callback anymore.
-
-                metadata.fallbackToNoCallback = false;
-                metadata.noCallback = true;
-                resolve();
-              }
-            } else if (metadata.noCallback) {
-              target[name](...args);
-              resolve();
-            } else {
-              target[name](...args, makeCallback({
-                resolve,
-                reject
-              }, metadata));
+        // Listen for port connections from content scripts
+        chrome.runtime.onConnect.addListener((port) => {
+            if (port.name === 'streaming') {
+                this.port = port;
+                this.setupPortListeners(port);
             }
-          });
-        };
-      };
-      /**
-       * Wraps an existing method of the target object, so that calls to it are
-       * intercepted by the given wrapper function. The wrapper function receives,
-       * as its first argument, the original `target` object, followed by each of
-       * the arguments passed to the original method.
-       *
-       * @param {object} target
-       *        The original target object that the wrapped method belongs to.
-       * @param {function} method
-       *        The method being wrapped. This is used as the target of the Proxy
-       *        object which is created to wrap the method.
-       * @param {function} wrapper
-       *        The wrapper function which is called in place of a direct invocation
-       *        of the wrapped method.
-       *
-       * @returns {Proxy<function>}
-       *        A Proxy object for the given method, which invokes the given wrapper
-       *        method in its place.
-       */
-
-
-      const wrapMethod = (target, method, wrapper) => {
-        return new Proxy(method, {
-          apply(targetMethod, thisObj, args) {
-            return wrapper.call(thisObj, target, ...args);
-          }
-
         });
-      };
-
-      let hasOwnProperty = Function.call.bind(Object.prototype.hasOwnProperty);
-      /**
-       * Wraps an object in a Proxy which intercepts and wraps certain methods
-       * based on the given `wrappers` and `metadata` objects.
-       *
-       * @param {object} target
-       *        The target object to wrap.
-       *
-       * @param {object} [wrappers = {}]
-       *        An object tree containing wrapper functions for special cases. Any
-       *        function present in this object tree is called in place of the
-       *        method in the same location in the `target` object tree. These
-       *        wrapper methods are invoked as described in {@see wrapMethod}.
-       *
-       * @param {object} [metadata = {}]
-       *        An object tree containing metadata used to automatically generate
-       *        Promise-based wrapper functions for asynchronous. Any function in
-       *        the `target` object tree which has a corresponding metadata object
-       *        in the same location in the `metadata` tree is replaced with an
-       *        automatically-generated wrapper function, as described in
-       *        {@see wrapAsyncFunction}
-       *
-       * @returns {Proxy<object>}
-       */
-
-      const wrapObject = (target, wrappers = {}, metadata = {}) => {
-        let cache = Object.create(null);
-        let handlers = {
-          has(proxyTarget, prop) {
-            return prop in target || prop in cache;
-          },
-
-          get(proxyTarget, prop, receiver) {
-            if (prop in cache) {
-              return cache[prop];
+    }
+    setupPortListeners(port) {
+        port.onMessage.addListener((msg) => {
+            switch (msg.type) {
+                case 'init_streaming':
+                    this.initializeStreaming(msg.originalContent);
+                    break;
+                case 'process_chunk':
+                    this.processStreamChunk(msg.content, msg.done);
+                    break;
             }
-
-            if (!(prop in target)) {
-              return undefined;
+        });
+        port.onDisconnect.addListener(() => {
+            this.port = null;
+            this.resetState();
+        });
+    }
+    initializeStreaming(originalContent) {
+        this.streamingState = {
+            buffer: '',
+            fullResponse: '',
+            textContent: '',
+            isCodeBlock: false,
+            appliedOperations: new Map(),
+            currentOperations: new Map(),
+            originalContent
+        };
+    }
+    processStreamChunk(content, done) {
+        if (!content || !this.port)
+            return;
+        // Add content to buffer and process lines
+        const lines = (this.streamingState.buffer + content).split('\n');
+        this.streamingState.buffer = lines.pop() || '';
+        if (lines.length > 0) {
+            const nextState = (0,_Content_parser__WEBPACK_IMPORTED_MODULE_0__.parseLines)(this.streamingState, lines);
+            this.streamingState = nextState;
+            // Send operations to content script
+            for (const [id, operation] of nextState.currentOperations) {
+                this.port.postMessage({
+                    type: 'operation',
+                    operation
+                });
             }
-
-            let value = target[prop];
-
-            if (typeof value === "function") {
-              // This is a method on the underlying object. Check if we need to do
-              // any wrapping.
-              if (typeof wrappers[prop] === "function") {
-                // We have a special-case wrapper for this method.
-                value = wrapMethod(target, target[prop], wrappers[prop]);
-              } else if (hasOwnProperty(metadata, prop)) {
-                // This is an async method that we have metadata for. Create a
-                // Promise wrapper for it.
-                let wrapper = wrapAsyncFunction(prop, metadata[prop]);
-                value = wrapMethod(target, target[prop], wrapper);
-              } else {
-                // This is a method that we don't know or care about. Return the
-                // original method, bound to the underlying object.
-                value = value.bind(target);
-              }
-            } else if (typeof value === "object" && value !== null && (hasOwnProperty(wrappers, prop) || hasOwnProperty(metadata, prop))) {
-              // This is an object that we need to do some wrapping for the children
-              // of. Create a sub-object wrapper for it with the appropriate child
-              // metadata.
-              value = wrapObject(value, wrappers[prop], metadata[prop]);
-            } else if (hasOwnProperty(metadata, "*")) {
-              // Wrap all properties in * namespace.
-              value = wrapObject(value, wrappers[prop], metadata["*"]);
-            } else {
-              // We don't need to do any wrapping for this property,
-              // so just forward all access to the underlying object.
-              Object.defineProperty(cache, prop, {
-                configurable: true,
-                enumerable: true,
-
-                get() {
-                  return target[prop];
-                },
-
-                set(value) {
-                  target[prop] = value;
-                }
-
-              });
-              return value;
+            // If done, send all applied operations
+            if (done) {
+                this.port.postMessage({
+                    type: 'complete',
+                    operations: Array.from(nextState.appliedOperations.entries())
+                });
             }
-
-            cache[prop] = value;
-            return value;
-          },
-
-          set(proxyTarget, prop, value, receiver) {
-            if (prop in cache) {
-              cache[prop] = value;
-            } else {
-              target[prop] = value;
-            }
-
-            return true;
-          },
-
-          defineProperty(proxyTarget, prop, desc) {
-            return Reflect.defineProperty(cache, prop, desc);
-          },
-
-          deleteProperty(proxyTarget, prop) {
-            return Reflect.deleteProperty(cache, prop);
-          }
-
-        }; // Per contract of the Proxy API, the "get" proxy handler must return the
-        // original value of the target if that value is declared read-only and
-        // non-configurable. For this reason, we create an object with the
-        // prototype set to `target` instead of using `target` directly.
-        // Otherwise we cannot return a custom object for APIs that
-        // are declared read-only and non-configurable, such as `chrome.devtools`.
-        //
-        // The proxy handlers themselves will still use the original `target`
-        // instead of the `proxyTarget`, so that the methods and properties are
-        // dereferenced via the original targets.
-
-        let proxyTarget = Object.create(target);
-        return new Proxy(proxyTarget, handlers);
-      };
-      /**
-       * Creates a set of wrapper functions for an event object, which handles
-       * wrapping of listener functions that those messages are passed.
-       *
-       * A single wrapper is created for each listener function, and stored in a
-       * map. Subsequent calls to `addListener`, `hasListener`, or `removeListener`
-       * retrieve the original wrapper, so that  attempts to remove a
-       * previously-added listener work as expected.
-       *
-       * @param {DefaultWeakMap<function, function>} wrapperMap
-       *        A DefaultWeakMap object which will create the appropriate wrapper
-       *        for a given listener function when one does not exist, and retrieve
-       *        an existing one when it does.
-       *
-       * @returns {object}
-       */
-
-
-      const wrapEvent = wrapperMap => ({
-        addListener(target, listener, ...args) {
-          target.addListener(wrapperMap.get(listener), ...args);
-        },
-
-        hasListener(target, listener) {
-          return target.hasListener(wrapperMap.get(listener));
-        },
-
-        removeListener(target, listener) {
-          target.removeListener(wrapperMap.get(listener));
         }
+    }
+    resetState() {
+        this.streamingState = {
+            buffer: '',
+            fullResponse: '',
+            textContent: '',
+            isCodeBlock: false,
+            appliedOperations: new Map(),
+            currentOperations: new Map(),
+            originalContent: []
+        };
+    }
+}
 
-      }); // Keep track if the deprecation warning has been logged at least once.
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/notebookUpdater.ts":
+/*!**********************************************!*\
+  !*** ./src/pages/Content/notebookUpdater.ts ***!
+  \**********************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   acceptChange: () => (/* binding */ acceptChange),
+/* harmony export */   applyOperation: () => (/* binding */ applyOperation),
+/* harmony export */   deleteCell: () => (/* binding */ deleteCell),
+/* harmony export */   getCellContent: () => (/* binding */ getCellContent),
+/* harmony export */   insertCell: () => (/* binding */ insertCell),
+/* harmony export */   rejectChange: () => (/* binding */ rejectChange),
+/* harmony export */   requestContent: () => (/* binding */ requestContent),
+/* harmony export */   updateCell: () => (/* binding */ updateCell)
+/* harmony export */ });
+/* harmony import */ var diff__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! diff */ "./node_modules/diff/lib/index.mjs");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+function applyOperation(operation) {
+    if (operation.type === 'create') {
+        return insertCell(operation.content, operation.cellType, operation.position);
+    }
+    else if (operation.type === 'edit') {
+        return updateCell(operation.cellId, operation.originalContent, operation.content);
+    }
+    else if (operation.type === 'delete') {
+        return deleteCell(operation.cellId, operation.originalContent);
+    }
+    else if (operation.type === 'diff') {
+        return diffCell(operation.cellId, operation.originalContent, operation.content);
+    }
+    return null;
+}
+function insertCell(content, type, position) {
+    const atIndex = getCellIndexFromRelativePosition(position);
+    if (atIndex === -1) {
+        console.error('Invalid position');
+        return null;
+    }
+    const notebook = document.querySelector('colab-shaded-scroller');
+    if (!notebook) {
+        console.error('Notebook element not found');
+        return null;
+    }
+    const lastCell = notebook.querySelector(`.notebook-cell-list > :nth-child(${atIndex})`);
+    if (atIndex !== 0 && !lastCell) {
+        console.error('Cell not found');
+        return null;
+    }
+    const addButtonGroup = atIndex === 0 ? notebook.querySelector('.add-cell') : lastCell === null || lastCell === void 0 ? void 0 : lastCell.querySelector('.add-cell');
+    if (!addButtonGroup) {
+        console.error('Add button group not found');
+        return null;
+    }
+    var event = new MouseEvent('mouseenter', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true
+    });
+    addButtonGroup.dispatchEvent(event); // Hover over the add cell button to make the buttons visible
+    const addButton = addButtonGroup.querySelector(type === 'code' ? '.add-code' : '.add-text');
+    addButton.click();
+    // get the newly created cell
+    const newCell = notebook.querySelector('.notebook-cell-list > :nth-child(' + (atIndex + 1) + ')');
+    if (!newCell) {
+        console.error('New cell not found');
+        return null;
+    }
+    const id = newCell.getAttribute('id');
+    if (content === '') {
+        return id;
+    }
+    // Use a custom event to pass data to the page context
+    setTimeout(() => {
+        newCell.setAttribute('data-operation', 'insert');
+        const customEvent = new CustomEvent('setMonacoValue', {
+            detail: { id: id, content: content, type: type }
+        });
+        document.dispatchEvent(customEvent);
+        newCell.classList.remove('edit');
+    }, 500); // Increased timeout to allow for cell creation
+    return id;
+}
+function updateCell(id, originalContent, newContent) {
+    const cell = document.getElementById(id);
+    if (!cell)
+        return null;
+    const customEvent = new CustomEvent('setMonacoValue', {
+        detail: { id, content: newContent }
+    });
+    document.dispatchEvent(customEvent);
+    return id;
+}
+function deleteCell(id, originalContent) {
+    const cell = document.getElementById(id);
+    if (!cell)
+        return null;
+    const mainContent = cell.querySelector('.main-content');
+    if (mainContent)
+        mainContent.style.opacity = '0.5';
+    // injectCellActions(
+    //     id, 
+    //     true,
+    //     () => acceptChange(id),
+    //     () => rejectChange(id)
+    // );
+    return id;
+}
+function diffCell(id, originalContent, newContent) {
+    const cell = document.getElementById(id);
+    if (!cell || cell.classList.contains('text'))
+        return null;
+    const diff = (0,diff__WEBPACK_IMPORTED_MODULE_0__.diffLines)(originalContent, newContent);
+    const customEvent = new CustomEvent('diffMonacoValue', {
+        detail: { id, diff }
+    });
+    document.dispatchEvent(customEvent);
+    cell.setAttribute('data-diff', 'true');
+    // injectCellActions(
+    //     id, 
+    //     true,
+    //     () => acceptChange(id),
+    //     () => rejectChange(id)
+    // );
+    return id;
+}
+function acceptChange(change) {
+    //injectCellActions(change.cellId, false, () => {}, () => {});
+    if (change.type === 'delete') {
+        const customEvent = new CustomEvent('deleteCell', {
+            detail: { id: change.cellId }
+        });
+        return () => document.dispatchEvent(customEvent);
+    }
+    else {
+        const customEvent = new CustomEvent('setMonacoValue', {
+            detail: { id: change.cellId, content: change.content }
+        });
+        return () => {
+            stopDiff(change.cellId);
+            document.dispatchEvent(customEvent);
+        };
+    }
+}
+function rejectChange(change) {
+    //injectCellActions(change.cellId, false, () => {}, () => {});
+    if (change.type === 'create') {
+        const customEvent = new CustomEvent('deleteCell', {
+            detail: { id: change.cellId }
+        });
+        return () => {
+            stopDiff(change.cellId);
+            document.dispatchEvent(customEvent);
+        };
+    }
+    else if (change.type === 'edit' && change.originalContent) {
+        const customEvent = new CustomEvent('setMonacoValue', {
+            detail: { id: change.cellId, content: change.originalContent }
+        });
+        return () => {
+            stopDiff(change.cellId);
+            document.dispatchEvent(customEvent);
+        };
+    }
+    else if (change.type === 'delete') {
+        return () => {
+            const cell = document.getElementById(change.cellId);
+            if (cell) {
+                const mainContent = cell.querySelector('.main-content');
+                if (mainContent)
+                    mainContent.style.opacity = '1';
+            }
+        };
+    }
+    return () => { };
+}
+const stopDiff = (cellId) => {
+    const cell = document.getElementById(cellId);
+    if (cell) {
+        cell.setAttribute('data-diff', 'false');
+    }
+};
+function requestContent() {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve) => {
+            function handleContentEvent(event) {
+                document.removeEventListener('contentValue', handleContentEvent);
+                resolve(event.detail.content);
+            }
+            document.addEventListener('contentValue', handleContentEvent);
+            const customEvent = new CustomEvent('getContent');
+            document.dispatchEvent(customEvent);
+        });
+    });
+}
+function getCellContent(cellId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve) => {
+            function handleContentEvent(event) {
+                document.removeEventListener('contentValue', handleContentEvent);
+                resolve(event.detail.content);
+            }
+            document.addEventListener('contentValue', handleContentEvent);
+            const customEvent = new CustomEvent('getMonacoValue', { detail: { id: cellId } });
+            document.dispatchEvent(customEvent);
+        });
+    });
+}
+function getCellIndexFromRelativePosition(position) {
+    const notebook = document.querySelector('colab-shaded-scroller');
+    if (!notebook) {
+        console.error('Notebook element not found');
+        return -1;
+    }
+    const cells = notebook.querySelectorAll('.cell');
+    if (position === 'top') {
+        return 0;
+    }
+    else if (position === 'bottom') {
+        return cells.length;
+    }
+    else if (position.startsWith('after:')) {
+        const id = position.split(':')[1];
+        let index = Array.from(cells).findIndex(cell => cell.getAttribute('id') === id);
+        return index + 1;
+    }
+    else if (position.startsWith('before:')) {
+        const id = position.split(':')[1];
+        const index = Array.from(cells).findIndex(cell => cell.getAttribute('id') === id);
+        return index;
+    }
+    else {
+        return -1;
+    }
+}
 
 
-      let loggedSendResponseDeprecationWarning = false;
-      const onMessageWrappers = new DefaultWeakMap(listener => {
-        if (typeof listener !== "function") {
-          return listener;
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/parser.ts":
+/*!*************************************!*\
+  !*** ./src/pages/Content/parser.ts ***!
+  \*************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   parseLines: () => (/* binding */ parseLines)
+/* harmony export */ });
+/* harmony import */ var _notebookUpdater__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./notebookUpdater */ "./src/pages/Content/notebookUpdater.ts");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+
+function parseLines(streamingState, lines) {
+    var _a, _b, _c, _d;
+    const createRegex = /@CREATE\[type=(markdown|code),\s*position=(top|bottom|after:(cell-[^\]]+)|before:(cell-[^\]]+))\]/;
+    const editRegex = /@EDIT\[(cell-[^\]]+)\]/;
+    const deleteRegex = /@DELETE\[(cell-[^\]]+)\]/;
+    const endRegex = /@END/;
+    const startCodeRegex = /@START_CODE/;
+    const endCodeRegex = /@END_CODE/;
+    for (const line of lines) {
+        // Handle code block markers
+        if (line.match(startCodeRegex)) {
+            streamingState.isCodeBlock = true;
+            return streamingState;
         }
-        /**
-         * Wraps a message listener function so that it may send responses based on
-         * its return value, rather than by returning a sentinel value and calling a
-         * callback. If the listener function returns a Promise, the response is
-         * sent when the promise either resolves or rejects.
-         *
-         * @param {*} message
-         *        The message sent by the other end of the channel.
-         * @param {object} sender
-         *        Details about the sender of the message.
-         * @param {function(*)} sendResponse
-         *        A callback which, when called with an arbitrary argument, sends
-         *        that value as a response.
-         * @returns {boolean}
-         *        True if the wrapped listener returned a Promise, which will later
-         *        yield a response. False otherwise.
-         */
-
-
-        return function onMessage(message, sender, sendResponse) {
-          let didCallSendResponse = false;
-          let wrappedSendResponse;
-          let sendResponsePromise = new Promise(resolve => {
-            wrappedSendResponse = function (response) {
-              if (!loggedSendResponseDeprecationWarning) {
-                console.warn(SEND_RESPONSE_DEPRECATION_WARNING, new Error().stack);
-                loggedSendResponseDeprecationWarning = true;
-              }
-
-              didCallSendResponse = true;
-              resolve(response);
+        if (line.match(endCodeRegex)) {
+            streamingState.isCodeBlock = false;
+            return streamingState;
+        }
+        // Process operations
+        const createMatch = line.match(createRegex);
+        const editMatch = line.match(editRegex);
+        const deleteMatch = line.match(deleteRegex);
+        if (createMatch) {
+            if (streamingState.currentOperations.size > 0 && ((_a = streamingState.currentOperations.values().next().value) === null || _a === void 0 ? void 0 : _a.type) === 'create') {
+                return streamingState;
+            }
+            const operationId = `create-${Date.now()}-${Math.random()}`;
+            const operation = {
+                type: 'create',
+                cellType: createMatch[1],
+                cellId: '',
+                position: createMatch[2],
+                contentArray: [],
+                content: ''
             };
-          });
-          let result;
-
-          try {
-            result = listener(message, sender, wrappedSendResponse);
-          } catch (err) {
-            result = Promise.reject(err);
-          }
-
-          const isResultThenable = result !== true && isThenable(result); // If the listener didn't returned true or a Promise, or called
-          // wrappedSendResponse synchronously, we can exit earlier
-          // because there will be no response sent from this listener.
-
-          if (result !== true && !isResultThenable && !didCallSendResponse) {
-            return false;
-          } // A small helper to send the message if the promise resolves
-          // and an error if the promise rejects (a wrapped sendMessage has
-          // to translate the message into a resolved promise or a rejected
-          // promise).
-
-
-          const sendPromisedResult = promise => {
-            promise.then(msg => {
-              // send the message value.
-              sendResponse(msg);
-            }, error => {
-              // Send a JSON representation of the error if the rejected value
-              // is an instance of error, or the object itself otherwise.
-              let message;
-
-              if (error && (error instanceof Error || typeof error.message === "string")) {
-                message = error.message;
-              } else {
-                message = "An unexpected error occurred";
-              }
-
-              sendResponse({
-                __mozWebExtensionPolyfillReject__: true,
-                message
-              });
-            }).catch(err => {
-              // Print an error on the console if unable to send the response.
-              console.error("Failed to send onMessage rejected reply", err);
-            });
-          }; // If the listener returned a Promise, send the resolved value as a
-          // result, otherwise wait the promise related to the wrappedSendResponse
-          // callback to resolve and send it as a response.
-
-
-          if (isResultThenable) {
-            sendPromisedResult(result);
-          } else {
-            sendPromisedResult(sendResponsePromise);
-          } // Let Chrome know that the listener is replying.
-
-
-          return true;
-        };
-      });
-
-      const wrappedSendMessageCallback = ({
-        reject,
-        resolve
-      }, reply) => {
-        if (extensionAPIs.runtime.lastError) {
-          // Detect when none of the listeners replied to the sendMessage call and resolve
-          // the promise to undefined as in Firefox.
-          // See https://github.com/mozilla/webextension-polyfill/issues/130
-          if (extensionAPIs.runtime.lastError.message === CHROME_SEND_MESSAGE_CALLBACK_NO_RESPONSE_MESSAGE) {
-            resolve();
-          } else {
-            reject(extensionAPIs.runtime.lastError);
-          }
-        } else if (reply && reply.__mozWebExtensionPolyfillReject__) {
-          // Convert back the JSON representation of the error into
-          // an Error instance.
-          reject(new Error(reply.message));
-        } else {
-          resolve(reply);
+            let id;
+            // If the operation is after a specific cell, find the last operation that was created after that cell (this is needed to ensure that cells are inserted in the correct order)
+            if (operation.position.startsWith('after:')) {
+                let position = operation.position;
+                // Find all previous operations that were created after this same cell
+                const previousOperations = Array.from(streamingState.appliedOperations.values())
+                    .filter(op => op.type === 'create' && op.position === operation.position);
+                if (previousOperations.length > 0) {
+                    // Get the last operation in the chain
+                    const lastOperation = previousOperations[previousOperations.length - 1];
+                    position = `after:${lastOperation.cellId}`;
+                }
+                id = (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)(Object.assign(Object.assign({}, operation), { position }));
+            }
+            else {
+                id = (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)(operation);
+            }
+            if (!id || id === '') {
+                console.log('[Parser] Failed to apply operation:', operation);
+                return streamingState;
+            }
+            operation.cellId = id;
+            streamingState.currentOperations.set(operation.cellId, operation);
+            console.log('[Parser] Create operation:', operation);
         }
-      };
-
-      const wrappedSendMessage = (name, metadata, apiNamespaceObj, ...args) => {
-        if (args.length < metadata.minArgs) {
-          throw new Error(`Expected at least ${metadata.minArgs} ${pluralizeArguments(metadata.minArgs)} for ${name}(), got ${args.length}`);
+        else if (editMatch) {
+            const cellId = editMatch[1];
+            const operation = {
+                type: 'edit',
+                cellId,
+                contentArray: [],
+                content: '',
+                originalContent: ((_b = streamingState.originalContent.find(cell => cell.id === cellId)) === null || _b === void 0 ? void 0 : _b.content) || ''
+            };
+            streamingState.currentOperations.set(cellId, operation);
+            (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)(operation);
+            console.log('[Parser] Edit operation:', operation);
         }
-
-        if (args.length > metadata.maxArgs) {
-          throw new Error(`Expected at most ${metadata.maxArgs} ${pluralizeArguments(metadata.maxArgs)} for ${name}(), got ${args.length}`);
+        else if (deleteMatch) {
+            const cellId = deleteMatch[1];
+            const originalContent = ((_c = streamingState.originalContent.find(cell => cell.id === cellId)) === null || _c === void 0 ? void 0 : _c.content) || '';
+            const operation = {
+                type: 'delete',
+                cellId,
+                originalContent
+            };
+            (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)(operation);
+            streamingState.appliedOperations.set(cellId, Object.assign(Object.assign({}, operation), { pending: true, reject: (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.rejectChange)(operation), accept: (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.acceptChange)(operation) }));
+            console.log('[Parser] Delete operation:', cellId);
         }
-
-        return new Promise((resolve, reject) => {
-          const wrappedCb = wrappedSendMessageCallback.bind(null, {
-            resolve,
-            reject
-          });
-          args.push(wrappedCb);
-          apiNamespaceObj.sendMessage(...args);
-        });
-      };
-
-      const staticWrappers = {
-        runtime: {
-          onMessage: wrapEvent(onMessageWrappers),
-          onMessageExternal: wrapEvent(onMessageWrappers),
-          sendMessage: wrappedSendMessage.bind(null, "sendMessage", {
-            minArgs: 1,
-            maxArgs: 3
-          })
-        },
-        tabs: {
-          sendMessage: wrappedSendMessage.bind(null, "sendMessage", {
-            minArgs: 2,
-            maxArgs: 3
-          })
+        else if (line.match(endRegex)) {
+            // Finalize current operation
+            for (const [id, operation] of streamingState.currentOperations.entries()) {
+                if (operation.type === 'create' || operation.type === 'edit') {
+                    console.log('[Parser] Applied operation:', operation);
+                    const pendingOperation = Object.assign(Object.assign({}, operation), { pending: true, reject: (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.rejectChange)(operation), accept: (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.acceptChange)(operation) });
+                    streamingState.appliedOperations.set(operation.cellId, pendingOperation);
+                    (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)({
+                        type: 'diff',
+                        cellId: operation.cellId,
+                        originalContent: operation.type === 'edit' ? operation.originalContent : '',
+                        content: operation.content
+                    });
+                }
+            }
+            streamingState.currentOperations.clear();
         }
-      };
-      const settingMetadata = {
-        clear: {
-          minArgs: 1,
-          maxArgs: 1
-        },
-        get: {
-          minArgs: 1,
-          maxArgs: 1
-        },
-        set: {
-          minArgs: 1,
-          maxArgs: 1
+        else {
+            // Add content to current operations
+            for (const operation of streamingState.currentOperations.values()) {
+                if (operation.type !== 'delete' && 'contentArray' in operation && operation.contentArray) {
+                    (_d = operation.contentArray) === null || _d === void 0 ? void 0 : _d.push(line);
+                    operation.content = operation.contentArray.join('\n');
+                    (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)({
+                        type: 'edit',
+                        cellId: operation.cellId,
+                        contentArray: operation.contentArray,
+                        content: operation.content,
+                        originalContent: operation.type === 'edit' ? operation.originalContent : ''
+                    });
+                }
+            }
         }
-      };
-      apiMetadata.privacy = {
-        network: {
-          "*": settingMetadata
-        },
-        services: {
-          "*": settingMetadata
-        },
-        websites: {
-          "*": settingMetadata
+    }
+    return streamingState;
+}
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/utils/errors.ts":
+/*!*****************************!*\
+  !*** ./src/utils/errors.ts ***!
+  \*****************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AIServiceError: () => (/* reexport safe */ _supabase_functions_shared_errors__WEBPACK_IMPORTED_MODULE_0__.AIServiceError),
+/* harmony export */   ErrorType: () => (/* reexport safe */ _supabase_functions_shared_errors__WEBPACK_IMPORTED_MODULE_0__.ErrorType),
+/* harmony export */   isAIServiceError: () => (/* reexport safe */ _supabase_functions_shared_errors__WEBPACK_IMPORTED_MODULE_0__.isAIServiceError)
+/* harmony export */ });
+/* harmony import */ var _supabase_functions_shared_errors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../supabase/functions/_shared/errors */ "./supabase/functions/_shared/errors.ts");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./supabase/functions/_shared/cors.ts":
+/*!********************************************!*\
+  !*** ./supabase/functions/_shared/cors.ts ***!
+  \********************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   corsHeaders: () => (/* binding */ corsHeaders)
+/* harmony export */ });
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, X-Messages-Remaining',
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, DELETE"
+};
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./supabase/functions/_shared/errors.ts":
+/*!**********************************************!*\
+  !*** ./supabase/functions/_shared/errors.ts ***!
+  \**********************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AIServiceError: () => (/* binding */ AIServiceError),
+/* harmony export */   ErrorType: () => (/* binding */ ErrorType),
+/* harmony export */   createErrorResponse: () => (/* binding */ createErrorResponse),
+/* harmony export */   errorStatusCodes: () => (/* binding */ errorStatusCodes),
+/* harmony export */   isAIServiceError: () => (/* binding */ isAIServiceError)
+/* harmony export */ });
+/* harmony import */ var _cors_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cors.ts */ "./supabase/functions/_shared/cors.ts");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+
+var ErrorType;
+(function (ErrorType) {
+    ErrorType["AUTHENTICATION"] = "AUTHENTICATION";
+    ErrorType["QUOTA_EXCEEDED"] = "QUOTA_EXCEEDED";
+    ErrorType["MODEL_ACCESS"] = "MODEL_ACCESS";
+    ErrorType["RATE_LIMIT"] = "RATE_LIMIT";
+    ErrorType["NETWORK"] = "NETWORK";
+    ErrorType["SERVER"] = "SERVER";
+    ErrorType["UNKNOWN"] = "UNKNOWN";
+})(ErrorType || (ErrorType = {}));
+// Error status codes
+const errorStatusCodes = {
+    [ErrorType.AUTHENTICATION]: 401,
+    [ErrorType.QUOTA_EXCEEDED]: 429,
+    [ErrorType.MODEL_ACCESS]: 403,
+    [ErrorType.RATE_LIMIT]: 429,
+    [ErrorType.NETWORK]: 500,
+    [ErrorType.SERVER]: 500,
+    [ErrorType.UNKNOWN]: 500
+};
+class AIServiceError extends Error {
+    constructor(error) {
+        super(error.message);
+        this.error = error;
+        this.name = 'AIServiceError';
+    }
+}
+function isAIServiceError(error) {
+    return error instanceof AIServiceError;
+}
+function createErrorResponse(errorType, message, details) {
+    return new Response(JSON.stringify({
+        error: {
+            type: errorType,
+            message,
+            details
         }
-      };
-      return wrapObject(extensionAPIs, staticWrappers, apiMetadata);
-    };
-
-    if (typeof chrome != "object" || !chrome || !chrome.runtime || !chrome.runtime.id) {
-      throw new Error("This script should only be loaded in a browser extension.");
-    } // The build process adds a UMD wrapper around this file, which makes the
-    // `module` variable available.
+    }), {
+        status: errorStatusCodes[errorType],
+        headers: _cors_ts__WEBPACK_IMPORTED_MODULE_0__.corsHeaders
+    });
+}
 
 
-    module.exports = wrapAPIs(chrome);
-  } else {
-    module.exports = browser;
-  }
-});
-//# sourceMappingURL=browser-polyfill.js.map
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
 
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
 
 /***/ }),
 
@@ -12998,6 +21014,2123 @@ function getWDSMetadata(SocketClient) {
 module.exports = getWDSMetadata;
 
 
+/***/ }),
+
+/***/ "./node_modules/@supabase/postgrest-js/dist/esm/wrapper.mjs":
+/*!******************************************************************!*\
+  !*** ./node_modules/@supabase/postgrest-js/dist/esm/wrapper.mjs ***!
+  \******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PostgrestBuilder: () => (/* binding */ PostgrestBuilder),
+/* harmony export */   PostgrestClient: () => (/* binding */ PostgrestClient),
+/* harmony export */   PostgrestFilterBuilder: () => (/* binding */ PostgrestFilterBuilder),
+/* harmony export */   PostgrestQueryBuilder: () => (/* binding */ PostgrestQueryBuilder),
+/* harmony export */   PostgrestTransformBuilder: () => (/* binding */ PostgrestTransformBuilder),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _cjs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cjs/index.js */ "./node_modules/@supabase/postgrest-js/dist/cjs/index.js");
+
+const {
+  PostgrestClient,
+  PostgrestQueryBuilder,
+  PostgrestFilterBuilder,
+  PostgrestTransformBuilder,
+  PostgrestBuilder,
+} = _cjs_index_js__WEBPACK_IMPORTED_MODULE_0__
+
+
+
+// compatibility with CJS output
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  PostgrestClient,
+  PostgrestQueryBuilder,
+  PostgrestFilterBuilder,
+  PostgrestTransformBuilder,
+  PostgrestBuilder,
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/diff/lib/index.mjs":
+/*!*****************************************!*\
+  !*** ./node_modules/diff/lib/index.mjs ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Diff: () => (/* binding */ Diff),
+/* harmony export */   applyPatch: () => (/* binding */ applyPatch),
+/* harmony export */   applyPatches: () => (/* binding */ applyPatches),
+/* harmony export */   canonicalize: () => (/* binding */ canonicalize),
+/* harmony export */   convertChangesToDMP: () => (/* binding */ convertChangesToDMP),
+/* harmony export */   convertChangesToXML: () => (/* binding */ convertChangesToXML),
+/* harmony export */   createPatch: () => (/* binding */ createPatch),
+/* harmony export */   createTwoFilesPatch: () => (/* binding */ createTwoFilesPatch),
+/* harmony export */   diffArrays: () => (/* binding */ diffArrays),
+/* harmony export */   diffChars: () => (/* binding */ diffChars),
+/* harmony export */   diffCss: () => (/* binding */ diffCss),
+/* harmony export */   diffJson: () => (/* binding */ diffJson),
+/* harmony export */   diffLines: () => (/* binding */ diffLines),
+/* harmony export */   diffSentences: () => (/* binding */ diffSentences),
+/* harmony export */   diffTrimmedLines: () => (/* binding */ diffTrimmedLines),
+/* harmony export */   diffWords: () => (/* binding */ diffWords),
+/* harmony export */   diffWordsWithSpace: () => (/* binding */ diffWordsWithSpace),
+/* harmony export */   formatPatch: () => (/* binding */ formatPatch),
+/* harmony export */   merge: () => (/* binding */ merge),
+/* harmony export */   parsePatch: () => (/* binding */ parsePatch),
+/* harmony export */   reversePatch: () => (/* binding */ reversePatch),
+/* harmony export */   structuredPatch: () => (/* binding */ structuredPatch)
+/* harmony export */ });
+function Diff() {}
+Diff.prototype = {
+  diff: function diff(oldString, newString) {
+    var _options$timeout;
+    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    var callback = options.callback;
+    if (typeof options === 'function') {
+      callback = options;
+      options = {};
+    }
+    var self = this;
+    function done(value) {
+      value = self.postProcess(value, options);
+      if (callback) {
+        setTimeout(function () {
+          callback(value);
+        }, 0);
+        return true;
+      } else {
+        return value;
+      }
+    }
+
+    // Allow subclasses to massage the input prior to running
+    oldString = this.castInput(oldString, options);
+    newString = this.castInput(newString, options);
+    oldString = this.removeEmpty(this.tokenize(oldString, options));
+    newString = this.removeEmpty(this.tokenize(newString, options));
+    var newLen = newString.length,
+      oldLen = oldString.length;
+    var editLength = 1;
+    var maxEditLength = newLen + oldLen;
+    if (options.maxEditLength != null) {
+      maxEditLength = Math.min(maxEditLength, options.maxEditLength);
+    }
+    var maxExecutionTime = (_options$timeout = options.timeout) !== null && _options$timeout !== void 0 ? _options$timeout : Infinity;
+    var abortAfterTimestamp = Date.now() + maxExecutionTime;
+    var bestPath = [{
+      oldPos: -1,
+      lastComponent: undefined
+    }];
+
+    // Seed editLength = 0, i.e. the content starts with the same values
+    var newPos = this.extractCommon(bestPath[0], newString, oldString, 0, options);
+    if (bestPath[0].oldPos + 1 >= oldLen && newPos + 1 >= newLen) {
+      // Identity per the equality and tokenizer
+      return done(buildValues(self, bestPath[0].lastComponent, newString, oldString, self.useLongestToken));
+    }
+
+    // Once we hit the right edge of the edit graph on some diagonal k, we can
+    // definitely reach the end of the edit graph in no more than k edits, so
+    // there's no point in considering any moves to diagonal k+1 any more (from
+    // which we're guaranteed to need at least k+1 more edits).
+    // Similarly, once we've reached the bottom of the edit graph, there's no
+    // point considering moves to lower diagonals.
+    // We record this fact by setting minDiagonalToConsider and
+    // maxDiagonalToConsider to some finite value once we've hit the edge of
+    // the edit graph.
+    // This optimization is not faithful to the original algorithm presented in
+    // Myers's paper, which instead pointlessly extends D-paths off the end of
+    // the edit graph - see page 7 of Myers's paper which notes this point
+    // explicitly and illustrates it with a diagram. This has major performance
+    // implications for some common scenarios. For instance, to compute a diff
+    // where the new text simply appends d characters on the end of the
+    // original text of length n, the true Myers algorithm will take O(n+d^2)
+    // time while this optimization needs only O(n+d) time.
+    var minDiagonalToConsider = -Infinity,
+      maxDiagonalToConsider = Infinity;
+
+    // Main worker method. checks all permutations of a given edit length for acceptance.
+    function execEditLength() {
+      for (var diagonalPath = Math.max(minDiagonalToConsider, -editLength); diagonalPath <= Math.min(maxDiagonalToConsider, editLength); diagonalPath += 2) {
+        var basePath = void 0;
+        var removePath = bestPath[diagonalPath - 1],
+          addPath = bestPath[diagonalPath + 1];
+        if (removePath) {
+          // No one else is going to attempt to use this value, clear it
+          bestPath[diagonalPath - 1] = undefined;
+        }
+        var canAdd = false;
+        if (addPath) {
+          // what newPos will be after we do an insertion:
+          var addPathNewPos = addPath.oldPos - diagonalPath;
+          canAdd = addPath && 0 <= addPathNewPos && addPathNewPos < newLen;
+        }
+        var canRemove = removePath && removePath.oldPos + 1 < oldLen;
+        if (!canAdd && !canRemove) {
+          // If this path is a terminal then prune
+          bestPath[diagonalPath] = undefined;
+          continue;
+        }
+
+        // Select the diagonal that we want to branch from. We select the prior
+        // path whose position in the old string is the farthest from the origin
+        // and does not pass the bounds of the diff graph
+        if (!canRemove || canAdd && removePath.oldPos < addPath.oldPos) {
+          basePath = self.addToPath(addPath, true, false, 0, options);
+        } else {
+          basePath = self.addToPath(removePath, false, true, 1, options);
+        }
+        newPos = self.extractCommon(basePath, newString, oldString, diagonalPath, options);
+        if (basePath.oldPos + 1 >= oldLen && newPos + 1 >= newLen) {
+          // If we have hit the end of both strings, then we are done
+          return done(buildValues(self, basePath.lastComponent, newString, oldString, self.useLongestToken));
+        } else {
+          bestPath[diagonalPath] = basePath;
+          if (basePath.oldPos + 1 >= oldLen) {
+            maxDiagonalToConsider = Math.min(maxDiagonalToConsider, diagonalPath - 1);
+          }
+          if (newPos + 1 >= newLen) {
+            minDiagonalToConsider = Math.max(minDiagonalToConsider, diagonalPath + 1);
+          }
+        }
+      }
+      editLength++;
+    }
+
+    // Performs the length of edit iteration. Is a bit fugly as this has to support the
+    // sync and async mode which is never fun. Loops over execEditLength until a value
+    // is produced, or until the edit length exceeds options.maxEditLength (if given),
+    // in which case it will return undefined.
+    if (callback) {
+      (function exec() {
+        setTimeout(function () {
+          if (editLength > maxEditLength || Date.now() > abortAfterTimestamp) {
+            return callback();
+          }
+          if (!execEditLength()) {
+            exec();
+          }
+        }, 0);
+      })();
+    } else {
+      while (editLength <= maxEditLength && Date.now() <= abortAfterTimestamp) {
+        var ret = execEditLength();
+        if (ret) {
+          return ret;
+        }
+      }
+    }
+  },
+  addToPath: function addToPath(path, added, removed, oldPosInc, options) {
+    var last = path.lastComponent;
+    if (last && !options.oneChangePerToken && last.added === added && last.removed === removed) {
+      return {
+        oldPos: path.oldPos + oldPosInc,
+        lastComponent: {
+          count: last.count + 1,
+          added: added,
+          removed: removed,
+          previousComponent: last.previousComponent
+        }
+      };
+    } else {
+      return {
+        oldPos: path.oldPos + oldPosInc,
+        lastComponent: {
+          count: 1,
+          added: added,
+          removed: removed,
+          previousComponent: last
+        }
+      };
+    }
+  },
+  extractCommon: function extractCommon(basePath, newString, oldString, diagonalPath, options) {
+    var newLen = newString.length,
+      oldLen = oldString.length,
+      oldPos = basePath.oldPos,
+      newPos = oldPos - diagonalPath,
+      commonCount = 0;
+    while (newPos + 1 < newLen && oldPos + 1 < oldLen && this.equals(oldString[oldPos + 1], newString[newPos + 1], options)) {
+      newPos++;
+      oldPos++;
+      commonCount++;
+      if (options.oneChangePerToken) {
+        basePath.lastComponent = {
+          count: 1,
+          previousComponent: basePath.lastComponent,
+          added: false,
+          removed: false
+        };
+      }
+    }
+    if (commonCount && !options.oneChangePerToken) {
+      basePath.lastComponent = {
+        count: commonCount,
+        previousComponent: basePath.lastComponent,
+        added: false,
+        removed: false
+      };
+    }
+    basePath.oldPos = oldPos;
+    return newPos;
+  },
+  equals: function equals(left, right, options) {
+    if (options.comparator) {
+      return options.comparator(left, right);
+    } else {
+      return left === right || options.ignoreCase && left.toLowerCase() === right.toLowerCase();
+    }
+  },
+  removeEmpty: function removeEmpty(array) {
+    var ret = [];
+    for (var i = 0; i < array.length; i++) {
+      if (array[i]) {
+        ret.push(array[i]);
+      }
+    }
+    return ret;
+  },
+  castInput: function castInput(value) {
+    return value;
+  },
+  tokenize: function tokenize(value) {
+    return Array.from(value);
+  },
+  join: function join(chars) {
+    return chars.join('');
+  },
+  postProcess: function postProcess(changeObjects) {
+    return changeObjects;
+  }
+};
+function buildValues(diff, lastComponent, newString, oldString, useLongestToken) {
+  // First we convert our linked list of components in reverse order to an
+  // array in the right order:
+  var components = [];
+  var nextComponent;
+  while (lastComponent) {
+    components.push(lastComponent);
+    nextComponent = lastComponent.previousComponent;
+    delete lastComponent.previousComponent;
+    lastComponent = nextComponent;
+  }
+  components.reverse();
+  var componentPos = 0,
+    componentLen = components.length,
+    newPos = 0,
+    oldPos = 0;
+  for (; componentPos < componentLen; componentPos++) {
+    var component = components[componentPos];
+    if (!component.removed) {
+      if (!component.added && useLongestToken) {
+        var value = newString.slice(newPos, newPos + component.count);
+        value = value.map(function (value, i) {
+          var oldValue = oldString[oldPos + i];
+          return oldValue.length > value.length ? oldValue : value;
+        });
+        component.value = diff.join(value);
+      } else {
+        component.value = diff.join(newString.slice(newPos, newPos + component.count));
+      }
+      newPos += component.count;
+
+      // Common case
+      if (!component.added) {
+        oldPos += component.count;
+      }
+    } else {
+      component.value = diff.join(oldString.slice(oldPos, oldPos + component.count));
+      oldPos += component.count;
+    }
+  }
+  return components;
+}
+
+var characterDiff = new Diff();
+function diffChars(oldStr, newStr, options) {
+  return characterDiff.diff(oldStr, newStr, options);
+}
+
+function longestCommonPrefix(str1, str2) {
+  var i;
+  for (i = 0; i < str1.length && i < str2.length; i++) {
+    if (str1[i] != str2[i]) {
+      return str1.slice(0, i);
+    }
+  }
+  return str1.slice(0, i);
+}
+function longestCommonSuffix(str1, str2) {
+  var i;
+
+  // Unlike longestCommonPrefix, we need a special case to handle all scenarios
+  // where we return the empty string since str1.slice(-0) will return the
+  // entire string.
+  if (!str1 || !str2 || str1[str1.length - 1] != str2[str2.length - 1]) {
+    return '';
+  }
+  for (i = 0; i < str1.length && i < str2.length; i++) {
+    if (str1[str1.length - (i + 1)] != str2[str2.length - (i + 1)]) {
+      return str1.slice(-i);
+    }
+  }
+  return str1.slice(-i);
+}
+function replacePrefix(string, oldPrefix, newPrefix) {
+  if (string.slice(0, oldPrefix.length) != oldPrefix) {
+    throw Error("string ".concat(JSON.stringify(string), " doesn't start with prefix ").concat(JSON.stringify(oldPrefix), "; this is a bug"));
+  }
+  return newPrefix + string.slice(oldPrefix.length);
+}
+function replaceSuffix(string, oldSuffix, newSuffix) {
+  if (!oldSuffix) {
+    return string + newSuffix;
+  }
+  if (string.slice(-oldSuffix.length) != oldSuffix) {
+    throw Error("string ".concat(JSON.stringify(string), " doesn't end with suffix ").concat(JSON.stringify(oldSuffix), "; this is a bug"));
+  }
+  return string.slice(0, -oldSuffix.length) + newSuffix;
+}
+function removePrefix(string, oldPrefix) {
+  return replacePrefix(string, oldPrefix, '');
+}
+function removeSuffix(string, oldSuffix) {
+  return replaceSuffix(string, oldSuffix, '');
+}
+function maximumOverlap(string1, string2) {
+  return string2.slice(0, overlapCount(string1, string2));
+}
+
+// Nicked from https://stackoverflow.com/a/60422853/1709587
+function overlapCount(a, b) {
+  // Deal with cases where the strings differ in length
+  var startA = 0;
+  if (a.length > b.length) {
+    startA = a.length - b.length;
+  }
+  var endB = b.length;
+  if (a.length < b.length) {
+    endB = a.length;
+  }
+  // Create a back-reference for each index
+  //   that should be followed in case of a mismatch.
+  //   We only need B to make these references:
+  var map = Array(endB);
+  var k = 0; // Index that lags behind j
+  map[0] = 0;
+  for (var j = 1; j < endB; j++) {
+    if (b[j] == b[k]) {
+      map[j] = map[k]; // skip over the same character (optional optimisation)
+    } else {
+      map[j] = k;
+    }
+    while (k > 0 && b[j] != b[k]) {
+      k = map[k];
+    }
+    if (b[j] == b[k]) {
+      k++;
+    }
+  }
+  // Phase 2: use these references while iterating over A
+  k = 0;
+  for (var i = startA; i < a.length; i++) {
+    while (k > 0 && a[i] != b[k]) {
+      k = map[k];
+    }
+    if (a[i] == b[k]) {
+      k++;
+    }
+  }
+  return k;
+}
+
+/**
+ * Returns true if the string consistently uses Windows line endings.
+ */
+function hasOnlyWinLineEndings(string) {
+  return string.includes('\r\n') && !string.startsWith('\n') && !string.match(/[^\r]\n/);
+}
+
+/**
+ * Returns true if the string consistently uses Unix line endings.
+ */
+function hasOnlyUnixLineEndings(string) {
+  return !string.includes('\r\n') && string.includes('\n');
+}
+
+// Based on https://en.wikipedia.org/wiki/Latin_script_in_Unicode
+//
+// Ranges and exceptions:
+// Latin-1 Supplement, 0080–00FF
+//  - U+00D7  × Multiplication sign
+//  - U+00F7  ÷ Division sign
+// Latin Extended-A, 0100–017F
+// Latin Extended-B, 0180–024F
+// IPA Extensions, 0250–02AF
+// Spacing Modifier Letters, 02B0–02FF
+//  - U+02C7  ˇ &#711;  Caron
+//  - U+02D8  ˘ &#728;  Breve
+//  - U+02D9  ˙ &#729;  Dot Above
+//  - U+02DA  ˚ &#730;  Ring Above
+//  - U+02DB  ˛ &#731;  Ogonek
+//  - U+02DC  ˜ &#732;  Small Tilde
+//  - U+02DD  ˝ &#733;  Double Acute Accent
+// Latin Extended Additional, 1E00–1EFF
+var extendedWordChars = "a-zA-Z0-9_\\u{C0}-\\u{FF}\\u{D8}-\\u{F6}\\u{F8}-\\u{2C6}\\u{2C8}-\\u{2D7}\\u{2DE}-\\u{2FF}\\u{1E00}-\\u{1EFF}";
+
+// Each token is one of the following:
+// - A punctuation mark plus the surrounding whitespace
+// - A word plus the surrounding whitespace
+// - Pure whitespace (but only in the special case where this the entire text
+//   is just whitespace)
+//
+// We have to include surrounding whitespace in the tokens because the two
+// alternative approaches produce horribly broken results:
+// * If we just discard the whitespace, we can't fully reproduce the original
+//   text from the sequence of tokens and any attempt to render the diff will
+//   get the whitespace wrong.
+// * If we have separate tokens for whitespace, then in a typical text every
+//   second token will be a single space character. But this often results in
+//   the optimal diff between two texts being a perverse one that preserves
+//   the spaces between words but deletes and reinserts actual common words.
+//   See https://github.com/kpdecker/jsdiff/issues/160#issuecomment-1866099640
+//   for an example.
+//
+// Keeping the surrounding whitespace of course has implications for .equals
+// and .join, not just .tokenize.
+
+// This regex does NOT fully implement the tokenization rules described above.
+// Instead, it gives runs of whitespace their own "token". The tokenize method
+// then handles stitching whitespace tokens onto adjacent word or punctuation
+// tokens.
+var tokenizeIncludingWhitespace = new RegExp("[".concat(extendedWordChars, "]+|\\s+|[^").concat(extendedWordChars, "]"), 'ug');
+var wordDiff = new Diff();
+wordDiff.equals = function (left, right, options) {
+  if (options.ignoreCase) {
+    left = left.toLowerCase();
+    right = right.toLowerCase();
+  }
+  return left.trim() === right.trim();
+};
+wordDiff.tokenize = function (value) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var parts;
+  if (options.intlSegmenter) {
+    if (options.intlSegmenter.resolvedOptions().granularity != 'word') {
+      throw new Error('The segmenter passed must have a granularity of "word"');
+    }
+    parts = Array.from(options.intlSegmenter.segment(value), function (segment) {
+      return segment.segment;
+    });
+  } else {
+    parts = value.match(tokenizeIncludingWhitespace) || [];
+  }
+  var tokens = [];
+  var prevPart = null;
+  parts.forEach(function (part) {
+    if (/\s/.test(part)) {
+      if (prevPart == null) {
+        tokens.push(part);
+      } else {
+        tokens.push(tokens.pop() + part);
+      }
+    } else if (/\s/.test(prevPart)) {
+      if (tokens[tokens.length - 1] == prevPart) {
+        tokens.push(tokens.pop() + part);
+      } else {
+        tokens.push(prevPart + part);
+      }
+    } else {
+      tokens.push(part);
+    }
+    prevPart = part;
+  });
+  return tokens;
+};
+wordDiff.join = function (tokens) {
+  // Tokens being joined here will always have appeared consecutively in the
+  // same text, so we can simply strip off the leading whitespace from all the
+  // tokens except the first (and except any whitespace-only tokens - but such
+  // a token will always be the first and only token anyway) and then join them
+  // and the whitespace around words and punctuation will end up correct.
+  return tokens.map(function (token, i) {
+    if (i == 0) {
+      return token;
+    } else {
+      return token.replace(/^\s+/, '');
+    }
+  }).join('');
+};
+wordDiff.postProcess = function (changes, options) {
+  if (!changes || options.oneChangePerToken) {
+    return changes;
+  }
+  var lastKeep = null;
+  // Change objects representing any insertion or deletion since the last
+  // "keep" change object. There can be at most one of each.
+  var insertion = null;
+  var deletion = null;
+  changes.forEach(function (change) {
+    if (change.added) {
+      insertion = change;
+    } else if (change.removed) {
+      deletion = change;
+    } else {
+      if (insertion || deletion) {
+        // May be false at start of text
+        dedupeWhitespaceInChangeObjects(lastKeep, deletion, insertion, change);
+      }
+      lastKeep = change;
+      insertion = null;
+      deletion = null;
+    }
+  });
+  if (insertion || deletion) {
+    dedupeWhitespaceInChangeObjects(lastKeep, deletion, insertion, null);
+  }
+  return changes;
+};
+function diffWords(oldStr, newStr, options) {
+  // This option has never been documented and never will be (it's clearer to
+  // just call `diffWordsWithSpace` directly if you need that behavior), but
+  // has existed in jsdiff for a long time, so we retain support for it here
+  // for the sake of backwards compatibility.
+  if ((options === null || options === void 0 ? void 0 : options.ignoreWhitespace) != null && !options.ignoreWhitespace) {
+    return diffWordsWithSpace(oldStr, newStr, options);
+  }
+  return wordDiff.diff(oldStr, newStr, options);
+}
+function dedupeWhitespaceInChangeObjects(startKeep, deletion, insertion, endKeep) {
+  // Before returning, we tidy up the leading and trailing whitespace of the
+  // change objects to eliminate cases where trailing whitespace in one object
+  // is repeated as leading whitespace in the next.
+  // Below are examples of the outcomes we want here to explain the code.
+  // I=insert, K=keep, D=delete
+  // 1. diffing 'foo bar baz' vs 'foo baz'
+  //    Prior to cleanup, we have K:'foo ' D:' bar ' K:' baz'
+  //    After cleanup, we want:   K:'foo ' D:'bar ' K:'baz'
+  //
+  // 2. Diffing 'foo bar baz' vs 'foo qux baz'
+  //    Prior to cleanup, we have K:'foo ' D:' bar ' I:' qux ' K:' baz'
+  //    After cleanup, we want K:'foo ' D:'bar' I:'qux' K:' baz'
+  //
+  // 3. Diffing 'foo\nbar baz' vs 'foo baz'
+  //    Prior to cleanup, we have K:'foo ' D:'\nbar ' K:' baz'
+  //    After cleanup, we want K'foo' D:'\nbar' K:' baz'
+  //
+  // 4. Diffing 'foo baz' vs 'foo\nbar baz'
+  //    Prior to cleanup, we have K:'foo\n' I:'\nbar ' K:' baz'
+  //    After cleanup, we ideally want K'foo' I:'\nbar' K:' baz'
+  //    but don't actually manage this currently (the pre-cleanup change
+  //    objects don't contain enough information to make it possible).
+  //
+  // 5. Diffing 'foo   bar baz' vs 'foo  baz'
+  //    Prior to cleanup, we have K:'foo  ' D:'   bar ' K:'  baz'
+  //    After cleanup, we want K:'foo  ' D:' bar ' K:'baz'
+  //
+  // Our handling is unavoidably imperfect in the case where there's a single
+  // indel between keeps and the whitespace has changed. For instance, consider
+  // diffing 'foo\tbar\nbaz' vs 'foo baz'. Unless we create an extra change
+  // object to represent the insertion of the space character (which isn't even
+  // a token), we have no way to avoid losing information about the texts'
+  // original whitespace in the result we return. Still, we do our best to
+  // output something that will look sensible if we e.g. print it with
+  // insertions in green and deletions in red.
+
+  // Between two "keep" change objects (or before the first or after the last
+  // change object), we can have either:
+  // * A "delete" followed by an "insert"
+  // * Just an "insert"
+  // * Just a "delete"
+  // We handle the three cases separately.
+  if (deletion && insertion) {
+    var oldWsPrefix = deletion.value.match(/^\s*/)[0];
+    var oldWsSuffix = deletion.value.match(/\s*$/)[0];
+    var newWsPrefix = insertion.value.match(/^\s*/)[0];
+    var newWsSuffix = insertion.value.match(/\s*$/)[0];
+    if (startKeep) {
+      var commonWsPrefix = longestCommonPrefix(oldWsPrefix, newWsPrefix);
+      startKeep.value = replaceSuffix(startKeep.value, newWsPrefix, commonWsPrefix);
+      deletion.value = removePrefix(deletion.value, commonWsPrefix);
+      insertion.value = removePrefix(insertion.value, commonWsPrefix);
+    }
+    if (endKeep) {
+      var commonWsSuffix = longestCommonSuffix(oldWsSuffix, newWsSuffix);
+      endKeep.value = replacePrefix(endKeep.value, newWsSuffix, commonWsSuffix);
+      deletion.value = removeSuffix(deletion.value, commonWsSuffix);
+      insertion.value = removeSuffix(insertion.value, commonWsSuffix);
+    }
+  } else if (insertion) {
+    // The whitespaces all reflect what was in the new text rather than
+    // the old, so we essentially have no information about whitespace
+    // insertion or deletion. We just want to dedupe the whitespace.
+    // We do that by having each change object keep its trailing
+    // whitespace and deleting duplicate leading whitespace where
+    // present.
+    if (startKeep) {
+      insertion.value = insertion.value.replace(/^\s*/, '');
+    }
+    if (endKeep) {
+      endKeep.value = endKeep.value.replace(/^\s*/, '');
+    }
+    // otherwise we've got a deletion and no insertion
+  } else if (startKeep && endKeep) {
+    var newWsFull = endKeep.value.match(/^\s*/)[0],
+      delWsStart = deletion.value.match(/^\s*/)[0],
+      delWsEnd = deletion.value.match(/\s*$/)[0];
+
+    // Any whitespace that comes straight after startKeep in both the old and
+    // new texts, assign to startKeep and remove from the deletion.
+    var newWsStart = longestCommonPrefix(newWsFull, delWsStart);
+    deletion.value = removePrefix(deletion.value, newWsStart);
+
+    // Any whitespace that comes straight before endKeep in both the old and
+    // new texts, and hasn't already been assigned to startKeep, assign to
+    // endKeep and remove from the deletion.
+    var newWsEnd = longestCommonSuffix(removePrefix(newWsFull, newWsStart), delWsEnd);
+    deletion.value = removeSuffix(deletion.value, newWsEnd);
+    endKeep.value = replacePrefix(endKeep.value, newWsFull, newWsEnd);
+
+    // If there's any whitespace from the new text that HASN'T already been
+    // assigned, assign it to the start:
+    startKeep.value = replaceSuffix(startKeep.value, newWsFull, newWsFull.slice(0, newWsFull.length - newWsEnd.length));
+  } else if (endKeep) {
+    // We are at the start of the text. Preserve all the whitespace on
+    // endKeep, and just remove whitespace from the end of deletion to the
+    // extent that it overlaps with the start of endKeep.
+    var endKeepWsPrefix = endKeep.value.match(/^\s*/)[0];
+    var deletionWsSuffix = deletion.value.match(/\s*$/)[0];
+    var overlap = maximumOverlap(deletionWsSuffix, endKeepWsPrefix);
+    deletion.value = removeSuffix(deletion.value, overlap);
+  } else if (startKeep) {
+    // We are at the END of the text. Preserve all the whitespace on
+    // startKeep, and just remove whitespace from the start of deletion to
+    // the extent that it overlaps with the end of startKeep.
+    var startKeepWsSuffix = startKeep.value.match(/\s*$/)[0];
+    var deletionWsPrefix = deletion.value.match(/^\s*/)[0];
+    var _overlap = maximumOverlap(startKeepWsSuffix, deletionWsPrefix);
+    deletion.value = removePrefix(deletion.value, _overlap);
+  }
+}
+var wordWithSpaceDiff = new Diff();
+wordWithSpaceDiff.tokenize = function (value) {
+  // Slightly different to the tokenizeIncludingWhitespace regex used above in
+  // that this one treats each individual newline as a distinct tokens, rather
+  // than merging them into other surrounding whitespace. This was requested
+  // in https://github.com/kpdecker/jsdiff/issues/180 &
+  //    https://github.com/kpdecker/jsdiff/issues/211
+  var regex = new RegExp("(\\r?\\n)|[".concat(extendedWordChars, "]+|[^\\S\\n\\r]+|[^").concat(extendedWordChars, "]"), 'ug');
+  return value.match(regex) || [];
+};
+function diffWordsWithSpace(oldStr, newStr, options) {
+  return wordWithSpaceDiff.diff(oldStr, newStr, options);
+}
+
+function generateOptions(options, defaults) {
+  if (typeof options === 'function') {
+    defaults.callback = options;
+  } else if (options) {
+    for (var name in options) {
+      /* istanbul ignore else */
+      if (options.hasOwnProperty(name)) {
+        defaults[name] = options[name];
+      }
+    }
+  }
+  return defaults;
+}
+
+var lineDiff = new Diff();
+lineDiff.tokenize = function (value, options) {
+  if (options.stripTrailingCr) {
+    // remove one \r before \n to match GNU diff's --strip-trailing-cr behavior
+    value = value.replace(/\r\n/g, '\n');
+  }
+  var retLines = [],
+    linesAndNewlines = value.split(/(\n|\r\n)/);
+
+  // Ignore the final empty token that occurs if the string ends with a new line
+  if (!linesAndNewlines[linesAndNewlines.length - 1]) {
+    linesAndNewlines.pop();
+  }
+
+  // Merge the content and line separators into single tokens
+  for (var i = 0; i < linesAndNewlines.length; i++) {
+    var line = linesAndNewlines[i];
+    if (i % 2 && !options.newlineIsToken) {
+      retLines[retLines.length - 1] += line;
+    } else {
+      retLines.push(line);
+    }
+  }
+  return retLines;
+};
+lineDiff.equals = function (left, right, options) {
+  // If we're ignoring whitespace, we need to normalise lines by stripping
+  // whitespace before checking equality. (This has an annoying interaction
+  // with newlineIsToken that requires special handling: if newlines get their
+  // own token, then we DON'T want to trim the *newline* tokens down to empty
+  // strings, since this would cause us to treat whitespace-only line content
+  // as equal to a separator between lines, which would be weird and
+  // inconsistent with the documented behavior of the options.)
+  if (options.ignoreWhitespace) {
+    if (!options.newlineIsToken || !left.includes('\n')) {
+      left = left.trim();
+    }
+    if (!options.newlineIsToken || !right.includes('\n')) {
+      right = right.trim();
+    }
+  } else if (options.ignoreNewlineAtEof && !options.newlineIsToken) {
+    if (left.endsWith('\n')) {
+      left = left.slice(0, -1);
+    }
+    if (right.endsWith('\n')) {
+      right = right.slice(0, -1);
+    }
+  }
+  return Diff.prototype.equals.call(this, left, right, options);
+};
+function diffLines(oldStr, newStr, callback) {
+  return lineDiff.diff(oldStr, newStr, callback);
+}
+
+// Kept for backwards compatibility. This is a rather arbitrary wrapper method
+// that just calls `diffLines` with `ignoreWhitespace: true`. It's confusing to
+// have two ways to do exactly the same thing in the API, so we no longer
+// document this one (library users should explicitly use `diffLines` with
+// `ignoreWhitespace: true` instead) but we keep it around to maintain
+// compatibility with code that used old versions.
+function diffTrimmedLines(oldStr, newStr, callback) {
+  var options = generateOptions(callback, {
+    ignoreWhitespace: true
+  });
+  return lineDiff.diff(oldStr, newStr, options);
+}
+
+var sentenceDiff = new Diff();
+sentenceDiff.tokenize = function (value) {
+  return value.split(/(\S.+?[.!?])(?=\s+|$)/);
+};
+function diffSentences(oldStr, newStr, callback) {
+  return sentenceDiff.diff(oldStr, newStr, callback);
+}
+
+var cssDiff = new Diff();
+cssDiff.tokenize = function (value) {
+  return value.split(/([{}:;,]|\s+)/);
+};
+function diffCss(oldStr, newStr, callback) {
+  return cssDiff.diff(oldStr, newStr, callback);
+}
+
+function ownKeys(e, r) {
+  var t = Object.keys(e);
+  if (Object.getOwnPropertySymbols) {
+    var o = Object.getOwnPropertySymbols(e);
+    r && (o = o.filter(function (r) {
+      return Object.getOwnPropertyDescriptor(e, r).enumerable;
+    })), t.push.apply(t, o);
+  }
+  return t;
+}
+function _objectSpread2(e) {
+  for (var r = 1; r < arguments.length; r++) {
+    var t = null != arguments[r] ? arguments[r] : {};
+    r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+      _defineProperty(e, r, t[r]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+      Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+    });
+  }
+  return e;
+}
+function _toPrimitive(t, r) {
+  if ("object" != typeof t || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || "default");
+    if ("object" != typeof i) return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r ? String : Number)(t);
+}
+function _toPropertyKey(t) {
+  var i = _toPrimitive(t, "string");
+  return "symbol" == typeof i ? i : i + "";
+}
+function _typeof(o) {
+  "@babel/helpers - typeof";
+
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+    return typeof o;
+  } : function (o) {
+    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+  }, _typeof(o);
+}
+function _defineProperty(obj, key, value) {
+  key = _toPropertyKey(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+var jsonDiff = new Diff();
+// Discriminate between two lines of pretty-printed, serialized JSON where one of them has a
+// dangling comma and the other doesn't. Turns out including the dangling comma yields the nicest output:
+jsonDiff.useLongestToken = true;
+jsonDiff.tokenize = lineDiff.tokenize;
+jsonDiff.castInput = function (value, options) {
+  var undefinedReplacement = options.undefinedReplacement,
+    _options$stringifyRep = options.stringifyReplacer,
+    stringifyReplacer = _options$stringifyRep === void 0 ? function (k, v) {
+      return typeof v === 'undefined' ? undefinedReplacement : v;
+    } : _options$stringifyRep;
+  return typeof value === 'string' ? value : JSON.stringify(canonicalize(value, null, null, stringifyReplacer), stringifyReplacer, '  ');
+};
+jsonDiff.equals = function (left, right, options) {
+  return Diff.prototype.equals.call(jsonDiff, left.replace(/,([\r\n])/g, '$1'), right.replace(/,([\r\n])/g, '$1'), options);
+};
+function diffJson(oldObj, newObj, options) {
+  return jsonDiff.diff(oldObj, newObj, options);
+}
+
+// This function handles the presence of circular references by bailing out when encountering an
+// object that is already on the "stack" of items being processed. Accepts an optional replacer
+function canonicalize(obj, stack, replacementStack, replacer, key) {
+  stack = stack || [];
+  replacementStack = replacementStack || [];
+  if (replacer) {
+    obj = replacer(key, obj);
+  }
+  var i;
+  for (i = 0; i < stack.length; i += 1) {
+    if (stack[i] === obj) {
+      return replacementStack[i];
+    }
+  }
+  var canonicalizedObj;
+  if ('[object Array]' === Object.prototype.toString.call(obj)) {
+    stack.push(obj);
+    canonicalizedObj = new Array(obj.length);
+    replacementStack.push(canonicalizedObj);
+    for (i = 0; i < obj.length; i += 1) {
+      canonicalizedObj[i] = canonicalize(obj[i], stack, replacementStack, replacer, key);
+    }
+    stack.pop();
+    replacementStack.pop();
+    return canonicalizedObj;
+  }
+  if (obj && obj.toJSON) {
+    obj = obj.toJSON();
+  }
+  if (_typeof(obj) === 'object' && obj !== null) {
+    stack.push(obj);
+    canonicalizedObj = {};
+    replacementStack.push(canonicalizedObj);
+    var sortedKeys = [],
+      _key;
+    for (_key in obj) {
+      /* istanbul ignore else */
+      if (Object.prototype.hasOwnProperty.call(obj, _key)) {
+        sortedKeys.push(_key);
+      }
+    }
+    sortedKeys.sort();
+    for (i = 0; i < sortedKeys.length; i += 1) {
+      _key = sortedKeys[i];
+      canonicalizedObj[_key] = canonicalize(obj[_key], stack, replacementStack, replacer, _key);
+    }
+    stack.pop();
+    replacementStack.pop();
+  } else {
+    canonicalizedObj = obj;
+  }
+  return canonicalizedObj;
+}
+
+var arrayDiff = new Diff();
+arrayDiff.tokenize = function (value) {
+  return value.slice();
+};
+arrayDiff.join = arrayDiff.removeEmpty = function (value) {
+  return value;
+};
+function diffArrays(oldArr, newArr, callback) {
+  return arrayDiff.diff(oldArr, newArr, callback);
+}
+
+function unixToWin(patch) {
+  if (Array.isArray(patch)) {
+    return patch.map(unixToWin);
+  }
+  return _objectSpread2(_objectSpread2({}, patch), {}, {
+    hunks: patch.hunks.map(function (hunk) {
+      return _objectSpread2(_objectSpread2({}, hunk), {}, {
+        lines: hunk.lines.map(function (line, i) {
+          var _hunk$lines;
+          return line.startsWith('\\') || line.endsWith('\r') || (_hunk$lines = hunk.lines[i + 1]) !== null && _hunk$lines !== void 0 && _hunk$lines.startsWith('\\') ? line : line + '\r';
+        })
+      });
+    })
+  });
+}
+function winToUnix(patch) {
+  if (Array.isArray(patch)) {
+    return patch.map(winToUnix);
+  }
+  return _objectSpread2(_objectSpread2({}, patch), {}, {
+    hunks: patch.hunks.map(function (hunk) {
+      return _objectSpread2(_objectSpread2({}, hunk), {}, {
+        lines: hunk.lines.map(function (line) {
+          return line.endsWith('\r') ? line.substring(0, line.length - 1) : line;
+        })
+      });
+    })
+  });
+}
+
+/**
+ * Returns true if the patch consistently uses Unix line endings (or only involves one line and has
+ * no line endings).
+ */
+function isUnix(patch) {
+  if (!Array.isArray(patch)) {
+    patch = [patch];
+  }
+  return !patch.some(function (index) {
+    return index.hunks.some(function (hunk) {
+      return hunk.lines.some(function (line) {
+        return !line.startsWith('\\') && line.endsWith('\r');
+      });
+    });
+  });
+}
+
+/**
+ * Returns true if the patch uses Windows line endings and only Windows line endings.
+ */
+function isWin(patch) {
+  if (!Array.isArray(patch)) {
+    patch = [patch];
+  }
+  return patch.some(function (index) {
+    return index.hunks.some(function (hunk) {
+      return hunk.lines.some(function (line) {
+        return line.endsWith('\r');
+      });
+    });
+  }) && patch.every(function (index) {
+    return index.hunks.every(function (hunk) {
+      return hunk.lines.every(function (line, i) {
+        var _hunk$lines2;
+        return line.startsWith('\\') || line.endsWith('\r') || ((_hunk$lines2 = hunk.lines[i + 1]) === null || _hunk$lines2 === void 0 ? void 0 : _hunk$lines2.startsWith('\\'));
+      });
+    });
+  });
+}
+
+function parsePatch(uniDiff) {
+  var diffstr = uniDiff.split(/\n/),
+    list = [],
+    i = 0;
+  function parseIndex() {
+    var index = {};
+    list.push(index);
+
+    // Parse diff metadata
+    while (i < diffstr.length) {
+      var line = diffstr[i];
+
+      // File header found, end parsing diff metadata
+      if (/^(\-\-\-|\+\+\+|@@)\s/.test(line)) {
+        break;
+      }
+
+      // Diff index
+      var header = /^(?:Index:|diff(?: -r \w+)+)\s+(.+?)\s*$/.exec(line);
+      if (header) {
+        index.index = header[1];
+      }
+      i++;
+    }
+
+    // Parse file headers if they are defined. Unified diff requires them, but
+    // there's no technical issues to have an isolated hunk without file header
+    parseFileHeader(index);
+    parseFileHeader(index);
+
+    // Parse hunks
+    index.hunks = [];
+    while (i < diffstr.length) {
+      var _line = diffstr[i];
+      if (/^(Index:\s|diff\s|\-\-\-\s|\+\+\+\s|===================================================================)/.test(_line)) {
+        break;
+      } else if (/^@@/.test(_line)) {
+        index.hunks.push(parseHunk());
+      } else if (_line) {
+        throw new Error('Unknown line ' + (i + 1) + ' ' + JSON.stringify(_line));
+      } else {
+        i++;
+      }
+    }
+  }
+
+  // Parses the --- and +++ headers, if none are found, no lines
+  // are consumed.
+  function parseFileHeader(index) {
+    var fileHeader = /^(---|\+\+\+)\s+(.*)\r?$/.exec(diffstr[i]);
+    if (fileHeader) {
+      var keyPrefix = fileHeader[1] === '---' ? 'old' : 'new';
+      var data = fileHeader[2].split('\t', 2);
+      var fileName = data[0].replace(/\\\\/g, '\\');
+      if (/^".*"$/.test(fileName)) {
+        fileName = fileName.substr(1, fileName.length - 2);
+      }
+      index[keyPrefix + 'FileName'] = fileName;
+      index[keyPrefix + 'Header'] = (data[1] || '').trim();
+      i++;
+    }
+  }
+
+  // Parses a hunk
+  // This assumes that we are at the start of a hunk.
+  function parseHunk() {
+    var chunkHeaderIndex = i,
+      chunkHeaderLine = diffstr[i++],
+      chunkHeader = chunkHeaderLine.split(/@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@/);
+    var hunk = {
+      oldStart: +chunkHeader[1],
+      oldLines: typeof chunkHeader[2] === 'undefined' ? 1 : +chunkHeader[2],
+      newStart: +chunkHeader[3],
+      newLines: typeof chunkHeader[4] === 'undefined' ? 1 : +chunkHeader[4],
+      lines: []
+    };
+
+    // Unified Diff Format quirk: If the chunk size is 0,
+    // the first number is one lower than one would expect.
+    // https://www.artima.com/weblogs/viewpost.jsp?thread=164293
+    if (hunk.oldLines === 0) {
+      hunk.oldStart += 1;
+    }
+    if (hunk.newLines === 0) {
+      hunk.newStart += 1;
+    }
+    var addCount = 0,
+      removeCount = 0;
+    for (; i < diffstr.length && (removeCount < hunk.oldLines || addCount < hunk.newLines || (_diffstr$i = diffstr[i]) !== null && _diffstr$i !== void 0 && _diffstr$i.startsWith('\\')); i++) {
+      var _diffstr$i;
+      var operation = diffstr[i].length == 0 && i != diffstr.length - 1 ? ' ' : diffstr[i][0];
+      if (operation === '+' || operation === '-' || operation === ' ' || operation === '\\') {
+        hunk.lines.push(diffstr[i]);
+        if (operation === '+') {
+          addCount++;
+        } else if (operation === '-') {
+          removeCount++;
+        } else if (operation === ' ') {
+          addCount++;
+          removeCount++;
+        }
+      } else {
+        throw new Error("Hunk at line ".concat(chunkHeaderIndex + 1, " contained invalid line ").concat(diffstr[i]));
+      }
+    }
+
+    // Handle the empty block count case
+    if (!addCount && hunk.newLines === 1) {
+      hunk.newLines = 0;
+    }
+    if (!removeCount && hunk.oldLines === 1) {
+      hunk.oldLines = 0;
+    }
+
+    // Perform sanity checking
+    if (addCount !== hunk.newLines) {
+      throw new Error('Added line count did not match for hunk at line ' + (chunkHeaderIndex + 1));
+    }
+    if (removeCount !== hunk.oldLines) {
+      throw new Error('Removed line count did not match for hunk at line ' + (chunkHeaderIndex + 1));
+    }
+    return hunk;
+  }
+  while (i < diffstr.length) {
+    parseIndex();
+  }
+  return list;
+}
+
+// Iterator that traverses in the range of [min, max], stepping
+// by distance from a given start position. I.e. for [0, 4], with
+// start of 2, this will iterate 2, 3, 1, 4, 0.
+function distanceIterator (start, minLine, maxLine) {
+  var wantForward = true,
+    backwardExhausted = false,
+    forwardExhausted = false,
+    localOffset = 1;
+  return function iterator() {
+    if (wantForward && !forwardExhausted) {
+      if (backwardExhausted) {
+        localOffset++;
+      } else {
+        wantForward = false;
+      }
+
+      // Check if trying to fit beyond text length, and if not, check it fits
+      // after offset location (or desired location on first iteration)
+      if (start + localOffset <= maxLine) {
+        return start + localOffset;
+      }
+      forwardExhausted = true;
+    }
+    if (!backwardExhausted) {
+      if (!forwardExhausted) {
+        wantForward = true;
+      }
+
+      // Check if trying to fit before text beginning, and if not, check it fits
+      // before offset location
+      if (minLine <= start - localOffset) {
+        return start - localOffset++;
+      }
+      backwardExhausted = true;
+      return iterator();
+    }
+
+    // We tried to fit hunk before text beginning and beyond text length, then
+    // hunk can't fit on the text. Return undefined
+  };
+}
+
+function applyPatch(source, uniDiff) {
+  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  if (typeof uniDiff === 'string') {
+    uniDiff = parsePatch(uniDiff);
+  }
+  if (Array.isArray(uniDiff)) {
+    if (uniDiff.length > 1) {
+      throw new Error('applyPatch only works with a single input.');
+    }
+    uniDiff = uniDiff[0];
+  }
+  if (options.autoConvertLineEndings || options.autoConvertLineEndings == null) {
+    if (hasOnlyWinLineEndings(source) && isUnix(uniDiff)) {
+      uniDiff = unixToWin(uniDiff);
+    } else if (hasOnlyUnixLineEndings(source) && isWin(uniDiff)) {
+      uniDiff = winToUnix(uniDiff);
+    }
+  }
+
+  // Apply the diff to the input
+  var lines = source.split('\n'),
+    hunks = uniDiff.hunks,
+    compareLine = options.compareLine || function (lineNumber, line, operation, patchContent) {
+      return line === patchContent;
+    },
+    fuzzFactor = options.fuzzFactor || 0,
+    minLine = 0;
+  if (fuzzFactor < 0 || !Number.isInteger(fuzzFactor)) {
+    throw new Error('fuzzFactor must be a non-negative integer');
+  }
+
+  // Special case for empty patch.
+  if (!hunks.length) {
+    return source;
+  }
+
+  // Before anything else, handle EOFNL insertion/removal. If the patch tells us to make a change
+  // to the EOFNL that is redundant/impossible - i.e. to remove a newline that's not there, or add a
+  // newline that already exists - then we either return false and fail to apply the patch (if
+  // fuzzFactor is 0) or simply ignore the problem and do nothing (if fuzzFactor is >0).
+  // If we do need to remove/add a newline at EOF, this will always be in the final hunk:
+  var prevLine = '',
+    removeEOFNL = false,
+    addEOFNL = false;
+  for (var i = 0; i < hunks[hunks.length - 1].lines.length; i++) {
+    var line = hunks[hunks.length - 1].lines[i];
+    if (line[0] == '\\') {
+      if (prevLine[0] == '+') {
+        removeEOFNL = true;
+      } else if (prevLine[0] == '-') {
+        addEOFNL = true;
+      }
+    }
+    prevLine = line;
+  }
+  if (removeEOFNL) {
+    if (addEOFNL) {
+      // This means the final line gets changed but doesn't have a trailing newline in either the
+      // original or patched version. In that case, we do nothing if fuzzFactor > 0, and if
+      // fuzzFactor is 0, we simply validate that the source file has no trailing newline.
+      if (!fuzzFactor && lines[lines.length - 1] == '') {
+        return false;
+      }
+    } else if (lines[lines.length - 1] == '') {
+      lines.pop();
+    } else if (!fuzzFactor) {
+      return false;
+    }
+  } else if (addEOFNL) {
+    if (lines[lines.length - 1] != '') {
+      lines.push('');
+    } else if (!fuzzFactor) {
+      return false;
+    }
+  }
+
+  /**
+   * Checks if the hunk can be made to fit at the provided location with at most `maxErrors`
+   * insertions, substitutions, or deletions, while ensuring also that:
+   * - lines deleted in the hunk match exactly, and
+   * - wherever an insertion operation or block of insertion operations appears in the hunk, the
+   *   immediately preceding and following lines of context match exactly
+   *
+   * `toPos` should be set such that lines[toPos] is meant to match hunkLines[0].
+   *
+   * If the hunk can be applied, returns an object with properties `oldLineLastI` and
+   * `replacementLines`. Otherwise, returns null.
+   */
+  function applyHunk(hunkLines, toPos, maxErrors) {
+    var hunkLinesI = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+    var lastContextLineMatched = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
+    var patchedLines = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
+    var patchedLinesLength = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+    var nConsecutiveOldContextLines = 0;
+    var nextContextLineMustMatch = false;
+    for (; hunkLinesI < hunkLines.length; hunkLinesI++) {
+      var hunkLine = hunkLines[hunkLinesI],
+        operation = hunkLine.length > 0 ? hunkLine[0] : ' ',
+        content = hunkLine.length > 0 ? hunkLine.substr(1) : hunkLine;
+      if (operation === '-') {
+        if (compareLine(toPos + 1, lines[toPos], operation, content)) {
+          toPos++;
+          nConsecutiveOldContextLines = 0;
+        } else {
+          if (!maxErrors || lines[toPos] == null) {
+            return null;
+          }
+          patchedLines[patchedLinesLength] = lines[toPos];
+          return applyHunk(hunkLines, toPos + 1, maxErrors - 1, hunkLinesI, false, patchedLines, patchedLinesLength + 1);
+        }
+      }
+      if (operation === '+') {
+        if (!lastContextLineMatched) {
+          return null;
+        }
+        patchedLines[patchedLinesLength] = content;
+        patchedLinesLength++;
+        nConsecutiveOldContextLines = 0;
+        nextContextLineMustMatch = true;
+      }
+      if (operation === ' ') {
+        nConsecutiveOldContextLines++;
+        patchedLines[patchedLinesLength] = lines[toPos];
+        if (compareLine(toPos + 1, lines[toPos], operation, content)) {
+          patchedLinesLength++;
+          lastContextLineMatched = true;
+          nextContextLineMustMatch = false;
+          toPos++;
+        } else {
+          if (nextContextLineMustMatch || !maxErrors) {
+            return null;
+          }
+
+          // Consider 3 possibilities in sequence:
+          // 1. lines contains a *substitution* not included in the patch context, or
+          // 2. lines contains an *insertion* not included in the patch context, or
+          // 3. lines contains a *deletion* not included in the patch context
+          // The first two options are of course only possible if the line from lines is non-null -
+          // i.e. only option 3 is possible if we've overrun the end of the old file.
+          return lines[toPos] && (applyHunk(hunkLines, toPos + 1, maxErrors - 1, hunkLinesI + 1, false, patchedLines, patchedLinesLength + 1) || applyHunk(hunkLines, toPos + 1, maxErrors - 1, hunkLinesI, false, patchedLines, patchedLinesLength + 1)) || applyHunk(hunkLines, toPos, maxErrors - 1, hunkLinesI + 1, false, patchedLines, patchedLinesLength);
+        }
+      }
+    }
+
+    // Before returning, trim any unmodified context lines off the end of patchedLines and reduce
+    // toPos (and thus oldLineLastI) accordingly. This allows later hunks to be applied to a region
+    // that starts in this hunk's trailing context.
+    patchedLinesLength -= nConsecutiveOldContextLines;
+    toPos -= nConsecutiveOldContextLines;
+    patchedLines.length = patchedLinesLength;
+    return {
+      patchedLines: patchedLines,
+      oldLineLastI: toPos - 1
+    };
+  }
+  var resultLines = [];
+
+  // Search best fit offsets for each hunk based on the previous ones
+  var prevHunkOffset = 0;
+  for (var _i = 0; _i < hunks.length; _i++) {
+    var hunk = hunks[_i];
+    var hunkResult = void 0;
+    var maxLine = lines.length - hunk.oldLines + fuzzFactor;
+    var toPos = void 0;
+    for (var maxErrors = 0; maxErrors <= fuzzFactor; maxErrors++) {
+      toPos = hunk.oldStart + prevHunkOffset - 1;
+      var iterator = distanceIterator(toPos, minLine, maxLine);
+      for (; toPos !== undefined; toPos = iterator()) {
+        hunkResult = applyHunk(hunk.lines, toPos, maxErrors);
+        if (hunkResult) {
+          break;
+        }
+      }
+      if (hunkResult) {
+        break;
+      }
+    }
+    if (!hunkResult) {
+      return false;
+    }
+
+    // Copy everything from the end of where we applied the last hunk to the start of this hunk
+    for (var _i2 = minLine; _i2 < toPos; _i2++) {
+      resultLines.push(lines[_i2]);
+    }
+
+    // Add the lines produced by applying the hunk:
+    for (var _i3 = 0; _i3 < hunkResult.patchedLines.length; _i3++) {
+      var _line = hunkResult.patchedLines[_i3];
+      resultLines.push(_line);
+    }
+
+    // Set lower text limit to end of the current hunk, so next ones don't try
+    // to fit over already patched text
+    minLine = hunkResult.oldLineLastI + 1;
+
+    // Note the offset between where the patch said the hunk should've applied and where we
+    // applied it, so we can adjust future hunks accordingly:
+    prevHunkOffset = toPos + 1 - hunk.oldStart;
+  }
+
+  // Copy over the rest of the lines from the old text
+  for (var _i4 = minLine; _i4 < lines.length; _i4++) {
+    resultLines.push(lines[_i4]);
+  }
+  return resultLines.join('\n');
+}
+
+// Wrapper that supports multiple file patches via callbacks.
+function applyPatches(uniDiff, options) {
+  if (typeof uniDiff === 'string') {
+    uniDiff = parsePatch(uniDiff);
+  }
+  var currentIndex = 0;
+  function processIndex() {
+    var index = uniDiff[currentIndex++];
+    if (!index) {
+      return options.complete();
+    }
+    options.loadFile(index, function (err, data) {
+      if (err) {
+        return options.complete(err);
+      }
+      var updatedContent = applyPatch(data, index, options);
+      options.patched(index, updatedContent, function (err) {
+        if (err) {
+          return options.complete(err);
+        }
+        processIndex();
+      });
+    });
+  }
+  processIndex();
+}
+
+function structuredPatch(oldFileName, newFileName, oldStr, newStr, oldHeader, newHeader, options) {
+  if (!options) {
+    options = {};
+  }
+  if (typeof options === 'function') {
+    options = {
+      callback: options
+    };
+  }
+  if (typeof options.context === 'undefined') {
+    options.context = 4;
+  }
+  if (options.newlineIsToken) {
+    throw new Error('newlineIsToken may not be used with patch-generation functions, only with diffing functions');
+  }
+  if (!options.callback) {
+    return diffLinesResultToPatch(diffLines(oldStr, newStr, options));
+  } else {
+    var _options = options,
+      _callback = _options.callback;
+    diffLines(oldStr, newStr, _objectSpread2(_objectSpread2({}, options), {}, {
+      callback: function callback(diff) {
+        var patch = diffLinesResultToPatch(diff);
+        _callback(patch);
+      }
+    }));
+  }
+  function diffLinesResultToPatch(diff) {
+    // STEP 1: Build up the patch with no "\ No newline at end of file" lines and with the arrays
+    //         of lines containing trailing newline characters. We'll tidy up later...
+
+    if (!diff) {
+      return;
+    }
+    diff.push({
+      value: '',
+      lines: []
+    }); // Append an empty value to make cleanup easier
+
+    function contextLines(lines) {
+      return lines.map(function (entry) {
+        return ' ' + entry;
+      });
+    }
+    var hunks = [];
+    var oldRangeStart = 0,
+      newRangeStart = 0,
+      curRange = [],
+      oldLine = 1,
+      newLine = 1;
+    var _loop = function _loop() {
+      var current = diff[i],
+        lines = current.lines || splitLines(current.value);
+      current.lines = lines;
+      if (current.added || current.removed) {
+        var _curRange;
+        // If we have previous context, start with that
+        if (!oldRangeStart) {
+          var prev = diff[i - 1];
+          oldRangeStart = oldLine;
+          newRangeStart = newLine;
+          if (prev) {
+            curRange = options.context > 0 ? contextLines(prev.lines.slice(-options.context)) : [];
+            oldRangeStart -= curRange.length;
+            newRangeStart -= curRange.length;
+          }
+        }
+
+        // Output our changes
+        (_curRange = curRange).push.apply(_curRange, _toConsumableArray(lines.map(function (entry) {
+          return (current.added ? '+' : '-') + entry;
+        })));
+
+        // Track the updated file position
+        if (current.added) {
+          newLine += lines.length;
+        } else {
+          oldLine += lines.length;
+        }
+      } else {
+        // Identical context lines. Track line changes
+        if (oldRangeStart) {
+          // Close out any changes that have been output (or join overlapping)
+          if (lines.length <= options.context * 2 && i < diff.length - 2) {
+            var _curRange2;
+            // Overlapping
+            (_curRange2 = curRange).push.apply(_curRange2, _toConsumableArray(contextLines(lines)));
+          } else {
+            var _curRange3;
+            // end the range and output
+            var contextSize = Math.min(lines.length, options.context);
+            (_curRange3 = curRange).push.apply(_curRange3, _toConsumableArray(contextLines(lines.slice(0, contextSize))));
+            var _hunk = {
+              oldStart: oldRangeStart,
+              oldLines: oldLine - oldRangeStart + contextSize,
+              newStart: newRangeStart,
+              newLines: newLine - newRangeStart + contextSize,
+              lines: curRange
+            };
+            hunks.push(_hunk);
+            oldRangeStart = 0;
+            newRangeStart = 0;
+            curRange = [];
+          }
+        }
+        oldLine += lines.length;
+        newLine += lines.length;
+      }
+    };
+    for (var i = 0; i < diff.length; i++) {
+      _loop();
+    }
+
+    // Step 2: eliminate the trailing `\n` from each line of each hunk, and, where needed, add
+    //         "\ No newline at end of file".
+    for (var _i = 0, _hunks = hunks; _i < _hunks.length; _i++) {
+      var hunk = _hunks[_i];
+      for (var _i2 = 0; _i2 < hunk.lines.length; _i2++) {
+        if (hunk.lines[_i2].endsWith('\n')) {
+          hunk.lines[_i2] = hunk.lines[_i2].slice(0, -1);
+        } else {
+          hunk.lines.splice(_i2 + 1, 0, '\\ No newline at end of file');
+          _i2++; // Skip the line we just added, then continue iterating
+        }
+      }
+    }
+    return {
+      oldFileName: oldFileName,
+      newFileName: newFileName,
+      oldHeader: oldHeader,
+      newHeader: newHeader,
+      hunks: hunks
+    };
+  }
+}
+function formatPatch(diff) {
+  if (Array.isArray(diff)) {
+    return diff.map(formatPatch).join('\n');
+  }
+  var ret = [];
+  if (diff.oldFileName == diff.newFileName) {
+    ret.push('Index: ' + diff.oldFileName);
+  }
+  ret.push('===================================================================');
+  ret.push('--- ' + diff.oldFileName + (typeof diff.oldHeader === 'undefined' ? '' : '\t' + diff.oldHeader));
+  ret.push('+++ ' + diff.newFileName + (typeof diff.newHeader === 'undefined' ? '' : '\t' + diff.newHeader));
+  for (var i = 0; i < diff.hunks.length; i++) {
+    var hunk = diff.hunks[i];
+    // Unified Diff Format quirk: If the chunk size is 0,
+    // the first number is one lower than one would expect.
+    // https://www.artima.com/weblogs/viewpost.jsp?thread=164293
+    if (hunk.oldLines === 0) {
+      hunk.oldStart -= 1;
+    }
+    if (hunk.newLines === 0) {
+      hunk.newStart -= 1;
+    }
+    ret.push('@@ -' + hunk.oldStart + ',' + hunk.oldLines + ' +' + hunk.newStart + ',' + hunk.newLines + ' @@');
+    ret.push.apply(ret, hunk.lines);
+  }
+  return ret.join('\n') + '\n';
+}
+function createTwoFilesPatch(oldFileName, newFileName, oldStr, newStr, oldHeader, newHeader, options) {
+  var _options2;
+  if (typeof options === 'function') {
+    options = {
+      callback: options
+    };
+  }
+  if (!((_options2 = options) !== null && _options2 !== void 0 && _options2.callback)) {
+    var patchObj = structuredPatch(oldFileName, newFileName, oldStr, newStr, oldHeader, newHeader, options);
+    if (!patchObj) {
+      return;
+    }
+    return formatPatch(patchObj);
+  } else {
+    var _options3 = options,
+      _callback2 = _options3.callback;
+    structuredPatch(oldFileName, newFileName, oldStr, newStr, oldHeader, newHeader, _objectSpread2(_objectSpread2({}, options), {}, {
+      callback: function callback(patchObj) {
+        if (!patchObj) {
+          _callback2();
+        } else {
+          _callback2(formatPatch(patchObj));
+        }
+      }
+    }));
+  }
+}
+function createPatch(fileName, oldStr, newStr, oldHeader, newHeader, options) {
+  return createTwoFilesPatch(fileName, fileName, oldStr, newStr, oldHeader, newHeader, options);
+}
+
+/**
+ * Split `text` into an array of lines, including the trailing newline character (where present)
+ */
+function splitLines(text) {
+  var hasTrailingNl = text.endsWith('\n');
+  var result = text.split('\n').map(function (line) {
+    return line + '\n';
+  });
+  if (hasTrailingNl) {
+    result.pop();
+  } else {
+    result.push(result.pop().slice(0, -1));
+  }
+  return result;
+}
+
+function arrayEqual(a, b) {
+  if (a.length !== b.length) {
+    return false;
+  }
+  return arrayStartsWith(a, b);
+}
+function arrayStartsWith(array, start) {
+  if (start.length > array.length) {
+    return false;
+  }
+  for (var i = 0; i < start.length; i++) {
+    if (start[i] !== array[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function calcLineCount(hunk) {
+  var _calcOldNewLineCount = calcOldNewLineCount(hunk.lines),
+    oldLines = _calcOldNewLineCount.oldLines,
+    newLines = _calcOldNewLineCount.newLines;
+  if (oldLines !== undefined) {
+    hunk.oldLines = oldLines;
+  } else {
+    delete hunk.oldLines;
+  }
+  if (newLines !== undefined) {
+    hunk.newLines = newLines;
+  } else {
+    delete hunk.newLines;
+  }
+}
+function merge(mine, theirs, base) {
+  mine = loadPatch(mine, base);
+  theirs = loadPatch(theirs, base);
+  var ret = {};
+
+  // For index we just let it pass through as it doesn't have any necessary meaning.
+  // Leaving sanity checks on this to the API consumer that may know more about the
+  // meaning in their own context.
+  if (mine.index || theirs.index) {
+    ret.index = mine.index || theirs.index;
+  }
+  if (mine.newFileName || theirs.newFileName) {
+    if (!fileNameChanged(mine)) {
+      // No header or no change in ours, use theirs (and ours if theirs does not exist)
+      ret.oldFileName = theirs.oldFileName || mine.oldFileName;
+      ret.newFileName = theirs.newFileName || mine.newFileName;
+      ret.oldHeader = theirs.oldHeader || mine.oldHeader;
+      ret.newHeader = theirs.newHeader || mine.newHeader;
+    } else if (!fileNameChanged(theirs)) {
+      // No header or no change in theirs, use ours
+      ret.oldFileName = mine.oldFileName;
+      ret.newFileName = mine.newFileName;
+      ret.oldHeader = mine.oldHeader;
+      ret.newHeader = mine.newHeader;
+    } else {
+      // Both changed... figure it out
+      ret.oldFileName = selectField(ret, mine.oldFileName, theirs.oldFileName);
+      ret.newFileName = selectField(ret, mine.newFileName, theirs.newFileName);
+      ret.oldHeader = selectField(ret, mine.oldHeader, theirs.oldHeader);
+      ret.newHeader = selectField(ret, mine.newHeader, theirs.newHeader);
+    }
+  }
+  ret.hunks = [];
+  var mineIndex = 0,
+    theirsIndex = 0,
+    mineOffset = 0,
+    theirsOffset = 0;
+  while (mineIndex < mine.hunks.length || theirsIndex < theirs.hunks.length) {
+    var mineCurrent = mine.hunks[mineIndex] || {
+        oldStart: Infinity
+      },
+      theirsCurrent = theirs.hunks[theirsIndex] || {
+        oldStart: Infinity
+      };
+    if (hunkBefore(mineCurrent, theirsCurrent)) {
+      // This patch does not overlap with any of the others, yay.
+      ret.hunks.push(cloneHunk(mineCurrent, mineOffset));
+      mineIndex++;
+      theirsOffset += mineCurrent.newLines - mineCurrent.oldLines;
+    } else if (hunkBefore(theirsCurrent, mineCurrent)) {
+      // This patch does not overlap with any of the others, yay.
+      ret.hunks.push(cloneHunk(theirsCurrent, theirsOffset));
+      theirsIndex++;
+      mineOffset += theirsCurrent.newLines - theirsCurrent.oldLines;
+    } else {
+      // Overlap, merge as best we can
+      var mergedHunk = {
+        oldStart: Math.min(mineCurrent.oldStart, theirsCurrent.oldStart),
+        oldLines: 0,
+        newStart: Math.min(mineCurrent.newStart + mineOffset, theirsCurrent.oldStart + theirsOffset),
+        newLines: 0,
+        lines: []
+      };
+      mergeLines(mergedHunk, mineCurrent.oldStart, mineCurrent.lines, theirsCurrent.oldStart, theirsCurrent.lines);
+      theirsIndex++;
+      mineIndex++;
+      ret.hunks.push(mergedHunk);
+    }
+  }
+  return ret;
+}
+function loadPatch(param, base) {
+  if (typeof param === 'string') {
+    if (/^@@/m.test(param) || /^Index:/m.test(param)) {
+      return parsePatch(param)[0];
+    }
+    if (!base) {
+      throw new Error('Must provide a base reference or pass in a patch');
+    }
+    return structuredPatch(undefined, undefined, base, param);
+  }
+  return param;
+}
+function fileNameChanged(patch) {
+  return patch.newFileName && patch.newFileName !== patch.oldFileName;
+}
+function selectField(index, mine, theirs) {
+  if (mine === theirs) {
+    return mine;
+  } else {
+    index.conflict = true;
+    return {
+      mine: mine,
+      theirs: theirs
+    };
+  }
+}
+function hunkBefore(test, check) {
+  return test.oldStart < check.oldStart && test.oldStart + test.oldLines < check.oldStart;
+}
+function cloneHunk(hunk, offset) {
+  return {
+    oldStart: hunk.oldStart,
+    oldLines: hunk.oldLines,
+    newStart: hunk.newStart + offset,
+    newLines: hunk.newLines,
+    lines: hunk.lines
+  };
+}
+function mergeLines(hunk, mineOffset, mineLines, theirOffset, theirLines) {
+  // This will generally result in a conflicted hunk, but there are cases where the context
+  // is the only overlap where we can successfully merge the content here.
+  var mine = {
+      offset: mineOffset,
+      lines: mineLines,
+      index: 0
+    },
+    their = {
+      offset: theirOffset,
+      lines: theirLines,
+      index: 0
+    };
+
+  // Handle any leading content
+  insertLeading(hunk, mine, their);
+  insertLeading(hunk, their, mine);
+
+  // Now in the overlap content. Scan through and select the best changes from each.
+  while (mine.index < mine.lines.length && their.index < their.lines.length) {
+    var mineCurrent = mine.lines[mine.index],
+      theirCurrent = their.lines[their.index];
+    if ((mineCurrent[0] === '-' || mineCurrent[0] === '+') && (theirCurrent[0] === '-' || theirCurrent[0] === '+')) {
+      // Both modified ...
+      mutualChange(hunk, mine, their);
+    } else if (mineCurrent[0] === '+' && theirCurrent[0] === ' ') {
+      var _hunk$lines;
+      // Mine inserted
+      (_hunk$lines = hunk.lines).push.apply(_hunk$lines, _toConsumableArray(collectChange(mine)));
+    } else if (theirCurrent[0] === '+' && mineCurrent[0] === ' ') {
+      var _hunk$lines2;
+      // Theirs inserted
+      (_hunk$lines2 = hunk.lines).push.apply(_hunk$lines2, _toConsumableArray(collectChange(their)));
+    } else if (mineCurrent[0] === '-' && theirCurrent[0] === ' ') {
+      // Mine removed or edited
+      removal(hunk, mine, their);
+    } else if (theirCurrent[0] === '-' && mineCurrent[0] === ' ') {
+      // Their removed or edited
+      removal(hunk, their, mine, true);
+    } else if (mineCurrent === theirCurrent) {
+      // Context identity
+      hunk.lines.push(mineCurrent);
+      mine.index++;
+      their.index++;
+    } else {
+      // Context mismatch
+      conflict(hunk, collectChange(mine), collectChange(their));
+    }
+  }
+
+  // Now push anything that may be remaining
+  insertTrailing(hunk, mine);
+  insertTrailing(hunk, their);
+  calcLineCount(hunk);
+}
+function mutualChange(hunk, mine, their) {
+  var myChanges = collectChange(mine),
+    theirChanges = collectChange(their);
+  if (allRemoves(myChanges) && allRemoves(theirChanges)) {
+    // Special case for remove changes that are supersets of one another
+    if (arrayStartsWith(myChanges, theirChanges) && skipRemoveSuperset(their, myChanges, myChanges.length - theirChanges.length)) {
+      var _hunk$lines3;
+      (_hunk$lines3 = hunk.lines).push.apply(_hunk$lines3, _toConsumableArray(myChanges));
+      return;
+    } else if (arrayStartsWith(theirChanges, myChanges) && skipRemoveSuperset(mine, theirChanges, theirChanges.length - myChanges.length)) {
+      var _hunk$lines4;
+      (_hunk$lines4 = hunk.lines).push.apply(_hunk$lines4, _toConsumableArray(theirChanges));
+      return;
+    }
+  } else if (arrayEqual(myChanges, theirChanges)) {
+    var _hunk$lines5;
+    (_hunk$lines5 = hunk.lines).push.apply(_hunk$lines5, _toConsumableArray(myChanges));
+    return;
+  }
+  conflict(hunk, myChanges, theirChanges);
+}
+function removal(hunk, mine, their, swap) {
+  var myChanges = collectChange(mine),
+    theirChanges = collectContext(their, myChanges);
+  if (theirChanges.merged) {
+    var _hunk$lines6;
+    (_hunk$lines6 = hunk.lines).push.apply(_hunk$lines6, _toConsumableArray(theirChanges.merged));
+  } else {
+    conflict(hunk, swap ? theirChanges : myChanges, swap ? myChanges : theirChanges);
+  }
+}
+function conflict(hunk, mine, their) {
+  hunk.conflict = true;
+  hunk.lines.push({
+    conflict: true,
+    mine: mine,
+    theirs: their
+  });
+}
+function insertLeading(hunk, insert, their) {
+  while (insert.offset < their.offset && insert.index < insert.lines.length) {
+    var line = insert.lines[insert.index++];
+    hunk.lines.push(line);
+    insert.offset++;
+  }
+}
+function insertTrailing(hunk, insert) {
+  while (insert.index < insert.lines.length) {
+    var line = insert.lines[insert.index++];
+    hunk.lines.push(line);
+  }
+}
+function collectChange(state) {
+  var ret = [],
+    operation = state.lines[state.index][0];
+  while (state.index < state.lines.length) {
+    var line = state.lines[state.index];
+
+    // Group additions that are immediately after subtractions and treat them as one "atomic" modify change.
+    if (operation === '-' && line[0] === '+') {
+      operation = '+';
+    }
+    if (operation === line[0]) {
+      ret.push(line);
+      state.index++;
+    } else {
+      break;
+    }
+  }
+  return ret;
+}
+function collectContext(state, matchChanges) {
+  var changes = [],
+    merged = [],
+    matchIndex = 0,
+    contextChanges = false,
+    conflicted = false;
+  while (matchIndex < matchChanges.length && state.index < state.lines.length) {
+    var change = state.lines[state.index],
+      match = matchChanges[matchIndex];
+
+    // Once we've hit our add, then we are done
+    if (match[0] === '+') {
+      break;
+    }
+    contextChanges = contextChanges || change[0] !== ' ';
+    merged.push(match);
+    matchIndex++;
+
+    // Consume any additions in the other block as a conflict to attempt
+    // to pull in the remaining context after this
+    if (change[0] === '+') {
+      conflicted = true;
+      while (change[0] === '+') {
+        changes.push(change);
+        change = state.lines[++state.index];
+      }
+    }
+    if (match.substr(1) === change.substr(1)) {
+      changes.push(change);
+      state.index++;
+    } else {
+      conflicted = true;
+    }
+  }
+  if ((matchChanges[matchIndex] || '')[0] === '+' && contextChanges) {
+    conflicted = true;
+  }
+  if (conflicted) {
+    return changes;
+  }
+  while (matchIndex < matchChanges.length) {
+    merged.push(matchChanges[matchIndex++]);
+  }
+  return {
+    merged: merged,
+    changes: changes
+  };
+}
+function allRemoves(changes) {
+  return changes.reduce(function (prev, change) {
+    return prev && change[0] === '-';
+  }, true);
+}
+function skipRemoveSuperset(state, removeChanges, delta) {
+  for (var i = 0; i < delta; i++) {
+    var changeContent = removeChanges[removeChanges.length - delta + i].substr(1);
+    if (state.lines[state.index + i] !== ' ' + changeContent) {
+      return false;
+    }
+  }
+  state.index += delta;
+  return true;
+}
+function calcOldNewLineCount(lines) {
+  var oldLines = 0;
+  var newLines = 0;
+  lines.forEach(function (line) {
+    if (typeof line !== 'string') {
+      var myCount = calcOldNewLineCount(line.mine);
+      var theirCount = calcOldNewLineCount(line.theirs);
+      if (oldLines !== undefined) {
+        if (myCount.oldLines === theirCount.oldLines) {
+          oldLines += myCount.oldLines;
+        } else {
+          oldLines = undefined;
+        }
+      }
+      if (newLines !== undefined) {
+        if (myCount.newLines === theirCount.newLines) {
+          newLines += myCount.newLines;
+        } else {
+          newLines = undefined;
+        }
+      }
+    } else {
+      if (newLines !== undefined && (line[0] === '+' || line[0] === ' ')) {
+        newLines++;
+      }
+      if (oldLines !== undefined && (line[0] === '-' || line[0] === ' ')) {
+        oldLines++;
+      }
+    }
+  });
+  return {
+    oldLines: oldLines,
+    newLines: newLines
+  };
+}
+
+function reversePatch(structuredPatch) {
+  if (Array.isArray(structuredPatch)) {
+    return structuredPatch.map(reversePatch).reverse();
+  }
+  return _objectSpread2(_objectSpread2({}, structuredPatch), {}, {
+    oldFileName: structuredPatch.newFileName,
+    oldHeader: structuredPatch.newHeader,
+    newFileName: structuredPatch.oldFileName,
+    newHeader: structuredPatch.oldHeader,
+    hunks: structuredPatch.hunks.map(function (hunk) {
+      return {
+        oldLines: hunk.newLines,
+        oldStart: hunk.newStart,
+        newLines: hunk.oldLines,
+        newStart: hunk.oldStart,
+        lines: hunk.lines.map(function (l) {
+          if (l.startsWith('-')) {
+            return "+".concat(l.slice(1));
+          }
+          if (l.startsWith('+')) {
+            return "-".concat(l.slice(1));
+          }
+          return l;
+        })
+      };
+    })
+  });
+}
+
+// See: http://code.google.com/p/google-diff-match-patch/wiki/API
+function convertChangesToDMP(changes) {
+  var ret = [],
+    change,
+    operation;
+  for (var i = 0; i < changes.length; i++) {
+    change = changes[i];
+    if (change.added) {
+      operation = 1;
+    } else if (change.removed) {
+      operation = -1;
+    } else {
+      operation = 0;
+    }
+    ret.push([operation, change.value]);
+  }
+  return ret;
+}
+
+function convertChangesToXML(changes) {
+  var ret = [];
+  for (var i = 0; i < changes.length; i++) {
+    var change = changes[i];
+    if (change.added) {
+      ret.push('<ins>');
+    } else if (change.removed) {
+      ret.push('<del>');
+    }
+    ret.push(escapeHTML(change.value));
+    if (change.added) {
+      ret.push('</ins>');
+    } else if (change.removed) {
+      ret.push('</del>');
+    }
+  }
+  return ret.join('');
+}
+function escapeHTML(s) {
+  var n = s;
+  n = n.replace(/&/g, '&amp;');
+  n = n.replace(/</g, '&lt;');
+  n = n.replace(/>/g, '&gt;');
+  n = n.replace(/"/g, '&quot;');
+  return n;
+}
+
+
+
+
 /***/ })
 
 /******/ 	});
@@ -13051,6 +23184,36 @@ module.exports = getWDSMetadata;
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/create fake namespace object */
+/******/ 	(() => {
+/******/ 		var getProto = Object.getPrototypeOf ? (obj) => (Object.getPrototypeOf(obj)) : (obj) => (obj.__proto__);
+/******/ 		var leafPrototypes;
+/******/ 		// create a fake namespace object
+/******/ 		// mode & 1: value is a module id, require it
+/******/ 		// mode & 2: merge all properties of value into the ns
+/******/ 		// mode & 4: return value when already ns object
+/******/ 		// mode & 16: return value when it's Promise-like
+/******/ 		// mode & 8|1: behave like require
+/******/ 		__webpack_require__.t = function(value, mode) {
+/******/ 			if(mode & 1) value = this(value);
+/******/ 			if(mode & 8) return value;
+/******/ 			if(typeof value === 'object' && value) {
+/******/ 				if((mode & 4) && value.__esModule) return value;
+/******/ 				if((mode & 16) && typeof value.then === 'function') return value;
+/******/ 			}
+/******/ 			var ns = Object.create(null);
+/******/ 			__webpack_require__.r(ns);
+/******/ 			var def = {};
+/******/ 			leafPrototypes = leafPrototypes || [null, getProto({}), getProto([]), getProto(getProto)];
+/******/ 			for(var current = mode & 2 && value; typeof current == 'object' && !~leafPrototypes.indexOf(current); current = getProto(current)) {
+/******/ 				Object.getOwnPropertyNames(current).forEach((key) => (def[key] = () => (value[key])));
+/******/ 			}
+/******/ 			def['default'] = () => (value);
+/******/ 			__webpack_require__.d(ns, def);
+/******/ 			return ns;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -13060,6 +23223,28 @@ module.exports = getWDSMetadata;
 /******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 				}
 /******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/ensure chunk */
+/******/ 	(() => {
+/******/ 		__webpack_require__.f = {};
+/******/ 		// This file contains only the entry chunk.
+/******/ 		// The chunk loading function for additional chunks
+/******/ 		__webpack_require__.e = (chunkId) => {
+/******/ 			return Promise.all(Object.keys(__webpack_require__.f).reduce((promises, key) => {
+/******/ 				__webpack_require__.f[key](chunkId, promises);
+/******/ 				return promises;
+/******/ 			}, []));
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/get javascript chunk filename */
+/******/ 	(() => {
+/******/ 		// This function allow to reference async chunks
+/******/ 		__webpack_require__.u = (chunkId) => {
+/******/ 			// return url for filenames based on template
+/******/ 			return "" + chunkId + ".bundle.js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -13079,7 +23264,7 @@ module.exports = getWDSMetadata;
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("0e95d7a1244c8268cf1b")
+/******/ 		__webpack_require__.h = () => ("1427c7e5026065c35a77")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
@@ -13624,7 +23809,44 @@ module.exports = getWDSMetadata;
 /******/ 			"background": 0
 /******/ 		};
 /******/ 		
-/******/ 		// no chunk on demand loading
+/******/ 		__webpack_require__.f.j = (chunkId, promises) => {
+/******/ 				// JSONP chunk loading for javascript
+/******/ 				var installedChunkData = __webpack_require__.o(installedChunks, chunkId) ? installedChunks[chunkId] : undefined;
+/******/ 				if(installedChunkData !== 0) { // 0 means "already installed".
+/******/ 		
+/******/ 					// a Promise means "currently loading".
+/******/ 					if(installedChunkData) {
+/******/ 						promises.push(installedChunkData[2]);
+/******/ 					} else {
+/******/ 						if(true) { // all chunks have JS
+/******/ 							// setup Promise in chunk cache
+/******/ 							var promise = new Promise((resolve, reject) => (installedChunkData = installedChunks[chunkId] = [resolve, reject]));
+/******/ 							promises.push(installedChunkData[2] = promise);
+/******/ 		
+/******/ 							// start chunk loading
+/******/ 							var url = __webpack_require__.p + __webpack_require__.u(chunkId);
+/******/ 							// create error before stack unwound to get useful stacktrace later
+/******/ 							var error = new Error();
+/******/ 							var loadingEnded = (event) => {
+/******/ 								if(__webpack_require__.o(installedChunks, chunkId)) {
+/******/ 									installedChunkData = installedChunks[chunkId];
+/******/ 									if(installedChunkData !== 0) installedChunks[chunkId] = undefined;
+/******/ 									if(installedChunkData) {
+/******/ 										var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 										var realSrc = event && event.target && event.target.src;
+/******/ 										error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 										error.name = 'ChunkLoadError';
+/******/ 										error.type = errorType;
+/******/ 										error.request = realSrc;
+/******/ 										installedChunkData[1](error);
+/******/ 									}
+/******/ 								}
+/******/ 							};
+/******/ 							__webpack_require__.l(url, loadingEnded, "chunk-" + chunkId, chunkId);
+/******/ 						}
+/******/ 					}
+/******/ 				}
+/******/ 		};
 /******/ 		
 /******/ 		// no prefetching
 /******/ 		
@@ -14122,7 +24344,34 @@ module.exports = getWDSMetadata;
 /******/ 		
 /******/ 		// no on chunks loaded
 /******/ 		
-/******/ 		// no jsonp function
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 		
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = self["webpackChunkchrome_extension_boilerplate_react"] = self["webpackChunkchrome_extension_boilerplate_react"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
 /******/ 	
 /************************************************************************/

@@ -5139,6 +5139,33 @@ module.exports = path.URL;
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/postcss-loader/dist/cjs.js!./src/pages/Content/MentionTextArea/style.css":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/postcss-loader/dist/cjs.js!./src/pages/Content/MentionTextArea/style.css ***!
+  \********************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "[contenteditable=true]:empty:before {\n  content: attr(placeholder);\n  color: #9ca3af;\n  pointer-events: none;\n}\n\n[contenteditable=true]:focus {\n  outline: none;\n}\n\n.action-pill {\n  cursor: default;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  user-select: none;\n}", "",{"version":3,"sources":["webpack://./src/pages/Content/MentionTextArea/style.css"],"names":[],"mappings":"AAAA;EACI,0BAAA;EACA,cAAA;EACA,oBAAA;AACJ;;AAEA;EACI,aAAA;AACJ;;AAEA;EACI,eAAA;EACA,yBAAA;EACG,sBAAA;EACK,iBAAA;AACZ","sourcesContent":["[contenteditable=true]:empty:before {\r\n    content: attr(placeholder);\r\n    color: #9ca3af;\r\n    pointer-events: none;\r\n}\r\n\r\n[contenteditable=true]:focus {\r\n    outline: none;\r\n}\r\n\r\n.action-pill {\r\n    cursor: default;\r\n    -webkit-user-select: none;\r\n       -moz-user-select: none;\r\n            user-select: none;\r\n}"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/postcss-loader/dist/cjs.js!./src/styles.css":
 /*!***************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/postcss-loader/dist/cjs.js!./src/styles.css ***!
@@ -5159,7 +5186,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x: ;\n  --tw-pan-y: ;\n  --tw-pinch-zoom: ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position: ;\n  --tw-gradient-via-position: ;\n  --tw-gradient-to-position: ;\n  --tw-ordinal: ;\n  --tw-slashed-zero: ;\n  --tw-numeric-figure: ;\n  --tw-numeric-spacing: ;\n  --tw-numeric-fraction: ;\n  --tw-ring-inset: ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur: ;\n  --tw-brightness: ;\n  --tw-contrast: ;\n  --tw-grayscale: ;\n  --tw-hue-rotate: ;\n  --tw-invert: ;\n  --tw-saturate: ;\n  --tw-sepia: ;\n  --tw-drop-shadow: ;\n  --tw-backdrop-blur: ;\n  --tw-backdrop-brightness: ;\n  --tw-backdrop-contrast: ;\n  --tw-backdrop-grayscale: ;\n  --tw-backdrop-hue-rotate: ;\n  --tw-backdrop-invert: ;\n  --tw-backdrop-opacity: ;\n  --tw-backdrop-saturate: ;\n  --tw-backdrop-sepia: ;\n  --tw-contain-size: ;\n  --tw-contain-layout: ;\n  --tw-contain-paint: ;\n  --tw-contain-style: ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x: ;\n  --tw-pan-y: ;\n  --tw-pinch-zoom: ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position: ;\n  --tw-gradient-via-position: ;\n  --tw-gradient-to-position: ;\n  --tw-ordinal: ;\n  --tw-slashed-zero: ;\n  --tw-numeric-figure: ;\n  --tw-numeric-spacing: ;\n  --tw-numeric-fraction: ;\n  --tw-ring-inset: ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur: ;\n  --tw-brightness: ;\n  --tw-contrast: ;\n  --tw-grayscale: ;\n  --tw-hue-rotate: ;\n  --tw-invert: ;\n  --tw-saturate: ;\n  --tw-sepia: ;\n  --tw-drop-shadow: ;\n  --tw-backdrop-blur: ;\n  --tw-backdrop-brightness: ;\n  --tw-backdrop-contrast: ;\n  --tw-backdrop-grayscale: ;\n  --tw-backdrop-hue-rotate: ;\n  --tw-backdrop-invert: ;\n  --tw-backdrop-opacity: ;\n  --tw-backdrop-saturate: ;\n  --tw-backdrop-sepia: ;\n  --tw-contain-size: ;\n  --tw-contain-layout: ;\n  --tw-contain-paint: ;\n  --tw-contain-style: ;\n} /*\n! tailwindcss v3.4.14 | MIT License | https://tailwindcss.com\n*/ /*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: #e5e7eb; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: \"\";\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n7. Disable tap highlights on iOS\n*/\nhtml,\n:host {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n  tab-size: 4; /* 3 */\n  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"; /* 4 */\n  font-feature-settings: normal; /* 5 */\n  font-variation-settings: normal; /* 6 */\n  -webkit-tap-highlight-color: transparent; /* 7 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n  text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font-family by default.\n2. Use the user's configured `mono` font-feature-settings by default.\n3. Use the user's configured `mono` font-variation-settings by default.\n4. Correct the odd `em` font sizing in all browsers.\n*/\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; /* 1 */\n  font-feature-settings: normal; /* 2 */\n  font-variation-settings: normal; /* 3 */\n  font-size: 1em; /* 4 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-feature-settings: inherit; /* 1 */\n  font-variation-settings: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  letter-spacing: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\nbutton,\ninput:where([type=button]),\ninput:where([type=reset]),\ninput:where([type=submit]) {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n[type=search] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\nbutton,\n[role=button] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n[hidden]:where(:not([hidden=until-found])) {\n  display: none;\n}\n\n:root {\n  --background: 0 0% 100%;\n  --foreground: 222.2 47.4% 11.2%;\n  --muted: 210 40% 96.1%;\n  --muted-foreground: 215.4 16.3% 46.9%;\n  --popover: 0 0% 100%;\n  --popover-foreground: 222.2 47.4% 11.2%;\n  --border: 214.3 31.8% 91.4%;\n  --input: 214.3 31.8% 91.4%;\n  --card: 0 0% 100%;\n  --card-foreground: 222.2 47.4% 11.2%;\n  --primary: 222.2 47.4% 11.2%;\n  --primary-foreground: 210 40% 98%;\n  --secondary: 210 40% 96.1%;\n  --secondary-foreground: 222.2 47.4% 11.2%;\n  --accent: 210 40% 96.1%;\n  --accent-foreground: 222.2 47.4% 11.2%;\n  --destructive: 0 100% 50%;\n  --destructive-foreground: 210 40% 98%;\n  --ring: 215 20.2% 65.1%;\n  --radius: 0.5rem;\n}\n\n* {\n  border-color: hsl(var(--border));\n}\n\nbody {\n  background-color: hsl(var(--background));\n  color: hsl(var(--foreground));\n  font-feature-settings: \"rlig\" 1, \"calt\" 1;\n}\n\n.container {\n  width: 100%;\n  margin-right: auto;\n  margin-left: auto;\n  padding-right: 2rem;\n  padding-left: 2rem;\n}\n\n@media (min-width: 1400px) {\n  .container {\n    max-width: 1400px;\n  }\n}\n.visible {\n  visibility: visible;\n}\n\n.fixed {\n  position: fixed;\n}\n\n.mx-2 {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\n\n.my-2 {\n  margin-top: 0.5rem;\n  margin-bottom: 0.5rem;\n}\n\n.mb-4 {\n  margin-bottom: 1rem;\n}\n\n.mb-6 {\n  margin-bottom: 1.5rem;\n}\n\n.block {\n  display: block;\n}\n\n.inline-block {\n  display: inline-block;\n}\n\n.flex {\n  display: flex;\n}\n\n.h-32 {\n  height: 8rem;\n}\n\n.h-4 {\n  height: 1rem;\n}\n\n.h-5 {\n  height: 1.25rem;\n}\n\n.max-h-8 {\n  max-height: 2rem;\n}\n\n.w-2 {\n  width: 0.5rem;\n}\n\n.w-4 {\n  width: 1rem;\n}\n\n.w-5 {\n  width: 1.25rem;\n}\n\n.w-full {\n  width: 100%;\n}\n\n.max-w-52 {\n  max-width: 13rem;\n}\n\n.max-w-8 {\n  max-width: 2rem;\n}\n\n.max-w-\\[85\\%\\] {\n  max-width: 85%;\n}\n\n.flex-1 {\n  flex: 1 1 0%;\n}\n\n.flex-none {\n  flex: none;\n}\n\n.flex-shrink-0 {\n  flex-shrink: 0;\n}\n\n@keyframes pulse {\n  50% {\n    opacity: 0.5;\n  }\n}\n.animate-pulse {\n  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;\n}\n\n@keyframes spin {\n  to {\n    transform: rotate(360deg);\n  }\n}\n.animate-spin {\n  animation: spin 1s linear infinite;\n}\n\n.cursor-col-resize {\n  cursor: col-resize;\n}\n\n.cursor-pointer {\n  cursor: pointer;\n}\n\n.resize-none {\n  resize: none;\n}\n\n.flex-row {\n  flex-direction: row;\n}\n\n.flex-row-reverse {\n  flex-direction: row-reverse;\n}\n\n.flex-col {\n  flex-direction: column;\n}\n\n.items-center {\n  align-items: center;\n}\n\n.justify-start {\n  justify-content: flex-start;\n}\n\n.justify-end {\n  justify-content: flex-end;\n}\n\n.justify-center {\n  justify-content: center;\n}\n\n.justify-between {\n  justify-content: space-between;\n}\n\n.justify-evenly {\n  justify-content: space-evenly;\n}\n\n.gap-2 {\n  gap: 0.5rem;\n}\n\n.space-x-2 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-x-reverse: 0;\n  margin-right: calc(0.5rem * var(--tw-space-x-reverse));\n  margin-left: calc(0.5rem * (1 - var(--tw-space-x-reverse)));\n}\n\n.space-y-2 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(0.5rem * (1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));\n}\n\n.space-y-4 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(1rem * (1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(1rem * var(--tw-space-y-reverse));\n}\n\n.overflow-hidden {\n  overflow: hidden;\n}\n\n.overflow-y-auto {\n  overflow-y: auto;\n}\n\n.rounded-full {\n  border-radius: 9999px;\n}\n\n.rounded-lg {\n  border-radius: var(--radius);\n}\n\n.border {\n  border-width: 1px;\n}\n\n.border-2 {\n  border-width: 2px;\n}\n\n.border-4 {\n  border-width: 4px;\n}\n\n.border-solid {\n  border-style: solid;\n}\n\n.border-current {\n  border-color: currentColor;\n}\n\n.border-gray-700 {\n  --tw-border-opacity: 1;\n  border-color: rgb(55 65 81/var(--tw-border-opacity));\n}\n\n.border-orange-600 {\n  --tw-border-opacity: 1;\n  border-color: rgb(234 88 12/var(--tw-border-opacity));\n}\n\n.border-e-transparent {\n  border-inline-end-color: transparent;\n}\n\n.bg-gray-600 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(75 85 99/var(--tw-bg-opacity));\n}\n\n.bg-gray-800 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(31 41 55/var(--tw-bg-opacity));\n}\n\n.bg-gray-900 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(17 24 39/var(--tw-bg-opacity));\n}\n\n.bg-green-500 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(34 197 94/var(--tw-bg-opacity));\n}\n\n.bg-orange-600 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(234 88 12/var(--tw-bg-opacity));\n}\n\n.bg-red-500 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(239 68 68/var(--tw-bg-opacity));\n}\n\n.p-2 {\n  padding: 0.5rem;\n}\n\n.p-3 {\n  padding: 0.75rem;\n}\n\n.p-4 {\n  padding: 1rem;\n}\n\n.px-3 {\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n}\n\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n\n.py-2 {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n}\n\n.align-\\[-0\\.125em\\] {\n  vertical-align: -0.125em;\n}\n\n.text-lg {\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n}\n\n.text-sm {\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n}\n\n.font-medium {\n  font-weight: 500;\n}\n\n.font-semibold {\n  font-weight: 600;\n}\n\n.italic {\n  font-style: italic;\n}\n\n.text-gray-100 {\n  --tw-text-opacity: 1;\n  color: rgb(243 244 246/var(--tw-text-opacity));\n}\n\n.text-orange-600 {\n  --tw-text-opacity: 1;\n  color: rgb(234 88 12/var(--tw-text-opacity));\n}\n\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255/var(--tw-text-opacity));\n}\n\n.shadow-xl {\n  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow);\n}\n\n.filter {\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\n\n.transition-colors {\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n\n@keyframes enter {\n  from {\n    opacity: var(--tw-enter-opacity, 1);\n    transform: translate3d(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0), 0) scale3d(var(--tw-enter-scale, 1), var(--tw-enter-scale, 1), var(--tw-enter-scale, 1)) rotate(var(--tw-enter-rotate, 0));\n  }\n}\n@keyframes exit {\n  to {\n    opacity: var(--tw-exit-opacity, 1);\n    transform: translate3d(var(--tw-exit-translate-x, 0), var(--tw-exit-translate-y, 0), 0) scale3d(var(--tw-exit-scale, 1), var(--tw-exit-scale, 1), var(--tw-exit-scale, 1)) rotate(var(--tw-exit-rotate, 0));\n  }\n}\n.running {\n  animation-play-state: running;\n}\n\n/* width */\n.ai-scrollbar::-webkit-scrollbar {\n  width: 5px;\n}\n\n/* Track */\n.ai-scrollbar::-webkit-scrollbar-track {\n  background: rgb(17, 24, 39);\n}\n\n/* Handle */\n.ai-scrollbar::-webkit-scrollbar-thumb {\n  background: rgb(37, 44, 59);\n  border-radius: 5px;\n}\n\n.hover\\:bg-orange-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(194 65 12/var(--tw-bg-opacity));\n}\n\n.focus\\:border-orange-500:focus {\n  --tw-border-opacity: 1;\n  border-color: rgb(249 115 22/var(--tw-border-opacity));\n}\n\n.focus\\:outline-none:focus {\n  outline: 2px solid transparent;\n  outline-offset: 2px;\n}\n\n.focus\\:ring-1:focus {\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 rgba(0, 0, 0, 0));\n}\n\n.focus\\:ring-2:focus {\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 rgba(0, 0, 0, 0));\n}\n\n.focus\\:ring-orange-500:focus {\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(249 115 22 / var(--tw-ring-opacity));\n}\n\n.focus\\:ring-offset-2:focus {\n  --tw-ring-offset-width: 2px;\n}\n\n.disabled\\:opacity-50:disabled {\n  opacity: 0.5;\n}\n\n@media (prefers-reduced-motion: reduce) {\n  @keyframes spin {\n    to {\n      transform: rotate(360deg);\n    }\n  }\n  .motion-reduce\\:animate-\\[spin_1\\.5s_linear_infinite\\] {\n    animation: spin 1.5s linear infinite;\n  }\n}\n.dark\\:text-white:is(.dark *) {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255/var(--tw-text-opacity));\n}", "",{"version":3,"sources":["webpack://./src/styles.css"],"names":[],"mappings":"AAAA;EACE,wBAAA;EACA,wBAAA;EACA,mBAAA;EACA,mBAAA;EACA,cAAA;EACA,cAAA;EACA,cAAA;EACA,eAAA;EACA,eAAA;EACA,YAAA;EACA,YAAA;EACA,iBAAA;EACA,sCAAA;EACA,6BAAA;EACA,4BAAA;EACA,2BAAA;EACA,cAAA;EACA,mBAAA;EACA,qBAAA;EACA,sBAAA;EACA,uBAAA;EACA,iBAAA;EACA,2BAAA;EACA,4BAAA;EACA,sCAAA;EACA,kCAAA;EACA,2BAAA;EACA,sBAAA;EACA,8BAAA;EACA,WAAA;EACA,iBAAA;EACA,eAAA;EACA,gBAAA;EACA,iBAAA;EACA,aAAA;EACA,eAAA;EACA,YAAA;EACA,kBAAA;EACA,oBAAA;EACA,0BAAA;EACA,wBAAA;EACA,yBAAA;EACA,0BAAA;EACA,sBAAA;EACA,uBAAA;EACA,wBAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,oBAAA;EACA,oBAAA;AACF;;AAEA;EACE,wBAAA;EACA,wBAAA;EACA,mBAAA;EACA,mBAAA;EACA,cAAA;EACA,cAAA;EACA,cAAA;EACA,eAAA;EACA,eAAA;EACA,YAAA;EACA,YAAA;EACA,iBAAA;EACA,sCAAA;EACA,6BAAA;EACA,4BAAA;EACA,2BAAA;EACA,cAAA;EACA,mBAAA;EACA,qBAAA;EACA,sBAAA;EACA,uBAAA;EACA,iBAAA;EACA,2BAAA;EACA,4BAAA;EACA,sCAAA;EACA,kCAAA;EACA,2BAAA;EACA,sBAAA;EACA,8BAAA;EACA,WAAA;EACA,iBAAA;EACA,eAAA;EACA,gBAAA;EACA,iBAAA;EACA,aAAA;EACA,eAAA;EACA,YAAA;EACA,kBAAA;EACA,oBAAA;EACA,0BAAA;EACA,wBAAA;EACA,yBAAA;EACA,0BAAA;EACA,sBAAA;EACA,uBAAA;EACA,wBAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,oBAAA;EACA,oBAAA;AACF,EAAC;;CAAA,EAEC;;;CAAA;AAKF;;;EAGE,sBAAA,EAAA,MAAA;EACA,eAAA,EAAA,MAAA;EACA,mBAAA,EAAA,MAAA;EACA,qBAAA,EAAA,MAAA;AAAF;;AAGA;;EAEE,gBAAA;AAAF;;AAGA;;;;;;;;CAAA;AAUA;;EAEE,gBAAA,EAAA,MAAA;EACA,8BAAA,EAAA,MAAA;EACA,gBAAA,EAAA,MAAA;EACA,cAAA;EACG,WAAA,EAAA,MAAA;EACH,iJAAA,EAAA,MAAA;EACA,6BAAA,EAAA,MAAA;EACA,+BAAA,EAAA,MAAA;EACA,wCAAA,EAAA,MAAA;AADF;;AAIA;;;CAAA;AAKA;EACE,SAAA,EAAA,MAAA;EACA,oBAAA,EAAA,MAAA;AAFF;;AAKA;;;;CAAA;AAMA;EACE,SAAA,EAAA,MAAA;EACA,cAAA,EAAA,MAAA;EACA,qBAAA,EAAA,MAAA;AAHF;;AAMA;;CAAA;AAIA;EACE,yCAAA;EACQ,iCAAA;AAJV;;AAOA;;CAAA;AAIA;;;;;;EAME,kBAAA;EACA,oBAAA;AALF;;AAQA;;CAAA;AAIA;EACE,cAAA;EACA,wBAAA;AANF;;AASA;;CAAA;AAIA;;EAEE,mBAAA;AAPF;;AAUA;;;;;CAAA;AAOA;;;;EAIE,+GAAA,EAAA,MAAA;EACA,6BAAA,EAAA,MAAA;EACA,+BAAA,EAAA,MAAA;EACA,cAAA,EAAA,MAAA;AARF;;AAWA;;CAAA;AAIA;EACE,cAAA;AATF;;AAYA;;CAAA;AAIA;;EAEE,cAAA;EACA,cAAA;EACA,kBAAA;EACA,wBAAA;AAVF;;AAaA;EACE,eAAA;AAVF;;AAaA;EACE,WAAA;AAVF;;AAaA;;;;CAAA;AAMA;EACE,cAAA,EAAA,MAAA;EACA,qBAAA,EAAA,MAAA;EACA,yBAAA,EAAA,MAAA;AAXF;;AAcA;;;;CAAA;AAMA;;;;;EAKE,oBAAA,EAAA,MAAA;EACA,8BAAA,EAAA,MAAA;EACA,gCAAA,EAAA,MAAA;EACA,eAAA,EAAA,MAAA;EACA,oBAAA,EAAA,MAAA;EACA,oBAAA,EAAA,MAAA;EACA,uBAAA,EAAA,MAAA;EACA,cAAA,EAAA,MAAA;EACA,SAAA,EAAA,MAAA;EACA,UAAA,EAAA,MAAA;AAZF;;AAeA;;CAAA;AAIA;;EAEE,oBAAA;AAbF;;AAgBA;;;CAAA;AAKA;;;;EAIE,0BAAA,EAAA,MAAA;EACA,6BAAA,EAAA,MAAA;EACA,sBAAA,EAAA,MAAA;AAdF;;AAiBA;;CAAA;AAIA;EACE,aAAA;AAfF;;AAkBA;;CAAA;AAIA;EACE,gBAAA;AAhBF;;AAmBA;;CAAA;AAIA;EACE,wBAAA;AAjBF;;AAoBA;;CAAA;AAIA;;EAEE,YAAA;AAlBF;;AAqBA;;;CAAA;AAKA;EACE,6BAAA,EAAA,MAAA;EACA,oBAAA,EAAA,MAAA;AAnBF;;AAsBA;;CAAA;AAIA;EACE,wBAAA;AApBF;;AAuBA;;;CAAA;AAKA;EACE,0BAAA,EAAA,MAAA;EACA,aAAA,EAAA,MAAA;AArBF;;AAwBA;;CAAA;AAIA;EACE,kBAAA;AAtBF;;AAyBA;;CAAA;AAIA;;;;;;;;;;;;;EAaE,SAAA;AAvBF;;AA0BA;EACE,SAAA;EACA,UAAA;AAvBF;;AA0BA;EACE,UAAA;AAvBF;;AA0BA;;;EAGE,gBAAA;EACA,SAAA;EACA,UAAA;AAvBF;;AA0BA;;CAAA;AAGA;EACE,UAAA;AAvBF;;AA0BA;;CAAA;AAIA;EACE,gBAAA;AAxBF;;AA2BA;;;CAAA;AAKA;EACE,UAAA,EAAA,MAAA;EACA,cAAA,EAAA,MAAA;AAzBF;;AA4BA;;EAEE,UAAA,EAAA,MAAA;EACA,cAAA,EAAA,MAAA;AAzBF;;AA4BA;;CAAA;AAIA;;EAEE,eAAA;AA1BF;;AA6BA;;CAAA;AAGA;EACE,eAAA;AA1BF;;AA6BA;;;;CAAA;AAMA;;;;;;;;EAQE,cAAA,EAAA,MAAA;EACA,sBAAA,EAAA,MAAA;AA3BF;;AA8BA;;CAAA;AAIA;;EAEE,eAAA;EACA,YAAA;AA5BF;;AA+BA,wEAAA;AACA;EACE,aAAA;AA5BF;;AA8BI;EACI,uBAAA;EACA,+BAAA;EAEA,sBAAA;EACA,qCAAA;EAEA,oBAAA;EACA,uCAAA;EAEA,2BAAA;EACA,0BAAA;EAEA,iBAAA;EACA,oCAAA;EAEA,4BAAA;EACA,iCAAA;EAEA,0BAAA;EACA,yCAAA;EAEA,uBAAA;EACA,sCAAA;EAEA,yBAAA;EACA,qCAAA;EAEA,uBAAA;EAEA,gBAAA;AArCR;;AAuCI;EACF,gCAAA;AApCF;;AAuCI;EACF,wCAAA;EACA,6BAAA;EACM,yCAAA;AApCR;;AAsCA;EACE,WAAA;EACA,kBAAA;EACA,iBAAA;EACA,mBAAA;EACA,kBAAA;AAnCF;;AAqCA;EAEE;IACE,iBAAA;EAnCF;AACF;AAqCA;EACE,mBAAA;AAnCF;;AAqCA;EACE,eAAA;AAlCF;;AAoCA;EACE,mBAAA;EACA,oBAAA;AAjCF;;AAmCA;EACE,kBAAA;EACA,qBAAA;AAhCF;;AAkCA;EACE,mBAAA;AA/BF;;AAiCA;EACE,qBAAA;AA9BF;;AAgCA;EACE,cAAA;AA7BF;;AA+BA;EACE,qBAAA;AA5BF;;AA8BA;EACE,aAAA;AA3BF;;AA6BA;EACE,YAAA;AA1BF;;AA4BA;EACE,YAAA;AAzBF;;AA2BA;EACE,eAAA;AAxBF;;AA0BA;EACE,gBAAA;AAvBF;;AAyBA;EACE,aAAA;AAtBF;;AAwBA;EACE,WAAA;AArBF;;AAuBA;EACE,cAAA;AApBF;;AAsBA;EACE,WAAA;AAnBF;;AAqBA;EACE,gBAAA;AAlBF;;AAoBA;EACE,eAAA;AAjBF;;AAmBA;EACE,cAAA;AAhBF;;AAkBA;EACE,YAAA;AAfF;;AAiBA;EACE,UAAA;AAdF;;AAgBA;EACE,cAAA;AAbF;;AAeA;EAEE;IACE,YAAA;EAbF;AACF;AAeA;EACE,yDAAA;AAbF;;AAeA;EAEE;IACE,yBAAA;EAbF;AACF;AAeA;EACE,kCAAA;AAbF;;AAeA;EACE,kBAAA;AAZF;;AAcA;EACE,eAAA;AAXF;;AAaA;EACE,YAAA;AAVF;;AAYA;EACE,mBAAA;AATF;;AAWA;EACE,2BAAA;AARF;;AAUA;EACE,sBAAA;AAPF;;AASA;EACE,mBAAA;AANF;;AAQA;EACE,2BAAA;AALF;;AAOA;EACE,yBAAA;AAJF;;AAMA;EACE,uBAAA;AAHF;;AAKA;EACE,8BAAA;AAFF;;AAIA;EACE,6BAAA;AADF;;AAGA;EACE,WAAA;AAAF;;AAEA;EACE,uBAAA;EACA,sDAAA;EACA,2DAAA;AACF;;AACA;EACE,uBAAA;EACA,0DAAA;EACA,uDAAA;AAEF;;AAAA;EACE,uBAAA;EACA,wDAAA;EACA,qDAAA;AAGF;;AADA;EACE,gBAAA;AAIF;;AAFA;EACE,gBAAA;AAKF;;AAHA;EACE,qBAAA;AAMF;;AAJA;EACE,4BAAA;AAOF;;AALA;EACE,iBAAA;AAQF;;AANA;EACE,iBAAA;AASF;;AAPA;EACE,iBAAA;AAUF;;AARA;EACE,mBAAA;AAWF;;AATA;EACE,0BAAA;AAYF;;AAVA;EACE,sBAAA;EACA,oDAAA;AAaF;;AAXA;EACE,sBAAA;EACA,qDAAA;AAcF;;AAZA;EACE,oCAAA;AAeF;;AAbA;EACE,kBAAA;EACA,oDAAA;AAgBF;;AAdA;EACE,kBAAA;EACA,oDAAA;AAiBF;;AAfA;EACE,kBAAA;EACA,oDAAA;AAkBF;;AAhBA;EACE,kBAAA;EACA,qDAAA;AAmBF;;AAjBA;EACE,kBAAA;EACA,qDAAA;AAoBF;;AAlBA;EACE,kBAAA;EACA,qDAAA;AAqBF;;AAnBA;EACE,eAAA;AAsBF;;AApBA;EACE,gBAAA;AAuBF;;AArBA;EACE,aAAA;AAwBF;;AAtBA;EACE,qBAAA;EACA,sBAAA;AAyBF;;AAvBA;EACE,kBAAA;EACA,mBAAA;AA0BF;;AAxBA;EACE,mBAAA;EACA,sBAAA;AA2BF;;AAzBA;EACE,wBAAA;AA4BF;;AA1BA;EACE,mBAAA;EACA,oBAAA;AA6BF;;AA3BA;EACE,mBAAA;EACA,oBAAA;AA8BF;;AA5BA;EACE,gBAAA;AA+BF;;AA7BA;EACE,gBAAA;AAgCF;;AA9BA;EACE,kBAAA;AAiCF;;AA/BA;EACE,oBAAA;EACA,8CAAA;AAkCF;;AAhCA;EACE,oBAAA;EACA,4CAAA;AAmCF;;AAjCA;EACE,oBAAA;EACA,8CAAA;AAoCF;;AAlCA;EACE,gFAAA;EACA,oGAAA;EACA,6HAAA;AAqCF;;AAnCA;EACE,iLAAA;AAsCF;;AApCA;EACE,+FAAA;EACA,wDAAA;EACA,0BAAA;AAuCF;;AArCA;EAEE;IACE,mCAAA;IACA,iNAAA;EAuCF;AACF;AArCA;EAEE;IACE,kCAAA;IACA,2MAAA;EAsCF;AACF;AApCA;EACE,6BAAA;AAsCF;;AAnCA,UAAA;AACA;EACI,UAAA;AAsCJ;;AAnCA,UAAA;AACA;EACI,2BAAA;AAsCJ;;AAnCA,WAAA;AACA;EACI,2BAAA;EACA,kBAAA;AAsCJ;;AApCA;EACE,kBAAA;EACA,qDAAA;AAuCF;;AArCA;EACE,sBAAA;EACA,sDAAA;AAwCF;;AAtCA;EACE,8BAAA;EACA,mBAAA;AAyCF;;AAvCA;EACE,2GAAA;EACA,yGAAA;EACA,uGAAA;AA0CF;;AAxCA;EACE,2GAAA;EACA,yGAAA;EACA,uGAAA;AA2CF;;AAzCA;EACE,oBAAA;EACA,yDAAA;AA4CF;;AA1CA;EACE,2BAAA;AA6CF;;AA3CA;EACE,YAAA;AA8CF;;AA5CA;EAEE;IAEE;MACE,yBAAA;IA6CF;EACF;EA1CA;IACE,oCAAA;EA4CF;AACF;AA1CA;EACE,oBAAA;EACA,8CAAA;AA4CF","sourcesContent":["*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n  --tw-contain-size:  ;\n  --tw-contain-layout:  ;\n  --tw-contain-paint:  ;\n  --tw-contain-style:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n  --tw-contain-size:  ;\n  --tw-contain-layout:  ;\n  --tw-contain-paint:  ;\n  --tw-contain-style:  ;\n}/*\n! tailwindcss v3.4.14 | MIT License | https://tailwindcss.com\n*//*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: #e5e7eb; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: '';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n7. Disable tap highlights on iOS\n*/\n\nhtml,\n:host {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4; /* 3 */\n  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"; /* 4 */\n  font-feature-settings: normal; /* 5 */\n  font-variation-settings: normal; /* 6 */\n  -webkit-tap-highlight-color: transparent; /* 7 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font-family by default.\n2. Use the user's configured `mono` font-feature-settings by default.\n3. Use the user's configured `mono` font-variation-settings by default.\n4. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; /* 1 */\n  font-feature-settings: normal; /* 2 */\n  font-variation-settings: normal; /* 3 */\n  font-size: 1em; /* 4 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-feature-settings: inherit; /* 1 */\n  font-variation-settings: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  letter-spacing: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\ninput:where([type='button']),\ninput:where([type='reset']),\ninput:where([type='submit']) {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type='search'] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role=\"button\"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n[hidden]:where(:not([hidden=\"until-found\"])) {\n  display: none;\n}\r\n    :root {\r\n        --background: 0 0% 100%;\r\n        --foreground: 222.2 47.4% 11.2%;\r\n\r\n        --muted: 210 40% 96.1%;\r\n        --muted-foreground: 215.4 16.3% 46.9%;\r\n\r\n        --popover: 0 0% 100%;\r\n        --popover-foreground: 222.2 47.4% 11.2%;\r\n\r\n        --border: 214.3 31.8% 91.4%;\r\n        --input: 214.3 31.8% 91.4%;\r\n\r\n        --card: 0 0% 100%;\r\n        --card-foreground: 222.2 47.4% 11.2%;\r\n\r\n        --primary: 222.2 47.4% 11.2%;\r\n        --primary-foreground: 210 40% 98%;\r\n\r\n        --secondary: 210 40% 96.1%;\r\n        --secondary-foreground: 222.2 47.4% 11.2%;\r\n\r\n        --accent: 210 40% 96.1%;\r\n        --accent-foreground: 222.2 47.4% 11.2%;\r\n\r\n        --destructive: 0 100% 50%;\r\n        --destructive-foreground: 210 40% 98%;\r\n\r\n        --ring: 215 20.2% 65.1%;\r\n\r\n        --radius: 0.5rem;\r\n    }\r\n    * {\n  border-color: hsl(var(--border));\n}\r\n\r\n    body {\n  background-color: hsl(var(--background));\n  color: hsl(var(--foreground));\r\n        font-feature-settings: \"rlig\" 1, \"calt\" 1;\n}\r\n.container {\n  width: 100%;\n  margin-right: auto;\n  margin-left: auto;\n  padding-right: 2rem;\n  padding-left: 2rem;\n}\r\n@media (min-width: 1400px) {\n\n  .container {\n    max-width: 1400px;\n  }\n}\r\n.visible {\n  visibility: visible;\n}\r\n.fixed {\n  position: fixed;\n}\r\n.mx-2 {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\r\n.my-2 {\n  margin-top: 0.5rem;\n  margin-bottom: 0.5rem;\n}\r\n.mb-4 {\n  margin-bottom: 1rem;\n}\r\n.mb-6 {\n  margin-bottom: 1.5rem;\n}\r\n.block {\n  display: block;\n}\r\n.inline-block {\n  display: inline-block;\n}\r\n.flex {\n  display: flex;\n}\r\n.h-32 {\n  height: 8rem;\n}\r\n.h-4 {\n  height: 1rem;\n}\r\n.h-5 {\n  height: 1.25rem;\n}\r\n.max-h-8 {\n  max-height: 2rem;\n}\r\n.w-2 {\n  width: 0.5rem;\n}\r\n.w-4 {\n  width: 1rem;\n}\r\n.w-5 {\n  width: 1.25rem;\n}\r\n.w-full {\n  width: 100%;\n}\r\n.max-w-52 {\n  max-width: 13rem;\n}\r\n.max-w-8 {\n  max-width: 2rem;\n}\r\n.max-w-\\[85\\%\\] {\n  max-width: 85%;\n}\r\n.flex-1 {\n  flex: 1 1 0%;\n}\r\n.flex-none {\n  flex: none;\n}\r\n.flex-shrink-0 {\n  flex-shrink: 0;\n}\r\n@keyframes pulse {\n\n  50% {\n    opacity: .5;\n  }\n}\r\n.animate-pulse {\n  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;\n}\r\n@keyframes spin {\n\n  to {\n    transform: rotate(360deg);\n  }\n}\r\n.animate-spin {\n  animation: spin 1s linear infinite;\n}\r\n.cursor-col-resize {\n  cursor: col-resize;\n}\r\n.cursor-pointer {\n  cursor: pointer;\n}\r\n.resize-none {\n  resize: none;\n}\r\n.flex-row {\n  flex-direction: row;\n}\r\n.flex-row-reverse {\n  flex-direction: row-reverse;\n}\r\n.flex-col {\n  flex-direction: column;\n}\r\n.items-center {\n  align-items: center;\n}\r\n.justify-start {\n  justify-content: flex-start;\n}\r\n.justify-end {\n  justify-content: flex-end;\n}\r\n.justify-center {\n  justify-content: center;\n}\r\n.justify-between {\n  justify-content: space-between;\n}\r\n.justify-evenly {\n  justify-content: space-evenly;\n}\r\n.gap-2 {\n  gap: 0.5rem;\n}\r\n.space-x-2 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-x-reverse: 0;\n  margin-right: calc(0.5rem * var(--tw-space-x-reverse));\n  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));\n}\r\n.space-y-2 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));\n}\r\n.space-y-4 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(1rem * var(--tw-space-y-reverse));\n}\r\n.overflow-hidden {\n  overflow: hidden;\n}\r\n.overflow-y-auto {\n  overflow-y: auto;\n}\r\n.rounded-full {\n  border-radius: 9999px;\n}\r\n.rounded-lg {\n  border-radius: var(--radius);\n}\r\n.border {\n  border-width: 1px;\n}\r\n.border-2 {\n  border-width: 2px;\n}\r\n.border-4 {\n  border-width: 4px;\n}\r\n.border-solid {\n  border-style: solid;\n}\r\n.border-current {\n  border-color: currentColor;\n}\r\n.border-gray-700 {\n  --tw-border-opacity: 1;\n  border-color: rgb(55 65 81 / var(--tw-border-opacity));\n}\r\n.border-orange-600 {\n  --tw-border-opacity: 1;\n  border-color: rgb(234 88 12 / var(--tw-border-opacity));\n}\r\n.border-e-transparent {\n  border-inline-end-color: transparent;\n}\r\n.bg-gray-600 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(75 85 99 / var(--tw-bg-opacity));\n}\r\n.bg-gray-800 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(31 41 55 / var(--tw-bg-opacity));\n}\r\n.bg-gray-900 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(17 24 39 / var(--tw-bg-opacity));\n}\r\n.bg-green-500 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(34 197 94 / var(--tw-bg-opacity));\n}\r\n.bg-orange-600 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(234 88 12 / var(--tw-bg-opacity));\n}\r\n.bg-red-500 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(239 68 68 / var(--tw-bg-opacity));\n}\r\n.p-2 {\n  padding: 0.5rem;\n}\r\n.p-3 {\n  padding: 0.75rem;\n}\r\n.p-4 {\n  padding: 1rem;\n}\r\n.px-3 {\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n}\r\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\r\n.py-2 {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n}\r\n.align-\\[-0\\.125em\\] {\n  vertical-align: -0.125em;\n}\r\n.text-lg {\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n}\r\n.text-sm {\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n}\r\n.font-medium {\n  font-weight: 500;\n}\r\n.font-semibold {\n  font-weight: 600;\n}\r\n.italic {\n  font-style: italic;\n}\r\n.text-gray-100 {\n  --tw-text-opacity: 1;\n  color: rgb(243 244 246 / var(--tw-text-opacity));\n}\r\n.text-orange-600 {\n  --tw-text-opacity: 1;\n  color: rgb(234 88 12 / var(--tw-text-opacity));\n}\r\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity));\n}\r\n.shadow-xl {\n  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\r\n.filter {\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\r\n.transition-colors {\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\r\n@keyframes enter {\n\n  from {\n    opacity: var(--tw-enter-opacity, 1);\n    transform: translate3d(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0), 0) scale3d(var(--tw-enter-scale, 1), var(--tw-enter-scale, 1), var(--tw-enter-scale, 1)) rotate(var(--tw-enter-rotate, 0));\n  }\n}\r\n@keyframes exit {\n\n  to {\n    opacity: var(--tw-exit-opacity, 1);\n    transform: translate3d(var(--tw-exit-translate-x, 0), var(--tw-exit-translate-y, 0), 0) scale3d(var(--tw-exit-scale, 1), var(--tw-exit-scale, 1), var(--tw-exit-scale, 1)) rotate(var(--tw-exit-rotate, 0));\n  }\n}\r\n.running {\n  animation-play-state: running;\n}\r\n\r\n/* width */\r\n.ai-scrollbar::-webkit-scrollbar {\r\n    width: 5px;\r\n}\r\n\r\n/* Track */\r\n.ai-scrollbar::-webkit-scrollbar-track {\r\n    background: rgb(17 24 39);\r\n}\r\n\r\n/* Handle */\r\n.ai-scrollbar::-webkit-scrollbar-thumb {\r\n    background: rgb(37 44 59);\r\n    border-radius: 5px;\r\n}\r\n.hover\\:bg-orange-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(194 65 12 / var(--tw-bg-opacity));\n}\r\n.focus\\:border-orange-500:focus {\n  --tw-border-opacity: 1;\n  border-color: rgb(249 115 22 / var(--tw-border-opacity));\n}\r\n.focus\\:outline-none:focus {\n  outline: 2px solid transparent;\n  outline-offset: 2px;\n}\r\n.focus\\:ring-1:focus {\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n}\r\n.focus\\:ring-2:focus {\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n}\r\n.focus\\:ring-orange-500:focus {\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(249 115 22 / var(--tw-ring-opacity));\n}\r\n.focus\\:ring-offset-2:focus {\n  --tw-ring-offset-width: 2px;\n}\r\n.disabled\\:opacity-50:disabled {\n  opacity: 0.5;\n}\r\n@media (prefers-reduced-motion: reduce) {\n\n  @keyframes spin {\n\n    to {\n      transform: rotate(360deg);\n    }\n  }\n\n  .motion-reduce\\:animate-\\[spin_1\\.5s_linear_infinite\\] {\n    animation: spin 1.5s linear infinite;\n  }\n}\r\n.dark\\:text-white:is(.dark *) {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity));\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x: ;\n  --tw-pan-y: ;\n  --tw-pinch-zoom: ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position: ;\n  --tw-gradient-via-position: ;\n  --tw-gradient-to-position: ;\n  --tw-ordinal: ;\n  --tw-slashed-zero: ;\n  --tw-numeric-figure: ;\n  --tw-numeric-spacing: ;\n  --tw-numeric-fraction: ;\n  --tw-ring-inset: ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur: ;\n  --tw-brightness: ;\n  --tw-contrast: ;\n  --tw-grayscale: ;\n  --tw-hue-rotate: ;\n  --tw-invert: ;\n  --tw-saturate: ;\n  --tw-sepia: ;\n  --tw-drop-shadow: ;\n  --tw-backdrop-blur: ;\n  --tw-backdrop-brightness: ;\n  --tw-backdrop-contrast: ;\n  --tw-backdrop-grayscale: ;\n  --tw-backdrop-hue-rotate: ;\n  --tw-backdrop-invert: ;\n  --tw-backdrop-opacity: ;\n  --tw-backdrop-saturate: ;\n  --tw-backdrop-sepia: ;\n  --tw-contain-size: ;\n  --tw-contain-layout: ;\n  --tw-contain-paint: ;\n  --tw-contain-style: ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x: ;\n  --tw-pan-y: ;\n  --tw-pinch-zoom: ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position: ;\n  --tw-gradient-via-position: ;\n  --tw-gradient-to-position: ;\n  --tw-ordinal: ;\n  --tw-slashed-zero: ;\n  --tw-numeric-figure: ;\n  --tw-numeric-spacing: ;\n  --tw-numeric-fraction: ;\n  --tw-ring-inset: ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur: ;\n  --tw-brightness: ;\n  --tw-contrast: ;\n  --tw-grayscale: ;\n  --tw-hue-rotate: ;\n  --tw-invert: ;\n  --tw-saturate: ;\n  --tw-sepia: ;\n  --tw-drop-shadow: ;\n  --tw-backdrop-blur: ;\n  --tw-backdrop-brightness: ;\n  --tw-backdrop-contrast: ;\n  --tw-backdrop-grayscale: ;\n  --tw-backdrop-hue-rotate: ;\n  --tw-backdrop-invert: ;\n  --tw-backdrop-opacity: ;\n  --tw-backdrop-saturate: ;\n  --tw-backdrop-sepia: ;\n  --tw-contain-size: ;\n  --tw-contain-layout: ;\n  --tw-contain-paint: ;\n  --tw-contain-style: ;\n} /*\n! tailwindcss v3.4.14 | MIT License | https://tailwindcss.com\n*/ /*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: #e5e7eb; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: \"\";\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n7. Disable tap highlights on iOS\n*/\nhtml,\n:host {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n  tab-size: 4; /* 3 */\n  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"; /* 4 */\n  font-feature-settings: normal; /* 5 */\n  font-variation-settings: normal; /* 6 */\n  -webkit-tap-highlight-color: transparent; /* 7 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n  text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font-family by default.\n2. Use the user's configured `mono` font-feature-settings by default.\n3. Use the user's configured `mono` font-variation-settings by default.\n4. Correct the odd `em` font sizing in all browsers.\n*/\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; /* 1 */\n  font-feature-settings: normal; /* 2 */\n  font-variation-settings: normal; /* 3 */\n  font-size: 1em; /* 4 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-feature-settings: inherit; /* 1 */\n  font-variation-settings: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  letter-spacing: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\nbutton,\ninput:where([type=button]),\ninput:where([type=reset]),\ninput:where([type=submit]) {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n[type=search] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\nbutton,\n[role=button] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n[hidden]:where(:not([hidden=until-found])) {\n  display: none;\n}\n\n:root {\n  --background: 0 0% 100%;\n  --foreground: 222.2 47.4% 11.2%;\n  --muted: 210 40% 96.1%;\n  --muted-foreground: 215.4 16.3% 46.9%;\n  --popover: 0 0% 100%;\n  --popover-foreground: 222.2 47.4% 11.2%;\n  --border: 214.3 31.8% 91.4%;\n  --input: 214.3 31.8% 91.4%;\n  --card: 0 0% 100%;\n  --card-foreground: 222.2 47.4% 11.2%;\n  --primary: 222.2 47.4% 11.2%;\n  --primary-foreground: 210 40% 98%;\n  --secondary: 210 40% 96.1%;\n  --secondary-foreground: 222.2 47.4% 11.2%;\n  --accent: 210 40% 96.1%;\n  --accent-foreground: 222.2 47.4% 11.2%;\n  --destructive: 0 100% 50%;\n  --destructive-foreground: 210 40% 98%;\n  --ring: 215 20.2% 65.1%;\n  --radius: 0.5rem;\n}\n\n.\\!container {\n  width: 100% !important;\n  margin-right: auto !important;\n  margin-left: auto !important;\n  padding-right: 2rem !important;\n  padding-left: 2rem !important;\n}\n\n.container {\n  width: 100%;\n  margin-right: auto;\n  margin-left: auto;\n  padding-right: 2rem;\n  padding-left: 2rem;\n}\n\n@media (min-width: 1400px) {\n  .\\!container {\n    max-width: 1400px !important;\n  }\n  .container {\n    max-width: 1400px;\n  }\n}\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border-width: 0;\n}\n\n.visible {\n  visibility: visible;\n}\n\n.static {\n  position: static;\n}\n\n.fixed {\n  position: fixed;\n}\n\n.absolute {\n  position: absolute;\n}\n\n.relative {\n  position: relative;\n}\n\n.inset-0 {\n  inset: 0px;\n}\n\n.-top-3 {\n  top: -0.75rem;\n}\n\n.left-1\\/2 {\n  left: 50%;\n}\n\n.right-0 {\n  right: 0px;\n}\n\n.top-1\\/4 {\n  top: 25%;\n}\n\n.z-10 {\n  z-index: 10;\n}\n\n.z-50 {\n  z-index: 50;\n}\n\n.mx-1 {\n  margin-left: 0.25rem;\n  margin-right: 0.25rem;\n}\n\n.mx-2 {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\n\n.mx-4 {\n  margin-left: 1rem;\n  margin-right: 1rem;\n}\n\n.mx-auto {\n  margin-left: auto;\n  margin-right: auto;\n}\n\n.my-1 {\n  margin-top: 0.25rem;\n  margin-bottom: 0.25rem;\n}\n\n.my-2 {\n  margin-top: 0.5rem;\n  margin-bottom: 0.5rem;\n}\n\n.mb-2 {\n  margin-bottom: 0.5rem;\n}\n\n.mb-3 {\n  margin-bottom: 0.75rem;\n}\n\n.mb-4 {\n  margin-bottom: 1rem;\n}\n\n.mb-6 {\n  margin-bottom: 1.5rem;\n}\n\n.mr-1 {\n  margin-right: 0.25rem;\n}\n\n.mr-2 {\n  margin-right: 0.5rem;\n}\n\n.mr-4 {\n  margin-right: 1rem;\n}\n\n.mt-1 {\n  margin-top: 0.25rem;\n}\n\n.mt-4 {\n  margin-top: 1rem;\n}\n\n.mt-6 {\n  margin-top: 1.5rem;\n}\n\n.block {\n  display: block;\n}\n\n.inline-block {\n  display: inline-block;\n}\n\n.flex {\n  display: flex;\n}\n\n.inline-flex {\n  display: inline-flex;\n}\n\n.grid {\n  display: grid;\n}\n\n.list-item {\n  display: list-item;\n}\n\n.h-16 {\n  height: 4rem;\n}\n\n.h-2 {\n  height: 0.5rem;\n}\n\n.h-3 {\n  height: 0.75rem;\n}\n\n.h-4 {\n  height: 1rem;\n}\n\n.h-5 {\n  height: 1.25rem;\n}\n\n.h-6 {\n  height: 1.5rem;\n}\n\n.h-8 {\n  height: 2rem;\n}\n\n.h-full {\n  height: 100%;\n}\n\n.max-h-2 {\n  max-height: 0.5rem;\n}\n\n.max-h-24 {\n  max-height: 6rem;\n}\n\n.max-h-48 {\n  max-height: 12rem;\n}\n\n.max-h-\\[90vh\\] {\n  max-height: 90vh;\n}\n\n.min-h-\\[300px\\] {\n  min-height: 300px;\n}\n\n.w-16 {\n  width: 4rem;\n}\n\n.w-2 {\n  width: 0.5rem;\n}\n\n.w-3 {\n  width: 0.75rem;\n}\n\n.w-4 {\n  width: 1rem;\n}\n\n.w-5 {\n  width: 1.25rem;\n}\n\n.w-6 {\n  width: 1.5rem;\n}\n\n.w-64 {\n  width: 16rem;\n}\n\n.w-8 {\n  width: 2rem;\n}\n\n.w-80 {\n  width: 20rem;\n}\n\n.w-\\[350px\\] {\n  width: 350px;\n}\n\n.w-full {\n  width: 100%;\n}\n\n.max-w-2 {\n  max-width: 0.5rem;\n}\n\n.max-w-4xl {\n  max-width: 56rem;\n}\n\n.max-w-52 {\n  max-width: 13rem;\n}\n\n.max-w-5xl {\n  max-width: 64rem;\n}\n\n.max-w-md {\n  max-width: 28rem;\n}\n\n.flex-1 {\n  flex: 1 1 0%;\n}\n\n.flex-none {\n  flex: none;\n}\n\n.flex-shrink-0 {\n  flex-shrink: 0;\n}\n\n.-translate-x-1\\/2 {\n  --tw-translate-x: -50%;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n\n.-translate-y-1\\/4 {\n  --tw-translate-y: -25%;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n\n.scale-105 {\n  --tw-scale-x: 1.05;\n  --tw-scale-y: 1.05;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n\n.transform {\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n\n@keyframes pulse {\n  50% {\n    opacity: 0.5;\n  }\n}\n.animate-pulse {\n  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;\n}\n\n@keyframes spin {\n  to {\n    transform: rotate(360deg);\n  }\n}\n.animate-spin {\n  animation: spin 1s linear infinite;\n}\n\n.cursor-col-resize {\n  cursor: col-resize;\n}\n\n.cursor-not-allowed {\n  cursor: not-allowed;\n}\n\n.cursor-pointer {\n  cursor: pointer;\n}\n\n.list-inside {\n  list-style-position: inside;\n}\n\n.list-decimal {\n  list-style-type: decimal;\n}\n\n.list-disc {\n  list-style-type: disc;\n}\n\n.grid-cols-1 {\n  grid-template-columns: repeat(1, minmax(0, 1fr));\n}\n\n.flex-row {\n  flex-direction: row;\n}\n\n.flex-col {\n  flex-direction: column;\n}\n\n.items-center {\n  align-items: center;\n}\n\n.justify-end {\n  justify-content: flex-end;\n}\n\n.justify-center {\n  justify-content: center;\n}\n\n.justify-between {\n  justify-content: space-between;\n}\n\n.justify-evenly {\n  justify-content: space-evenly;\n}\n\n.gap-1 {\n  gap: 0.25rem;\n}\n\n.gap-2 {\n  gap: 0.5rem;\n}\n\n.gap-6 {\n  gap: 1.5rem;\n}\n\n.space-x-1 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-x-reverse: 0;\n  margin-right: calc(0.25rem * var(--tw-space-x-reverse));\n  margin-left: calc(0.25rem * (1 - var(--tw-space-x-reverse)));\n}\n\n.space-x-2 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-x-reverse: 0;\n  margin-right: calc(0.5rem * var(--tw-space-x-reverse));\n  margin-left: calc(0.5rem * (1 - var(--tw-space-x-reverse)));\n}\n\n.space-x-3 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-x-reverse: 0;\n  margin-right: calc(0.75rem * var(--tw-space-x-reverse));\n  margin-left: calc(0.75rem * (1 - var(--tw-space-x-reverse)));\n}\n\n.space-x-7 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-x-reverse: 0;\n  margin-right: calc(1.75rem * var(--tw-space-x-reverse));\n  margin-left: calc(1.75rem * (1 - var(--tw-space-x-reverse)));\n}\n\n.space-y-1 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(0.25rem * (1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));\n}\n\n.space-y-2 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(0.5rem * (1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));\n}\n\n.space-y-3 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(0.75rem * (1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));\n}\n\n.space-y-4 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(1rem * (1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(1rem * var(--tw-space-y-reverse));\n}\n\n.space-y-6 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(1.5rem * (1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));\n}\n\n.overflow-hidden {\n  overflow: hidden;\n}\n\n.overflow-y-auto {\n  overflow-y: auto;\n}\n\n.rounded {\n  border-radius: 0.25rem;\n}\n\n.rounded-full {\n  border-radius: 9999px;\n}\n\n.rounded-lg {\n  border-radius: var(--radius);\n}\n\n.rounded-md {\n  border-radius: calc(var(--radius) - 2px);\n}\n\n.rounded-xl {\n  border-radius: 0.75rem;\n}\n\n.border {\n  border-width: 1px;\n}\n\n.border-2 {\n  border-width: 2px;\n}\n\n.border-4 {\n  border-width: 4px;\n}\n\n.border-b-2 {\n  border-bottom-width: 2px;\n}\n\n.border-s-4 {\n  border-inline-start-width: 4px;\n}\n\n.border-t {\n  border-top-width: 1px;\n}\n\n.border-t-2 {\n  border-top-width: 2px;\n}\n\n.border-solid {\n  border-style: solid;\n}\n\n.border-current {\n  border-color: currentColor;\n}\n\n.border-gray-100 {\n  --tw-border-opacity: 1;\n  border-color: rgb(243 244 246/var(--tw-border-opacity));\n}\n\n.border-gray-500 {\n  --tw-border-opacity: 1;\n  border-color: rgb(107 114 128/var(--tw-border-opacity));\n}\n\n.border-gray-700 {\n  --tw-border-opacity: 1;\n  border-color: rgb(55 65 81/var(--tw-border-opacity));\n}\n\n.border-gray-800 {\n  --tw-border-opacity: 1;\n  border-color: rgb(31 41 55/var(--tw-border-opacity));\n}\n\n.border-green-500 {\n  --tw-border-opacity: 1;\n  border-color: rgb(34 197 94/var(--tw-border-opacity));\n}\n\n.border-orange-600 {\n  --tw-border-opacity: 1;\n  border-color: rgb(234 88 12/var(--tw-border-opacity));\n}\n\n.border-orange-600\\/20 {\n  border-color: rgba(234, 88, 12, 0.2);\n}\n\n.border-red-500\\/20 {\n  border-color: rgba(239, 68, 68, 0.2);\n}\n\n.border-e-transparent {\n  border-inline-end-color: transparent;\n}\n\n.bg-blue-100 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(219 234 254/var(--tw-bg-opacity));\n}\n\n.bg-gray-600 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(75 85 99/var(--tw-bg-opacity));\n}\n\n.bg-gray-700 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(55 65 81/var(--tw-bg-opacity));\n}\n\n.bg-gray-800 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(31 41 55/var(--tw-bg-opacity));\n}\n\n.bg-gray-800\\/50 {\n  background-color: rgba(31, 41, 55, 0.5);\n}\n\n.bg-gray-900 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(17 24 39/var(--tw-bg-opacity));\n}\n\n.bg-gray-900\\/90 {\n  background-color: rgba(17, 24, 39, 0.9);\n}\n\n.bg-green-800 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(22 101 52/var(--tw-bg-opacity));\n}\n\n.bg-orange-600 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(234 88 12/var(--tw-bg-opacity));\n}\n\n.bg-red-500 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(239 68 68/var(--tw-bg-opacity));\n}\n\n.bg-red-600 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(220 38 38/var(--tw-bg-opacity));\n}\n\n.bg-red-800 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(153 27 27/var(--tw-bg-opacity));\n}\n\n.bg-red-900\\/50 {\n  background-color: rgba(127, 29, 29, 0.5);\n}\n\n.bg-slate-200 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(226 232 240/var(--tw-bg-opacity));\n}\n\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255/var(--tw-bg-opacity));\n}\n\n.p-1 {\n  padding: 0.25rem;\n}\n\n.p-2 {\n  padding: 0.5rem;\n}\n\n.p-3 {\n  padding: 0.75rem;\n}\n\n.p-4 {\n  padding: 1rem;\n}\n\n.p-6 {\n  padding: 1.5rem;\n}\n\n.px-2 {\n  padding-left: 0.5rem;\n  padding-right: 0.5rem;\n}\n\n.px-3 {\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n}\n\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n\n.py-0\\.5 {\n  padding-top: 0.125rem;\n  padding-bottom: 0.125rem;\n}\n\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\n\n.py-2 {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n}\n\n.py-3 {\n  padding-top: 0.75rem;\n  padding-bottom: 0.75rem;\n}\n\n.py-8 {\n  padding-top: 2rem;\n  padding-bottom: 2rem;\n}\n\n.pl-2 {\n  padding-left: 0.5rem;\n}\n\n.ps-4 {\n  padding-inline-start: 1rem;\n}\n\n.pt-4 {\n  padding-top: 1rem;\n}\n\n.text-left {\n  text-align: left;\n}\n\n.text-center {\n  text-align: center;\n}\n\n.align-\\[-0\\.125em\\] {\n  vertical-align: -0.125em;\n}\n\n.text-2xl {\n  font-size: 1.5rem;\n  line-height: 2rem;\n}\n\n.text-4xl {\n  font-size: 2.25rem;\n  line-height: 2.5rem;\n}\n\n.text-lg {\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n}\n\n.text-sm {\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n}\n\n.text-xl {\n  font-size: 1.25rem;\n  line-height: 1.75rem;\n}\n\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\n\n.font-bold {\n  font-weight: 700;\n}\n\n.font-medium {\n  font-weight: 500;\n}\n\n.font-semibold {\n  font-weight: 600;\n}\n\n.text-blue-800 {\n  --tw-text-opacity: 1;\n  color: rgb(30 64 175/var(--tw-text-opacity));\n}\n\n.text-gray-100 {\n  --tw-text-opacity: 1;\n  color: rgb(243 244 246/var(--tw-text-opacity));\n}\n\n.text-gray-300 {\n  --tw-text-opacity: 1;\n  color: rgb(209 213 219/var(--tw-text-opacity));\n}\n\n.text-gray-400 {\n  --tw-text-opacity: 1;\n  color: rgb(156 163 175/var(--tw-text-opacity));\n}\n\n.text-gray-500 {\n  --tw-text-opacity: 1;\n  color: rgb(107 114 128/var(--tw-text-opacity));\n}\n\n.text-gray-600 {\n  --tw-text-opacity: 1;\n  color: rgb(75 85 99/var(--tw-text-opacity));\n}\n\n.text-green-600 {\n  --tw-text-opacity: 1;\n  color: rgb(22 163 74/var(--tw-text-opacity));\n}\n\n.text-orange-600 {\n  --tw-text-opacity: 1;\n  color: rgb(234 88 12/var(--tw-text-opacity));\n}\n\n.text-red-400 {\n  --tw-text-opacity: 1;\n  color: rgb(248 113 113/var(--tw-text-opacity));\n}\n\n.text-red-500 {\n  --tw-text-opacity: 1;\n  color: rgb(239 68 68/var(--tw-text-opacity));\n}\n\n.text-red-600 {\n  --tw-text-opacity: 1;\n  color: rgb(220 38 38/var(--tw-text-opacity));\n}\n\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255/var(--tw-text-opacity));\n}\n\n.opacity-50 {\n  opacity: 0.5;\n}\n\n.shadow-lg {\n  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow);\n}\n\n.shadow-xl {\n  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow);\n}\n\n.outline {\n  outline-style: solid;\n}\n\n.outline-1 {\n  outline-width: 1px;\n}\n\n.outline-orange-600 {\n  outline-color: #ea580c;\n}\n\n.ring-1 {\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 rgba(0, 0, 0, 0));\n}\n\n.ring-gray-900 {\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(17 24 39 / var(--tw-ring-opacity));\n}\n\n.filter {\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\n\n.backdrop-blur-sm {\n  --tw-backdrop-blur: blur(4px);\n  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);\n  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);\n}\n\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n\n.transition-colors {\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n\n@keyframes enter {\n  from {\n    opacity: var(--tw-enter-opacity, 1);\n    transform: translate3d(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0), 0) scale3d(var(--tw-enter-scale, 1), var(--tw-enter-scale, 1), var(--tw-enter-scale, 1)) rotate(var(--tw-enter-rotate, 0));\n  }\n}\n@keyframes exit {\n  to {\n    opacity: var(--tw-exit-opacity, 1);\n    transform: translate3d(var(--tw-exit-translate-x, 0), var(--tw-exit-translate-y, 0), 0) scale3d(var(--tw-exit-scale, 1), var(--tw-exit-scale, 1), var(--tw-exit-scale, 1)) rotate(var(--tw-exit-rotate, 0));\n  }\n}\n.\\[animation-delay\\:-0\\.15s\\] {\n  animation-delay: -0.15s;\n}\n\n.\\[animation-delay\\:-0\\.3s\\] {\n  animation-delay: -0.3s;\n}\n\n/* width */\n.ai-scrollbar::-webkit-scrollbar {\n  width: 5px;\n}\n\n/* Track */\n.ai-scrollbar::-webkit-scrollbar-track {\n  background: rgb(17, 24, 39);\n}\n\n/* Handle */\n.ai-scrollbar::-webkit-scrollbar-thumb {\n  background: rgb(37, 44, 59);\n  border-radius: 5px;\n}\n\n.last\\:mb-0:last-child {\n  margin-bottom: 0px;\n}\n\n.hover\\:border-orange-600\\/50:hover {\n  border-color: rgba(234, 88, 12, 0.5);\n}\n\n.hover\\:bg-gray-600:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(75 85 99/var(--tw-bg-opacity));\n}\n\n.hover\\:bg-gray-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(55 65 81/var(--tw-bg-opacity));\n}\n\n.hover\\:bg-green-800:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(22 101 52/var(--tw-bg-opacity));\n}\n\n.hover\\:bg-orange-600:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(234 88 12/var(--tw-bg-opacity));\n}\n\n.hover\\:bg-orange-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(194 65 12/var(--tw-bg-opacity));\n}\n\n.hover\\:bg-red-50:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(254 242 242/var(--tw-bg-opacity));\n}\n\n.hover\\:bg-red-600:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(220 38 38/var(--tw-bg-opacity));\n}\n\n.hover\\:bg-red-800:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(153 27 27/var(--tw-bg-opacity));\n}\n\n.hover\\:text-orange-500:hover {\n  --tw-text-opacity: 1;\n  color: rgb(249 115 22/var(--tw-text-opacity));\n}\n\n.hover\\:text-white:hover {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255/var(--tw-text-opacity));\n}\n\n.hover\\:shadow-md:hover {\n  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow);\n}\n\n.focus\\:border-orange-500:focus {\n  --tw-border-opacity: 1;\n  border-color: rgb(249 115 22/var(--tw-border-opacity));\n}\n\n.focus\\:outline-none:focus {\n  outline: 2px solid transparent;\n  outline-offset: 2px;\n}\n\n.focus\\:ring-1:focus {\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 rgba(0, 0, 0, 0));\n}\n\n.focus\\:ring-2:focus {\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 rgba(0, 0, 0, 0));\n}\n\n.focus\\:ring-orange-500:focus {\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(249 115 22 / var(--tw-ring-opacity));\n}\n\n.focus\\:ring-orange-600:focus {\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(234 88 12 / var(--tw-ring-opacity));\n}\n\n.focus\\:ring-offset-2:focus {\n  --tw-ring-offset-width: 2px;\n}\n\n.focus\\:ring-offset-gray-900:focus {\n  --tw-ring-offset-color: #111827;\n}\n\n.disabled\\:opacity-50:disabled {\n  opacity: 0.5;\n}\n\n@media (prefers-reduced-motion: reduce) {\n  @keyframes spin {\n    to {\n      transform: rotate(360deg);\n    }\n  }\n  .motion-reduce\\:animate-\\[spin_1\\.5s_linear_infinite\\] {\n    animation: spin 1.5s linear infinite;\n  }\n}\n.dark\\:text-white:is(.dark *) {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255/var(--tw-text-opacity));\n}\n\n@media (min-width: 640px) {\n  .sm\\:ps-6 {\n    padding-inline-start: 1.5rem;\n  }\n}\n@media (min-width: 768px) {\n  .md\\:grid-cols-3 {\n    grid-template-columns: repeat(3, minmax(0, 1fr));\n  }\n}", "",{"version":3,"sources":["webpack://./src/styles.css"],"names":[],"mappings":"AAAA;EACE,wBAAA;EACA,wBAAA;EACA,mBAAA;EACA,mBAAA;EACA,cAAA;EACA,cAAA;EACA,cAAA;EACA,eAAA;EACA,eAAA;EACA,YAAA;EACA,YAAA;EACA,iBAAA;EACA,sCAAA;EACA,6BAAA;EACA,4BAAA;EACA,2BAAA;EACA,cAAA;EACA,mBAAA;EACA,qBAAA;EACA,sBAAA;EACA,uBAAA;EACA,iBAAA;EACA,2BAAA;EACA,4BAAA;EACA,sCAAA;EACA,kCAAA;EACA,2BAAA;EACA,sBAAA;EACA,8BAAA;EACA,WAAA;EACA,iBAAA;EACA,eAAA;EACA,gBAAA;EACA,iBAAA;EACA,aAAA;EACA,eAAA;EACA,YAAA;EACA,kBAAA;EACA,oBAAA;EACA,0BAAA;EACA,wBAAA;EACA,yBAAA;EACA,0BAAA;EACA,sBAAA;EACA,uBAAA;EACA,wBAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,oBAAA;EACA,oBAAA;AACF;;AAEA;EACE,wBAAA;EACA,wBAAA;EACA,mBAAA;EACA,mBAAA;EACA,cAAA;EACA,cAAA;EACA,cAAA;EACA,eAAA;EACA,eAAA;EACA,YAAA;EACA,YAAA;EACA,iBAAA;EACA,sCAAA;EACA,6BAAA;EACA,4BAAA;EACA,2BAAA;EACA,cAAA;EACA,mBAAA;EACA,qBAAA;EACA,sBAAA;EACA,uBAAA;EACA,iBAAA;EACA,2BAAA;EACA,4BAAA;EACA,sCAAA;EACA,kCAAA;EACA,2BAAA;EACA,sBAAA;EACA,8BAAA;EACA,WAAA;EACA,iBAAA;EACA,eAAA;EACA,gBAAA;EACA,iBAAA;EACA,aAAA;EACA,eAAA;EACA,YAAA;EACA,kBAAA;EACA,oBAAA;EACA,0BAAA;EACA,wBAAA;EACA,yBAAA;EACA,0BAAA;EACA,sBAAA;EACA,uBAAA;EACA,wBAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,oBAAA;EACA,oBAAA;AACF,EAAC;;CAAA,EAEC;;;CAAA;AAKF;;;EAGE,sBAAA,EAAA,MAAA;EACA,eAAA,EAAA,MAAA;EACA,mBAAA,EAAA,MAAA;EACA,qBAAA,EAAA,MAAA;AAAF;;AAGA;;EAEE,gBAAA;AAAF;;AAGA;;;;;;;;CAAA;AAUA;;EAEE,gBAAA,EAAA,MAAA;EACA,8BAAA,EAAA,MAAA;EACA,gBAAA,EAAA,MAAA;EACA,cAAA;EACG,WAAA,EAAA,MAAA;EACH,iJAAA,EAAA,MAAA;EACA,6BAAA,EAAA,MAAA;EACA,+BAAA,EAAA,MAAA;EACA,wCAAA,EAAA,MAAA;AADF;;AAIA;;;CAAA;AAKA;EACE,SAAA,EAAA,MAAA;EACA,oBAAA,EAAA,MAAA;AAFF;;AAKA;;;;CAAA;AAMA;EACE,SAAA,EAAA,MAAA;EACA,cAAA,EAAA,MAAA;EACA,qBAAA,EAAA,MAAA;AAHF;;AAMA;;CAAA;AAIA;EACE,yCAAA;EACQ,iCAAA;AAJV;;AAOA;;CAAA;AAIA;;;;;;EAME,kBAAA;EACA,oBAAA;AALF;;AAQA;;CAAA;AAIA;EACE,cAAA;EACA,wBAAA;AANF;;AASA;;CAAA;AAIA;;EAEE,mBAAA;AAPF;;AAUA;;;;;CAAA;AAOA;;;;EAIE,+GAAA,EAAA,MAAA;EACA,6BAAA,EAAA,MAAA;EACA,+BAAA,EAAA,MAAA;EACA,cAAA,EAAA,MAAA;AARF;;AAWA;;CAAA;AAIA;EACE,cAAA;AATF;;AAYA;;CAAA;AAIA;;EAEE,cAAA;EACA,cAAA;EACA,kBAAA;EACA,wBAAA;AAVF;;AAaA;EACE,eAAA;AAVF;;AAaA;EACE,WAAA;AAVF;;AAaA;;;;CAAA;AAMA;EACE,cAAA,EAAA,MAAA;EACA,qBAAA,EAAA,MAAA;EACA,yBAAA,EAAA,MAAA;AAXF;;AAcA;;;;CAAA;AAMA;;;;;EAKE,oBAAA,EAAA,MAAA;EACA,8BAAA,EAAA,MAAA;EACA,gCAAA,EAAA,MAAA;EACA,eAAA,EAAA,MAAA;EACA,oBAAA,EAAA,MAAA;EACA,oBAAA,EAAA,MAAA;EACA,uBAAA,EAAA,MAAA;EACA,cAAA,EAAA,MAAA;EACA,SAAA,EAAA,MAAA;EACA,UAAA,EAAA,MAAA;AAZF;;AAeA;;CAAA;AAIA;;EAEE,oBAAA;AAbF;;AAgBA;;;CAAA;AAKA;;;;EAIE,0BAAA,EAAA,MAAA;EACA,6BAAA,EAAA,MAAA;EACA,sBAAA,EAAA,MAAA;AAdF;;AAiBA;;CAAA;AAIA;EACE,aAAA;AAfF;;AAkBA;;CAAA;AAIA;EACE,gBAAA;AAhBF;;AAmBA;;CAAA;AAIA;EACE,wBAAA;AAjBF;;AAoBA;;CAAA;AAIA;;EAEE,YAAA;AAlBF;;AAqBA;;;CAAA;AAKA;EACE,6BAAA,EAAA,MAAA;EACA,oBAAA,EAAA,MAAA;AAnBF;;AAsBA;;CAAA;AAIA;EACE,wBAAA;AApBF;;AAuBA;;;CAAA;AAKA;EACE,0BAAA,EAAA,MAAA;EACA,aAAA,EAAA,MAAA;AArBF;;AAwBA;;CAAA;AAIA;EACE,kBAAA;AAtBF;;AAyBA;;CAAA;AAIA;;;;;;;;;;;;;EAaE,SAAA;AAvBF;;AA0BA;EACE,SAAA;EACA,UAAA;AAvBF;;AA0BA;EACE,UAAA;AAvBF;;AA0BA;;;EAGE,gBAAA;EACA,SAAA;EACA,UAAA;AAvBF;;AA0BA;;CAAA;AAGA;EACE,UAAA;AAvBF;;AA0BA;;CAAA;AAIA;EACE,gBAAA;AAxBF;;AA2BA;;;CAAA;AAKA;EACE,UAAA,EAAA,MAAA;EACA,cAAA,EAAA,MAAA;AAzBF;;AA4BA;;EAEE,UAAA,EAAA,MAAA;EACA,cAAA,EAAA,MAAA;AAzBF;;AA4BA;;CAAA;AAIA;;EAEE,eAAA;AA1BF;;AA6BA;;CAAA;AAGA;EACE,eAAA;AA1BF;;AA6BA;;;;CAAA;AAMA;;;;;;;;EAQE,cAAA,EAAA,MAAA;EACA,sBAAA,EAAA,MAAA;AA3BF;;AA8BA;;CAAA;AAIA;;EAEE,eAAA;EACA,YAAA;AA5BF;;AA+BA,wEAAA;AACA;EACE,aAAA;AA5BF;;AA8BI;EACI,uBAAA;EACA,+BAAA;EAEA,sBAAA;EACA,qCAAA;EAEA,oBAAA;EACA,uCAAA;EAEA,2BAAA;EACA,0BAAA;EAEA,iBAAA;EACA,oCAAA;EAEA,4BAAA;EACA,iCAAA;EAEA,0BAAA;EACA,yCAAA;EAEA,uBAAA;EACA,sCAAA;EAEA,yBAAA;EACA,qCAAA;EAEA,uBAAA;EAEA,gBAAA;AArCR;;AAuCA;EACE,sBAAA;EACA,6BAAA;EACA,4BAAA;EACA,8BAAA;EACA,6BAAA;AApCF;;AAsCA;EACE,WAAA;EACA,kBAAA;EACA,iBAAA;EACA,mBAAA;EACA,kBAAA;AAnCF;;AAqCA;EAEE;IACE,4BAAA;EAnCF;EAsCA;IACE,iBAAA;EApCF;AACF;AAsCA;EACE,kBAAA;EACA,UAAA;EACA,WAAA;EACA,UAAA;EACA,YAAA;EACA,gBAAA;EACA,sBAAA;EACA,mBAAA;EACA,eAAA;AApCF;;AAsCA;EACE,mBAAA;AAnCF;;AAqCA;EACE,gBAAA;AAlCF;;AAoCA;EACE,eAAA;AAjCF;;AAmCA;EACE,kBAAA;AAhCF;;AAkCA;EACE,kBAAA;AA/BF;;AAiCA;EACE,UAAA;AA9BF;;AAgCA;EACE,aAAA;AA7BF;;AA+BA;EACE,SAAA;AA5BF;;AA8BA;EACE,UAAA;AA3BF;;AA6BA;EACE,QAAA;AA1BF;;AA4BA;EACE,WAAA;AAzBF;;AA2BA;EACE,WAAA;AAxBF;;AA0BA;EACE,oBAAA;EACA,qBAAA;AAvBF;;AAyBA;EACE,mBAAA;EACA,oBAAA;AAtBF;;AAwBA;EACE,iBAAA;EACA,kBAAA;AArBF;;AAuBA;EACE,iBAAA;EACA,kBAAA;AApBF;;AAsBA;EACE,mBAAA;EACA,sBAAA;AAnBF;;AAqBA;EACE,kBAAA;EACA,qBAAA;AAlBF;;AAoBA;EACE,qBAAA;AAjBF;;AAmBA;EACE,sBAAA;AAhBF;;AAkBA;EACE,mBAAA;AAfF;;AAiBA;EACE,qBAAA;AAdF;;AAgBA;EACE,qBAAA;AAbF;;AAeA;EACE,oBAAA;AAZF;;AAcA;EACE,kBAAA;AAXF;;AAaA;EACE,mBAAA;AAVF;;AAYA;EACE,gBAAA;AATF;;AAWA;EACE,kBAAA;AARF;;AAUA;EACE,cAAA;AAPF;;AASA;EACE,qBAAA;AANF;;AAQA;EACE,aAAA;AALF;;AAOA;EACE,oBAAA;AAJF;;AAMA;EACE,aAAA;AAHF;;AAKA;EACE,kBAAA;AAFF;;AAIA;EACE,YAAA;AADF;;AAGA;EACE,cAAA;AAAF;;AAEA;EACE,eAAA;AACF;;AACA;EACE,YAAA;AAEF;;AAAA;EACE,eAAA;AAGF;;AADA;EACE,cAAA;AAIF;;AAFA;EACE,YAAA;AAKF;;AAHA;EACE,YAAA;AAMF;;AAJA;EACE,kBAAA;AAOF;;AALA;EACE,gBAAA;AAQF;;AANA;EACE,iBAAA;AASF;;AAPA;EACE,gBAAA;AAUF;;AARA;EACE,iBAAA;AAWF;;AATA;EACE,WAAA;AAYF;;AAVA;EACE,aAAA;AAaF;;AAXA;EACE,cAAA;AAcF;;AAZA;EACE,WAAA;AAeF;;AAbA;EACE,cAAA;AAgBF;;AAdA;EACE,aAAA;AAiBF;;AAfA;EACE,YAAA;AAkBF;;AAhBA;EACE,WAAA;AAmBF;;AAjBA;EACE,YAAA;AAoBF;;AAlBA;EACE,YAAA;AAqBF;;AAnBA;EACE,WAAA;AAsBF;;AApBA;EACE,iBAAA;AAuBF;;AArBA;EACE,gBAAA;AAwBF;;AAtBA;EACE,gBAAA;AAyBF;;AAvBA;EACE,gBAAA;AA0BF;;AAxBA;EACE,gBAAA;AA2BF;;AAzBA;EACE,YAAA;AA4BF;;AA1BA;EACE,UAAA;AA6BF;;AA3BA;EACE,cAAA;AA8BF;;AA5BA;EACE,sBAAA;EACA,+LAAA;AA+BF;;AA7BA;EACE,sBAAA;EACA,+LAAA;AAgCF;;AA9BA;EACE,kBAAA;EACA,kBAAA;EACA,+LAAA;AAiCF;;AA/BA;EACE,+LAAA;AAkCF;;AAhCA;EAEE;IACE,YAAA;EAkCF;AACF;AAhCA;EACE,yDAAA;AAkCF;;AAhCA;EAEE;IACE,yBAAA;EAkCF;AACF;AAhCA;EACE,kCAAA;AAkCF;;AAhCA;EACE,kBAAA;AAmCF;;AAjCA;EACE,mBAAA;AAoCF;;AAlCA;EACE,eAAA;AAqCF;;AAnCA;EACE,2BAAA;AAsCF;;AApCA;EACE,wBAAA;AAuCF;;AArCA;EACE,qBAAA;AAwCF;;AAtCA;EACE,gDAAA;AAyCF;;AAvCA;EACE,mBAAA;AA0CF;;AAxCA;EACE,sBAAA;AA2CF;;AAzCA;EACE,mBAAA;AA4CF;;AA1CA;EACE,yBAAA;AA6CF;;AA3CA;EACE,uBAAA;AA8CF;;AA5CA;EACE,8BAAA;AA+CF;;AA7CA;EACE,6BAAA;AAgDF;;AA9CA;EACE,YAAA;AAiDF;;AA/CA;EACE,WAAA;AAkDF;;AAhDA;EACE,WAAA;AAmDF;;AAjDA;EACE,uBAAA;EACA,uDAAA;EACA,4DAAA;AAoDF;;AAlDA;EACE,uBAAA;EACA,sDAAA;EACA,2DAAA;AAqDF;;AAnDA;EACE,uBAAA;EACA,uDAAA;EACA,4DAAA;AAsDF;;AApDA;EACE,uBAAA;EACA,uDAAA;EACA,4DAAA;AAuDF;;AArDA;EACE,uBAAA;EACA,2DAAA;EACA,wDAAA;AAwDF;;AAtDA;EACE,uBAAA;EACA,0DAAA;EACA,uDAAA;AAyDF;;AAvDA;EACE,uBAAA;EACA,2DAAA;EACA,wDAAA;AA0DF;;AAxDA;EACE,uBAAA;EACA,wDAAA;EACA,qDAAA;AA2DF;;AAzDA;EACE,uBAAA;EACA,0DAAA;EACA,uDAAA;AA4DF;;AA1DA;EACE,gBAAA;AA6DF;;AA3DA;EACE,gBAAA;AA8DF;;AA5DA;EACE,sBAAA;AA+DF;;AA7DA;EACE,qBAAA;AAgEF;;AA9DA;EACE,4BAAA;AAiEF;;AA/DA;EACE,wCAAA;AAkEF;;AAhEA;EACE,sBAAA;AAmEF;;AAjEA;EACE,iBAAA;AAoEF;;AAlEA;EACE,iBAAA;AAqEF;;AAnEA;EACE,iBAAA;AAsEF;;AApEA;EACE,wBAAA;AAuEF;;AArEA;EACE,8BAAA;AAwEF;;AAtEA;EACE,qBAAA;AAyEF;;AAvEA;EACE,qBAAA;AA0EF;;AAxEA;EACE,mBAAA;AA2EF;;AAzEA;EACE,0BAAA;AA4EF;;AA1EA;EACE,sBAAA;EACA,uDAAA;AA6EF;;AA3EA;EACE,sBAAA;EACA,uDAAA;AA8EF;;AA5EA;EACE,sBAAA;EACA,oDAAA;AA+EF;;AA7EA;EACE,sBAAA;EACA,oDAAA;AAgFF;;AA9EA;EACE,sBAAA;EACA,qDAAA;AAiFF;;AA/EA;EACE,sBAAA;EACA,qDAAA;AAkFF;;AAhFA;EACE,oCAAA;AAmFF;;AAjFA;EACE,oCAAA;AAoFF;;AAlFA;EACE,oCAAA;AAqFF;;AAnFA;EACE,kBAAA;EACA,uDAAA;AAsFF;;AApFA;EACE,kBAAA;EACA,oDAAA;AAuFF;;AArFA;EACE,kBAAA;EACA,oDAAA;AAwFF;;AAtFA;EACE,kBAAA;EACA,oDAAA;AAyFF;;AAvFA;EACE,uCAAA;AA0FF;;AAxFA;EACE,kBAAA;EACA,oDAAA;AA2FF;;AAzFA;EACE,uCAAA;AA4FF;;AA1FA;EACE,kBAAA;EACA,qDAAA;AA6FF;;AA3FA;EACE,kBAAA;EACA,qDAAA;AA8FF;;AA5FA;EACE,kBAAA;EACA,qDAAA;AA+FF;;AA7FA;EACE,kBAAA;EACA,qDAAA;AAgGF;;AA9FA;EACE,kBAAA;EACA,qDAAA;AAiGF;;AA/FA;EACE,wCAAA;AAkGF;;AAhGA;EACE,kBAAA;EACA,uDAAA;AAmGF;;AAjGA;EACE,kBAAA;EACA,uDAAA;AAoGF;;AAlGA;EACE,gBAAA;AAqGF;;AAnGA;EACE,eAAA;AAsGF;;AApGA;EACE,gBAAA;AAuGF;;AArGA;EACE,aAAA;AAwGF;;AAtGA;EACE,eAAA;AAyGF;;AAvGA;EACE,oBAAA;EACA,qBAAA;AA0GF;;AAxGA;EACE,qBAAA;EACA,sBAAA;AA2GF;;AAzGA;EACE,kBAAA;EACA,mBAAA;AA4GF;;AA1GA;EACE,qBAAA;EACA,wBAAA;AA6GF;;AA3GA;EACE,oBAAA;EACA,uBAAA;AA8GF;;AA5GA;EACE,mBAAA;EACA,sBAAA;AA+GF;;AA7GA;EACE,oBAAA;EACA,uBAAA;AAgHF;;AA9GA;EACE,iBAAA;EACA,oBAAA;AAiHF;;AA/GA;EACE,oBAAA;AAkHF;;AAhHA;EACE,0BAAA;AAmHF;;AAjHA;EACE,iBAAA;AAoHF;;AAlHA;EACE,gBAAA;AAqHF;;AAnHA;EACE,kBAAA;AAsHF;;AApHA;EACE,wBAAA;AAuHF;;AArHA;EACE,iBAAA;EACA,iBAAA;AAwHF;;AAtHA;EACE,kBAAA;EACA,mBAAA;AAyHF;;AAvHA;EACE,mBAAA;EACA,oBAAA;AA0HF;;AAxHA;EACE,mBAAA;EACA,oBAAA;AA2HF;;AAzHA;EACE,kBAAA;EACA,oBAAA;AA4HF;;AA1HA;EACE,kBAAA;EACA,iBAAA;AA6HF;;AA3HA;EACE,gBAAA;AA8HF;;AA5HA;EACE,gBAAA;AA+HF;;AA7HA;EACE,gBAAA;AAgIF;;AA9HA;EACE,oBAAA;EACA,4CAAA;AAiIF;;AA/HA;EACE,oBAAA;EACA,8CAAA;AAkIF;;AAhIA;EACE,oBAAA;EACA,8CAAA;AAmIF;;AAjIA;EACE,oBAAA;EACA,8CAAA;AAoIF;;AAlIA;EACE,oBAAA;EACA,8CAAA;AAqIF;;AAnIA;EACE,oBAAA;EACA,2CAAA;AAsIF;;AApIA;EACE,oBAAA;EACA,4CAAA;AAuIF;;AArIA;EACE,oBAAA;EACA,4CAAA;AAwIF;;AAtIA;EACE,oBAAA;EACA,8CAAA;AAyIF;;AAvIA;EACE,oBAAA;EACA,4CAAA;AA0IF;;AAxIA;EACE,oBAAA;EACA,4CAAA;AA2IF;;AAzIA;EACE,oBAAA;EACA,8CAAA;AA4IF;;AA1IA;EACE,YAAA;AA6IF;;AA3IA;EACE,+EAAA;EACA,mGAAA;EACA,6HAAA;AA8IF;;AA5IA;EACE,gFAAA;EACA,oGAAA;EACA,6HAAA;AA+IF;;AA7IA;EACE,oBAAA;AAgJF;;AA9IA;EACE,kBAAA;AAiJF;;AA/IA;EACE,sBAAA;AAkJF;;AAhJA;EACE,2GAAA;EACA,yGAAA;EACA,uGAAA;AAmJF;;AAjJA;EACE,oBAAA;EACA,uDAAA;AAoJF;;AAlJA;EACE,iLAAA;AAqJF;;AAnJA;EACE,6BAAA;EACA,+QAAA;EACA,uQAAA;AAsJF;;AApJA;EACE,wBAAA;EACA,wDAAA;EACA,0BAAA;AAuJF;;AArJA;EACE,+FAAA;EACA,wDAAA;EACA,0BAAA;AAwJF;;AAtJA;EAEE;IACE,mCAAA;IACA,iNAAA;EAwJF;AACF;AAtJA;EAEE;IACE,kCAAA;IACA,2MAAA;EAuJF;AACF;AArJA;EACE,uBAAA;AAuJF;;AArJA;EACE,sBAAA;AAwJF;;AArJA,UAAA;AACA;EACI,UAAA;AAwJJ;;AArJA,UAAA;AACA;EACI,2BAAA;AAwJJ;;AArJA,WAAA;AACA;EACI,2BAAA;EACA,kBAAA;AAwJJ;;AAtJA;EACE,kBAAA;AAyJF;;AAvJA;EACE,oCAAA;AA0JF;;AAxJA;EACE,kBAAA;EACA,oDAAA;AA2JF;;AAzJA;EACE,kBAAA;EACA,oDAAA;AA4JF;;AA1JA;EACE,kBAAA;EACA,qDAAA;AA6JF;;AA3JA;EACE,kBAAA;EACA,qDAAA;AA8JF;;AA5JA;EACE,kBAAA;EACA,qDAAA;AA+JF;;AA7JA;EACE,kBAAA;EACA,uDAAA;AAgKF;;AA9JA;EACE,kBAAA;EACA,qDAAA;AAiKF;;AA/JA;EACE,kBAAA;EACA,qDAAA;AAkKF;;AAhKA;EACE,oBAAA;EACA,6CAAA;AAmKF;;AAjKA;EACE,oBAAA;EACA,8CAAA;AAoKF;;AAlKA;EACE,6EAAA;EACA,iGAAA;EACA,6HAAA;AAqKF;;AAnKA;EACE,sBAAA;EACA,sDAAA;AAsKF;;AApKA;EACE,8BAAA;EACA,mBAAA;AAuKF;;AArKA;EACE,2GAAA;EACA,yGAAA;EACA,uGAAA;AAwKF;;AAtKA;EACE,2GAAA;EACA,yGAAA;EACA,uGAAA;AAyKF;;AAvKA;EACE,oBAAA;EACA,yDAAA;AA0KF;;AAxKA;EACE,oBAAA;EACA,wDAAA;AA2KF;;AAzKA;EACE,2BAAA;AA4KF;;AA1KA;EACE,+BAAA;AA6KF;;AA3KA;EACE,YAAA;AA8KF;;AA5KA;EAEE;IAEE;MACE,yBAAA;IA6KF;EACF;EA1KA;IACE,oCAAA;EA4KF;AACF;AA1KA;EACE,oBAAA;EACA,8CAAA;AA4KF;;AA1KA;EAEE;IACE,4BAAA;EA4KF;AACF;AA1KA;EAEE;IACE,gDAAA;EA2KF;AACF","sourcesContent":["*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n  --tw-contain-size:  ;\n  --tw-contain-layout:  ;\n  --tw-contain-paint:  ;\n  --tw-contain-style:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n  --tw-contain-size:  ;\n  --tw-contain-layout:  ;\n  --tw-contain-paint:  ;\n  --tw-contain-style:  ;\n}/*\n! tailwindcss v3.4.14 | MIT License | https://tailwindcss.com\n*//*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: #e5e7eb; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: '';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n7. Disable tap highlights on iOS\n*/\n\nhtml,\n:host {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4; /* 3 */\n  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"; /* 4 */\n  font-feature-settings: normal; /* 5 */\n  font-variation-settings: normal; /* 6 */\n  -webkit-tap-highlight-color: transparent; /* 7 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font-family by default.\n2. Use the user's configured `mono` font-feature-settings by default.\n3. Use the user's configured `mono` font-variation-settings by default.\n4. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; /* 1 */\n  font-feature-settings: normal; /* 2 */\n  font-variation-settings: normal; /* 3 */\n  font-size: 1em; /* 4 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-feature-settings: inherit; /* 1 */\n  font-variation-settings: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  letter-spacing: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\ninput:where([type='button']),\ninput:where([type='reset']),\ninput:where([type='submit']) {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type='search'] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role=\"button\"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n[hidden]:where(:not([hidden=\"until-found\"])) {\n  display: none;\n}\n    :root {\n        --background: 0 0% 100%;\n        --foreground: 222.2 47.4% 11.2%;\n\n        --muted: 210 40% 96.1%;\n        --muted-foreground: 215.4 16.3% 46.9%;\n\n        --popover: 0 0% 100%;\n        --popover-foreground: 222.2 47.4% 11.2%;\n\n        --border: 214.3 31.8% 91.4%;\n        --input: 214.3 31.8% 91.4%;\n\n        --card: 0 0% 100%;\n        --card-foreground: 222.2 47.4% 11.2%;\n\n        --primary: 222.2 47.4% 11.2%;\n        --primary-foreground: 210 40% 98%;\n\n        --secondary: 210 40% 96.1%;\n        --secondary-foreground: 222.2 47.4% 11.2%;\n\n        --accent: 210 40% 96.1%;\n        --accent-foreground: 222.2 47.4% 11.2%;\n\n        --destructive: 0 100% 50%;\n        --destructive-foreground: 210 40% 98%;\n\n        --ring: 215 20.2% 65.1%;\n\n        --radius: 0.5rem;\n    }\n.\\!container {\n  width: 100% !important;\n  margin-right: auto !important;\n  margin-left: auto !important;\n  padding-right: 2rem !important;\n  padding-left: 2rem !important;\n}\n.container {\n  width: 100%;\n  margin-right: auto;\n  margin-left: auto;\n  padding-right: 2rem;\n  padding-left: 2rem;\n}\n@media (min-width: 1400px) {\n\n  .\\!container {\n    max-width: 1400px !important;\n  }\n\n  .container {\n    max-width: 1400px;\n  }\n}\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border-width: 0;\n}\n.visible {\n  visibility: visible;\n}\n.static {\n  position: static;\n}\n.fixed {\n  position: fixed;\n}\n.absolute {\n  position: absolute;\n}\n.relative {\n  position: relative;\n}\n.inset-0 {\n  inset: 0px;\n}\n.-top-3 {\n  top: -0.75rem;\n}\n.left-1\\/2 {\n  left: 50%;\n}\n.right-0 {\n  right: 0px;\n}\n.top-1\\/4 {\n  top: 25%;\n}\n.z-10 {\n  z-index: 10;\n}\n.z-50 {\n  z-index: 50;\n}\n.mx-1 {\n  margin-left: 0.25rem;\n  margin-right: 0.25rem;\n}\n.mx-2 {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\n.mx-4 {\n  margin-left: 1rem;\n  margin-right: 1rem;\n}\n.mx-auto {\n  margin-left: auto;\n  margin-right: auto;\n}\n.my-1 {\n  margin-top: 0.25rem;\n  margin-bottom: 0.25rem;\n}\n.my-2 {\n  margin-top: 0.5rem;\n  margin-bottom: 0.5rem;\n}\n.mb-2 {\n  margin-bottom: 0.5rem;\n}\n.mb-3 {\n  margin-bottom: 0.75rem;\n}\n.mb-4 {\n  margin-bottom: 1rem;\n}\n.mb-6 {\n  margin-bottom: 1.5rem;\n}\n.mr-1 {\n  margin-right: 0.25rem;\n}\n.mr-2 {\n  margin-right: 0.5rem;\n}\n.mr-4 {\n  margin-right: 1rem;\n}\n.mt-1 {\n  margin-top: 0.25rem;\n}\n.mt-4 {\n  margin-top: 1rem;\n}\n.mt-6 {\n  margin-top: 1.5rem;\n}\n.block {\n  display: block;\n}\n.inline-block {\n  display: inline-block;\n}\n.flex {\n  display: flex;\n}\n.inline-flex {\n  display: inline-flex;\n}\n.grid {\n  display: grid;\n}\n.list-item {\n  display: list-item;\n}\n.h-16 {\n  height: 4rem;\n}\n.h-2 {\n  height: 0.5rem;\n}\n.h-3 {\n  height: 0.75rem;\n}\n.h-4 {\n  height: 1rem;\n}\n.h-5 {\n  height: 1.25rem;\n}\n.h-6 {\n  height: 1.5rem;\n}\n.h-8 {\n  height: 2rem;\n}\n.h-full {\n  height: 100%;\n}\n.max-h-2 {\n  max-height: 0.5rem;\n}\n.max-h-24 {\n  max-height: 6rem;\n}\n.max-h-48 {\n  max-height: 12rem;\n}\n.max-h-\\[90vh\\] {\n  max-height: 90vh;\n}\n.min-h-\\[300px\\] {\n  min-height: 300px;\n}\n.w-16 {\n  width: 4rem;\n}\n.w-2 {\n  width: 0.5rem;\n}\n.w-3 {\n  width: 0.75rem;\n}\n.w-4 {\n  width: 1rem;\n}\n.w-5 {\n  width: 1.25rem;\n}\n.w-6 {\n  width: 1.5rem;\n}\n.w-64 {\n  width: 16rem;\n}\n.w-8 {\n  width: 2rem;\n}\n.w-80 {\n  width: 20rem;\n}\n.w-\\[350px\\] {\n  width: 350px;\n}\n.w-full {\n  width: 100%;\n}\n.max-w-2 {\n  max-width: 0.5rem;\n}\n.max-w-4xl {\n  max-width: 56rem;\n}\n.max-w-52 {\n  max-width: 13rem;\n}\n.max-w-5xl {\n  max-width: 64rem;\n}\n.max-w-md {\n  max-width: 28rem;\n}\n.flex-1 {\n  flex: 1 1 0%;\n}\n.flex-none {\n  flex: none;\n}\n.flex-shrink-0 {\n  flex-shrink: 0;\n}\n.-translate-x-1\\/2 {\n  --tw-translate-x: -50%;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n.-translate-y-1\\/4 {\n  --tw-translate-y: -25%;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n.scale-105 {\n  --tw-scale-x: 1.05;\n  --tw-scale-y: 1.05;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n.transform {\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n@keyframes pulse {\n\n  50% {\n    opacity: .5;\n  }\n}\n.animate-pulse {\n  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;\n}\n@keyframes spin {\n\n  to {\n    transform: rotate(360deg);\n  }\n}\n.animate-spin {\n  animation: spin 1s linear infinite;\n}\n.cursor-col-resize {\n  cursor: col-resize;\n}\n.cursor-not-allowed {\n  cursor: not-allowed;\n}\n.cursor-pointer {\n  cursor: pointer;\n}\n.list-inside {\n  list-style-position: inside;\n}\n.list-decimal {\n  list-style-type: decimal;\n}\n.list-disc {\n  list-style-type: disc;\n}\n.grid-cols-1 {\n  grid-template-columns: repeat(1, minmax(0, 1fr));\n}\n.flex-row {\n  flex-direction: row;\n}\n.flex-col {\n  flex-direction: column;\n}\n.items-center {\n  align-items: center;\n}\n.justify-end {\n  justify-content: flex-end;\n}\n.justify-center {\n  justify-content: center;\n}\n.justify-between {\n  justify-content: space-between;\n}\n.justify-evenly {\n  justify-content: space-evenly;\n}\n.gap-1 {\n  gap: 0.25rem;\n}\n.gap-2 {\n  gap: 0.5rem;\n}\n.gap-6 {\n  gap: 1.5rem;\n}\n.space-x-1 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-x-reverse: 0;\n  margin-right: calc(0.25rem * var(--tw-space-x-reverse));\n  margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));\n}\n.space-x-2 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-x-reverse: 0;\n  margin-right: calc(0.5rem * var(--tw-space-x-reverse));\n  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));\n}\n.space-x-3 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-x-reverse: 0;\n  margin-right: calc(0.75rem * var(--tw-space-x-reverse));\n  margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));\n}\n.space-x-7 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-x-reverse: 0;\n  margin-right: calc(1.75rem * var(--tw-space-x-reverse));\n  margin-left: calc(1.75rem * calc(1 - var(--tw-space-x-reverse)));\n}\n.space-y-1 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));\n}\n.space-y-2 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));\n}\n.space-y-3 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));\n}\n.space-y-4 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(1rem * var(--tw-space-y-reverse));\n}\n.space-y-6 > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));\n}\n.overflow-hidden {\n  overflow: hidden;\n}\n.overflow-y-auto {\n  overflow-y: auto;\n}\n.rounded {\n  border-radius: 0.25rem;\n}\n.rounded-full {\n  border-radius: 9999px;\n}\n.rounded-lg {\n  border-radius: var(--radius);\n}\n.rounded-md {\n  border-radius: calc(var(--radius) - 2px);\n}\n.rounded-xl {\n  border-radius: 0.75rem;\n}\n.border {\n  border-width: 1px;\n}\n.border-2 {\n  border-width: 2px;\n}\n.border-4 {\n  border-width: 4px;\n}\n.border-b-2 {\n  border-bottom-width: 2px;\n}\n.border-s-4 {\n  border-inline-start-width: 4px;\n}\n.border-t {\n  border-top-width: 1px;\n}\n.border-t-2 {\n  border-top-width: 2px;\n}\n.border-solid {\n  border-style: solid;\n}\n.border-current {\n  border-color: currentColor;\n}\n.border-gray-100 {\n  --tw-border-opacity: 1;\n  border-color: rgb(243 244 246 / var(--tw-border-opacity));\n}\n.border-gray-500 {\n  --tw-border-opacity: 1;\n  border-color: rgb(107 114 128 / var(--tw-border-opacity));\n}\n.border-gray-700 {\n  --tw-border-opacity: 1;\n  border-color: rgb(55 65 81 / var(--tw-border-opacity));\n}\n.border-gray-800 {\n  --tw-border-opacity: 1;\n  border-color: rgb(31 41 55 / var(--tw-border-opacity));\n}\n.border-green-500 {\n  --tw-border-opacity: 1;\n  border-color: rgb(34 197 94 / var(--tw-border-opacity));\n}\n.border-orange-600 {\n  --tw-border-opacity: 1;\n  border-color: rgb(234 88 12 / var(--tw-border-opacity));\n}\n.border-orange-600\\/20 {\n  border-color: rgb(234 88 12 / 0.2);\n}\n.border-red-500\\/20 {\n  border-color: rgb(239 68 68 / 0.2);\n}\n.border-e-transparent {\n  border-inline-end-color: transparent;\n}\n.bg-blue-100 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(219 234 254 / var(--tw-bg-opacity));\n}\n.bg-gray-600 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(75 85 99 / var(--tw-bg-opacity));\n}\n.bg-gray-700 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(55 65 81 / var(--tw-bg-opacity));\n}\n.bg-gray-800 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(31 41 55 / var(--tw-bg-opacity));\n}\n.bg-gray-800\\/50 {\n  background-color: rgb(31 41 55 / 0.5);\n}\n.bg-gray-900 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(17 24 39 / var(--tw-bg-opacity));\n}\n.bg-gray-900\\/90 {\n  background-color: rgb(17 24 39 / 0.9);\n}\n.bg-green-800 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(22 101 52 / var(--tw-bg-opacity));\n}\n.bg-orange-600 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(234 88 12 / var(--tw-bg-opacity));\n}\n.bg-red-500 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(239 68 68 / var(--tw-bg-opacity));\n}\n.bg-red-600 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(220 38 38 / var(--tw-bg-opacity));\n}\n.bg-red-800 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(153 27 27 / var(--tw-bg-opacity));\n}\n.bg-red-900\\/50 {\n  background-color: rgb(127 29 29 / 0.5);\n}\n.bg-slate-200 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(226 232 240 / var(--tw-bg-opacity));\n}\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\n.p-1 {\n  padding: 0.25rem;\n}\n.p-2 {\n  padding: 0.5rem;\n}\n.p-3 {\n  padding: 0.75rem;\n}\n.p-4 {\n  padding: 1rem;\n}\n.p-6 {\n  padding: 1.5rem;\n}\n.px-2 {\n  padding-left: 0.5rem;\n  padding-right: 0.5rem;\n}\n.px-3 {\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n}\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n.py-0\\.5 {\n  padding-top: 0.125rem;\n  padding-bottom: 0.125rem;\n}\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\n.py-2 {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n}\n.py-3 {\n  padding-top: 0.75rem;\n  padding-bottom: 0.75rem;\n}\n.py-8 {\n  padding-top: 2rem;\n  padding-bottom: 2rem;\n}\n.pl-2 {\n  padding-left: 0.5rem;\n}\n.ps-4 {\n  padding-inline-start: 1rem;\n}\n.pt-4 {\n  padding-top: 1rem;\n}\n.text-left {\n  text-align: left;\n}\n.text-center {\n  text-align: center;\n}\n.align-\\[-0\\.125em\\] {\n  vertical-align: -0.125em;\n}\n.text-2xl {\n  font-size: 1.5rem;\n  line-height: 2rem;\n}\n.text-4xl {\n  font-size: 2.25rem;\n  line-height: 2.5rem;\n}\n.text-lg {\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n}\n.text-sm {\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n}\n.text-xl {\n  font-size: 1.25rem;\n  line-height: 1.75rem;\n}\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\n.font-bold {\n  font-weight: 700;\n}\n.font-medium {\n  font-weight: 500;\n}\n.font-semibold {\n  font-weight: 600;\n}\n.text-blue-800 {\n  --tw-text-opacity: 1;\n  color: rgb(30 64 175 / var(--tw-text-opacity));\n}\n.text-gray-100 {\n  --tw-text-opacity: 1;\n  color: rgb(243 244 246 / var(--tw-text-opacity));\n}\n.text-gray-300 {\n  --tw-text-opacity: 1;\n  color: rgb(209 213 219 / var(--tw-text-opacity));\n}\n.text-gray-400 {\n  --tw-text-opacity: 1;\n  color: rgb(156 163 175 / var(--tw-text-opacity));\n}\n.text-gray-500 {\n  --tw-text-opacity: 1;\n  color: rgb(107 114 128 / var(--tw-text-opacity));\n}\n.text-gray-600 {\n  --tw-text-opacity: 1;\n  color: rgb(75 85 99 / var(--tw-text-opacity));\n}\n.text-green-600 {\n  --tw-text-opacity: 1;\n  color: rgb(22 163 74 / var(--tw-text-opacity));\n}\n.text-orange-600 {\n  --tw-text-opacity: 1;\n  color: rgb(234 88 12 / var(--tw-text-opacity));\n}\n.text-red-400 {\n  --tw-text-opacity: 1;\n  color: rgb(248 113 113 / var(--tw-text-opacity));\n}\n.text-red-500 {\n  --tw-text-opacity: 1;\n  color: rgb(239 68 68 / var(--tw-text-opacity));\n}\n.text-red-600 {\n  --tw-text-opacity: 1;\n  color: rgb(220 38 38 / var(--tw-text-opacity));\n}\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity));\n}\n.opacity-50 {\n  opacity: 0.5;\n}\n.shadow-lg {\n  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n.shadow-xl {\n  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n.outline {\n  outline-style: solid;\n}\n.outline-1 {\n  outline-width: 1px;\n}\n.outline-orange-600 {\n  outline-color: #ea580c;\n}\n.ring-1 {\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n}\n.ring-gray-900 {\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(17 24 39 / var(--tw-ring-opacity));\n}\n.filter {\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\n.backdrop-blur-sm {\n  --tw-backdrop-blur: blur(4px);\n  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);\n  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);\n}\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n.transition-colors {\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n@keyframes enter {\n\n  from {\n    opacity: var(--tw-enter-opacity, 1);\n    transform: translate3d(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0), 0) scale3d(var(--tw-enter-scale, 1), var(--tw-enter-scale, 1), var(--tw-enter-scale, 1)) rotate(var(--tw-enter-rotate, 0));\n  }\n}\n@keyframes exit {\n\n  to {\n    opacity: var(--tw-exit-opacity, 1);\n    transform: translate3d(var(--tw-exit-translate-x, 0), var(--tw-exit-translate-y, 0), 0) scale3d(var(--tw-exit-scale, 1), var(--tw-exit-scale, 1), var(--tw-exit-scale, 1)) rotate(var(--tw-exit-rotate, 0));\n  }\n}\n.\\[animation-delay\\:-0\\.15s\\] {\n  animation-delay: -0.15s;\n}\n.\\[animation-delay\\:-0\\.3s\\] {\n  animation-delay: -0.3s;\n}\n\n/* width */\n.ai-scrollbar::-webkit-scrollbar {\n    width: 5px;\n}\n\n/* Track */\n.ai-scrollbar::-webkit-scrollbar-track {\n    background: rgb(17 24 39);\n}\n\n/* Handle */\n.ai-scrollbar::-webkit-scrollbar-thumb {\n    background: rgb(37 44 59);\n    border-radius: 5px;\n}\n.last\\:mb-0:last-child {\n  margin-bottom: 0px;\n}\n.hover\\:border-orange-600\\/50:hover {\n  border-color: rgb(234 88 12 / 0.5);\n}\n.hover\\:bg-gray-600:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(75 85 99 / var(--tw-bg-opacity));\n}\n.hover\\:bg-gray-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(55 65 81 / var(--tw-bg-opacity));\n}\n.hover\\:bg-green-800:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(22 101 52 / var(--tw-bg-opacity));\n}\n.hover\\:bg-orange-600:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(234 88 12 / var(--tw-bg-opacity));\n}\n.hover\\:bg-orange-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(194 65 12 / var(--tw-bg-opacity));\n}\n.hover\\:bg-red-50:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(254 242 242 / var(--tw-bg-opacity));\n}\n.hover\\:bg-red-600:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(220 38 38 / var(--tw-bg-opacity));\n}\n.hover\\:bg-red-800:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(153 27 27 / var(--tw-bg-opacity));\n}\n.hover\\:text-orange-500:hover {\n  --tw-text-opacity: 1;\n  color: rgb(249 115 22 / var(--tw-text-opacity));\n}\n.hover\\:text-white:hover {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity));\n}\n.hover\\:shadow-md:hover {\n  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n.focus\\:border-orange-500:focus {\n  --tw-border-opacity: 1;\n  border-color: rgb(249 115 22 / var(--tw-border-opacity));\n}\n.focus\\:outline-none:focus {\n  outline: 2px solid transparent;\n  outline-offset: 2px;\n}\n.focus\\:ring-1:focus {\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n}\n.focus\\:ring-2:focus {\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n}\n.focus\\:ring-orange-500:focus {\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(249 115 22 / var(--tw-ring-opacity));\n}\n.focus\\:ring-orange-600:focus {\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(234 88 12 / var(--tw-ring-opacity));\n}\n.focus\\:ring-offset-2:focus {\n  --tw-ring-offset-width: 2px;\n}\n.focus\\:ring-offset-gray-900:focus {\n  --tw-ring-offset-color: #111827;\n}\n.disabled\\:opacity-50:disabled {\n  opacity: 0.5;\n}\n@media (prefers-reduced-motion: reduce) {\n\n  @keyframes spin {\n\n    to {\n      transform: rotate(360deg);\n    }\n  }\n\n  .motion-reduce\\:animate-\\[spin_1\\.5s_linear_infinite\\] {\n    animation: spin 1.5s linear infinite;\n  }\n}\n.dark\\:text-white:is(.dark *) {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity));\n}\n@media (min-width: 640px) {\n\n  .sm\\:ps-6 {\n    padding-inline-start: 1.5rem;\n  }\n}\n@media (min-width: 768px) {\n\n  .md\\:grid-cols-3 {\n    grid-template-columns: repeat(3, minmax(0, 1fr));\n  }\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -6693,348 +6720,6 @@ module.exports = function extend() {
 	// Return the modified object
 	return target;
 };
-
-
-/***/ }),
-
-/***/ "./node_modules/extpay/dist/ExtPay.module.js":
-/*!***************************************************!*\
-  !*** ./node_modules/extpay/dist/ExtPay.module.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! webextension-polyfill */ "./node_modules/webextension-polyfill/dist/browser-polyfill.js");
-/* harmony import */ var webextension_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__);
-
-
-// Sign up at https://extensionpay.com to use this library. AGPLv3 licensed.
-
-
-// For running as a content script. Receive a message from the successful payments page
-// and pass it on to the background page to query if the user has paid.
-if (typeof window !== 'undefined') {
-    window.addEventListener('message', (event) => {
-        if (event.origin !== 'https://extensionpay.com') return;
-        if (event.source != window) return;
-        if (event.data === 'fetch-user' || event.data === 'trial-start') {
-            webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.runtime.sendMessage(event.data);
-        }
-    }, false);
-}
-
-function ExtPay(extension_id) {
-
-    const HOST = `https://extensionpay.com`;
-    const EXTENSION_URL = `${HOST}/extension/${extension_id}`;
-
-    function timeout(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-    async function get(key) {
-        try {
-            return await webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.storage.sync.get(key)
-        } catch(e) {
-            // if sync not available (like with Firefox temp addons), fall back to local
-            return await webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.storage.local.get(key)
-        }
-    }
-    async function set(dict) {
-        try {
-            return await webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.storage.sync.set(dict)
-        } catch(e) {
-            // if sync not available (like with Firefox temp addons), fall back to local
-            return await webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.storage.local.set(dict)
-        }
-    }
-
-    // ----- start configuration checks
-    webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.management && webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.management.getSelf().then(async (ext_info) => {
-        if (!ext_info.permissions.includes('storage')) {
-            var permissions = ext_info.hostPermissions.concat(ext_info.permissions);
-            throw `ExtPay Setup Error: please include the "storage" permission in manifest.json["permissions"] or else ExtensionPay won't work correctly.
-
-You can copy and paste this to your manifest.json file to fix this error:
-
-"permissions": [
-    ${permissions.map(x => `"    ${x}"`).join(',\n')}${permissions.length > 0 ? ',' : ''}
-    "storage"
-]
-`
-        }
-
-    });
-    // ----- end configuration checks
-
-    // run on "install"
-    get(['extensionpay_installed_at', 'extensionpay_user']).then(async (storage) => {
-        if (storage.extensionpay_installed_at) return;
-
-        // Migration code: before v2.1 installedAt came from the server
-        // so use that stored datetime instead of making a new one.
-        const user = storage.extensionpay_user;
-        const date = user ? user.installedAt : (new Date()).toISOString();
-        await set({'extensionpay_installed_at': date});
-    });
-
-    const paid_callbacks = [];
-    const trial_callbacks =  [];
-
-    async function create_key() {
-        var body = {};
-        var ext_info;
-        if (webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.management) {
-            ext_info = await webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.management.getSelf();
-        } else if (webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.runtime) {
-            ext_info = await webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.runtime.sendMessage('extpay-extinfo'); // ask background page for ext info
-            if (!ext_info) {
-                // Safari doesn't support browser.management for some reason
-                const is_dev_mode = !('update_url' in webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.runtime.getManifest());
-                ext_info = {installType: is_dev_mode ? 'development' : 'normal'};
-            }
-        } else {
-            throw 'ExtPay needs to be run in a browser extension context'
-        }
-
-        if (ext_info.installType == 'development') {
-            body.development = true;
-        } 
-
-        const resp = await fetch(`${EXTENSION_URL}/api/new-key`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify(body),
-        });
-        if (!resp.ok) {
-            throw resp.status, `${HOST}/home`
-        }
-        const api_key = await resp.json();
-        await set({extensionpay_api_key: api_key});
-        return api_key;
-    }
-
-    async function get_key() {
-        const storage = await get(['extensionpay_api_key']);
-        if (storage.extensionpay_api_key) {
-            return storage.extensionpay_api_key;
-        }
-        return null;
-    }
-
-    const datetime_re = /^\d\d\d\d-\d\d-\d\dT/;
-
-    async function fetch_user() {
-        var storage = await get(['extensionpay_user', 'extensionpay_installed_at']);
-        const api_key = await get_key();
-        if (!api_key) {
-            return {
-                paid: false,
-                paidAt: null,
-                installedAt: storage.extensionpay_installed_at ? new Date(storage.extensionpay_installed_at) : new Date(), // sometimes this function gets called before the initial install time can be flushed to storage
-                trialStartedAt: null,
-            }
-        }
-
-        const resp = await fetch(`${EXTENSION_URL}/api/user?api_key=${api_key}`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-            }
-        });
-        // TODO: think harder about error states and what users will want (bad connection, server error, id not found)
-        if (!resp.ok) throw 'ExtPay error while fetching user: '+(await resp.text())
-
-        const user_data = await resp.json();
-
-        const parsed_user = {};
-        for (var [key, value] of Object.entries(user_data)) {
-            if (value && value.match && value.match(datetime_re)) {
-                value = new Date(value);
-            }
-            parsed_user[key] = value;
-        }
-        parsed_user.installedAt = new Date(storage.extensionpay_installed_at);
-          
-
-        if (parsed_user.paidAt) {
-            if (!storage.extensionpay_user || (storage.extensionpay_user && !storage.extensionpay_user.paidAt)) {
-                paid_callbacks.forEach(cb => cb(parsed_user));
-            }
-        }
-        if (parsed_user.trialStartedAt) {
-            if (!storage.extensionpay_user || (storage.extensionpay_user && !storage.extensionpay_user.trialStartedAt)) {
-                trial_callbacks.forEach(cb => cb(parsed_user));
-            }
-
-        }
-        await set({extensionpay_user: user_data});
-
-        return parsed_user;
-    }
-
-    async function payment_page_link() {
-        var api_key = await get_key();
-        if (!api_key) {
-            api_key = await create_key();
-        }
-        return `${EXTENSION_URL}?api_key=${api_key}`
-    }
-
-    async function open_popup(url, width, height) {
-        if (webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.windows && webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.windows.create) {
-            const current_window = await webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.windows.getCurrent();
-            // https://stackoverflow.com/a/68456858
-            const left = Math.round((current_window.width - width) * 0.5 + current_window.left);
-            const top = Math.round((current_window.height - height) * 0.5 + current_window.top);
-            try {
-                webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.windows.create({
-                    url: url,
-                    type: "popup",
-                    focused: true,
-                    width,
-                    height,
-                    left,
-                    top
-                });
-            } catch(e) {
-                // firefox doesn't support 'focused'
-                webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.windows.create({
-                    url: url,
-                    type: "popup",
-                    width,
-                    height,
-                    left,
-                    top
-                });
-            }
-        } else {
-            // for opening from a content script
-            // https://developer.mozilla.org/en-US/docs/Web/API/Window/open
-            window.open(url, null, `toolbar=no,location=no,directories=no,status=no,menubar=no,width=${width},height=${height},left=450`);
-        }
-    }
-
-    async function open_payment_page() {
-        const url = await payment_page_link();
-        open_popup(url, 500, 800);
-    }
-
-    async function open_trial_page(period) {
-        // let user have period string like '1 week' e.g. "start your 1 week free trial"
-
-        var api_key = await get_key();
-        if (!api_key) {
-            api_key = await create_key();
-        }
-        var url = `${EXTENSION_URL}/trial?api_key=${api_key}`;
-        if (period) {
-            url += `&period=${period}`;
-        }
-        open_popup(url, 500, 650);
-    }
-    async function open_login_page() {
-        var api_key = await get_key();
-        if (!api_key) {
-            api_key = await create_key();
-        }
-        const url = `${EXTENSION_URL}/reactivate?api_key=${api_key}`;
-        open_popup(url, 500, 800);
-    }
-
-    var polling = false;
-    async function poll_user_paid() {
-        // keep trying to fetch user in case stripe webhook is late
-        if (polling) return;
-        polling = true;
-        var user = await fetch_user();
-        for (var i=0; i < 2*60; ++i) {
-            if (user.paidAt) {
-                polling = false;
-                return user;
-            }
-            await timeout(1000);
-            user = await fetch_user();
-        }
-        polling = false;
-    }
-
-
-    
-    return {
-        getUser: function() {
-            return fetch_user()
-        },
-        onPaid: {
-            addListener: function(callback) {
-                const content_script_template = `"content_scripts": [
-                {
-            "matches": ["${HOST}/*"],
-            "js": ["ExtPay.js"],
-            "run_at": "document_start"
-        }]`;
-                const manifest = webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.runtime.getManifest();
-                if (!manifest.content_scripts) {
-                    throw `ExtPay setup error: To use the onPaid callback handler, please include ExtPay as a content script in your manifest.json. You can copy the example below into your manifest.json or check the docs: https://github.com/Glench/ExtPay#2-configure-your-manifestjson
-
-        ${content_script_template}`
-                }
-                const extpay_content_script_entry = manifest.content_scripts.find(obj => {
-                    // removing port number because firefox ignores content scripts with port number
-                    return obj.matches.includes(HOST.replace(':3000', '')+'/*')
-                });
-                if (!extpay_content_script_entry) {
-                    throw `ExtPay setup error: To use the onPaid callback handler, please include ExtPay as a content script in your manifest.json matching "${HOST}/*". You can copy the example below into your manifest.json or check the docs: https://github.com/Glench/ExtPay#2-configure-your-manifestjson
-
-        ${content_script_template}`
-                } else {
-                    if (!extpay_content_script_entry.run_at || extpay_content_script_entry.run_at !== 'document_start') {
-                        throw `ExtPay setup error: To use the onPaid callback handler, please make sure the ExtPay content script in your manifest.json runs at document start. You can copy the example below into your manifest.json or check the docs: https://github.com/Glench/ExtPay#2-configure-your-manifestjson
-
-        ${content_script_template}`
-                    }
-                }
-
-                paid_callbacks.push(callback);
-            },
-            // removeListener: function(callback) {
-            //     // TODO
-            // }
-        },
-        openPaymentPage: open_payment_page,
-        openTrialPage: open_trial_page,
-        openLoginPage: open_login_page,
-        onTrialStarted: {
-            addListener: function(callback) {
-                trial_callbacks.push(callback);
-            }
-        },
-        startBackground: function() {
-            webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.runtime.onMessage.addListener(function(message, sender, send_response) {
-                console.log('service worker got message! Here it is:', message);
-                if (message == 'fetch-user') {
-                    // Only called via extensionpay.com/extension/[extension-id]/paid -> content_script when user successfully pays.
-                    // It's possible attackers could trigger this but that is basically harmless. It would just query the user.
-                    poll_user_paid();
-                } else if (message == 'trial-start') {
-                    // no need to poll since the trial confirmation page has already set trialStartedAt
-                    fetch_user(); 
-                } else if (message == 'extpay-extinfo' && webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.management) {
-                    // get this message from content scripts which can't access browser.management
-                    return webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__.management.getSelf()
-                } 
-            });
-        }
-    }
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ExtPay);
 
 
 /***/ }),
@@ -43480,6 +43165,119 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
+/***/ "./src/pages/Content/MentionTextArea/style.css":
+/*!*****************************************************!*\
+  !*** ./src/pages/Content/MentionTextArea/style.css ***!
+  \*****************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_0_use_2_node_modules_postcss_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!../../../../node_modules/postcss-loader/dist/cjs.js!./style.css */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/postcss-loader/dist/cjs.js!./src/pages/Content/MentionTextArea/style.css");
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+var options = {};
+
+options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
+options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
+
+      options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
+    
+options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
+options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_0_use_2_node_modules_postcss_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__["default"], options);
+
+
+if (true) {
+  if (!_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_0_use_2_node_modules_postcss_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals || module.hot.invalidate) {
+    var isEqualLocals = function isEqualLocals(a, b, isNamedExport) {
+  if (!a && b || a && !b) {
+    return false;
+  }
+
+  var p;
+
+  for (p in a) {
+    if (isNamedExport && p === "default") {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+
+    if (a[p] !== b[p]) {
+      return false;
+    }
+  }
+
+  for (p in b) {
+    if (isNamedExport && p === "default") {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+
+    if (!a[p]) {
+      return false;
+    }
+  }
+
+  return true;
+};
+    var isNamedExport = !_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_0_use_2_node_modules_postcss_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals;
+    var oldLocals = isNamedExport ? _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_0_use_2_node_modules_postcss_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__ : _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_0_use_2_node_modules_postcss_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals;
+
+    module.hot.accept(
+      /*! !!../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!../../../../node_modules/postcss-loader/dist/cjs.js!./style.css */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/postcss-loader/dist/cjs.js!./src/pages/Content/MentionTextArea/style.css",
+      __WEBPACK_OUTDATED_DEPENDENCIES__ => { /* harmony import */ _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_0_use_2_node_modules_postcss_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!../../../../node_modules/postcss-loader/dist/cjs.js!./style.css */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/postcss-loader/dist/cjs.js!./src/pages/Content/MentionTextArea/style.css");
+(function () {
+        if (!isEqualLocals(oldLocals, isNamedExport ? _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_0_use_2_node_modules_postcss_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__ : _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_0_use_2_node_modules_postcss_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals, isNamedExport)) {
+                module.hot.invalidate();
+
+                return;
+              }
+
+              oldLocals = isNamedExport ? _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_0_use_2_node_modules_postcss_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__ : _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_0_use_2_node_modules_postcss_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals;
+
+              update(_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_0_use_2_node_modules_postcss_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__["default"]);
+      })(__WEBPACK_OUTDATED_DEPENDENCIES__); }
+    )
+  }
+
+  module.hot.dispose(function() {
+    update();
+  });
+}
+
+
+
+       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_0_use_2_node_modules_postcss_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_0_use_2_node_modules_postcss_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_0_use_2_node_modules_postcss_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
+
+
+/***/ }),
+
 /***/ "./src/styles.css":
 /*!************************!*\
   !*** ./src/styles.css ***!
@@ -43959,6 +43757,69 @@ function StyleToObject(style, iterator) {
 
 /***/ }),
 
+/***/ "./src/components/MessageQuota.tsx":
+/*!*****************************************!*\
+  !*** ./src/components/MessageQuota.tsx ***!
+  \*****************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   MessageQuota: () => (/* binding */ MessageQuota)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a;
+
+function MessageQuota({ messagesRemaining }) {
+    return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex items-center space-x-2 text-sm" },
+        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", { className: "text-gray-300" },
+            messagesRemaining,
+            " messages left today")));
+}
+_a = MessageQuota;
+__webpack_require__.$Refresh$.register(_a, "MessageQuota");
+;
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
 /***/ "./src/pages/Content/App.tsx":
 /*!***********************************!*\
   !*** ./src/pages/Content/App.tsx ***!
@@ -43972,12 +43833,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _parser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parser */ "./src/pages/Content/parser.ts");
-/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../styles.css */ "./src/styles.css");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-user.js");
-/* harmony import */ var react_markdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-markdown */ "./node_modules/react-markdown/lib/index.js");
-/* harmony import */ var remark_gfm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! remark-gfm */ "./node_modules/remark-gfm/lib/index.js");
-/* harmony import */ var extpay__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! extpay */ "./node_modules/extpay/dist/ExtPay.module.js");
+/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../styles.css */ "./src/styles.css");
+/* harmony import */ var _LoginPrompt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LoginPrompt */ "./src/pages/Content/LoginPrompt.tsx");
+/* harmony import */ var _utils_useAuthState__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/useAuthState */ "./src/utils/useAuthState.tsx");
+/* harmony import */ var _ColResize__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ColResize */ "./src/pages/Content/ColResize.tsx");
+/* harmony import */ var _components_MessageQuota__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/MessageQuota */ "./src/components/MessageQuota.tsx");
+/* harmony import */ var _MentionTextArea__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./MentionTextArea */ "./src/pages/Content/MentionTextArea/index.tsx");
+/* harmony import */ var _hooks_useAI__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./hooks/useAI */ "./src/pages/Content/hooks/useAI.ts");
+/* harmony import */ var _utils_openSubscriptionWindow__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./utils/openSubscriptionWindow */ "./src/pages/Content/utils/openSubscriptionWindow.ts");
+/* harmony import */ var _Message__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Message */ "./src/pages/Content/Message.tsx");
+/* harmony import */ var _CellActions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./CellActions */ "./src/pages/Content/CellActions.tsx");
 /* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
 /* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
@@ -43992,44 +43857,336 @@ _b = __webpack_require__.$Refresh$.signature();
 
 
 
+
+
+
+
 const [minWidth, maxWidth, defaultWidth] = [200, 500, 350];
-const initialMessages = [
-    {
-        type: 'ai',
-        content: 'Welcome to the Colab AI Assistant! Enter your prompt in the text area below and click "Send" to generate content.'
-    },
-    // {
-    //     type: 'user',
-    //     content: 'Generate content about...'
-    // },
-    // {
-    //     type: 'ai',
-    //     content: `Sure! Here is some content about...
-    //     @START_CODE
-    //     Let me know if you need any more help!`
-    // }
-];
-var extpay = (0,extpay__WEBPACK_IMPORTED_MODULE_3__["default"])('colab');
 const App = () => {
     _b();
     const [width, setWidth] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(defaultWidth);
-    const isResized = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);
-    const overlay = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
     const [prompt, setPrompt] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
     const [model, setModel] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('gpt-4o-mini');
-    const [messages, setMessages] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(initialMessages);
-    const [isGenerating, setIsGenerating] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-    const [isUpdatingNotebook, setIsUpdatingNotebook] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-    const [isPaid, setIsPaid] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-    const setCurrentMessage = (message) => {
-        setMessages((previousMessages) => {
-            var _c;
-            const newMessage = typeof message === 'function' ? message(((_c = previousMessages[previousMessages.length - 1]) === null || _c === void 0 ? void 0 : _c.content) || '') : message;
-            const updatedMessages = [...previousMessages];
-            updatedMessages[updatedMessages.length - 1] = Object.assign(Object.assign({}, updatedMessages[updatedMessages.length - 1]), { content: newMessage });
-            return updatedMessages;
-        });
+    const actionTextAreaRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+    // Function to get focused cell ID
+    const getFocusedCellId = () => {
+        const focusedCell = document.querySelector('.cell.focused');
+        return (focusedCell === null || focusedCell === void 0 ? void 0 : focusedCell.getAttribute('id')) || null;
     };
+    const { authState, refreshAuthState } = (0,_utils_useAuthState__WEBPACK_IMPORTED_MODULE_3__.useAuthState)();
+    const { generationState, messageManager, pendingOperations, acceptAllChanges, rejectAllChanges, generateAndInsertContent, restartAI } = (0,_hooks_useAI__WEBPACK_IMPORTED_MODULE_7__.useAI)(_utils_openSubscriptionWindow__WEBPACK_IMPORTED_MODULE_8__.openSubscriptionWindow, setPrompt, actionTextAreaRef, authState);
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+        refreshAuthState();
+    }, []);
+    if (!authState.user) {
+        return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "fixed right-0 top-1/4 transform -translate-y-1/4 mr-4 z-50 w-80" },
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_LoginPrompt__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
+    }
+    return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null,
+        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ColResize__WEBPACK_IMPORTED_MODULE_4__["default"], { setWidth: setWidth, minWidth: minWidth, maxWidth: maxWidth }),
+        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "p-4 space-y-4 shadow-xl bg-gray-900 text-gray-100 flex flex-col justify-between", style: { width: `${width / 16}rem` } },
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex flex-col overflow-hidden flex-1" },
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex items-center justify-between mb-6 flex-none" },
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "bg-gray-800 p-2 rounded-lg" },
+                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-5 h-5 text-orange-600", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg" },
+                            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M13 10V3L4 14h7v7l9-11h-7z" }))),
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex items-center space-x-2 justify-between flex-1 mx-2" },
+                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", { className: "text-lg font-semibold text-white" }, "ColabAI"),
+                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex flex-none items-center space-x-2" },
+                            authState.subscriptionPlan == 'free' && (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", { onClick: _utils_openSubscriptionWindow__WEBPACK_IMPORTED_MODULE_8__.openSubscriptionWindow, className: "px-2 py-1 text-xs flex flex-row flex-none gap-1 items-center text-orange-600 font-medium bg-gray-800 outline outline-1 outline-orange-600 rounded-lg hover:bg-orange-600 hover:text-white transition-colors" },
+                                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-3 h-3", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" },
+                                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M5 10l7-7m0 0l7 7m-7-7v18" })),
+                                "Upgrade")),
+                            authState.subscriptionPlan != 'free' && (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", { onClick: _utils_openSubscriptionWindow__WEBPACK_IMPORTED_MODULE_8__.openSubscriptionWindow, className: "px-2 py-1 text-xs flex flex-row flex-none gap-1 items-center text-orange-600 font-medium bg-gray-800 outline outline-1 outline-orange-600 rounded-lg hover:bg-orange-600 hover:text-white transition-colors" }, "Subscription")),
+                            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", { onClick: restartAI, className: "px-2 py-1 text-xs flex flex-row flex-none gap-1 items-center text-orange-600 font-medium bg-gray-800 outline outline-1 outline-orange-600 rounded-lg hover:bg-orange-600 hover:text-white transition-colors" },
+                                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-4 h-4", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 24 24", fill: "currentColor", stroke: 'currentColor' },
+                                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { d: "M7 5C5.34315 5 4 6.34315 4 8V16C4 17.6569 5.34315 19 7 19H17C18.6569 19 20 17.6569 20 16V12.5C20 11.9477 20.4477 11.5 21 11.5C21.5523 11.5 22 11.9477 22 12.5V16C22 18.7614 19.7614 21 17 21H7C4.23858 21 2 18.7614 2 16V8C2 5.23858 4.23858 3 7 3H10.5C11.0523 3 11.5 3.44772 11.5 4C11.5 4.55228 11.0523 5 10.5 5H7Z" }),
+                                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M18.8431 3.58579C18.0621 2.80474 16.7957 2.80474 16.0147 3.58579L11.6806 7.91992L11.0148 11.9455C10.8917 12.6897 11.537 13.3342 12.281 13.21L16.3011 12.5394L20.6347 8.20582C21.4158 7.42477 21.4158 6.15844 20.6347 5.37739L18.8431 3.58579ZM13.1933 11.0302L13.5489 8.87995L17.4289 5L19.2205 6.7916L15.34 10.6721L13.1933 11.0302Z" })))))),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { id: "message-container", className: "ai-scrollbar space-y-6 mb-4 overflow-y-auto" }, messageManager.messages.map((message, index) => (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Message__WEBPACK_IMPORTED_MODULE_9__.Message, { key: index, message: message, index: index, isUpdatingNotebook: generationState.isUpdatingNotebook }))))),
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "space-y-4" },
+                messageManager.messagesRemaining && authState && react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_MessageQuota__WEBPACK_IMPORTED_MODULE_5__.MessageQuota, { messagesRemaining: messageManager.messagesRemaining }),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "space-y-2" },
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_MentionTextArea__WEBPACK_IMPORTED_MODULE_6__.ActionTextAreaWrapper, { actions: [
+                            { label: 'Mention focused cell', action: () => getFocusedCellId(), id: 'mention-cell' },
+                        ], onInput: setPrompt, ref: actionTextAreaRef })),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "space-y-2" },
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", { id: "model", className: "w-full px-3 py-2 text-sm text-gray-100 border border-gray-700 rounded-lg focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-gray-800 cursor-pointer", value: model, onChange: (e) => setModel(e.target.value) },
+                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", { value: "gpt-4o-mini" }, "GPT-4o Mini"),
+                        authState.subscriptionPlan == 'pro' && react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", { value: "gpt-4o" }, "GPT-4o"))),
+                pendingOperations.size > 0 ? (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex space-x-2" },
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", { className: "flex-1 px-4 py-2 text-sm font-medium text-white bg-orange-600 rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors flex items-center justify-center gap-2", onClick: acceptAllChanges },
+                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-5 h-5 text-white", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" },
+                            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M5 13l4 4L19 7" })),
+                        "Accept All"),
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", { className: "flex-1 px-4 py-2 text-sm font-medium text-white bg-orange-600 rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors flex items-center justify-center gap-2", onClick: rejectAllChanges },
+                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-5 h-5 text-white", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" },
+                            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M6 18L18 6M6 6l12 12" })),
+                        "Reject All"))) :
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex space-x-2" },
+                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", { className: "flex-1 px-4 py-2 text-sm font-medium text-white bg-orange-600 \n                                rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 \n                                focus:ring-offset-2 transition-colors flex items-center justify-center gap-2 disabled:opacity-50", onClick: () => generateAndInsertContent(prompt, model), disabled: generationState.isGenerating || !prompt || (messageManager.messagesRemaining && messageManager.messagesRemaining <= 0) }, generationState.isGenerating ?
+                            react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null,
+                                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "mx-2 inline-block h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white", role: "status" }),
+                                "Processing") : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null,
+                            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-5 h-5 text-white", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" },
+                                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M9 5l7 7-7 7" })),
+                            "Send"))),
+                generationState.error && (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "p-3 bg-red-900/50 text-red-400 rounded border border-red-500/20 text-sm" }, generationState.error === 'QUOTA_EXCEEDED' ? (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex flex-col space-y-2" },
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "You've reached your daily message limit."),
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", { onClick: _utils_openSubscriptionWindow__WEBPACK_IMPORTED_MODULE_8__.openSubscriptionWindow, className: "text-orange-600 hover:text-orange-500 font-medium text-left" }, "Upgrade your plan for more messages \u2192"))) : (generationState.error))))),
+        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CellActions__WEBPACK_IMPORTED_MODULE_10__["default"], { diffCells: pendingOperations, handleAccept: acceptAllChanges, handleReject: rejectAllChanges })));
+};
+_a = App;
+__webpack_require__.$Refresh$.register(_a, "App");
+_b(App, "da6qJV2JBRm2DHrUxhve6jjenaY=", false, () => [_utils_useAuthState__WEBPACK_IMPORTED_MODULE_3__.useAuthState, _hooks_useAI__WEBPACK_IMPORTED_MODULE_7__.useAI]);
+// Inject the page script
+const script = document.createElement('script');
+script.src = chrome.runtime.getURL('pageScript.js');
+document.body.appendChild(script);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/CellActions.tsx":
+/*!*******************************************!*\
+  !*** ./src/pages/Content/CellActions.tsx ***!
+  \*******************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ CellActions)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _CellDiff__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CellDiff */ "./src/pages/Content/CellDiff.tsx");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a;
+var _b;
+_b = __webpack_require__.$Refresh$.signature();
+
+
+
+
+function CellActions({ diffCells, handleAccept, handleReject }) {
+    _b();
+    const [cells, setCells] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+        const updateCells = () => {
+            const cellElements = [];
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach((cell) => {
+                const id = cell.getAttribute('id');
+                if (!id)
+                    return;
+                // Find the cell-tag-editor
+                const tagEditor = cell.querySelector('.cell-tag-editor');
+                if (!tagEditor)
+                    return;
+                // Find or create container for cell actions
+                let actionsContainer = tagEditor.querySelector('.cell-actions-container');
+                if (!actionsContainer) {
+                    actionsContainer = document.createElement('div');
+                    actionsContainer.className = 'cell-actions-container';
+                    tagEditor.appendChild(actionsContainer);
+                }
+                cellElements.push({ container: actionsContainer, id });
+            });
+            setCells(cellElements);
+        };
+        updateCells();
+        const observer = new MutationObserver(updateCells);
+        const notebook = document.querySelector('.notebook-content');
+        if (!notebook) {
+            console.error('Notebook content not found');
+            return;
+        }
+        observer.observe(notebook, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeFilter: ['id']
+        });
+        return () => observer.disconnect();
+    }, []);
+    return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, cells.map((cell) => {
+        const operation = diffCells.get(cell.id);
+        return operation && (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.createPortal)(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CellDiff__WEBPACK_IMPORTED_MODULE_2__.CellDiff, { cellId: cell.id, diff: !!(operation === null || operation === void 0 ? void 0 : operation.pending), onAccept: () => handleAccept(cell.id), onReject: () => handleReject(cell.id) }), cell.container);
+    })));
+}
+_a = CellActions;
+__webpack_require__.$Refresh$.register(_a, "CellActions");
+_b(CellActions, "I3MqqXdYWTqqYpM9h+iSfl9kmoM=");
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/CellDiff.tsx":
+/*!****************************************!*\
+  !*** ./src/pages/Content/CellDiff.tsx ***!
+  \****************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CellDiff: () => (/* binding */ CellDiff)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a;
+
+// Component to be injected after each cell
+const CellDiff = ({ cellId, diff, onAccept, onReject }) => {
+    if (!diff) {
+        return null;
+    }
+    return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: 'cell-actions-container' },
+        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex items-center space-x-7 p-1 bg-gray-900" },
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "bg-gray-800 p-1 rounded-lg" },
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-4 h-4 text-orange-600", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg" },
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M13 10V3L4 14h7v7l9-11h-7z" }))),
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex flex-none bg-gray-800 rounded-lg" },
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", { className: "flex space-x-2 items-center p-1 rounded-lg text-green-600 hover:bg-green-800 hover:text-white transition-colors", onClick: onAccept },
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { xmlns: "http://www.w3.org/2000/svg", x: "0px", y: "0px", width: "15", height: "15", viewBox: "0 0 50 50", fill: "currentColor", stroke: "currentColor" },
+                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { d: "M 41.9375 8.625 C 41.273438 8.648438 40.664063 9 40.3125 9.5625 L 21.5 38.34375 L 9.3125 27.8125 C 8.789063 27.269531 8.003906 27.066406 7.28125 27.292969 C 6.5625 27.515625 6.027344 28.125 5.902344 28.867188 C 5.777344 29.613281 6.078125 30.363281 6.6875 30.8125 L 20.625 42.875 C 21.0625 43.246094 21.640625 43.410156 22.207031 43.328125 C 22.777344 43.242188 23.28125 42.917969 23.59375 42.4375 L 43.6875 11.75 C 44.117188 11.121094 44.152344 10.308594 43.78125 9.644531 C 43.410156 8.984375 42.695313 8.589844 41.9375 8.625 Z", strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2" }))),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", { className: "flex space-x-2 items-center p-1 rounded-lg text-red-600 hover:bg-red-800 hover:text-white transition-colors", onClick: onReject },
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: "15", height: "15", x: "0", y: "0", viewBox: "0 0 512 512", fill: "currentColor", stroke: "currentColor" },
+                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { d: "M437.5 386.6L306.9 256l130.6-130.6c14.1-14.1 14.1-36.8 0-50.9-14.1-14.1-36.8-14.1-50.9 0L256 205.1 125.4 74.5c-14.1-14.1-36.8-14.1-50.9 0-14.1 14.1-14.1 36.8 0 50.9L205.1 256 74.5 386.6c-14.1 14.1-14.1 36.8 0 50.9 14.1 14.1 36.8 14.1 50.9 0L256 306.9l130.6 130.6c14.1 14.1 36.8 14.1 50.9 0 14-14.1 14-36.9 0-50.9z" })))))));
+};
+_a = CellDiff;
+__webpack_require__.$Refresh$.register(_a, "CellDiff");
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/ColResize.tsx":
+/*!*****************************************!*\
+  !*** ./src/pages/Content/ColResize.tsx ***!
+  \*****************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ColResize)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a;
+var _b;
+_b = __webpack_require__.$Refresh$.signature();
+
+function ColResize({ setWidth, minWidth, maxWidth }) {
+    _b();
+    const isResized = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);
+    const overlay = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
     (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
         overlay.current = document.createElement('div');
         overlay.current.style.position = 'fixed';
@@ -44069,109 +44226,1896 @@ const App = () => {
             return false;
         }
     }, []);
-    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-        // Inject the page script
-        const script = document.createElement('script');
-        script.src = chrome.runtime.getURL('pageScript.js');
-        document.body.appendChild(script);
-        extpay.getUser().then(user => {
-            if (user.paid === true) {
-                setIsPaid(true);
+    return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "w-2 cursor-col-resize", onMouseDown: () => {
+            isResized.current = true;
+            if (overlay.current) {
+                overlay.current.style.display = 'block';
             }
-        }).catch(err => {
-            console.log("Error fetching data :( Check that your ExtensionPay id is correct and you're connected to the internet");
-        });
-        chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-            const { action } = message;
-            switch (action) {
-                case 'streamed_response':
-                    (0,_parser__WEBPACK_IMPORTED_MODULE_1__.handleStreamingContent)(message.content, message.done, applyOperation, setCurrentMessage, (isCode) => setIsUpdatingNotebook(isCode));
-                    sendResponse({ success: true });
-                    if (message.done) {
-                        setIsUpdatingNotebook(false);
-                        setIsGenerating(false);
-                    }
-                    return true;
-                    break;
-                default:
-                    break;
-            }
-        });
+        } }));
+}
+_a = ColResize;
+__webpack_require__.$Refresh$.register(_a, "ColResize");
+_b(ColResize, "hawnUoTUCbmt5kiYrg6r3cXyrQ8=");
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/LoginPrompt.tsx":
+/*!*******************************************!*\
+  !*** ./src/pages/Content/LoginPrompt.tsx ***!
+  \*******************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a;
+
+const LoginPrompt = () => {
+    return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex flex-col items-center justify-center p-6 bg-gray-900 rounded-lg shadow-xl text-gray-100 space-y-4 border-2 border-orange-600" },
+        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex items-center space-x-2" },
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "bg-gray-800 p-2 rounded-lg" },
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-6 h-6 text-orange-600", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" },
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M13 10V3L4 14h7v7l9-11h-7z" }))),
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", { className: "text-xl font-semibold" }, "Welcome to ColabAI")),
+        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "text-center space-y-3" },
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", { className: "text-gray-300" }, "Please sign in to access all features"),
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "space-y-2" },
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", { className: "text-sm text-gray-400" }, "To sign in:"),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ol", { className: "text-sm text-gray-400 list-decimal list-inside space-y-1 text-left" },
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null,
+                        "Look for the extension icon ",
+                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", { className: "inline-flex items-center px-2 py-1 bg-gray-800 rounded" },
+                            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-4 h-4 text-orange-600", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" },
+                                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M13 10V3L4 14h7v7l9-11h-7z" }))),
+                        " in your browser toolbar"),
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Click the icon to open the extension"),
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Sign in with your Google account")))),
+        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex items-center justify-center" },
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", { className: "text-xs text-gray-500" }, "Sign in securely with your Google account"))));
+};
+_a = LoginPrompt;
+__webpack_require__.$Refresh$.register(_a, "LoginPrompt");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoginPrompt);
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/MentionTextArea/ActionContext.tsx":
+/*!*************************************************************!*\
+  !*** ./src/pages/Content/MentionTextArea/ActionContext.tsx ***!
+  \*************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ActionProvider: () => (/* binding */ ActionProvider),
+/* harmony export */   useAction: () => (/* binding */ useAction)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a;
+var _b, _c;
+_b = __webpack_require__.$Refresh$.signature();
+_c = __webpack_require__.$Refresh$.signature();
+
+const ActionContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(undefined);
+function ActionProvider({ actions, children }) {
+    _b();
+    const [filteredActions, setFilteredActions] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+    return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(ActionContext.Provider, { value: { actions, filteredActions, setFilteredActions } }, children));
+}
+_a = ActionProvider;
+__webpack_require__.$Refresh$.register(_a, "ActionProvider");
+_b(ActionProvider, "FPLvvmPEs7exVmY2mKrMyrOEOl4=");
+function useAction() {
+    _c();
+    const context = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(ActionContext);
+    if (!context) {
+        throw new Error('useAction must be used within a ActionProvider');
+    }
+    return context;
+}
+_c(useAction, "b9L3QQ+jgeyIrH0NfHrJ8nn7VMU=");
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/MentionTextArea/ActionSuggestions.tsx":
+/*!*****************************************************************!*\
+  !*** ./src/pages/Content/MentionTextArea/ActionSuggestions.tsx ***!
+  \*****************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ActionSuggestions: () => (/* binding */ ActionSuggestions)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ActionContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ActionContext */ "./src/pages/Content/MentionTextArea/ActionContext.tsx");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a;
+var _b;
+_b = __webpack_require__.$Refresh$.signature();
+
+
+function ActionSuggestions({ position, selectedIndex, onSelect }) {
+    _b();
+    const { filteredActions } = (0,_ActionContext__WEBPACK_IMPORTED_MODULE_1__.useAction)();
+    return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "absolute z-10 w-64 max-h-48 overflow-y-auto bg-gray-800 border border-gray-800 rounded-lg shadow-lg", style: {
+            top: `${position.top}px`,
+            left: `${position.left}px`
+        }, role: "listbox", "aria-label": "Action suggestions" }, filteredActions.map((action, index) => (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { key: action.id, className: `p-2 cursor-pointer hover:bg-gray-700 ${index === selectedIndex ? 'bg-gray-800 text-white' : ''}`, onClick: () => onSelect(action), role: "option", "aria-selected": index === selectedIndex },
+        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "font-medium" }, action.label))))));
+}
+_a = ActionSuggestions;
+__webpack_require__.$Refresh$.register(_a, "ActionSuggestions");
+_b(ActionSuggestions, "C54nel4SbhGkQ8nYhWXPWz0i4z8=", false, () => [_ActionContext__WEBPACK_IMPORTED_MODULE_1__.useAction]);
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/MentionTextArea/ActionTextArea.tsx":
+/*!**************************************************************!*\
+  !*** ./src/pages/Content/MentionTextArea/ActionTextArea.tsx ***!
+  \**************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ActionTextArea: () => (/* binding */ ActionTextArea)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ActionContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ActionContext */ "./src/pages/Content/MentionTextArea/ActionContext.tsx");
+/* harmony import */ var _ActionSuggestions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ActionSuggestions */ "./src/pages/Content/MentionTextArea/ActionSuggestions.tsx");
+/* harmony import */ var _utils_domUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/domUtils */ "./src/pages/Content/MentionTextArea/utils/domUtils.ts");
+/* harmony import */ var _utils_actionUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/actionUtils */ "./src/pages/Content/MentionTextArea/utils/actionUtils.ts");
+/* harmony import */ var _hooks_useActionSuggestions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./hooks/useActionSuggestions */ "./src/pages/Content/MentionTextArea/hooks/useActionSuggestions.ts");
+/* harmony import */ var _hooks_useKeyboardNavigation__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./hooks/useKeyboardNavigation */ "./src/pages/Content/MentionTextArea/hooks/useKeyboardNavigation.ts");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a, _b;
+var _c;
+_c = __webpack_require__.$Refresh$.signature();
+
+
+
+
+
+
+
+const ActionTextArea = (0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(_a = _c(({ onInput }, ref) => {
+    _c();
+    const editorRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+    const { filteredActions } = (0,_ActionContext__WEBPACK_IMPORTED_MODULE_1__.useAction)();
+    const { showSuggestions, setShowSuggestions, suggestionPosition, selectedIndex, setSelectedIndex, lastSelectionRange, handleActionSearch } = (0,_hooks_useActionSuggestions__WEBPACK_IMPORTED_MODULE_5__.useActionSuggestions)();
+    const insertAction = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((action) => {
+        if (!editorRef.current)
+            return;
+        const actionResult = action.action();
+        if (!actionResult)
+            return;
+        const actionData = {
+            id: action.id + Date.now(),
+            label: actionResult
+        };
+        const actionNode = (0,_utils_actionUtils__WEBPACK_IMPORTED_MODULE_4__.createActionNode)(actionData);
+        (0,_utils_domUtils__WEBPACK_IMPORTED_MODULE_3__.insertActionAtCursor)(actionNode, lastSelectionRange.current);
+        setShowSuggestions(false);
+        editorRef.current.focus();
     }, []);
-    function generateAndInsertContent(prompt, model) {
-        setCurrentMessage(''); // Clear the current message
-        setPrompt(''); // Clear the prompt
-        setIsGenerating(true);
-        (0,_parser__WEBPACK_IMPORTED_MODULE_1__.initializeStreamingState)();
-        messages.push({ type: 'user', content: prompt });
-        messages.push({ type: 'ai', content: '' });
-        requestContent((content) => {
-            chrome.runtime.sendMessage({ action: "generateAI", prompt: prompt, content: content, model: model });
+    const handleKeyDown = (0,_hooks_useKeyboardNavigation__WEBPACK_IMPORTED_MODULE_6__.useKeyboardNavigation)({
+        showSuggestions,
+        setShowSuggestions,
+        selectedIndex,
+        setSelectedIndex,
+        filteredActions,
+        insertAction
+    });
+    const handleBackspace = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((event) => {
+        var _d, _e, _f, _g;
+        if (event.key === 'Backspace') {
+            event.stopPropagation();
+            const selection = window.getSelection();
+            if (!selection || !selection.anchorNode)
+                return;
+            const actionElement = ((_e = (_d = selection.anchorNode).closest) === null || _e === void 0 ? void 0 : _e.call(_d, '.action-pill')) ||
+                ((_g = (_f = selection.anchorNode.parentElement) === null || _f === void 0 ? void 0 : _f.closest) === null || _g === void 0 ? void 0 : _g.call(_f, '.action-pill'));
+            if (actionElement) {
+                event.preventDefault();
+                (0,_utils_actionUtils__WEBPACK_IMPORTED_MODULE_4__.removeAction)(actionElement);
+            }
+        }
+    }, []);
+    const handleInput = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
+        requestAnimationFrame(() => {
+            var _d;
+            const selection = window.getSelection();
+            if (!selection)
+                return;
+            lastSelectionRange.current = selection.getRangeAt(0);
+            handleActionSearch(selection);
+            onInput(((_d = editorRef.current) === null || _d === void 0 ? void 0 : _d.textContent) || '');
+        });
+    }, [handleActionSearch, onInput]);
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+        const editor = editorRef.current;
+        if (editor) {
+            const observer = new MutationObserver(() => {
+                if (!editor.textContent && !editor.querySelector('.action-pill')) {
+                    editor.textContent = '';
+                }
+            });
+            observer.observe(editor, {
+                childList: true,
+                subtree: true,
+                characterData: true
+            });
+            return () => observer.disconnect();
+        }
+    }, []);
+    // useEffect(() => {
+    //   function handleClickOutside(event: MouseEvent) {
+    //     if (editorRef.current && !editorRef.current.contains(event.target as Node)) {
+    //       setShowSuggestions(false);
+    //     }
+    //   }
+    //   document.addEventListener('mousedown', handleClickOutside);
+    //   return () => document.removeEventListener('mousedown', handleClickOutside);
+    // }, [setShowSuggestions]);
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle)(ref, () => ({
+        clear: () => {
+            if (editorRef.current) {
+                editorRef.current.innerHTML = '';
+                onInput('');
+            }
+        }
+    }));
+    return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "relative w-full" },
+        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { ref: editorRef, className: "ai-scrollbar w-full overflow-y-auto max-h-24 bg-gray-800 text-gray-100 rounded-lg p-2 focus:outline-none ring-1 ring-gray-900 focus:ring-1 focus:ring-orange-600", contentEditable: true, suppressContentEditableWarning: true, onInput: handleInput, onKeyDown: (e) => {
+                e.stopPropagation();
+                handleKeyDown(e);
+                handleBackspace(e);
+            }, role: "textbox", "aria-label": "Colab AI assistant text area", placeholder: "Ask me anything..." }),
+        showSuggestions && (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ActionSuggestions__WEBPACK_IMPORTED_MODULE_2__.ActionSuggestions, { position: suggestionPosition, selectedIndex: selectedIndex, onSelect: insertAction }))));
+}, "93eHIaMsh1zcyfS9KNlmW/Wdov8=", false, () => [_ActionContext__WEBPACK_IMPORTED_MODULE_1__.useAction, _hooks_useActionSuggestions__WEBPACK_IMPORTED_MODULE_5__.useActionSuggestions, _hooks_useKeyboardNavigation__WEBPACK_IMPORTED_MODULE_6__.useKeyboardNavigation]));
+__webpack_require__.$Refresh$.register(_a, "ActionTextArea$forwardRef");
+_b = ActionTextArea;
+__webpack_require__.$Refresh$.register(_b, "ActionTextArea");
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/MentionTextArea/hooks/useActionSuggestions.ts":
+/*!*************************************************************************!*\
+  !*** ./src/pages/Content/MentionTextArea/hooks/useActionSuggestions.ts ***!
+  \*************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useActionSuggestions: () => (/* binding */ useActionSuggestions)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ActionContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ActionContext */ "./src/pages/Content/MentionTextArea/ActionContext.tsx");
+/* harmony import */ var _utils_domUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/domUtils */ "./src/pages/Content/MentionTextArea/utils/domUtils.ts");
+/* harmony import */ var _useTextContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./useTextContent */ "./src/pages/Content/MentionTextArea/hooks/useTextContent.ts");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a;
+_a = __webpack_require__.$Refresh$.signature();
+
+
+
+
+function useActionSuggestions() {
+    _a();
+    const [showSuggestions, setShowSuggestions] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+    const [suggestionPosition, setSuggestionPosition] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({ top: 0, left: 0 });
+    const [selectedIndex, setSelectedIndex] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+    const lastSelectionRange = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+    const { actions, setFilteredActions } = (0,_ActionContext__WEBPACK_IMPORTED_MODULE_1__.useAction)();
+    const { getTextContent } = (0,_useTextContent__WEBPACK_IMPORTED_MODULE_3__.useTextContent)();
+    const handleActionSearch = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((selection) => {
+        var _b, _c, _d, _e, _f, _g, _h, _j;
+        if (!selection.anchorNode)
+            return false;
+        // Check if we're inside a action pill
+        const isInsideActionPill = ((_c = (_b = selection.anchorNode).closest) === null || _c === void 0 ? void 0 : _c.call(_b, '.action-pill')) ||
+            ((_e = (_d = selection.anchorNode.parentElement) === null || _d === void 0 ? void 0 : _d.closest) === null || _e === void 0 ? void 0 : _e.call(_d, '.action-pill'));
+        if (isInsideActionPill) {
+            setShowSuggestions(false);
+            return false;
+        }
+        // Get text content and cursor position
+        const { text, position } = getTextContent(selection.anchorNode, selection.anchorOffset);
+        // Find the last @ symbol before the cursor
+        const textBeforeCursor = text.slice(0, position);
+        const lastAtIndex = textBeforeCursor.lastIndexOf('@');
+        if (lastAtIndex !== -1) {
+            const searchStr = textBeforeCursor.slice(lastAtIndex + 1).toLowerCase();
+            const textAfterAt = textBeforeCursor.slice(lastAtIndex + 1);
+            // Only show suggestions if there's no space after @
+            if (!textAfterAt.includes(' ')) {
+                const filtered = actions.filter((action) => action.label.toLowerCase().includes(searchStr));
+                setFilteredActions(filtered);
+                if (filtered.length > 0) {
+                    const coords = (0,_utils_domUtils__WEBPACK_IMPORTED_MODULE_2__.getCaretPosition)(selection);
+                    const editor = ((_g = (_f = selection.anchorNode).closest) === null || _g === void 0 ? void 0 : _g.call(_f, '[contenteditable="true"]')) ||
+                        ((_j = (_h = selection.anchorNode.parentElement) === null || _h === void 0 ? void 0 : _h.closest) === null || _j === void 0 ? void 0 : _j.call(_h, '[contenteditable="true"]'));
+                    if (editor) {
+                        //const editorRect = editor.getBoundingClientRect();
+                        setSuggestionPosition({
+                            top: coords.bottom,
+                            left: coords.left
+                        });
+                    }
+                    else {
+                        setSuggestionPosition({
+                            top: coords.bottom,
+                            left: coords.left
+                        });
+                    }
+                    setShowSuggestions(true);
+                    setSelectedIndex(0);
+                    return true;
+                }
+            }
+        }
+        setShowSuggestions(false);
+        return false;
+    }, [actions, setFilteredActions, getTextContent]);
+    return {
+        showSuggestions,
+        setShowSuggestions,
+        suggestionPosition,
+        selectedIndex,
+        setSelectedIndex,
+        lastSelectionRange,
+        handleActionSearch
+    };
+}
+_a(useActionSuggestions, "y2YaH6mJ4pqV8SPfmOHgcD2fZ4g=", false, () => [_ActionContext__WEBPACK_IMPORTED_MODULE_1__.useAction, _useTextContent__WEBPACK_IMPORTED_MODULE_3__.useTextContent]);
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/MentionTextArea/hooks/useKeyboardNavigation.ts":
+/*!**************************************************************************!*\
+  !*** ./src/pages/Content/MentionTextArea/hooks/useKeyboardNavigation.ts ***!
+  \**************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useKeyboardNavigation: () => (/* binding */ useKeyboardNavigation)
+/* harmony export */ });
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+function useKeyboardNavigation({ showSuggestions, setShowSuggestions, selectedIndex, setSelectedIndex, filteredActions, insertAction }) {
+    const handleKeyDown = (event) => {
+        if (showSuggestions) {
+            switch (event.key) {
+                case 'ArrowDown':
+                    event.preventDefault();
+                    setSelectedIndex(prev => (prev + 1) % filteredActions.length);
+                    break;
+                case 'ArrowUp':
+                    event.preventDefault();
+                    setSelectedIndex(prev => (prev - 1 + filteredActions.length) % filteredActions.length);
+                    break;
+                case 'Enter':
+                    event.preventDefault();
+                    if (filteredActions[selectedIndex]) {
+                        insertAction(filteredActions[selectedIndex]);
+                    }
+                    break;
+                case 'Tab':
+                    event.preventDefault();
+                    if (filteredActions[selectedIndex]) {
+                        insertAction(filteredActions[selectedIndex]);
+                    }
+                    break;
+                case 'Escape':
+                    event.preventDefault();
+                    setShowSuggestions(false);
+                    break;
+            }
+        }
+    };
+    return handleKeyDown;
+}
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/MentionTextArea/hooks/useTextContent.ts":
+/*!*******************************************************************!*\
+  !*** ./src/pages/Content/MentionTextArea/hooks/useTextContent.ts ***!
+  \*******************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useTextContent: () => (/* binding */ useTextContent)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a;
+_a = __webpack_require__.$Refresh$.signature();
+
+function useTextContent() {
+    _a();
+    const getTextContent = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((node, position) => {
+        var _b, _c;
+        // If node is a text node, return its content
+        if (node.nodeType === Node.TEXT_NODE) {
+            return {
+                text: node.textContent || '',
+                position
+            };
+        }
+        // If node is an element
+        if (node.nodeType === Node.ELEMENT_NODE) {
+            let text = '';
+            let currentPosition = 0;
+            const childNodes = Array.from(node.childNodes);
+            for (const child of childNodes) {
+                if (child.nodeType === Node.TEXT_NODE) {
+                    text += child.textContent;
+                    currentPosition += (((_b = child.textContent) === null || _b === void 0 ? void 0 : _b.length) || 0);
+                }
+                else if ((_c = child.classList) === null || _c === void 0 ? void 0 : _c.contains('action-pill')) {
+                    // Add a space for action pills to ensure proper text handling
+                    text += ' ';
+                    currentPosition += 1;
+                }
+            }
+            return {
+                text,
+                position: Math.min(position, text.length)
+            };
+        }
+        return {
+            text: '',
+            position: 0
+        };
+    }, []);
+    return { getTextContent };
+}
+_a(useTextContent, "7KdkULWCUA7dFPvQvyW+kN78YxU=");
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/MentionTextArea/index.tsx":
+/*!*****************************************************!*\
+  !*** ./src/pages/Content/MentionTextArea/index.tsx ***!
+  \*****************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ActionTextAreaWrapper: () => (/* binding */ ActionTextAreaWrapper)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ActionTextArea__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ActionTextArea */ "./src/pages/Content/MentionTextArea/ActionTextArea.tsx");
+/* harmony import */ var _ActionContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ActionContext */ "./src/pages/Content/MentionTextArea/ActionContext.tsx");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.css */ "./src/pages/Content/MentionTextArea/style.css");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a, _b;
+
+
+
+
+const ActionTextAreaWrapper = (0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(_a = (props, ref) => {
+    return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ActionContext__WEBPACK_IMPORTED_MODULE_2__.ActionProvider, { actions: props.actions },
+        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ActionTextArea__WEBPACK_IMPORTED_MODULE_1__.ActionTextArea, { ref: ref, onInput: props.onInput })));
+});
+__webpack_require__.$Refresh$.register(_a, "ActionTextAreaWrapper$forwardRef");
+_b = ActionTextAreaWrapper;
+__webpack_require__.$Refresh$.register(_b, "ActionTextAreaWrapper");
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/MentionTextArea/utils/actionUtils.ts":
+/*!****************************************************************!*\
+  !*** ./src/pages/Content/MentionTextArea/utils/actionUtils.ts ***!
+  \****************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   createActionNode: () => (/* binding */ createActionNode),
+/* harmony export */   removeAction: () => (/* binding */ removeAction)
+/* harmony export */ });
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+function createActionNode(action) {
+    const actionNode = document.createElement('span');
+    actionNode.className = 'action-pill inline-flex items-center px-2 py-0.5 rounded-full text-sm font-medium bg-orange-600 text-white mx-1';
+    actionNode.contentEditable = 'false';
+    actionNode.setAttribute('data-action-id', action.id);
+    actionNode.textContent = `@${action.label}`;
+    return actionNode;
+}
+function removeAction(actionElement) {
+    const parent = actionElement.parentElement;
+    if (!parent)
+        return;
+    const range = document.createRange();
+    range.selectNode(actionElement);
+    range.deleteContents();
+    // Ensure there's always a space where the mention was
+    const space = document.createTextNode(' ');
+    range.insertNode(space);
+    // Move cursor to where the mention was
+    const selection = window.getSelection();
+    if (selection) {
+        range.setStartAfter(space);
+        range.setEndAfter(space);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+}
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/MentionTextArea/utils/domUtils.ts":
+/*!*************************************************************!*\
+  !*** ./src/pages/Content/MentionTextArea/utils/domUtils.ts ***!
+  \*************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getCaretPosition: () => (/* binding */ getCaretPosition),
+/* harmony export */   insertActionAtCursor: () => (/* binding */ insertActionAtCursor)
+/* harmony export */ });
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+function getCaretPosition(selection) {
+    var _a, _b, _c, _d;
+    const range = selection.getRangeAt(0);
+    const rect = range.getBoundingClientRect();
+    // Get the editor element (assuming it's the closest contenteditable or textarea)
+    const editor = ((_b = (_a = range.startContainer).closest) === null || _b === void 0 ? void 0 : _b.call(_a, '[contenteditable="true"]')) ||
+        ((_d = (_c = range.startContainer.parentElement) === null || _c === void 0 ? void 0 : _c.closest) === null || _d === void 0 ? void 0 : _d.call(_c, '[contenteditable="true"]'));
+    if (editor) {
+        // Get the editor's position
+        const editorRect = editor.getBoundingClientRect();
+        // Calculate position relative to the editor
+        return new DOMRect(rect.left - editorRect.left, rect.top - editorRect.top, rect.width, rect.height);
+    }
+    return rect;
+}
+function insertActionAtCursor(node, range) {
+    const selection = window.getSelection();
+    if (!selection || !selection.rangeCount)
+        return;
+    range = range || selection.getRangeAt(0);
+    // If we're in the middle of typing an @mention, remove the partial text
+    const text = range.startContainer.textContent || '';
+    const startPos = range.startOffset;
+    // Find the start of the @mention
+    let atPos = startPos;
+    while (atPos > 0 && text[atPos - 1] !== '@') {
+        atPos--;
+    }
+    // Create a new range to delete the @mention text
+    const newRange = document.createRange();
+    newRange.setStart(range.startContainer, Math.max(0, atPos - 1));
+    newRange.setEnd(range.startContainer, startPos);
+    newRange.deleteContents();
+    // Insert the mention node
+    range.insertNode(node);
+    // Move cursor to end and add a space
+    const space = document.createTextNode('\u00A0');
+    range.setStartAfter(node);
+    range.setEndAfter(node);
+    range.insertNode(space);
+    // Set cursor after the space
+    range.setStartAfter(space);
+    range.setEndAfter(space);
+    selection.removeAllRanges();
+    selection.addRange(range);
+}
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/Message.tsx":
+/*!***************************************!*\
+  !*** ./src/pages/Content/Message.tsx ***!
+  \***************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Message: () => (/* binding */ Message)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-user.js");
+/* harmony import */ var react_markdown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-markdown */ "./node_modules/react-markdown/lib/index.js");
+/* harmony import */ var remark_gfm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! remark-gfm */ "./node_modules/remark-gfm/lib/index.js");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a;
+
+
+
+
+const Message = ({ message, index, isUpdatingNotebook }) => {
+    return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { key: `message-${index}`, className: `flex ${message.type === 'user' ? 'flex-col' : 'flex-col'} gap-2` },
+        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex flex-row gap-2 items-center" },
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: `flex-shrink-0 ${message.type === 'ai' ? 'bg-orange-600' : message.type === 'error' ? 'bg-red-600' : 'bg-gray-600'} rounded-full p-2 max-h-2 max-w-2 flex items-center justify-center` }, message.type === 'ai' ? (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-2 h-2 text-white", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" },
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M13 10V3L4 14h7v7l9-11h-7z" }))) : message.type === 'error' ? (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-2 h-2 text-white", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" },
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" }))) : (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_1__["default"], { className: "w-2 h-2 text-white " }))),
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", { className: "text-sm" },
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, message.type === 'ai' ? 'Assistant' : message.type === 'error' ? 'Error' : 'You'))),
+        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: `p-3 rounded-lg ${message.type === 'user'
+                ? 'bg-orange-600 text-white'
+                : message.type === 'error' ? 'bg-red-600 text-white'
+                    : 'bg-gray-800 text-gray-100'}` }, message.type === 'error' ? (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "space-y-2" },
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, message.content),
+            message.action && (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", { onClick: message.action, className: "bg-white text-red-600 px-4 py-1 rounded-md text-sm font-medium hover:bg-red-50" }, message.actionText)))) : (message.content.split('@START_CODE').map((content, contentIndex) => (react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), { key: `content-${index}-${contentIndex}` },
+            contentIndex > 0 && message.type === 'ai' && (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: (isUpdatingNotebook ? "animate-pulse " : "") + "bg-gray-800 p-2 rounded-lg my-2 flex flex-row justify-evenly max-w-52 space-x-2 border-2 border-orange-600" },
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-5 h-5 text-orange-600", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg" },
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M13 10V3L4 14h7v7l9-11h-7z" })),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null,
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, "Updating Notebook")))),
+            content.trim().length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_markdown__WEBPACK_IMPORTED_MODULE_2__.Markdown, { components: components, remarkPlugins: [remark_gfm__WEBPACK_IMPORTED_MODULE_3__["default"]] }, content),
+            message.content.trim().length === 0 && message.type === 'ai' && (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: 'flex space-x-1 items-center justify-center' },
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", { className: 'sr-only' }, "Loading..."),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: 'h-2 w-2 bg-white rounded-full animate-pulse [animation-delay:-0.3s]' }),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: 'h-2 w-2 bg-white rounded-full animate-pulse [animation-delay:-0.15s]' }),
+                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: 'h-2 w-2 bg-white rounded-full animate-pulse' }))))))))));
+};
+_a = Message;
+__webpack_require__.$Refresh$.register(_a, "Message");
+const components = {
+    p({ children }) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", { className: "mb-2 last:mb-0" }, children);
+    },
+    h1({ children }) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", { className: "text-bold text-gray-500 text-lg font-bold mb-3 last:mb-0" }, children);
+    },
+    h2({ children }) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", { className: "text-bold text-gray-600 font-bold mb-2 last:mb-0" }, children);
+    },
+    h3({ children }) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", { className: "text-bold text-sm font-bold mb-2 last:mb-0" }, children);
+    },
+    ol({ children }) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ol", { className: "list-inside list-decimal" }, children);
+    },
+    ul({ children }) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", { className: "list-inside list-disc" }, children);
+    },
+    li({ children }) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", { className: "my-1 list-item list-inside" }, children);
+    },
+    blockquote({ children }) {
+        return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("blockquote", { className: "relative border-s-4 border-gray-800 bg-slate-200 pl-2 ps-4 sm:ps-6" }, children));
+    },
+};
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/hooks/useAI.ts":
+/*!******************************************!*\
+  !*** ./src/pages/Content/hooks/useAI.ts ***!
+  \******************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useAI: () => (/* binding */ useAI)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _notebookUpdater__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../notebookUpdater */ "./src/pages/Content/notebookUpdater.ts");
+/* harmony import */ var _useStreamingState__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useStreamingState */ "./src/pages/Content/hooks/useStreamingState.ts");
+/* harmony import */ var _usePendingOperations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./usePendingOperations */ "./src/pages/Content/hooks/usePendingOperations.ts");
+/* harmony import */ var _useGenerationState__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./useGenerationState */ "./src/pages/Content/hooks/useGenerationState.ts");
+/* harmony import */ var _useMessages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./useMessages */ "./src/pages/Content/hooks/useMessages.ts");
+/* harmony import */ var _useAIError__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./useAIError */ "./src/pages/Content/hooks/useAIError.ts");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var _a;
+_a = __webpack_require__.$Refresh$.signature();
+
+
+
+
+
+
+
+const useAI = (openSubscriptionWindow, setPrompt, actionTextAreaRef, authState) => {
+    _a();
+    const { generationState, dispatch } = (0,_useGenerationState__WEBPACK_IMPORTED_MODULE_4__.useGenerationState)();
+    const messageManager = (0,_useMessages__WEBPACK_IMPORTED_MODULE_5__.useMessages)();
+    const { streamingState, updateStreamingContent, resetStreamingState } = (0,_useStreamingState__WEBPACK_IMPORTED_MODULE_2__.useStreamingState)();
+    const { pendingOperations, setPendingOperations, acceptAllChanges, rejectAllChanges } = (0,_usePendingOperations__WEBPACK_IMPORTED_MODULE_3__.usePendingOperations)();
+    const { handleAIError } = (0,_useAIError__WEBPACK_IMPORTED_MODULE_6__.useAIError)(openSubscriptionWindow, (error) => {
+        messageManager.addErrorMessage(error.message, error.action, error.actionText);
+        dispatch({ type: 'error', payload: error.message });
+    });
+    // Memoize streamingState.isCodeBlock to prevent unnecessary re-renders
+    const isCodeBlock = streamingState.isCodeBlock;
+    const messageListener = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((message) => {
+        if (message.action === 'streamed_response') {
+            updateStreamingContent(message.content, message.done, messageManager.setCurrentMessage);
+            // Use ref for isCodeBlock to avoid dependency
+            dispatch({
+                type: isCodeBlock ? 'start_update_notebook' : 'finish_update_notebook'
+            });
+            if (!isCodeBlock) {
+                scrollToBottom();
+            }
+            if (message.done) {
+                dispatch({ type: 'finish_generation' });
+            }
+        }
+        else if (message.action === 'messages_remaining') {
+            const remaining = message.messagesRemaining;
+            if (remaining <= 5) {
+                messageManager.setMessagesRemaining(remaining);
+            }
+            else {
+                messageManager.setMessagesRemaining(null);
+            }
+        }
+        else if (message.action === 'ai_error') {
+            handleAIError(message.error);
+        }
+    }, [updateStreamingContent, isCodeBlock, messageManager.setCurrentMessage, messageManager.setMessagesRemaining, dispatch, scrollToBottom, handleAIError]);
+    // Effect to handle pending operations when streaming state changes
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+        if (streamingState.appliedOperations.size > 0) {
+            setPendingOperations(streamingState.appliedOperations);
+            dispatch({ type: 'start_diffing' });
+            // Listen for diff completion
+            const diffListener = (event) => {
+                if (event.detail.id === 'diff_complete') {
+                    dispatch({ type: 'finish_diffing' });
+                    document.removeEventListener('diff_complete', diffListener);
+                }
+            };
+            document.addEventListener('diff_complete', diffListener);
+        }
+    }, [streamingState.appliedOperations]);
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+        chrome.runtime.onMessage.addListener(messageListener);
+        // Cleanup function to remove the listener
+        return () => {
+            chrome.runtime.onMessage.removeListener(messageListener);
+        };
+    }, [messageListener]);
+    const generateAndInsertContent = (prompt, model) => __awaiter(void 0, void 0, void 0, function* () {
+        var _b;
+        if (!prompt.trim())
+            return;
+        dispatch({ type: 'start_generation' });
+        try {
+            // Clear the input after starting generation
+            (_b = actionTextAreaRef.current) === null || _b === void 0 ? void 0 : _b.clear();
+            setPrompt('');
+            const content = yield (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_1__.requestContent)();
+            resetStreamingState(content);
+            messageManager.addMessage({ type: 'user', content: prompt });
+            messageManager.addMessage({ type: 'ai', content: '' });
+            scrollToBottom();
+            chrome.runtime.sendMessage({ action: "generateAI", prompt: prompt, content: content, model: model, plan: authState.subscriptionPlan });
+        }
+        catch (error) {
+            console.error('Error generating content:', error);
+            dispatch({ type: 'error', payload: 'Failed to generate content. Please try again.' });
+        }
+    });
+    function restartAI() {
+        chrome.runtime.sendMessage({ action: "restartAI" });
+        messageManager.resetMessages();
+    }
+    return {
+        generationState,
+        messageManager,
+        pendingOperations,
+        acceptAllChanges,
+        rejectAllChanges,
+        generateAndInsertContent,
+        restartAI
+    };
+};
+_a(useAI, "AIy8VdhfPhZLCZUiNWFaawNmykM=", false, () => [_useGenerationState__WEBPACK_IMPORTED_MODULE_4__.useGenerationState, _useMessages__WEBPACK_IMPORTED_MODULE_5__.useMessages, _useStreamingState__WEBPACK_IMPORTED_MODULE_2__.useStreamingState, _usePendingOperations__WEBPACK_IMPORTED_MODULE_3__.usePendingOperations, _useAIError__WEBPACK_IMPORTED_MODULE_6__.useAIError]);
+const scrollToBottom = () => {
+    const messageContainer = document.getElementById('message-container'); // Replace with your actual container ID
+    if (messageContainer) {
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+    }
+};
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/hooks/useAIError.ts":
+/*!***********************************************!*\
+  !*** ./src/pages/Content/hooks/useAIError.ts ***!
+  \***********************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useAIError: () => (/* binding */ useAIError)
+/* harmony export */ });
+/* harmony import */ var _src_utils_errors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../src/utils/errors */ "./src/utils/errors.ts");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+
+const useAIError = (openSubscriptionWindow, onError) => {
+    const handleAIError = (error) => {
+        var _a;
+        let errorMessage = 'An unexpected error occurred. Please try again.';
+        let action = undefined;
+        let actionText = undefined;
+        switch (error.type) {
+            case _src_utils_errors__WEBPACK_IMPORTED_MODULE_0__.ErrorType.AUTHENTICATION:
+                errorMessage = 'Please sign in to continue.';
+                break;
+            case _src_utils_errors__WEBPACK_IMPORTED_MODULE_0__.ErrorType.QUOTA_EXCEEDED:
+                errorMessage = 'You have reached your daily message limit.';
+                action = () => openSubscriptionWindow();
+                actionText = 'Upgrade';
+                break;
+            case _src_utils_errors__WEBPACK_IMPORTED_MODULE_0__.ErrorType.MODEL_ACCESS:
+                errorMessage = error.message || 'Your current plan does not have access to this model.';
+                action = () => openSubscriptionWindow();
+                actionText = 'Upgrade';
+                break;
+            case _src_utils_errors__WEBPACK_IMPORTED_MODULE_0__.ErrorType.RATE_LIMIT:
+                errorMessage = 'Too many requests. Please wait a moment and try again.';
+                break;
+            case _src_utils_errors__WEBPACK_IMPORTED_MODULE_0__.ErrorType.NETWORK:
+                errorMessage = 'Network connection error. Please check your internet connection.';
+                break;
+            case _src_utils_errors__WEBPACK_IMPORTED_MODULE_0__.ErrorType.SERVER:
+                errorMessage = 'Server error. Please try again later.';
+                if (((_a = error.details) === null || _a === void 0 ? void 0 : _a.status) === 503) {
+                    errorMessage = 'Service is temporarily unavailable. Please try again later.';
+                }
+                break;
+            default:
+                console.error('Unhandled error:', error);
+        }
+        onError({
+            type: error.type,
+            message: errorMessage,
+            action,
+            actionText
+        });
+    };
+    return { handleAIError };
+};
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/hooks/useGenerationState.ts":
+/*!*******************************************************!*\
+  !*** ./src/pages/Content/hooks/useGenerationState.ts ***!
+  \*******************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useGenerationState: () => (/* binding */ useGenerationState)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reducers_generationReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reducers/generationReducer */ "./src/pages/Content/reducers/generationReducer.ts");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a;
+_a = __webpack_require__.$Refresh$.signature();
+
+
+const useGenerationState = () => {
+    _a();
+    const [generationState, dispatch] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_generationReducer__WEBPACK_IMPORTED_MODULE_1__.generationReducer, {
+        isGenerating: false,
+        isDiffing: false,
+        isUpdatingNotebook: false,
+        error: null
+    });
+    return {
+        generationState,
+        dispatch
+    };
+};
+_a(useGenerationState, "0fzFa+rOHN60lLBTOYXVSQw5uVA=");
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/hooks/useMessages.ts":
+/*!************************************************!*\
+  !*** ./src/pages/Content/hooks/useMessages.ts ***!
+  \************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useMessages: () => (/* binding */ useMessages)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a;
+_a = __webpack_require__.$Refresh$.signature();
+
+const useMessages = () => {
+    _a();
+    const [messages, setMessages] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(initialMessages);
+    const [messagesRemaining, setMessagesRemaining] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+    const addMessage = (message) => {
+        setMessages(prev => [...prev, message]);
+    };
+    const setCurrentMessage = (message) => {
+        setMessages((previousMessages) => {
+            var _b;
+            const newMessage = typeof message === 'function' ? message(((_b = previousMessages[previousMessages.length - 1]) === null || _b === void 0 ? void 0 : _b.content) || '') : message;
+            const updatedMessages = [...previousMessages];
+            updatedMessages[updatedMessages.length - 1] = Object.assign(Object.assign({}, updatedMessages[updatedMessages.length - 1]), { content: newMessage });
+            return updatedMessages;
+        });
+    };
+    const resetMessages = () => {
+        setMessages(initialMessages);
+    };
+    const addErrorMessage = (errorMessage, action, actionText) => {
+        setMessages(prev => {
+            var _b;
+            return [
+                ...(((_b = prev[-1]) === null || _b === void 0 ? void 0 : _b.type) === 'ai' ? prev.slice(0, -1) : prev),
+                {
+                    type: 'error',
+                    content: errorMessage,
+                    action,
+                    actionText,
+                    timestamp: new Date().toISOString()
+                }
+            ];
+        });
+    };
+    return {
+        messages,
+        messagesRemaining,
+        addMessage,
+        addErrorMessage,
+        setCurrentMessage,
+        resetMessages,
+        setMessagesRemaining
+    };
+};
+_a(useMessages, "PJLkZ0gbKbjQzg+xZ91IYtH3Gv4=");
+const initialMessages = [
+    {
+        type: 'ai',
+        content: `Welcome to the ColabAI Assistant! I can help you generate content for your notebook. Just type your prompt and I'll take care of the rest.`
+    },
+    // {
+    //     type: 'user',
+    //     content: 'Generate content about...'
+    // },
+    // {
+    //     type: 'ai',
+    //     content: `Sure! Here is some content about...
+    //     @START_CODE
+    //     Let me know if you need any more help!`
+    // }
+];
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/hooks/usePendingOperations.ts":
+/*!*********************************************************!*\
+  !*** ./src/pages/Content/hooks/usePendingOperations.ts ***!
+  \*********************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   usePendingOperations: () => (/* binding */ usePendingOperations)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a;
+_a = __webpack_require__.$Refresh$.signature();
+
+const usePendingOperations = () => {
+    _a();
+    const [pendingOperations, setPendingOperations] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(new Map());
+    const anyPendingChanges = () => {
+        return pendingOperations.size > 0;
+    };
+    function acceptAllChanges() {
+        pendingOperations.forEach((operation, cellId) => {
+            var _b;
+            if (operation.pending) {
+                (_b = operation.accept) === null || _b === void 0 ? void 0 : _b.call(operation);
+                setPendingOperations((prev) => {
+                    const newMap = new Map(prev);
+                    newMap.delete(cellId);
+                    return newMap;
+                });
+            }
         });
     }
-    return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null,
-        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "w-2 cursor-col-resize", onMouseDown: () => {
-                isResized.current = true;
-                if (overlay.current) {
-                    overlay.current.style.display = 'block';
-                }
-            } }),
-        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "p-4 space-y-4 shadow-xl bg-gray-900 text-gray-100 flex flex-col justify-between", style: { width: `${width / 16}rem` } },
-            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex flex-col overflow-hidden flex-1" },
-                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex items-center space-x-2 mb-6 flex-none" },
-                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "bg-gray-800 p-2 rounded-lg" },
-                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-5 h-5 text-orange-600", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg" },
-                            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M13 10V3L4 14h7v7l9-11h-7z" }))),
-                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", { className: "text-lg font-semibold text-white" }, " Colab AI Assistant ")),
-                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "ai-scrollbar space-y-4 mb-4 overflow-y-auto" }, messages.map((message, index) => (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { key: index, className: `flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}` },
-                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: `flex gap-2 max-w-[85%] ${message.type === 'user' ? 'flex-row-reverse' : 'flex-row'}` },
-                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: `flex-shrink-0 ${message.type === 'ai' ? 'bg-orange-600' : 'bg-gray-600'} rounded-full p-2 max-h-8 max-w-8 flex items-center justify-center` }, message.type === 'ai' ? (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-4 h-4 text-white", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" },
-                            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M13 10V3L4 14h7v7l9-11h-7z" }))) : (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], { className: "w-4 h-4 text-white" }))),
-                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: `p-3 rounded-lg ${message.type === 'user'
-                                ? 'bg-orange-600 text-white'
-                                : 'bg-gray-800 text-gray-100'}` }, message.content.split('@START_CODE').map((content, index) => ((index > 0 &&
-                            react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null,
-                                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { key: `${index}-updating`, className: (isUpdatingNotebook ? "animate-pulse " : "") + "bg-gray-800 p-2 rounded-lg my-2 flex flex-row justify-evenly max-w-52 space-x-2 border-2 border-orange-600" },
-                                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-5 h-5 text-orange-600", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg" },
-                                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M13 10V3L4 14h7v7l9-11h-7z" })),
-                                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null,
-                                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, "Updating Notebook"))),
-                                content.trim().length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_markdown__WEBPACK_IMPORTED_MODULE_5__.Markdown, { key: index, remarkPlugins: [remark_gfm__WEBPACK_IMPORTED_MODULE_6__["default"]] }, content))) || ((content.trim().length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_markdown__WEBPACK_IMPORTED_MODULE_5__.Markdown, { key: index, remarkPlugins: [remark_gfm__WEBPACK_IMPORTED_MODULE_6__["default"]] }, content)))))))))))),
-            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "space-y-4" },
-                isPaid ? (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex items-center space-x-2 p-2 bg-green-500 rounded-lg" },
-                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-5 h-5 text-white", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" },
-                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M5 13l4 4L19 7" })),
-                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", { className: "text-white" }, "You are subscribed to the Colab AI Assistant"))) : (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex items-center space-x-2 p-2 bg-red-500 rounded-lg" },
-                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-5 h-5 text-white", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" },
-                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M6 18L18 6M6 6l12 12" })),
-                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", { className: "text-white" }, "You are not subscribed to the Colab AI Assistant"))),
-                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "space-y-2" },
-                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("textarea", { id: "prompt", placeholder: "Enter your prompt here...", className: "w-full h-32 px-3 py-2 text-sm text-gray-100 border border-gray-700 rounded-lg focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors resize-none bg-gray-800", value: prompt, onChange: (e) => setPrompt(e.target.value) })),
-                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "space-y-2" },
-                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", { id: "model", className: "w-full px-3 py-2 text-sm text-gray-100 border border-gray-700 rounded-lg focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-gray-800 cursor-pointer", value: model, onChange: (e) => setModel(e.target.value) },
-                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", { value: "gpt-4o-mini" }, "GPT-4o Mini"),
-                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", { value: "gpt-4o" }, "GPT-4o"))),
-                react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex space-x-2" },
-                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", { className: "flex-1 px-4 py-2 text-sm font-medium text-white bg-orange-600 \r\n                            rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 \r\n                            focus:ring-offset-2 transition-colors flex items-center justify-center gap-2 disabled:opacity-50", onClick: () => generateAndInsertContent(prompt, model), disabled: isGenerating }, isGenerating ?
-                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null,
-                            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "mx-2 inline-block h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white", role: "status" }),
-                            "Processing") : react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null,
-                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-5 h-5 text-white", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" },
-                            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M9 5l7 7-7 7" })),
-                        "Send")))))));
+    function rejectAllChanges() {
+        pendingOperations.forEach((operation, cellId) => {
+            var _b;
+            if (operation.pending) {
+                (_b = operation.reject) === null || _b === void 0 ? void 0 : _b.call(operation);
+                setPendingOperations((prev) => {
+                    const newMap = new Map(prev);
+                    newMap.delete(cellId);
+                    return newMap;
+                });
+            }
+        });
+    }
+    return { pendingOperations, setPendingOperations, anyPendingChanges, acceptAllChanges, rejectAllChanges };
 };
-_a = App;
-__webpack_require__.$Refresh$.register(_a, "App");
-_b(App, "9VohxwjuKwuUNt6grQ5pu7u7gOA=");
+_a(usePendingOperations, "sz0IHa7Dp1RfuiV1zg9tnH0SeUg=");
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/hooks/useStreamingState.ts":
+/*!******************************************************!*\
+  !*** ./src/pages/Content/hooks/useStreamingState.ts ***!
+  \******************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useStreamingState: () => (/* binding */ useStreamingState)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _parser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../parser */ "./src/pages/Content/parser.ts");
+/* harmony import */ var _utils_deep_copy__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../utils/deep-copy */ "./src/utils/deep-copy.ts");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a;
+_a = __webpack_require__.$Refresh$.signature();
+
+
+
+function useStreamingState() {
+    _a();
+    const [streamingState, setStreamingState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+        buffer: '',
+        textContent: '',
+        fullResponse: '',
+        appliedOperations: new Map(),
+        currentOperations: new Map(),
+        isCodeBlock: false,
+        originalContent: []
+    });
+    const updateStreamingContent = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((newContent, done, setMessageText) => {
+        setStreamingState(prevState => {
+            // If nothing changed or content is already in buffer, return same state
+            if (!newContent || prevState.fullResponse.endsWith(newContent)) {
+                return prevState;
+            }
+            const nextState = (0,_utils_deep_copy__WEBPACK_IMPORTED_MODULE_2__.deepCopyStreamingState)(prevState);
+            nextState.buffer = prevState.buffer + newContent;
+            nextState.fullResponse = prevState.fullResponse + newContent;
+            // Process complete lines
+            const lines = nextState.buffer.split(/\r?\n/);
+            nextState.buffer = lines.pop() || '';
+            if (!nextState.isCodeBlock) {
+                const newTextContent = prevState.textContent + newContent;
+                nextState.textContent = newTextContent;
+                setMessageText(newTextContent);
+            }
+            // Only parse and create new Maps if we have lines to process
+            if (lines.length > 0) {
+                const processedState = (0,_parser__WEBPACK_IMPORTED_MODULE_1__.parseLines)(nextState, lines);
+                return processedState;
+            }
+            return nextState;
+        });
+    }, []); // No dependencies needed since we use functional updates
+    const resetStreamingState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((content) => {
+        setStreamingState({
+            buffer: '',
+            textContent: '',
+            fullResponse: '',
+            appliedOperations: new Map(),
+            currentOperations: new Map(),
+            isCodeBlock: false,
+            originalContent: content
+        });
+    }, []);
+    return { streamingState, updateStreamingContent, resetStreamingState };
+}
+_a(useStreamingState, "gzm8VjoC/K4Cocq1Pi1yRf3NFws=");
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/index.tsx":
+/*!*************************************!*\
+  !*** ./src/pages/Content/index.tsx ***!
+  \*************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App */ "./src/pages/Content/App.tsx");
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+
+
+
+if (document.readyState !== 'loading') {
+    waitForNotebook();
+}
+else {
+    document.addEventListener('DOMContentLoaded', () => {
+        waitForNotebook();
+    });
+}
+function waitForNotebook() {
+    const observer = new MutationObserver((mutations, obs) => {
+        const notebook = document.querySelector('.notebook-horizontal');
+        if (notebook) {
+            obs.disconnect();
+            init(notebook);
+        }
+    });
+    observer.observe(document, {
+        childList: true,
+        subtree: true
+    });
+}
+function init(notebook) {
+    const container = document.createElement('div');
+    container.id = 'colab-assistant-root';
+    container.style.display = 'flex';
+    notebook.appendChild(container);
+    const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(container); // createRoot(container!) if you use TypeScript
+    root.render(react__WEBPACK_IMPORTED_MODULE_2___default().createElement(react__WEBPACK_IMPORTED_MODULE_2__.StrictMode, null,
+        react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_App__WEBPACK_IMPORTED_MODULE_0__["default"], null)));
+}
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/notebookUpdater.ts":
+/*!**********************************************!*\
+  !*** ./src/pages/Content/notebookUpdater.ts ***!
+  \**********************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   acceptChange: () => (/* binding */ acceptChange),
+/* harmony export */   applyOperation: () => (/* binding */ applyOperation),
+/* harmony export */   deleteCell: () => (/* binding */ deleteCell),
+/* harmony export */   getCellContent: () => (/* binding */ getCellContent),
+/* harmony export */   insertCell: () => (/* binding */ insertCell),
+/* harmony export */   rejectChange: () => (/* binding */ rejectChange),
+/* harmony export */   requestContent: () => (/* binding */ requestContent),
+/* harmony export */   updateCell: () => (/* binding */ updateCell)
+/* harmony export */ });
+/* harmony import */ var diff__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! diff */ "./node_modules/diff/lib/index.mjs");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
 function applyOperation(operation) {
     if (operation.type === 'create') {
         return insertCell(operation.content, operation.cellType, operation.position);
     }
     else if (operation.type === 'edit') {
-        return updateCell(operation.cellId, operation.content);
+        return updateCell(operation.cellId, operation.originalContent, operation.content);
     }
     else if (operation.type === 'delete') {
-        return deleteCell(operation.cellId);
+        return deleteCell(operation.cellId, operation.originalContent);
+    }
+    else if (operation.type === 'diff') {
+        return diffCell(operation.cellId, operation.originalContent, operation.content);
     }
     return null;
 }
@@ -44216,33 +46160,139 @@ function insertCell(content, type, position) {
     }
     // Use a custom event to pass data to the page context
     setTimeout(() => {
+        newCell.setAttribute('data-operation', 'insert');
         const customEvent = new CustomEvent('setMonacoValue', {
             detail: { id: id, content: content, type: type }
         });
         document.dispatchEvent(customEvent);
+        newCell.classList.remove('edit');
     }, 500); // Increased timeout to allow for cell creation
     return id;
 }
-function updateCell(id, newContent) {
+function updateCell(id, originalContent, newContent) {
+    const cell = document.getElementById(id);
+    if (!cell)
+        return null;
     const customEvent = new CustomEvent('setMonacoValue', {
-        detail: { id: id, content: newContent }
+        detail: { id, content: newContent }
     });
     document.dispatchEvent(customEvent);
     return id;
 }
-function deleteCell(id) {
-    const customEvent = new CustomEvent('deleteCell', { detail: { id: id } });
-    document.dispatchEvent(customEvent);
+function deleteCell(id, originalContent) {
+    const cell = document.getElementById(id);
+    if (!cell)
+        return null;
+    const mainContent = cell.querySelector('.main-content');
+    if (mainContent)
+        mainContent.style.opacity = '0.5';
+    // injectCellActions(
+    //     id, 
+    //     true,
+    //     () => acceptChange(id),
+    //     () => rejectChange(id)
+    // );
     return id;
 }
-function requestContent(callback) {
-    function handleContentEvent(event) {
-        document.removeEventListener('contentValue', handleContentEvent);
-        callback(event.detail.content);
-    }
-    document.addEventListener('contentValue', handleContentEvent);
-    const customEvent = new CustomEvent('getContent');
+function diffCell(id, originalContent, newContent) {
+    const cell = document.getElementById(id);
+    if (!cell || cell.classList.contains('text'))
+        return null;
+    const diff = (0,diff__WEBPACK_IMPORTED_MODULE_0__.diffLines)(originalContent, newContent);
+    const customEvent = new CustomEvent('diffMonacoValue', {
+        detail: { id, diff }
+    });
     document.dispatchEvent(customEvent);
+    cell.setAttribute('data-diff', 'true');
+    // injectCellActions(
+    //     id, 
+    //     true,
+    //     () => acceptChange(id),
+    //     () => rejectChange(id)
+    // );
+    return id;
+}
+function acceptChange(change) {
+    //injectCellActions(change.cellId, false, () => {}, () => {});
+    if (change.type === 'delete') {
+        const customEvent = new CustomEvent('deleteCell', {
+            detail: { id: change.cellId }
+        });
+        return () => document.dispatchEvent(customEvent);
+    }
+    else {
+        const customEvent = new CustomEvent('setMonacoValue', {
+            detail: { id: change.cellId, content: change.content }
+        });
+        return () => {
+            stopDiff(change.cellId);
+            document.dispatchEvent(customEvent);
+        };
+    }
+}
+function rejectChange(change) {
+    //injectCellActions(change.cellId, false, () => {}, () => {});
+    if (change.type === 'create') {
+        const customEvent = new CustomEvent('deleteCell', {
+            detail: { id: change.cellId }
+        });
+        return () => {
+            stopDiff(change.cellId);
+            document.dispatchEvent(customEvent);
+        };
+    }
+    else if (change.type === 'edit' && change.originalContent) {
+        const customEvent = new CustomEvent('setMonacoValue', {
+            detail: { id: change.cellId, content: change.originalContent }
+        });
+        return () => {
+            stopDiff(change.cellId);
+            document.dispatchEvent(customEvent);
+        };
+    }
+    else if (change.type === 'delete') {
+        return () => {
+            const cell = document.getElementById(change.cellId);
+            if (cell) {
+                const mainContent = cell.querySelector('.main-content');
+                if (mainContent)
+                    mainContent.style.opacity = '1';
+            }
+        };
+    }
+    return () => { };
+}
+const stopDiff = (cellId) => {
+    const cell = document.getElementById(cellId);
+    if (cell) {
+        cell.setAttribute('data-diff', 'false');
+    }
+};
+function requestContent() {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve) => {
+            function handleContentEvent(event) {
+                document.removeEventListener('contentValue', handleContentEvent);
+                resolve(event.detail.content);
+            }
+            document.addEventListener('contentValue', handleContentEvent);
+            const customEvent = new CustomEvent('getContent');
+            document.dispatchEvent(customEvent);
+        });
+    });
+}
+function getCellContent(cellId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve) => {
+            function handleContentEvent(event) {
+                document.removeEventListener('contentValue', handleContentEvent);
+                resolve(event.detail.content);
+            }
+            document.addEventListener('contentValue', handleContentEvent);
+            const customEvent = new CustomEvent('getMonacoValue', { detail: { id: cellId } });
+            document.dispatchEvent(customEvent);
+        });
+    });
 }
 function getCellIndexFromRelativePosition(position) {
     const notebook = document.querySelector('colab-shaded-scroller');
@@ -44259,7 +46309,7 @@ function getCellIndexFromRelativePosition(position) {
     }
     else if (position.startsWith('after:')) {
         const id = position.split(':')[1];
-        const index = Array.from(cells).findIndex(cell => cell.getAttribute('id') === id);
+        let index = Array.from(cells).findIndex(cell => cell.getAttribute('id') === id);
         return index + 1;
     }
     else if (position.startsWith('before:')) {
@@ -44270,94 +46320,6 @@ function getCellIndexFromRelativePosition(position) {
     else {
         return -1;
     }
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
-
-
-const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
-const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
-	$ReactRefreshModuleId$
-);
-
-function $ReactRefreshModuleRuntime$(exports) {
-	if (true) {
-		let errorOverlay;
-		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
-			errorOverlay = __react_refresh_error_overlay__;
-		}
-		let testMode;
-		if (typeof __react_refresh_test__ !== 'undefined') {
-			testMode = __react_refresh_test__;
-		}
-		return __react_refresh_utils__.executeRuntime(
-			exports,
-			$ReactRefreshModuleId$,
-			module.hot,
-			errorOverlay,
-			testMode
-		);
-	}
-}
-
-if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
-	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
-} else {
-	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
-}
-
-/***/ }),
-
-/***/ "./src/pages/Content/index.ts":
-/*!************************************!*\
-  !*** ./src/pages/Content/index.ts ***!
-  \************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App */ "./src/pages/Content/App.tsx");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
-/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
-/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
-__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
-
-
-
-
-console.log('Content script works!');
-console.log('Must reload extension for modifications to take effect.');
-if (document.readyState !== 'loading') {
-    console.log('document is already ready, just execute code here');
-    waitForNotebook();
-}
-else {
-    document.addEventListener('DOMContentLoaded', () => {
-        waitForNotebook();
-    });
-}
-function waitForNotebook() {
-    const observer = new MutationObserver((mutations, obs) => {
-        const notebook = document.querySelector('.notebook-horizontal');
-        if (notebook) {
-            console.log('Notebook:', notebook);
-            obs.disconnect();
-            init(notebook);
-        }
-    });
-    observer.observe(document, {
-        childList: true,
-        subtree: true
-    });
-}
-function init(notebook) {
-    const container = document.createElement('div');
-    container.id = 'colab-assistant-root';
-    container.style.display = 'flex';
-    notebook.appendChild(container);
-    const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_2__.createRoot)(container); // createRoot(container!) if you use TypeScript
-    root.render(react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_App__WEBPACK_IMPORTED_MODULE_0__["default"]));
 }
 
 
@@ -44403,170 +46365,16 @@ if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Pr
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   handleStreamingContent: () => (/* binding */ handleStreamingContent),
-/* harmony export */   initializeStreamingState: () => (/* binding */ initializeStreamingState)
+/* harmony export */   parseLines: () => (/* binding */ parseLines)
 /* harmony export */ });
+/* harmony import */ var _notebookUpdater__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./notebookUpdater */ "./src/pages/Content/notebookUpdater.ts");
 /* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
 /* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
 
-const streamingState = {
-    buffer: '',
-    textContent: '',
-    fullResponse: '',
-    appliedOperations: new Set(),
-    currentOperations: new Map(),
-    isCodeBlock: false
-};
-function initializeStreamingState() {
-    // Reset streaming state for new generation
-    streamingState.buffer = '';
-    streamingState.textContent = '';
-    streamingState.fullResponse = '';
-    streamingState.appliedOperations.clear();
-    streamingState.currentOperations.clear();
-    streamingState.isCodeBlock = false;
-}
-function handleStreamingContent(newContent, done, applyOperation, setMessageText, handleCodeBlock) {
-    // Append new content to buffer
-    streamingState.buffer += newContent;
-    streamingState.fullResponse += newContent;
-    // Process complete lines
-    const lines = streamingState.buffer.split(/\r?\n/);
-    streamingState.buffer = lines.pop() || ''; // Keep incomplete line in buffer
-    // Collect text before and after code block
-    if (!streamingState.isCodeBlock) {
-        streamingState.textContent += newContent;
-        setMessageText(streamingState.textContent);
-    }
-    processStreamingLines(lines, applyOperation, setMessageText, handleCodeBlock);
-    if (done) {
-        console.log(streamingState.fullResponse);
-    }
-}
-// function processStreamingLines(lines: string[], applyOperation: (operation: Operation) => string | null,
-//     setMessageText: (text: React.SetStateAction<string>) => void, handleCodeBlock: (isCode: boolean) => void) {
-//     const createRegex = /@CREATE\[type=(markdown|code),\s*position=(top|bottom|after:(cell-[^\]]+)|before:(cell-[^\]]+))\]/;
-//     const editRegex = /@EDIT\[(cell-[^\]]+)\]/;
-//     const deleteRegex = /@DELETE\[(cell-[^\]]+)\]/;
-//     const endRegex = /@END/;
-//     const startCodeRegex = /@START_CODE/;
-//     const endCodeRegex = /@END_CODE/;
-//     for (const line of lines) {
-//         try {
-//             // Handle code block markers
-//             if (line.match(startCodeRegex)) {
-//                 streamingState.isCodeBlock = true;
-//                 setMessageText(streamingState.textContent);
-//                 handleCodeBlock(true);
-//                 continue;  // Use continue instead of return
-//             }
-//             if (line.match(endCodeRegex)) {
-//                 streamingState.isCodeBlock = false;
-//                 handleCodeBlock(false);
-//                 continue;  // Use continue instead of return
-//             }
-//             // Process operations
-//             const createMatch = line.match(createRegex);
-//             const editMatch = line.match(editRegex);
-//             const deleteMatch = line.match(deleteRegex);
-//             if (createMatch) {
-//                 const operationId = `create-${Date.now()}-${Math.random()}`;
-//                 const operation = {
-//                     type: 'create',
-//                     cellType: createMatch[1] as 'markdown' | 'code',
-//                     cellId: '',
-//                     position: createMatch[2] as "top" | "bottom" | `after:${string}` | `before:${string}`,
-//                     contentArray: [],
-//                     content: ''
-//                 }
-//                 // Check if any of the operations had the same position
-//                 const samePositionOperations = Array.from(streamingState.currentOperations.values())
-//                     .filter(op => op.type === 'create' && op.position === operation.position && op.position.startsWith('after:'));
-//                 if (samePositionOperations.length > 0) {
-//                     const lastOperation = samePositionOperations[samePositionOperations.length - 1];
-//                     operation.position = `after:${lastOperation.cellId}`;
-//                 }
-//                 const id = applyOperation(operation as CreateOperation);
-//                 if (!id) {
-//                     console.error('Failed to apply create operation:', operation);
-//                     continue;  // Skip this operation but continue processing
-//                 }
-//                 operation.cellId = id;
-//                 streamingState.currentOperations.set(operationId, operation as CreateOperation);
-//             } else if (editMatch) {
-//                 const cellId = editMatch[1];
-//                 const operation = {
-//                     type: 'edit',
-//                     cellId,
-//                     contentArray: [],
-//                     content: ''
-//                 }
-//                 streamingState.currentOperations.set(cellId, operation as EditOperation);
-//                 const result = applyOperation(operation as EditOperation);
-//                 if (!result) {
-//                     console.error('Failed to apply edit operation:', operation);
-//                     continue;
-//                 }
-//             } else if (deleteMatch) {
-//                 const cellId = deleteMatch[1];
-//                 if (!streamingState.appliedOperations.has(cellId)) {
-//                     const result = applyOperation({
-//                         type: 'delete',
-//                         cellId
-//                     });
-//                     if (result) {
-//                         streamingState.appliedOperations.add(cellId);
-//                     } else {
-//                         console.error('Failed to apply delete operation for cell:', cellId);
-//                     }
-//                 }
-//             } else if (line.match(endRegex)) {
-//                 // Finalize and verify current operations
-//                 for (const [id, operation] of streamingState.currentOperations.entries()) {
-//                     if (!streamingState.appliedOperations.has(id) &&
-//                         'contentArray' in operation &&
-//                         operation.contentArray &&
-//                         operation.contentArray.length > 0) {
-//                         const finalOperation = {
-//                             ...operation,
-//                             content: operation.contentArray.join('\n')
-//                         };
-//                         const result = applyOperation(finalOperation as Operation);
-//                         if (result) {
-//                             streamingState.appliedOperations.add(id);
-//                         } else {
-//                             console.error('Failed to apply final operation:', finalOperation);
-//                         }
-//                     }
-//                 }
-//                 streamingState.currentOperations.clear();
-//             } else {
-//                 // Add content to current operations
-//                 for (const operation of streamingState.currentOperations.values()) {
-//                     if (operation.type !== 'delete' && 'contentArray' in operation && operation.contentArray) {
-//                         operation.contentArray.push(line);
-//                         operation.content = operation.contentArray.join('\n');
-//                         const result = applyOperation({
-//                             type: 'edit',
-//                             cellId: operation.cellId,
-//                             contentArray: operation.contentArray,
-//                             content: operation.content
-//                         } as EditOperation);
-//                         if (!result) {
-//                             console.error('Failed to apply content update:', operation);
-//                         }
-//                     }
-//                 }
-//             }
-//         } catch (error) {
-//             console.error('Error processing line:', line, error);
-//             // Continue processing remaining lines
-//         }
-//     }
-// }
-function processStreamingLines(lines, applyOperation, setMessageText, handleCodeBlock) {
-    var _a;
+
+function parseLines(streamingState, lines) {
+    var _a, _b, _c, _d;
     const createRegex = /@CREATE\[type=(markdown|code),\s*position=(top|bottom|after:(cell-[^\]]+)|before:(cell-[^\]]+))\]/;
     const editRegex = /@EDIT\[(cell-[^\]]+)\]/;
     const deleteRegex = /@DELETE\[(cell-[^\]]+)\]/;
@@ -44577,20 +46385,20 @@ function processStreamingLines(lines, applyOperation, setMessageText, handleCode
         // Handle code block markers
         if (line.match(startCodeRegex)) {
             streamingState.isCodeBlock = true;
-            setMessageText(streamingState.textContent);
-            handleCodeBlock(true);
-            return;
+            return streamingState;
         }
         if (line.match(endCodeRegex)) {
             streamingState.isCodeBlock = false;
-            handleCodeBlock(false);
-            return;
+            return streamingState;
         }
         // Process operations
         const createMatch = line.match(createRegex);
         const editMatch = line.match(editRegex);
         const deleteMatch = line.match(deleteRegex);
         if (createMatch) {
+            if (streamingState.currentOperations.size > 0 && ((_a = streamingState.currentOperations.values().next().value) === null || _a === void 0 ? void 0 : _a.type) === 'create') {
+                return streamingState;
+            }
             const operationId = `create-${Date.now()}-${Math.random()}`;
             const operation = {
                 type: 'create',
@@ -44600,21 +46408,30 @@ function processStreamingLines(lines, applyOperation, setMessageText, handleCode
                 contentArray: [],
                 content: ''
             };
-            // Check if any of the operations had the same position (after a specific cell), this is to ensure the order of operations
-            const samePositionOperations = Array.from(streamingState.currentOperations.values())
-                .filter(op => op.type === 'create' && op.position === operation.position && op.position.startsWith('after:'));
-            if (samePositionOperations.length > 0) {
-                const lastOperation = samePositionOperations[samePositionOperations.length - 1];
-                operation.position = `after:${lastOperation.cellId}`;
+            let id;
+            // If the operation is after a specific cell, find the last operation that was created after that cell (this is needed to ensure that cells are inserted in the correct order)
+            if (operation.position.startsWith('after:')) {
+                let position = operation.position;
+                // Find all previous operations that were created after this same cell
+                const previousOperations = Array.from(streamingState.appliedOperations.values())
+                    .filter(op => op.type === 'create' && op.position === operation.position);
+                if (previousOperations.length > 0) {
+                    // Get the last operation in the chain
+                    const lastOperation = previousOperations[previousOperations.length - 1];
+                    position = `after:${lastOperation.cellId}`;
+                }
+                id = (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)(Object.assign(Object.assign({}, operation), { position }));
             }
-            const id = applyOperation(operation);
-            if (!id) {
-                console.log('Failed to apply operation:', operation);
-                return;
+            else {
+                id = (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)(operation);
+            }
+            if (!id || id === '') {
+                console.log('[Parser] Failed to apply operation:', operation);
+                return streamingState;
             }
             operation.cellId = id;
-            streamingState.currentOperations.set(operationId, operation);
-            console.log('Create operation:', operation);
+            streamingState.currentOperations.set(operation.cellId, operation);
+            console.log('[Parser] Create operation:', operation);
         }
         else if (editMatch) {
             const cellId = editMatch[1];
@@ -44622,29 +46439,38 @@ function processStreamingLines(lines, applyOperation, setMessageText, handleCode
                 type: 'edit',
                 cellId,
                 contentArray: [],
-                content: ''
+                content: '',
+                originalContent: ((_b = streamingState.originalContent.find(cell => cell.id === cellId)) === null || _b === void 0 ? void 0 : _b.content) || ''
             };
             streamingState.currentOperations.set(cellId, operation);
-            applyOperation(operation);
-            console.log('Edit operation:', operation);
+            (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)(operation);
+            console.log('[Parser] Edit operation:', operation);
         }
         else if (deleteMatch) {
             const cellId = deleteMatch[1];
-            if (!streamingState.appliedOperations.has(cellId)) {
-                applyOperation({
-                    type: 'delete',
-                    cellId
-                });
-                streamingState.appliedOperations.add(cellId);
-            }
-            console.log('Delete operation:', cellId);
+            const originalContent = ((_c = streamingState.originalContent.find(cell => cell.id === cellId)) === null || _c === void 0 ? void 0 : _c.content) || '';
+            const operation = {
+                type: 'delete',
+                cellId,
+                originalContent
+            };
+            (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)(operation);
+            streamingState.appliedOperations.set(cellId, Object.assign(Object.assign({}, operation), { pending: true, reject: (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.rejectChange)(operation), accept: (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.acceptChange)(operation) }));
+            console.log('[Parser] Delete operation:', cellId);
         }
         else if (line.match(endRegex)) {
             // Finalize current operation
             for (const [id, operation] of streamingState.currentOperations.entries()) {
-                if (!streamingState.appliedOperations.has(id) && 'contentArray' in operation && operation.contentArray && operation.contentArray.length > 0) {
-                    streamingState.appliedOperations.add(id);
-                    console.log('Applied operation:', operation);
+                if (operation.type === 'create' || operation.type === 'edit') {
+                    console.log('[Parser] Applied operation:', operation);
+                    const pendingOperation = Object.assign(Object.assign({}, operation), { pending: true, reject: (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.rejectChange)(operation), accept: (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.acceptChange)(operation) });
+                    streamingState.appliedOperations.set(operation.cellId, pendingOperation);
+                    (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)({
+                        type: 'diff',
+                        cellId: operation.cellId,
+                        originalContent: operation.type === 'edit' ? operation.originalContent : '',
+                        content: operation.content
+                    });
                 }
             }
             streamingState.currentOperations.clear();
@@ -44653,141 +46479,21 @@ function processStreamingLines(lines, applyOperation, setMessageText, handleCode
             // Add content to current operations
             for (const operation of streamingState.currentOperations.values()) {
                 if (operation.type !== 'delete' && 'contentArray' in operation && operation.contentArray) {
-                    (_a = operation.contentArray) === null || _a === void 0 ? void 0 : _a.push(line);
+                    (_d = operation.contentArray) === null || _d === void 0 ? void 0 : _d.push(line);
                     operation.content = operation.contentArray.join('\n');
-                    applyOperation({
+                    (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)({
                         type: 'edit',
                         cellId: operation.cellId,
                         contentArray: operation.contentArray,
-                        content: operation.content
+                        content: operation.content,
+                        originalContent: operation.type === 'edit' ? operation.originalContent : ''
                     });
                 }
             }
         }
     }
+    return streamingState;
 }
-// export function parseContent(content: string): ParsedContent {
-//     const operations: Operation[] = [];
-//     const beforeTextLines: string[] = [];
-//     const afterTextLines: string[] = [];
-//     const lines = content.split(/\r?\n/);
-//     let currentOperation: Operation | null = null;
-//     let currentContent = [];
-//     let inCodeBlock = false;
-//     let afterCodeBlock = false;
-//     // Regular expressions for parsing operations
-//     const createRegex = /@CREATE\[type=(markdown|code),\s*position=(top|bottom|after:(cell-[a-zA-Z0-9]+)|before:(cell-[a-zA-Z0-9]+))\]/;
-//     const editRegex = /@EDIT\[(cell-[a-zA-Z0-9]+)\]/;
-//     const deleteRegex = /@DELETE\[(cell-[a-zA-Z0-9]+)\]/;
-//     const endRegex = /@END/;
-//     const startCodeRegex = /@START_CODE/;
-//     const endCodeRegex = /@END_CODE/;
-//     lines.forEach(line => {
-//         if (line.match(startCodeRegex)) {
-//             inCodeBlock = true;
-//             return;
-//         }
-//         if (line.match(endCodeRegex)) {
-//             inCodeBlock = false;
-//             afterCodeBlock = true;
-//             return;
-//         }
-//         if (!inCodeBlock && !afterCodeBlock) {
-//             beforeTextLines.push(line);
-//             return;
-//         }
-//         if (afterCodeBlock) {
-//             afterTextLines.push(line);
-//             return;
-//         }
-//         // Check for new operation start
-//         const createMatch = line.match(createRegex);
-//         const editMatch = line.match(editRegex);
-//         const deleteMatch = line.match(deleteRegex);
-//         if (createMatch) {
-//             if (currentOperation) {
-//                 finalizeCurrent();
-//             }
-//             currentOperation = {
-//                 type: 'create',
-//                 cellType: createMatch[1],
-//                 position: createMatch[2],
-//                 contentArray: [],
-//                 content: ''
-//             } as CreateOperation;
-//         } else if (editMatch) {
-//             if (currentOperation) {
-//                 finalizeCurrent();
-//             }
-//             currentOperation = {
-//                 type: 'edit',
-//                 cellId: editMatch[1],
-//                 contentArray: [],
-//                 content: ''
-//             } as EditOperation;
-//         } else if (deleteMatch) {
-//             operations.push({
-//                 type: 'delete',
-//                 cellId: deleteMatch[1]
-//             } as DeleteOperation);
-//         } else if (line.match(endRegex)) {
-//             if (currentOperation) {
-//                 finalizeCurrent();
-//             }
-//         } else if (currentOperation) {
-//             if (currentOperation.type !== 'delete') {
-//                 currentOperation.contentArray.push(line);
-//             }
-//         }
-//     });
-//     // Helper function to finalize current operation
-//     function finalizeCurrent() {
-//         if (currentOperation === null || currentOperation.type === 'delete')
-//             return;
-//         if (currentOperation.contentArray.length > 0) {
-//             currentOperation.content = currentOperation.contentArray.join('\n');
-//             operations.push(currentOperation);
-//         }
-//         currentOperation = null;
-//     }
-//     // Handle any remaining operation
-//     if (currentOperation) {
-//         finalizeCurrent();
-//     }
-//     return {
-//         beforeText: beforeTextLines.join('\n').trim(),
-//         operations,
-//         afterText: afterTextLines.join('\n').trim()
-//     };
-// }
-// Example usage:
-/*
-const testContent = `
-Some text before explaining the operations
-@START_CODE
-@CREATE[type=markdown, position=top]
-# Data Analysis Project
-This is a new project
-@END
-
-@CREATE[type=code, position=after:123]
-import pandas as pd
-import numpy as np
-@END
-
-@DELETE[456]
-
-@EDIT[012]
-def process_data():
-    return "processed"
-@END
-@END_CODE
-Some more text
-`;
-
-const parsedContent = parseContent(testContent);
-console.log(parsedContent);
-*/ 
 
 
 const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
@@ -44823,1246 +46529,573 @@ if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Pr
 
 /***/ }),
 
-/***/ "./node_modules/webextension-polyfill/dist/browser-polyfill.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/webextension-polyfill/dist/browser-polyfill.js ***!
-  \*********************************************************************/
-/***/ (function(module, exports) {
+/***/ "./src/pages/Content/reducers/generationReducer.ts":
+/*!*********************************************************!*\
+  !*** ./src/pages/Content/reducers/generationReducer.ts ***!
+  \*********************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
-  if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else { var mod; }
-})(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this, function (module) {
-  /* webextension-polyfill - v0.7.0 - Tue Nov 10 2020 20:24:04 */
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   generationReducer: () => (/* binding */ generationReducer)
+/* harmony export */ });
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
 
-  /* -*- Mode: indent-tabs-mode: nil; js-indent-level: 2 -*- */
+const generationReducer = (state, action) => {
+    switch (action.type) {
+        case 'start_generation':
+            return Object.assign(Object.assign({}, state), { isGenerating: true, error: null });
+        case 'finish_generation':
+            return Object.assign(Object.assign({}, state), { isGenerating: false, isUpdatingNotebook: false });
+        case 'start_update_notebook':
+            return Object.assign(Object.assign({}, state), { isUpdatingNotebook: true });
+        case 'finish_update_notebook':
+            return Object.assign(Object.assign({}, state), { isUpdatingNotebook: false });
+        case 'start_diffing':
+            return Object.assign(Object.assign({}, state), { isDiffing: true });
+        case 'finish_diffing':
+            return Object.assign(Object.assign({}, state), { isDiffing: false });
+        case 'error':
+            return Object.assign(Object.assign({}, state), { isGenerating: false, isDiffing: false, isUpdatingNotebook: false, error: action.payload });
+        default:
+            return state;
+    }
+};
 
-  /* vim: set sts=2 sw=2 et tw=80: */
 
-  /* This Source Code Form is subject to the terms of the Mozilla Public
-   * License, v. 2.0. If a copy of the MPL was not distributed with this
-   * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-  "use strict";
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
 
-  if (typeof browser === "undefined" || Object.getPrototypeOf(browser) !== Object.prototype) {
-    const CHROME_SEND_MESSAGE_CALLBACK_NO_RESPONSE_MESSAGE = "The message port closed before a response was received.";
-    const SEND_RESPONSE_DEPRECATION_WARNING = "Returning a Promise is the preferred way to send a reply from an onMessage/onMessageExternal listener, as the sendResponse will be removed from the specs (See https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/runtime/onMessage)"; // Wrapping the bulk of this polyfill in a one-time-use function is a minor
-    // optimization for Firefox. Since Spidermonkey does not fully parse the
-    // contents of a function until the first time it's called, and since it will
-    // never actually need to be called, this allows the polyfill to be included
-    // in Firefox nearly for free.
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
 
-    const wrapAPIs = extensionAPIs => {
-      // NOTE: apiMetadata is associated to the content of the api-metadata.json file
-      // at build time by replacing the following "include" with the content of the
-      // JSON file.
-      const apiMetadata = {
-        "alarms": {
-          "clear": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "clearAll": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "get": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "getAll": {
-            "minArgs": 0,
-            "maxArgs": 0
-          }
-        },
-        "bookmarks": {
-          "create": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "get": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getChildren": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getRecent": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getSubTree": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getTree": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "move": {
-            "minArgs": 2,
-            "maxArgs": 2
-          },
-          "remove": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeTree": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "search": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "update": {
-            "minArgs": 2,
-            "maxArgs": 2
-          }
-        },
-        "browserAction": {
-          "disable": {
-            "minArgs": 0,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "enable": {
-            "minArgs": 0,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "getBadgeBackgroundColor": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getBadgeText": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getPopup": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getTitle": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "openPopup": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "setBadgeBackgroundColor": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "setBadgeText": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "setIcon": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "setPopup": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "setTitle": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          }
-        },
-        "browsingData": {
-          "remove": {
-            "minArgs": 2,
-            "maxArgs": 2
-          },
-          "removeCache": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeCookies": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeDownloads": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeFormData": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeHistory": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeLocalStorage": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removePasswords": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removePluginData": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "settings": {
-            "minArgs": 0,
-            "maxArgs": 0
-          }
-        },
-        "commands": {
-          "getAll": {
-            "minArgs": 0,
-            "maxArgs": 0
-          }
-        },
-        "contextMenus": {
-          "remove": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeAll": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "update": {
-            "minArgs": 2,
-            "maxArgs": 2
-          }
-        },
-        "cookies": {
-          "get": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getAll": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getAllCookieStores": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "remove": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "set": {
-            "minArgs": 1,
-            "maxArgs": 1
-          }
-        },
-        "devtools": {
-          "inspectedWindow": {
-            "eval": {
-              "minArgs": 1,
-              "maxArgs": 2,
-              "singleCallbackArg": false
-            }
-          },
-          "panels": {
-            "create": {
-              "minArgs": 3,
-              "maxArgs": 3,
-              "singleCallbackArg": true
-            },
-            "elements": {
-              "createSidebarPane": {
-                "minArgs": 1,
-                "maxArgs": 1
-              }
-            }
-          }
-        },
-        "downloads": {
-          "cancel": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "download": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "erase": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getFileIcon": {
-            "minArgs": 1,
-            "maxArgs": 2
-          },
-          "open": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "pause": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeFile": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "resume": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "search": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "show": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          }
-        },
-        "extension": {
-          "isAllowedFileSchemeAccess": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "isAllowedIncognitoAccess": {
-            "minArgs": 0,
-            "maxArgs": 0
-          }
-        },
-        "history": {
-          "addUrl": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "deleteAll": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "deleteRange": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "deleteUrl": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getVisits": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "search": {
-            "minArgs": 1,
-            "maxArgs": 1
-          }
-        },
-        "i18n": {
-          "detectLanguage": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getAcceptLanguages": {
-            "minArgs": 0,
-            "maxArgs": 0
-          }
-        },
-        "identity": {
-          "launchWebAuthFlow": {
-            "minArgs": 1,
-            "maxArgs": 1
-          }
-        },
-        "idle": {
-          "queryState": {
-            "minArgs": 1,
-            "maxArgs": 1
-          }
-        },
-        "management": {
-          "get": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getAll": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "getSelf": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "setEnabled": {
-            "minArgs": 2,
-            "maxArgs": 2
-          },
-          "uninstallSelf": {
-            "minArgs": 0,
-            "maxArgs": 1
-          }
-        },
-        "notifications": {
-          "clear": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "create": {
-            "minArgs": 1,
-            "maxArgs": 2
-          },
-          "getAll": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "getPermissionLevel": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "update": {
-            "minArgs": 2,
-            "maxArgs": 2
-          }
-        },
-        "pageAction": {
-          "getPopup": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getTitle": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "hide": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "setIcon": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "setPopup": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "setTitle": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          },
-          "show": {
-            "minArgs": 1,
-            "maxArgs": 1,
-            "fallbackToNoCallback": true
-          }
-        },
-        "permissions": {
-          "contains": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getAll": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "remove": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "request": {
-            "minArgs": 1,
-            "maxArgs": 1
-          }
-        },
-        "runtime": {
-          "getBackgroundPage": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "getPlatformInfo": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "openOptionsPage": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "requestUpdateCheck": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "sendMessage": {
-            "minArgs": 1,
-            "maxArgs": 3
-          },
-          "sendNativeMessage": {
-            "minArgs": 2,
-            "maxArgs": 2
-          },
-          "setUninstallURL": {
-            "minArgs": 1,
-            "maxArgs": 1
-          }
-        },
-        "sessions": {
-          "getDevices": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "getRecentlyClosed": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "restore": {
-            "minArgs": 0,
-            "maxArgs": 1
-          }
-        },
-        "storage": {
-          "local": {
-            "clear": {
-              "minArgs": 0,
-              "maxArgs": 0
-            },
-            "get": {
-              "minArgs": 0,
-              "maxArgs": 1
-            },
-            "getBytesInUse": {
-              "minArgs": 0,
-              "maxArgs": 1
-            },
-            "remove": {
-              "minArgs": 1,
-              "maxArgs": 1
-            },
-            "set": {
-              "minArgs": 1,
-              "maxArgs": 1
-            }
-          },
-          "managed": {
-            "get": {
-              "minArgs": 0,
-              "maxArgs": 1
-            },
-            "getBytesInUse": {
-              "minArgs": 0,
-              "maxArgs": 1
-            }
-          },
-          "sync": {
-            "clear": {
-              "minArgs": 0,
-              "maxArgs": 0
-            },
-            "get": {
-              "minArgs": 0,
-              "maxArgs": 1
-            },
-            "getBytesInUse": {
-              "minArgs": 0,
-              "maxArgs": 1
-            },
-            "remove": {
-              "minArgs": 1,
-              "maxArgs": 1
-            },
-            "set": {
-              "minArgs": 1,
-              "maxArgs": 1
-            }
-          }
-        },
-        "tabs": {
-          "captureVisibleTab": {
-            "minArgs": 0,
-            "maxArgs": 2
-          },
-          "create": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "detectLanguage": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "discard": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "duplicate": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "executeScript": {
-            "minArgs": 1,
-            "maxArgs": 2
-          },
-          "get": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getCurrent": {
-            "minArgs": 0,
-            "maxArgs": 0
-          },
-          "getZoom": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "getZoomSettings": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "goBack": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "goForward": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "highlight": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "insertCSS": {
-            "minArgs": 1,
-            "maxArgs": 2
-          },
-          "move": {
-            "minArgs": 2,
-            "maxArgs": 2
-          },
-          "query": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "reload": {
-            "minArgs": 0,
-            "maxArgs": 2
-          },
-          "remove": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "removeCSS": {
-            "minArgs": 1,
-            "maxArgs": 2
-          },
-          "sendMessage": {
-            "minArgs": 2,
-            "maxArgs": 3
-          },
-          "setZoom": {
-            "minArgs": 1,
-            "maxArgs": 2
-          },
-          "setZoomSettings": {
-            "minArgs": 1,
-            "maxArgs": 2
-          },
-          "update": {
-            "minArgs": 1,
-            "maxArgs": 2
-          }
-        },
-        "topSites": {
-          "get": {
-            "minArgs": 0,
-            "maxArgs": 0
-          }
-        },
-        "webNavigation": {
-          "getAllFrames": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "getFrame": {
-            "minArgs": 1,
-            "maxArgs": 1
-          }
-        },
-        "webRequest": {
-          "handlerBehaviorChanged": {
-            "minArgs": 0,
-            "maxArgs": 0
-          }
-        },
-        "windows": {
-          "create": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "get": {
-            "minArgs": 1,
-            "maxArgs": 2
-          },
-          "getAll": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "getCurrent": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "getLastFocused": {
-            "minArgs": 0,
-            "maxArgs": 1
-          },
-          "remove": {
-            "minArgs": 1,
-            "maxArgs": 1
-          },
-          "update": {
-            "minArgs": 2,
-            "maxArgs": 2
-          }
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Content/utils/openSubscriptionWindow.ts":
+/*!***********************************************************!*\
+  !*** ./src/pages/Content/utils/openSubscriptionWindow.ts ***!
+  \***********************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   openSubscriptionWindow: () => (/* binding */ openSubscriptionWindow)
+/* harmony export */ });
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+const openSubscriptionWindow = () => {
+    const width = 1200;
+    const height = 900;
+    const left = (window.screen.width - width) / 2;
+    const top = (window.screen.height - height) / 2;
+    chrome.runtime.sendMessage({
+        action: "OPEN_POPUP",
+        payload: {
+            popupUrl: chrome.runtime.getURL('subscription.html'),
+            width,
+            height,
+            left: Math.floor(left),
+            top: Math.floor(top)
         }
-      };
-
-      if (Object.keys(apiMetadata).length === 0) {
-        throw new Error("api-metadata.json has not been included in browser-polyfill");
-      }
-      /**
-       * A WeakMap subclass which creates and stores a value for any key which does
-       * not exist when accessed, but behaves exactly as an ordinary WeakMap
-       * otherwise.
-       *
-       * @param {function} createItem
-       *        A function which will be called in order to create the value for any
-       *        key which does not exist, the first time it is accessed. The
-       *        function receives, as its only argument, the key being created.
-       */
+    });
+};
 
 
-      class DefaultWeakMap extends WeakMap {
-        constructor(createItem, items = undefined) {
-          super(items);
-          this.createItem = createItem;
-        }
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
 
-        get(key) {
-          if (!this.has(key)) {
-            this.set(key, this.createItem(key));
-          }
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
 
-          return super.get(key);
-        }
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
 
-      }
-      /**
-       * Returns true if the given object is an object with a `then` method, and can
-       * therefore be assumed to behave as a Promise.
-       *
-       * @param {*} value The value to test.
-       * @returns {boolean} True if the value is thenable.
-       */
+/***/ }),
 
+/***/ "./src/utils/deep-copy.ts":
+/*!********************************!*\
+  !*** ./src/utils/deep-copy.ts ***!
+  \********************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-      const isThenable = value => {
-        return value && typeof value === "object" && typeof value.then === "function";
-      };
-      /**
-       * Creates and returns a function which, when called, will resolve or reject
-       * the given promise based on how it is called:
-       *
-       * - If, when called, `chrome.runtime.lastError` contains a non-null object,
-       *   the promise is rejected with that value.
-       * - If the function is called with exactly one argument, the promise is
-       *   resolved to that value.
-       * - Otherwise, the promise is resolved to an array containing all of the
-       *   function's arguments.
-       *
-       * @param {object} promise
-       *        An object containing the resolution and rejection functions of a
-       *        promise.
-       * @param {function} promise.resolve
-       *        The promise's resolution function.
-       * @param {function} promise.rejection
-       *        The promise's rejection function.
-       * @param {object} metadata
-       *        Metadata about the wrapped method which has created the callback.
-       * @param {integer} metadata.maxResolvedArgs
-       *        The maximum number of arguments which may be passed to the
-       *        callback created by the wrapped async function.
-       *
-       * @returns {function}
-       *        The generated callback function.
-       */
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   deepCopyStreamingState: () => (/* binding */ deepCopyStreamingState)
+/* harmony export */ });
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
 
-
-      const makeCallback = (promise, metadata) => {
-        return (...callbackArgs) => {
-          if (extensionAPIs.runtime.lastError) {
-            promise.reject(extensionAPIs.runtime.lastError);
-          } else if (metadata.singleCallbackArg || callbackArgs.length <= 1 && metadata.singleCallbackArg !== false) {
-            promise.resolve(callbackArgs[0]);
-          } else {
-            promise.resolve(callbackArgs);
-          }
-        };
-      };
-
-      const pluralizeArguments = numArgs => numArgs == 1 ? "argument" : "arguments";
-      /**
-       * Creates a wrapper function for a method with the given name and metadata.
-       *
-       * @param {string} name
-       *        The name of the method which is being wrapped.
-       * @param {object} metadata
-       *        Metadata about the method being wrapped.
-       * @param {integer} metadata.minArgs
-       *        The minimum number of arguments which must be passed to the
-       *        function. If called with fewer than this number of arguments, the
-       *        wrapper will raise an exception.
-       * @param {integer} metadata.maxArgs
-       *        The maximum number of arguments which may be passed to the
-       *        function. If called with more than this number of arguments, the
-       *        wrapper will raise an exception.
-       * @param {integer} metadata.maxResolvedArgs
-       *        The maximum number of arguments which may be passed to the
-       *        callback created by the wrapped async function.
-       *
-       * @returns {function(object, ...*)}
-       *       The generated wrapper function.
-       */
-
-
-      const wrapAsyncFunction = (name, metadata) => {
-        return function asyncFunctionWrapper(target, ...args) {
-          if (args.length < metadata.minArgs) {
-            throw new Error(`Expected at least ${metadata.minArgs} ${pluralizeArguments(metadata.minArgs)} for ${name}(), got ${args.length}`);
-          }
-
-          if (args.length > metadata.maxArgs) {
-            throw new Error(`Expected at most ${metadata.maxArgs} ${pluralizeArguments(metadata.maxArgs)} for ${name}(), got ${args.length}`);
-          }
-
-          return new Promise((resolve, reject) => {
-            if (metadata.fallbackToNoCallback) {
-              // This API method has currently no callback on Chrome, but it return a promise on Firefox,
-              // and so the polyfill will try to call it with a callback first, and it will fallback
-              // to not passing the callback if the first call fails.
-              try {
-                target[name](...args, makeCallback({
-                  resolve,
-                  reject
-                }, metadata));
-              } catch (cbError) {
-                console.warn(`${name} API method doesn't seem to support the callback parameter, ` + "falling back to call it without a callback: ", cbError);
-                target[name](...args); // Update the API method metadata, so that the next API calls will not try to
-                // use the unsupported callback anymore.
-
-                metadata.fallbackToNoCallback = false;
-                metadata.noCallback = true;
-                resolve();
-              }
-            } else if (metadata.noCallback) {
-              target[name](...args);
-              resolve();
-            } else {
-              target[name](...args, makeCallback({
-                resolve,
-                reject
-              }, metadata));
-            }
-          });
-        };
-      };
-      /**
-       * Wraps an existing method of the target object, so that calls to it are
-       * intercepted by the given wrapper function. The wrapper function receives,
-       * as its first argument, the original `target` object, followed by each of
-       * the arguments passed to the original method.
-       *
-       * @param {object} target
-       *        The original target object that the wrapped method belongs to.
-       * @param {function} method
-       *        The method being wrapped. This is used as the target of the Proxy
-       *        object which is created to wrap the method.
-       * @param {function} wrapper
-       *        The wrapper function which is called in place of a direct invocation
-       *        of the wrapped method.
-       *
-       * @returns {Proxy<function>}
-       *        A Proxy object for the given method, which invokes the given wrapper
-       *        method in its place.
-       */
-
-
-      const wrapMethod = (target, method, wrapper) => {
-        return new Proxy(method, {
-          apply(targetMethod, thisObj, args) {
-            return wrapper.call(thisObj, target, ...args);
-          }
-
-        });
-      };
-
-      let hasOwnProperty = Function.call.bind(Object.prototype.hasOwnProperty);
-      /**
-       * Wraps an object in a Proxy which intercepts and wraps certain methods
-       * based on the given `wrappers` and `metadata` objects.
-       *
-       * @param {object} target
-       *        The target object to wrap.
-       *
-       * @param {object} [wrappers = {}]
-       *        An object tree containing wrapper functions for special cases. Any
-       *        function present in this object tree is called in place of the
-       *        method in the same location in the `target` object tree. These
-       *        wrapper methods are invoked as described in {@see wrapMethod}.
-       *
-       * @param {object} [metadata = {}]
-       *        An object tree containing metadata used to automatically generate
-       *        Promise-based wrapper functions for asynchronous. Any function in
-       *        the `target` object tree which has a corresponding metadata object
-       *        in the same location in the `metadata` tree is replaced with an
-       *        automatically-generated wrapper function, as described in
-       *        {@see wrapAsyncFunction}
-       *
-       * @returns {Proxy<object>}
-       */
-
-      const wrapObject = (target, wrappers = {}, metadata = {}) => {
-        let cache = Object.create(null);
-        let handlers = {
-          has(proxyTarget, prop) {
-            return prop in target || prop in cache;
-          },
-
-          get(proxyTarget, prop, receiver) {
-            if (prop in cache) {
-              return cache[prop];
-            }
-
-            if (!(prop in target)) {
-              return undefined;
-            }
-
-            let value = target[prop];
-
-            if (typeof value === "function") {
-              // This is a method on the underlying object. Check if we need to do
-              // any wrapping.
-              if (typeof wrappers[prop] === "function") {
-                // We have a special-case wrapper for this method.
-                value = wrapMethod(target, target[prop], wrappers[prop]);
-              } else if (hasOwnProperty(metadata, prop)) {
-                // This is an async method that we have metadata for. Create a
-                // Promise wrapper for it.
-                let wrapper = wrapAsyncFunction(prop, metadata[prop]);
-                value = wrapMethod(target, target[prop], wrapper);
-              } else {
-                // This is a method that we don't know or care about. Return the
-                // original method, bound to the underlying object.
-                value = value.bind(target);
-              }
-            } else if (typeof value === "object" && value !== null && (hasOwnProperty(wrappers, prop) || hasOwnProperty(metadata, prop))) {
-              // This is an object that we need to do some wrapping for the children
-              // of. Create a sub-object wrapper for it with the appropriate child
-              // metadata.
-              value = wrapObject(value, wrappers[prop], metadata[prop]);
-            } else if (hasOwnProperty(metadata, "*")) {
-              // Wrap all properties in * namespace.
-              value = wrapObject(value, wrappers[prop], metadata["*"]);
-            } else {
-              // We don't need to do any wrapping for this property,
-              // so just forward all access to the underlying object.
-              Object.defineProperty(cache, prop, {
-                configurable: true,
-                enumerable: true,
-
-                get() {
-                  return target[prop];
-                },
-
-                set(value) {
-                  target[prop] = value;
-                }
-
-              });
-              return value;
-            }
-
-            cache[prop] = value;
-            return value;
-          },
-
-          set(proxyTarget, prop, value, receiver) {
-            if (prop in cache) {
-              cache[prop] = value;
-            } else {
-              target[prop] = value;
-            }
-
-            return true;
-          },
-
-          defineProperty(proxyTarget, prop, desc) {
-            return Reflect.defineProperty(cache, prop, desc);
-          },
-
-          deleteProperty(proxyTarget, prop) {
-            return Reflect.deleteProperty(cache, prop);
-          }
-
-        }; // Per contract of the Proxy API, the "get" proxy handler must return the
-        // original value of the target if that value is declared read-only and
-        // non-configurable. For this reason, we create an object with the
-        // prototype set to `target` instead of using `target` directly.
-        // Otherwise we cannot return a custom object for APIs that
-        // are declared read-only and non-configurable, such as `chrome.devtools`.
-        //
-        // The proxy handlers themselves will still use the original `target`
-        // instead of the `proxyTarget`, so that the methods and properties are
-        // dereferenced via the original targets.
-
-        let proxyTarget = Object.create(target);
-        return new Proxy(proxyTarget, handlers);
-      };
-      /**
-       * Creates a set of wrapper functions for an event object, which handles
-       * wrapping of listener functions that those messages are passed.
-       *
-       * A single wrapper is created for each listener function, and stored in a
-       * map. Subsequent calls to `addListener`, `hasListener`, or `removeListener`
-       * retrieve the original wrapper, so that  attempts to remove a
-       * previously-added listener work as expected.
-       *
-       * @param {DefaultWeakMap<function, function>} wrapperMap
-       *        A DefaultWeakMap object which will create the appropriate wrapper
-       *        for a given listener function when one does not exist, and retrieve
-       *        an existing one when it does.
-       *
-       * @returns {object}
-       */
-
-
-      const wrapEvent = wrapperMap => ({
-        addListener(target, listener, ...args) {
-          target.addListener(wrapperMap.get(listener), ...args);
-        },
-
-        hasListener(target, listener) {
-          return target.hasListener(wrapperMap.get(listener));
-        },
-
-        removeListener(target, listener) {
-          target.removeListener(wrapperMap.get(listener));
-        }
-
-      }); // Keep track if the deprecation warning has been logged at least once.
-
-
-      let loggedSendResponseDeprecationWarning = false;
-      const onMessageWrappers = new DefaultWeakMap(listener => {
-        if (typeof listener !== "function") {
-          return listener;
-        }
-        /**
-         * Wraps a message listener function so that it may send responses based on
-         * its return value, rather than by returning a sentinel value and calling a
-         * callback. If the listener function returns a Promise, the response is
-         * sent when the promise either resolves or rejects.
-         *
-         * @param {*} message
-         *        The message sent by the other end of the channel.
-         * @param {object} sender
-         *        Details about the sender of the message.
-         * @param {function(*)} sendResponse
-         *        A callback which, when called with an arbitrary argument, sends
-         *        that value as a response.
-         * @returns {boolean}
-         *        True if the wrapped listener returned a Promise, which will later
-         *        yield a response. False otherwise.
-         */
-
-
-        return function onMessage(message, sender, sendResponse) {
-          let didCallSendResponse = false;
-          let wrappedSendResponse;
-          let sendResponsePromise = new Promise(resolve => {
-            wrappedSendResponse = function (response) {
-              if (!loggedSendResponseDeprecationWarning) {
-                console.warn(SEND_RESPONSE_DEPRECATION_WARNING, new Error().stack);
-                loggedSendResponseDeprecationWarning = true;
-              }
-
-              didCallSendResponse = true;
-              resolve(response);
-            };
-          });
-          let result;
-
-          try {
-            result = listener(message, sender, wrappedSendResponse);
-          } catch (err) {
-            result = Promise.reject(err);
-          }
-
-          const isResultThenable = result !== true && isThenable(result); // If the listener didn't returned true or a Promise, or called
-          // wrappedSendResponse synchronously, we can exit earlier
-          // because there will be no response sent from this listener.
-
-          if (result !== true && !isResultThenable && !didCallSendResponse) {
-            return false;
-          } // A small helper to send the message if the promise resolves
-          // and an error if the promise rejects (a wrapped sendMessage has
-          // to translate the message into a resolved promise or a rejected
-          // promise).
-
-
-          const sendPromisedResult = promise => {
-            promise.then(msg => {
-              // send the message value.
-              sendResponse(msg);
-            }, error => {
-              // Send a JSON representation of the error if the rejected value
-              // is an instance of error, or the object itself otherwise.
-              let message;
-
-              if (error && (error instanceof Error || typeof error.message === "string")) {
-                message = error.message;
-              } else {
-                message = "An unexpected error occurred";
-              }
-
-              sendResponse({
-                __mozWebExtensionPolyfillReject__: true,
-                message
-              });
-            }).catch(err => {
-              // Print an error on the console if unable to send the response.
-              console.error("Failed to send onMessage rejected reply", err);
-            });
-          }; // If the listener returned a Promise, send the resolved value as a
-          // result, otherwise wait the promise related to the wrappedSendResponse
-          // callback to resolve and send it as a response.
-
-
-          if (isResultThenable) {
-            sendPromisedResult(result);
-          } else {
-            sendPromisedResult(sendResponsePromise);
-          } // Let Chrome know that the listener is replying.
-
-
-          return true;
-        };
-      });
-
-      const wrappedSendMessageCallback = ({
-        reject,
-        resolve
-      }, reply) => {
-        if (extensionAPIs.runtime.lastError) {
-          // Detect when none of the listeners replied to the sendMessage call and resolve
-          // the promise to undefined as in Firefox.
-          // See https://github.com/mozilla/webextension-polyfill/issues/130
-          if (extensionAPIs.runtime.lastError.message === CHROME_SEND_MESSAGE_CALLBACK_NO_RESPONSE_MESSAGE) {
-            resolve();
-          } else {
-            reject(extensionAPIs.runtime.lastError);
-          }
-        } else if (reply && reply.__mozWebExtensionPolyfillReject__) {
-          // Convert back the JSON representation of the error into
-          // an Error instance.
-          reject(new Error(reply.message));
-        } else {
-          resolve(reply);
-        }
-      };
-
-      const wrappedSendMessage = (name, metadata, apiNamespaceObj, ...args) => {
-        if (args.length < metadata.minArgs) {
-          throw new Error(`Expected at least ${metadata.minArgs} ${pluralizeArguments(metadata.minArgs)} for ${name}(), got ${args.length}`);
-        }
-
-        if (args.length > metadata.maxArgs) {
-          throw new Error(`Expected at most ${metadata.maxArgs} ${pluralizeArguments(metadata.maxArgs)} for ${name}(), got ${args.length}`);
-        }
-
-        return new Promise((resolve, reject) => {
-          const wrappedCb = wrappedSendMessageCallback.bind(null, {
-            resolve,
-            reject
-          });
-          args.push(wrappedCb);
-          apiNamespaceObj.sendMessage(...args);
-        });
-      };
-
-      const staticWrappers = {
-        runtime: {
-          onMessage: wrapEvent(onMessageWrappers),
-          onMessageExternal: wrapEvent(onMessageWrappers),
-          sendMessage: wrappedSendMessage.bind(null, "sendMessage", {
-            minArgs: 1,
-            maxArgs: 3
-          })
-        },
-        tabs: {
-          sendMessage: wrappedSendMessage.bind(null, "sendMessage", {
-            minArgs: 2,
-            maxArgs: 3
-          })
-        }
-      };
-      const settingMetadata = {
-        clear: {
-          minArgs: 1,
-          maxArgs: 1
-        },
-        get: {
-          minArgs: 1,
-          maxArgs: 1
-        },
-        set: {
-          minArgs: 1,
-          maxArgs: 1
-        }
-      };
-      apiMetadata.privacy = {
-        network: {
-          "*": settingMetadata
-        },
-        services: {
-          "*": settingMetadata
-        },
-        websites: {
-          "*": settingMetadata
-        }
-      };
-      return wrapObject(extensionAPIs, staticWrappers, apiMetadata);
+/**
+ * Creates a deep copy of a NotebookCell object
+ */
+function deepCopyNotebookCell(cell) {
+    return {
+        id: cell.id,
+        type: cell.type,
+        content: cell.content
     };
+}
+/**
+ * Creates a deep copy of an Operation object
+ */
+function deepCopyOperation(operation) {
+    const baseCopy = Object.assign({}, operation);
+    switch (operation.type) {
+        case 'create':
+            return Object.assign(Object.assign({}, baseCopy), { contentArray: [...operation.contentArray], content: operation.content, cellType: operation.cellType, cellId: operation.cellId, position: operation.position });
+        case 'edit':
+            return Object.assign(Object.assign({}, baseCopy), { contentArray: [...operation.contentArray], content: operation.content, originalContent: operation.originalContent });
+        case 'delete':
+            return Object.assign(Object.assign({}, baseCopy), { originalContent: operation.originalContent });
+        case 'diff':
+            return Object.assign(Object.assign({}, baseCopy), { originalContent: operation.originalContent, content: operation.content });
+    }
+}
+/**
+ * Creates a deep copy of a Pending<Operation> object
+ */
+function deepCopyPendingOperation(pending) {
+    return Object.assign(Object.assign({}, deepCopyOperation(pending)), { pending: pending.pending, accept: pending.accept, reject: pending.reject });
+}
+/**
+ * Creates a deep copy of a StreamingState object
+ */
+function deepCopyStreamingState(state) {
+    return {
+        buffer: state.buffer,
+        textContent: state.textContent,
+        appliedOperations: new Map(Array.from(state.appliedOperations.entries()).map(([key, value]) => [key, deepCopyPendingOperation(value)])),
+        currentOperations: new Map(Array.from(state.currentOperations.entries()).map(([key, value]) => [key, deepCopyOperation(value)])),
+        isCodeBlock: state.isCodeBlock,
+        fullResponse: state.fullResponse,
+        originalContent: state.originalContent.map(deepCopyNotebookCell)
+    };
+}
 
-    if (typeof chrome != "object" || !chrome || !chrome.runtime || !chrome.runtime.id) {
-      throw new Error("This script should only be loaded in a browser extension.");
-    } // The build process adds a UMD wrapper around this file, which makes the
-    // `module` variable available.
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/utils/errors.ts":
+/*!*****************************!*\
+  !*** ./src/utils/errors.ts ***!
+  \*****************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AIServiceError: () => (/* reexport safe */ _supabase_functions_shared_errors__WEBPACK_IMPORTED_MODULE_0__.AIServiceError),
+/* harmony export */   ErrorType: () => (/* reexport safe */ _supabase_functions_shared_errors__WEBPACK_IMPORTED_MODULE_0__.ErrorType),
+/* harmony export */   isAIServiceError: () => (/* reexport safe */ _supabase_functions_shared_errors__WEBPACK_IMPORTED_MODULE_0__.isAIServiceError)
+/* harmony export */ });
+/* harmony import */ var _supabase_functions_shared_errors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../supabase/functions/_shared/errors */ "./supabase/functions/_shared/errors.ts");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
 
 
-    module.exports = wrapAPIs(chrome);
-  } else {
-    module.exports = browser;
-  }
-});
-//# sourceMappingURL=browser-polyfill.js.map
 
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/utils/useAuthState.tsx":
+/*!************************************!*\
+  !*** ./src/utils/useAuthState.tsx ***!
+  \************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useAuthState: () => (/* binding */ useAuthState)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var _a;
+_a = __webpack_require__.$Refresh$.signature();
+
+const DEFAULT_AUTH_STATE = {
+    user: null,
+    session: null,
+    subscriptionPlan: 'free',
+    subscriptionDetails: null
+};
+const useAuthState = () => {
+    _a();
+    const [authState, setAuthState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(DEFAULT_AUTH_STATE);
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+        // Listen for auth state changes
+        const authListener = (message) => {
+            if (message.type === 'AUTH_STATE_CHANGED') {
+                setAuthState(message.payload);
+            }
+        };
+        chrome.runtime.onMessage.addListener(authListener);
+        // Cleanup listener
+        return () => {
+            chrome.runtime.onMessage.removeListener(authListener);
+        };
+    }, []);
+    // Function to get current auth state
+    function refreshAuthState(global = false) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (global) {
+                    const response = yield chrome.runtime.sendMessage({
+                        type: 'SUPABASE_REQUEST',
+                        payload: {
+                            operation: 'REFRESH_AUTH_STATE'
+                        }
+                    });
+                    if (response.data) {
+                        setAuthState(response.data);
+                    }
+                    else {
+                        setAuthState(DEFAULT_AUTH_STATE);
+                    }
+                    return;
+                }
+                const response = yield chrome.runtime.sendMessage({
+                    type: 'SUPABASE_REQUEST',
+                    payload: {
+                        operation: 'GET_AUTH_STATE'
+                    }
+                });
+                if (response.data) {
+                    setAuthState(response.data);
+                }
+                else {
+                    setAuthState(DEFAULT_AUTH_STATE);
+                }
+            }
+            catch (error) {
+                console.error('Error getting auth state:', error);
+                setAuthState(DEFAULT_AUTH_STATE);
+                throw error;
+            }
+        });
+    }
+    return {
+        authState,
+        refreshAuthState
+    };
+};
+_a(useAuthState, "BJ1fApoOMch96qSfhlsikNZtES0=");
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./supabase/functions/_shared/cors.ts":
+/*!********************************************!*\
+  !*** ./supabase/functions/_shared/cors.ts ***!
+  \********************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   corsHeaders: () => (/* binding */ corsHeaders)
+/* harmony export */ });
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, X-Messages-Remaining',
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, DELETE"
+};
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./supabase/functions/_shared/errors.ts":
+/*!**********************************************!*\
+  !*** ./supabase/functions/_shared/errors.ts ***!
+  \**********************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AIServiceError: () => (/* binding */ AIServiceError),
+/* harmony export */   ErrorType: () => (/* binding */ ErrorType),
+/* harmony export */   createErrorResponse: () => (/* binding */ createErrorResponse),
+/* harmony export */   errorStatusCodes: () => (/* binding */ errorStatusCodes),
+/* harmony export */   isAIServiceError: () => (/* binding */ isAIServiceError)
+/* harmony export */ });
+/* harmony import */ var _cors_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cors.ts */ "./supabase/functions/_shared/cors.ts");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+
+var ErrorType;
+(function (ErrorType) {
+    ErrorType["AUTHENTICATION"] = "AUTHENTICATION";
+    ErrorType["QUOTA_EXCEEDED"] = "QUOTA_EXCEEDED";
+    ErrorType["MODEL_ACCESS"] = "MODEL_ACCESS";
+    ErrorType["RATE_LIMIT"] = "RATE_LIMIT";
+    ErrorType["NETWORK"] = "NETWORK";
+    ErrorType["SERVER"] = "SERVER";
+    ErrorType["UNKNOWN"] = "UNKNOWN";
+})(ErrorType || (ErrorType = {}));
+// Error status codes
+const errorStatusCodes = {
+    [ErrorType.AUTHENTICATION]: 401,
+    [ErrorType.QUOTA_EXCEEDED]: 429,
+    [ErrorType.MODEL_ACCESS]: 403,
+    [ErrorType.RATE_LIMIT]: 429,
+    [ErrorType.NETWORK]: 500,
+    [ErrorType.SERVER]: 500,
+    [ErrorType.UNKNOWN]: 500
+};
+class AIServiceError extends Error {
+    constructor(error) {
+        super(error.message);
+        this.error = error;
+        this.name = 'AIServiceError';
+    }
+}
+function isAIServiceError(error) {
+    return error instanceof AIServiceError;
+}
+function createErrorResponse(errorType, message, details) {
+    return new Response(JSON.stringify({
+        error: {
+            type: errorType,
+            message,
+            details
+        }
+    }), {
+        status: errorStatusCodes[errorType],
+        headers: _cors_ts__WEBPACK_IMPORTED_MODULE_0__.corsHeaders
+    });
+}
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
 
 /***/ }),
 
@@ -50957,6 +51990,2083 @@ function assert(bool, actual, expected, operator, defaultMessage, userMessage) {
         )
   }
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/diff/lib/index.mjs":
+/*!*****************************************!*\
+  !*** ./node_modules/diff/lib/index.mjs ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Diff: () => (/* binding */ Diff),
+/* harmony export */   applyPatch: () => (/* binding */ applyPatch),
+/* harmony export */   applyPatches: () => (/* binding */ applyPatches),
+/* harmony export */   canonicalize: () => (/* binding */ canonicalize),
+/* harmony export */   convertChangesToDMP: () => (/* binding */ convertChangesToDMP),
+/* harmony export */   convertChangesToXML: () => (/* binding */ convertChangesToXML),
+/* harmony export */   createPatch: () => (/* binding */ createPatch),
+/* harmony export */   createTwoFilesPatch: () => (/* binding */ createTwoFilesPatch),
+/* harmony export */   diffArrays: () => (/* binding */ diffArrays),
+/* harmony export */   diffChars: () => (/* binding */ diffChars),
+/* harmony export */   diffCss: () => (/* binding */ diffCss),
+/* harmony export */   diffJson: () => (/* binding */ diffJson),
+/* harmony export */   diffLines: () => (/* binding */ diffLines),
+/* harmony export */   diffSentences: () => (/* binding */ diffSentences),
+/* harmony export */   diffTrimmedLines: () => (/* binding */ diffTrimmedLines),
+/* harmony export */   diffWords: () => (/* binding */ diffWords),
+/* harmony export */   diffWordsWithSpace: () => (/* binding */ diffWordsWithSpace),
+/* harmony export */   formatPatch: () => (/* binding */ formatPatch),
+/* harmony export */   merge: () => (/* binding */ merge),
+/* harmony export */   parsePatch: () => (/* binding */ parsePatch),
+/* harmony export */   reversePatch: () => (/* binding */ reversePatch),
+/* harmony export */   structuredPatch: () => (/* binding */ structuredPatch)
+/* harmony export */ });
+function Diff() {}
+Diff.prototype = {
+  diff: function diff(oldString, newString) {
+    var _options$timeout;
+    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    var callback = options.callback;
+    if (typeof options === 'function') {
+      callback = options;
+      options = {};
+    }
+    var self = this;
+    function done(value) {
+      value = self.postProcess(value, options);
+      if (callback) {
+        setTimeout(function () {
+          callback(value);
+        }, 0);
+        return true;
+      } else {
+        return value;
+      }
+    }
+
+    // Allow subclasses to massage the input prior to running
+    oldString = this.castInput(oldString, options);
+    newString = this.castInput(newString, options);
+    oldString = this.removeEmpty(this.tokenize(oldString, options));
+    newString = this.removeEmpty(this.tokenize(newString, options));
+    var newLen = newString.length,
+      oldLen = oldString.length;
+    var editLength = 1;
+    var maxEditLength = newLen + oldLen;
+    if (options.maxEditLength != null) {
+      maxEditLength = Math.min(maxEditLength, options.maxEditLength);
+    }
+    var maxExecutionTime = (_options$timeout = options.timeout) !== null && _options$timeout !== void 0 ? _options$timeout : Infinity;
+    var abortAfterTimestamp = Date.now() + maxExecutionTime;
+    var bestPath = [{
+      oldPos: -1,
+      lastComponent: undefined
+    }];
+
+    // Seed editLength = 0, i.e. the content starts with the same values
+    var newPos = this.extractCommon(bestPath[0], newString, oldString, 0, options);
+    if (bestPath[0].oldPos + 1 >= oldLen && newPos + 1 >= newLen) {
+      // Identity per the equality and tokenizer
+      return done(buildValues(self, bestPath[0].lastComponent, newString, oldString, self.useLongestToken));
+    }
+
+    // Once we hit the right edge of the edit graph on some diagonal k, we can
+    // definitely reach the end of the edit graph in no more than k edits, so
+    // there's no point in considering any moves to diagonal k+1 any more (from
+    // which we're guaranteed to need at least k+1 more edits).
+    // Similarly, once we've reached the bottom of the edit graph, there's no
+    // point considering moves to lower diagonals.
+    // We record this fact by setting minDiagonalToConsider and
+    // maxDiagonalToConsider to some finite value once we've hit the edge of
+    // the edit graph.
+    // This optimization is not faithful to the original algorithm presented in
+    // Myers's paper, which instead pointlessly extends D-paths off the end of
+    // the edit graph - see page 7 of Myers's paper which notes this point
+    // explicitly and illustrates it with a diagram. This has major performance
+    // implications for some common scenarios. For instance, to compute a diff
+    // where the new text simply appends d characters on the end of the
+    // original text of length n, the true Myers algorithm will take O(n+d^2)
+    // time while this optimization needs only O(n+d) time.
+    var minDiagonalToConsider = -Infinity,
+      maxDiagonalToConsider = Infinity;
+
+    // Main worker method. checks all permutations of a given edit length for acceptance.
+    function execEditLength() {
+      for (var diagonalPath = Math.max(minDiagonalToConsider, -editLength); diagonalPath <= Math.min(maxDiagonalToConsider, editLength); diagonalPath += 2) {
+        var basePath = void 0;
+        var removePath = bestPath[diagonalPath - 1],
+          addPath = bestPath[diagonalPath + 1];
+        if (removePath) {
+          // No one else is going to attempt to use this value, clear it
+          bestPath[diagonalPath - 1] = undefined;
+        }
+        var canAdd = false;
+        if (addPath) {
+          // what newPos will be after we do an insertion:
+          var addPathNewPos = addPath.oldPos - diagonalPath;
+          canAdd = addPath && 0 <= addPathNewPos && addPathNewPos < newLen;
+        }
+        var canRemove = removePath && removePath.oldPos + 1 < oldLen;
+        if (!canAdd && !canRemove) {
+          // If this path is a terminal then prune
+          bestPath[diagonalPath] = undefined;
+          continue;
+        }
+
+        // Select the diagonal that we want to branch from. We select the prior
+        // path whose position in the old string is the farthest from the origin
+        // and does not pass the bounds of the diff graph
+        if (!canRemove || canAdd && removePath.oldPos < addPath.oldPos) {
+          basePath = self.addToPath(addPath, true, false, 0, options);
+        } else {
+          basePath = self.addToPath(removePath, false, true, 1, options);
+        }
+        newPos = self.extractCommon(basePath, newString, oldString, diagonalPath, options);
+        if (basePath.oldPos + 1 >= oldLen && newPos + 1 >= newLen) {
+          // If we have hit the end of both strings, then we are done
+          return done(buildValues(self, basePath.lastComponent, newString, oldString, self.useLongestToken));
+        } else {
+          bestPath[diagonalPath] = basePath;
+          if (basePath.oldPos + 1 >= oldLen) {
+            maxDiagonalToConsider = Math.min(maxDiagonalToConsider, diagonalPath - 1);
+          }
+          if (newPos + 1 >= newLen) {
+            minDiagonalToConsider = Math.max(minDiagonalToConsider, diagonalPath + 1);
+          }
+        }
+      }
+      editLength++;
+    }
+
+    // Performs the length of edit iteration. Is a bit fugly as this has to support the
+    // sync and async mode which is never fun. Loops over execEditLength until a value
+    // is produced, or until the edit length exceeds options.maxEditLength (if given),
+    // in which case it will return undefined.
+    if (callback) {
+      (function exec() {
+        setTimeout(function () {
+          if (editLength > maxEditLength || Date.now() > abortAfterTimestamp) {
+            return callback();
+          }
+          if (!execEditLength()) {
+            exec();
+          }
+        }, 0);
+      })();
+    } else {
+      while (editLength <= maxEditLength && Date.now() <= abortAfterTimestamp) {
+        var ret = execEditLength();
+        if (ret) {
+          return ret;
+        }
+      }
+    }
+  },
+  addToPath: function addToPath(path, added, removed, oldPosInc, options) {
+    var last = path.lastComponent;
+    if (last && !options.oneChangePerToken && last.added === added && last.removed === removed) {
+      return {
+        oldPos: path.oldPos + oldPosInc,
+        lastComponent: {
+          count: last.count + 1,
+          added: added,
+          removed: removed,
+          previousComponent: last.previousComponent
+        }
+      };
+    } else {
+      return {
+        oldPos: path.oldPos + oldPosInc,
+        lastComponent: {
+          count: 1,
+          added: added,
+          removed: removed,
+          previousComponent: last
+        }
+      };
+    }
+  },
+  extractCommon: function extractCommon(basePath, newString, oldString, diagonalPath, options) {
+    var newLen = newString.length,
+      oldLen = oldString.length,
+      oldPos = basePath.oldPos,
+      newPos = oldPos - diagonalPath,
+      commonCount = 0;
+    while (newPos + 1 < newLen && oldPos + 1 < oldLen && this.equals(oldString[oldPos + 1], newString[newPos + 1], options)) {
+      newPos++;
+      oldPos++;
+      commonCount++;
+      if (options.oneChangePerToken) {
+        basePath.lastComponent = {
+          count: 1,
+          previousComponent: basePath.lastComponent,
+          added: false,
+          removed: false
+        };
+      }
+    }
+    if (commonCount && !options.oneChangePerToken) {
+      basePath.lastComponent = {
+        count: commonCount,
+        previousComponent: basePath.lastComponent,
+        added: false,
+        removed: false
+      };
+    }
+    basePath.oldPos = oldPos;
+    return newPos;
+  },
+  equals: function equals(left, right, options) {
+    if (options.comparator) {
+      return options.comparator(left, right);
+    } else {
+      return left === right || options.ignoreCase && left.toLowerCase() === right.toLowerCase();
+    }
+  },
+  removeEmpty: function removeEmpty(array) {
+    var ret = [];
+    for (var i = 0; i < array.length; i++) {
+      if (array[i]) {
+        ret.push(array[i]);
+      }
+    }
+    return ret;
+  },
+  castInput: function castInput(value) {
+    return value;
+  },
+  tokenize: function tokenize(value) {
+    return Array.from(value);
+  },
+  join: function join(chars) {
+    return chars.join('');
+  },
+  postProcess: function postProcess(changeObjects) {
+    return changeObjects;
+  }
+};
+function buildValues(diff, lastComponent, newString, oldString, useLongestToken) {
+  // First we convert our linked list of components in reverse order to an
+  // array in the right order:
+  var components = [];
+  var nextComponent;
+  while (lastComponent) {
+    components.push(lastComponent);
+    nextComponent = lastComponent.previousComponent;
+    delete lastComponent.previousComponent;
+    lastComponent = nextComponent;
+  }
+  components.reverse();
+  var componentPos = 0,
+    componentLen = components.length,
+    newPos = 0,
+    oldPos = 0;
+  for (; componentPos < componentLen; componentPos++) {
+    var component = components[componentPos];
+    if (!component.removed) {
+      if (!component.added && useLongestToken) {
+        var value = newString.slice(newPos, newPos + component.count);
+        value = value.map(function (value, i) {
+          var oldValue = oldString[oldPos + i];
+          return oldValue.length > value.length ? oldValue : value;
+        });
+        component.value = diff.join(value);
+      } else {
+        component.value = diff.join(newString.slice(newPos, newPos + component.count));
+      }
+      newPos += component.count;
+
+      // Common case
+      if (!component.added) {
+        oldPos += component.count;
+      }
+    } else {
+      component.value = diff.join(oldString.slice(oldPos, oldPos + component.count));
+      oldPos += component.count;
+    }
+  }
+  return components;
+}
+
+var characterDiff = new Diff();
+function diffChars(oldStr, newStr, options) {
+  return characterDiff.diff(oldStr, newStr, options);
+}
+
+function longestCommonPrefix(str1, str2) {
+  var i;
+  for (i = 0; i < str1.length && i < str2.length; i++) {
+    if (str1[i] != str2[i]) {
+      return str1.slice(0, i);
+    }
+  }
+  return str1.slice(0, i);
+}
+function longestCommonSuffix(str1, str2) {
+  var i;
+
+  // Unlike longestCommonPrefix, we need a special case to handle all scenarios
+  // where we return the empty string since str1.slice(-0) will return the
+  // entire string.
+  if (!str1 || !str2 || str1[str1.length - 1] != str2[str2.length - 1]) {
+    return '';
+  }
+  for (i = 0; i < str1.length && i < str2.length; i++) {
+    if (str1[str1.length - (i + 1)] != str2[str2.length - (i + 1)]) {
+      return str1.slice(-i);
+    }
+  }
+  return str1.slice(-i);
+}
+function replacePrefix(string, oldPrefix, newPrefix) {
+  if (string.slice(0, oldPrefix.length) != oldPrefix) {
+    throw Error("string ".concat(JSON.stringify(string), " doesn't start with prefix ").concat(JSON.stringify(oldPrefix), "; this is a bug"));
+  }
+  return newPrefix + string.slice(oldPrefix.length);
+}
+function replaceSuffix(string, oldSuffix, newSuffix) {
+  if (!oldSuffix) {
+    return string + newSuffix;
+  }
+  if (string.slice(-oldSuffix.length) != oldSuffix) {
+    throw Error("string ".concat(JSON.stringify(string), " doesn't end with suffix ").concat(JSON.stringify(oldSuffix), "; this is a bug"));
+  }
+  return string.slice(0, -oldSuffix.length) + newSuffix;
+}
+function removePrefix(string, oldPrefix) {
+  return replacePrefix(string, oldPrefix, '');
+}
+function removeSuffix(string, oldSuffix) {
+  return replaceSuffix(string, oldSuffix, '');
+}
+function maximumOverlap(string1, string2) {
+  return string2.slice(0, overlapCount(string1, string2));
+}
+
+// Nicked from https://stackoverflow.com/a/60422853/1709587
+function overlapCount(a, b) {
+  // Deal with cases where the strings differ in length
+  var startA = 0;
+  if (a.length > b.length) {
+    startA = a.length - b.length;
+  }
+  var endB = b.length;
+  if (a.length < b.length) {
+    endB = a.length;
+  }
+  // Create a back-reference for each index
+  //   that should be followed in case of a mismatch.
+  //   We only need B to make these references:
+  var map = Array(endB);
+  var k = 0; // Index that lags behind j
+  map[0] = 0;
+  for (var j = 1; j < endB; j++) {
+    if (b[j] == b[k]) {
+      map[j] = map[k]; // skip over the same character (optional optimisation)
+    } else {
+      map[j] = k;
+    }
+    while (k > 0 && b[j] != b[k]) {
+      k = map[k];
+    }
+    if (b[j] == b[k]) {
+      k++;
+    }
+  }
+  // Phase 2: use these references while iterating over A
+  k = 0;
+  for (var i = startA; i < a.length; i++) {
+    while (k > 0 && a[i] != b[k]) {
+      k = map[k];
+    }
+    if (a[i] == b[k]) {
+      k++;
+    }
+  }
+  return k;
+}
+
+/**
+ * Returns true if the string consistently uses Windows line endings.
+ */
+function hasOnlyWinLineEndings(string) {
+  return string.includes('\r\n') && !string.startsWith('\n') && !string.match(/[^\r]\n/);
+}
+
+/**
+ * Returns true if the string consistently uses Unix line endings.
+ */
+function hasOnlyUnixLineEndings(string) {
+  return !string.includes('\r\n') && string.includes('\n');
+}
+
+// Based on https://en.wikipedia.org/wiki/Latin_script_in_Unicode
+//
+// Ranges and exceptions:
+// Latin-1 Supplement, 0080–00FF
+//  - U+00D7  × Multiplication sign
+//  - U+00F7  ÷ Division sign
+// Latin Extended-A, 0100–017F
+// Latin Extended-B, 0180–024F
+// IPA Extensions, 0250–02AF
+// Spacing Modifier Letters, 02B0–02FF
+//  - U+02C7  ˇ &#711;  Caron
+//  - U+02D8  ˘ &#728;  Breve
+//  - U+02D9  ˙ &#729;  Dot Above
+//  - U+02DA  ˚ &#730;  Ring Above
+//  - U+02DB  ˛ &#731;  Ogonek
+//  - U+02DC  ˜ &#732;  Small Tilde
+//  - U+02DD  ˝ &#733;  Double Acute Accent
+// Latin Extended Additional, 1E00–1EFF
+var extendedWordChars = "a-zA-Z0-9_\\u{C0}-\\u{FF}\\u{D8}-\\u{F6}\\u{F8}-\\u{2C6}\\u{2C8}-\\u{2D7}\\u{2DE}-\\u{2FF}\\u{1E00}-\\u{1EFF}";
+
+// Each token is one of the following:
+// - A punctuation mark plus the surrounding whitespace
+// - A word plus the surrounding whitespace
+// - Pure whitespace (but only in the special case where this the entire text
+//   is just whitespace)
+//
+// We have to include surrounding whitespace in the tokens because the two
+// alternative approaches produce horribly broken results:
+// * If we just discard the whitespace, we can't fully reproduce the original
+//   text from the sequence of tokens and any attempt to render the diff will
+//   get the whitespace wrong.
+// * If we have separate tokens for whitespace, then in a typical text every
+//   second token will be a single space character. But this often results in
+//   the optimal diff between two texts being a perverse one that preserves
+//   the spaces between words but deletes and reinserts actual common words.
+//   See https://github.com/kpdecker/jsdiff/issues/160#issuecomment-1866099640
+//   for an example.
+//
+// Keeping the surrounding whitespace of course has implications for .equals
+// and .join, not just .tokenize.
+
+// This regex does NOT fully implement the tokenization rules described above.
+// Instead, it gives runs of whitespace their own "token". The tokenize method
+// then handles stitching whitespace tokens onto adjacent word or punctuation
+// tokens.
+var tokenizeIncludingWhitespace = new RegExp("[".concat(extendedWordChars, "]+|\\s+|[^").concat(extendedWordChars, "]"), 'ug');
+var wordDiff = new Diff();
+wordDiff.equals = function (left, right, options) {
+  if (options.ignoreCase) {
+    left = left.toLowerCase();
+    right = right.toLowerCase();
+  }
+  return left.trim() === right.trim();
+};
+wordDiff.tokenize = function (value) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var parts;
+  if (options.intlSegmenter) {
+    if (options.intlSegmenter.resolvedOptions().granularity != 'word') {
+      throw new Error('The segmenter passed must have a granularity of "word"');
+    }
+    parts = Array.from(options.intlSegmenter.segment(value), function (segment) {
+      return segment.segment;
+    });
+  } else {
+    parts = value.match(tokenizeIncludingWhitespace) || [];
+  }
+  var tokens = [];
+  var prevPart = null;
+  parts.forEach(function (part) {
+    if (/\s/.test(part)) {
+      if (prevPart == null) {
+        tokens.push(part);
+      } else {
+        tokens.push(tokens.pop() + part);
+      }
+    } else if (/\s/.test(prevPart)) {
+      if (tokens[tokens.length - 1] == prevPart) {
+        tokens.push(tokens.pop() + part);
+      } else {
+        tokens.push(prevPart + part);
+      }
+    } else {
+      tokens.push(part);
+    }
+    prevPart = part;
+  });
+  return tokens;
+};
+wordDiff.join = function (tokens) {
+  // Tokens being joined here will always have appeared consecutively in the
+  // same text, so we can simply strip off the leading whitespace from all the
+  // tokens except the first (and except any whitespace-only tokens - but such
+  // a token will always be the first and only token anyway) and then join them
+  // and the whitespace around words and punctuation will end up correct.
+  return tokens.map(function (token, i) {
+    if (i == 0) {
+      return token;
+    } else {
+      return token.replace(/^\s+/, '');
+    }
+  }).join('');
+};
+wordDiff.postProcess = function (changes, options) {
+  if (!changes || options.oneChangePerToken) {
+    return changes;
+  }
+  var lastKeep = null;
+  // Change objects representing any insertion or deletion since the last
+  // "keep" change object. There can be at most one of each.
+  var insertion = null;
+  var deletion = null;
+  changes.forEach(function (change) {
+    if (change.added) {
+      insertion = change;
+    } else if (change.removed) {
+      deletion = change;
+    } else {
+      if (insertion || deletion) {
+        // May be false at start of text
+        dedupeWhitespaceInChangeObjects(lastKeep, deletion, insertion, change);
+      }
+      lastKeep = change;
+      insertion = null;
+      deletion = null;
+    }
+  });
+  if (insertion || deletion) {
+    dedupeWhitespaceInChangeObjects(lastKeep, deletion, insertion, null);
+  }
+  return changes;
+};
+function diffWords(oldStr, newStr, options) {
+  // This option has never been documented and never will be (it's clearer to
+  // just call `diffWordsWithSpace` directly if you need that behavior), but
+  // has existed in jsdiff for a long time, so we retain support for it here
+  // for the sake of backwards compatibility.
+  if ((options === null || options === void 0 ? void 0 : options.ignoreWhitespace) != null && !options.ignoreWhitespace) {
+    return diffWordsWithSpace(oldStr, newStr, options);
+  }
+  return wordDiff.diff(oldStr, newStr, options);
+}
+function dedupeWhitespaceInChangeObjects(startKeep, deletion, insertion, endKeep) {
+  // Before returning, we tidy up the leading and trailing whitespace of the
+  // change objects to eliminate cases where trailing whitespace in one object
+  // is repeated as leading whitespace in the next.
+  // Below are examples of the outcomes we want here to explain the code.
+  // I=insert, K=keep, D=delete
+  // 1. diffing 'foo bar baz' vs 'foo baz'
+  //    Prior to cleanup, we have K:'foo ' D:' bar ' K:' baz'
+  //    After cleanup, we want:   K:'foo ' D:'bar ' K:'baz'
+  //
+  // 2. Diffing 'foo bar baz' vs 'foo qux baz'
+  //    Prior to cleanup, we have K:'foo ' D:' bar ' I:' qux ' K:' baz'
+  //    After cleanup, we want K:'foo ' D:'bar' I:'qux' K:' baz'
+  //
+  // 3. Diffing 'foo\nbar baz' vs 'foo baz'
+  //    Prior to cleanup, we have K:'foo ' D:'\nbar ' K:' baz'
+  //    After cleanup, we want K'foo' D:'\nbar' K:' baz'
+  //
+  // 4. Diffing 'foo baz' vs 'foo\nbar baz'
+  //    Prior to cleanup, we have K:'foo\n' I:'\nbar ' K:' baz'
+  //    After cleanup, we ideally want K'foo' I:'\nbar' K:' baz'
+  //    but don't actually manage this currently (the pre-cleanup change
+  //    objects don't contain enough information to make it possible).
+  //
+  // 5. Diffing 'foo   bar baz' vs 'foo  baz'
+  //    Prior to cleanup, we have K:'foo  ' D:'   bar ' K:'  baz'
+  //    After cleanup, we want K:'foo  ' D:' bar ' K:'baz'
+  //
+  // Our handling is unavoidably imperfect in the case where there's a single
+  // indel between keeps and the whitespace has changed. For instance, consider
+  // diffing 'foo\tbar\nbaz' vs 'foo baz'. Unless we create an extra change
+  // object to represent the insertion of the space character (which isn't even
+  // a token), we have no way to avoid losing information about the texts'
+  // original whitespace in the result we return. Still, we do our best to
+  // output something that will look sensible if we e.g. print it with
+  // insertions in green and deletions in red.
+
+  // Between two "keep" change objects (or before the first or after the last
+  // change object), we can have either:
+  // * A "delete" followed by an "insert"
+  // * Just an "insert"
+  // * Just a "delete"
+  // We handle the three cases separately.
+  if (deletion && insertion) {
+    var oldWsPrefix = deletion.value.match(/^\s*/)[0];
+    var oldWsSuffix = deletion.value.match(/\s*$/)[0];
+    var newWsPrefix = insertion.value.match(/^\s*/)[0];
+    var newWsSuffix = insertion.value.match(/\s*$/)[0];
+    if (startKeep) {
+      var commonWsPrefix = longestCommonPrefix(oldWsPrefix, newWsPrefix);
+      startKeep.value = replaceSuffix(startKeep.value, newWsPrefix, commonWsPrefix);
+      deletion.value = removePrefix(deletion.value, commonWsPrefix);
+      insertion.value = removePrefix(insertion.value, commonWsPrefix);
+    }
+    if (endKeep) {
+      var commonWsSuffix = longestCommonSuffix(oldWsSuffix, newWsSuffix);
+      endKeep.value = replacePrefix(endKeep.value, newWsSuffix, commonWsSuffix);
+      deletion.value = removeSuffix(deletion.value, commonWsSuffix);
+      insertion.value = removeSuffix(insertion.value, commonWsSuffix);
+    }
+  } else if (insertion) {
+    // The whitespaces all reflect what was in the new text rather than
+    // the old, so we essentially have no information about whitespace
+    // insertion or deletion. We just want to dedupe the whitespace.
+    // We do that by having each change object keep its trailing
+    // whitespace and deleting duplicate leading whitespace where
+    // present.
+    if (startKeep) {
+      insertion.value = insertion.value.replace(/^\s*/, '');
+    }
+    if (endKeep) {
+      endKeep.value = endKeep.value.replace(/^\s*/, '');
+    }
+    // otherwise we've got a deletion and no insertion
+  } else if (startKeep && endKeep) {
+    var newWsFull = endKeep.value.match(/^\s*/)[0],
+      delWsStart = deletion.value.match(/^\s*/)[0],
+      delWsEnd = deletion.value.match(/\s*$/)[0];
+
+    // Any whitespace that comes straight after startKeep in both the old and
+    // new texts, assign to startKeep and remove from the deletion.
+    var newWsStart = longestCommonPrefix(newWsFull, delWsStart);
+    deletion.value = removePrefix(deletion.value, newWsStart);
+
+    // Any whitespace that comes straight before endKeep in both the old and
+    // new texts, and hasn't already been assigned to startKeep, assign to
+    // endKeep and remove from the deletion.
+    var newWsEnd = longestCommonSuffix(removePrefix(newWsFull, newWsStart), delWsEnd);
+    deletion.value = removeSuffix(deletion.value, newWsEnd);
+    endKeep.value = replacePrefix(endKeep.value, newWsFull, newWsEnd);
+
+    // If there's any whitespace from the new text that HASN'T already been
+    // assigned, assign it to the start:
+    startKeep.value = replaceSuffix(startKeep.value, newWsFull, newWsFull.slice(0, newWsFull.length - newWsEnd.length));
+  } else if (endKeep) {
+    // We are at the start of the text. Preserve all the whitespace on
+    // endKeep, and just remove whitespace from the end of deletion to the
+    // extent that it overlaps with the start of endKeep.
+    var endKeepWsPrefix = endKeep.value.match(/^\s*/)[0];
+    var deletionWsSuffix = deletion.value.match(/\s*$/)[0];
+    var overlap = maximumOverlap(deletionWsSuffix, endKeepWsPrefix);
+    deletion.value = removeSuffix(deletion.value, overlap);
+  } else if (startKeep) {
+    // We are at the END of the text. Preserve all the whitespace on
+    // startKeep, and just remove whitespace from the start of deletion to
+    // the extent that it overlaps with the end of startKeep.
+    var startKeepWsSuffix = startKeep.value.match(/\s*$/)[0];
+    var deletionWsPrefix = deletion.value.match(/^\s*/)[0];
+    var _overlap = maximumOverlap(startKeepWsSuffix, deletionWsPrefix);
+    deletion.value = removePrefix(deletion.value, _overlap);
+  }
+}
+var wordWithSpaceDiff = new Diff();
+wordWithSpaceDiff.tokenize = function (value) {
+  // Slightly different to the tokenizeIncludingWhitespace regex used above in
+  // that this one treats each individual newline as a distinct tokens, rather
+  // than merging them into other surrounding whitespace. This was requested
+  // in https://github.com/kpdecker/jsdiff/issues/180 &
+  //    https://github.com/kpdecker/jsdiff/issues/211
+  var regex = new RegExp("(\\r?\\n)|[".concat(extendedWordChars, "]+|[^\\S\\n\\r]+|[^").concat(extendedWordChars, "]"), 'ug');
+  return value.match(regex) || [];
+};
+function diffWordsWithSpace(oldStr, newStr, options) {
+  return wordWithSpaceDiff.diff(oldStr, newStr, options);
+}
+
+function generateOptions(options, defaults) {
+  if (typeof options === 'function') {
+    defaults.callback = options;
+  } else if (options) {
+    for (var name in options) {
+      /* istanbul ignore else */
+      if (options.hasOwnProperty(name)) {
+        defaults[name] = options[name];
+      }
+    }
+  }
+  return defaults;
+}
+
+var lineDiff = new Diff();
+lineDiff.tokenize = function (value, options) {
+  if (options.stripTrailingCr) {
+    // remove one \r before \n to match GNU diff's --strip-trailing-cr behavior
+    value = value.replace(/\r\n/g, '\n');
+  }
+  var retLines = [],
+    linesAndNewlines = value.split(/(\n|\r\n)/);
+
+  // Ignore the final empty token that occurs if the string ends with a new line
+  if (!linesAndNewlines[linesAndNewlines.length - 1]) {
+    linesAndNewlines.pop();
+  }
+
+  // Merge the content and line separators into single tokens
+  for (var i = 0; i < linesAndNewlines.length; i++) {
+    var line = linesAndNewlines[i];
+    if (i % 2 && !options.newlineIsToken) {
+      retLines[retLines.length - 1] += line;
+    } else {
+      retLines.push(line);
+    }
+  }
+  return retLines;
+};
+lineDiff.equals = function (left, right, options) {
+  // If we're ignoring whitespace, we need to normalise lines by stripping
+  // whitespace before checking equality. (This has an annoying interaction
+  // with newlineIsToken that requires special handling: if newlines get their
+  // own token, then we DON'T want to trim the *newline* tokens down to empty
+  // strings, since this would cause us to treat whitespace-only line content
+  // as equal to a separator between lines, which would be weird and
+  // inconsistent with the documented behavior of the options.)
+  if (options.ignoreWhitespace) {
+    if (!options.newlineIsToken || !left.includes('\n')) {
+      left = left.trim();
+    }
+    if (!options.newlineIsToken || !right.includes('\n')) {
+      right = right.trim();
+    }
+  } else if (options.ignoreNewlineAtEof && !options.newlineIsToken) {
+    if (left.endsWith('\n')) {
+      left = left.slice(0, -1);
+    }
+    if (right.endsWith('\n')) {
+      right = right.slice(0, -1);
+    }
+  }
+  return Diff.prototype.equals.call(this, left, right, options);
+};
+function diffLines(oldStr, newStr, callback) {
+  return lineDiff.diff(oldStr, newStr, callback);
+}
+
+// Kept for backwards compatibility. This is a rather arbitrary wrapper method
+// that just calls `diffLines` with `ignoreWhitespace: true`. It's confusing to
+// have two ways to do exactly the same thing in the API, so we no longer
+// document this one (library users should explicitly use `diffLines` with
+// `ignoreWhitespace: true` instead) but we keep it around to maintain
+// compatibility with code that used old versions.
+function diffTrimmedLines(oldStr, newStr, callback) {
+  var options = generateOptions(callback, {
+    ignoreWhitespace: true
+  });
+  return lineDiff.diff(oldStr, newStr, options);
+}
+
+var sentenceDiff = new Diff();
+sentenceDiff.tokenize = function (value) {
+  return value.split(/(\S.+?[.!?])(?=\s+|$)/);
+};
+function diffSentences(oldStr, newStr, callback) {
+  return sentenceDiff.diff(oldStr, newStr, callback);
+}
+
+var cssDiff = new Diff();
+cssDiff.tokenize = function (value) {
+  return value.split(/([{}:;,]|\s+)/);
+};
+function diffCss(oldStr, newStr, callback) {
+  return cssDiff.diff(oldStr, newStr, callback);
+}
+
+function ownKeys(e, r) {
+  var t = Object.keys(e);
+  if (Object.getOwnPropertySymbols) {
+    var o = Object.getOwnPropertySymbols(e);
+    r && (o = o.filter(function (r) {
+      return Object.getOwnPropertyDescriptor(e, r).enumerable;
+    })), t.push.apply(t, o);
+  }
+  return t;
+}
+function _objectSpread2(e) {
+  for (var r = 1; r < arguments.length; r++) {
+    var t = null != arguments[r] ? arguments[r] : {};
+    r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+      _defineProperty(e, r, t[r]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+      Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+    });
+  }
+  return e;
+}
+function _toPrimitive(t, r) {
+  if ("object" != typeof t || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || "default");
+    if ("object" != typeof i) return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r ? String : Number)(t);
+}
+function _toPropertyKey(t) {
+  var i = _toPrimitive(t, "string");
+  return "symbol" == typeof i ? i : i + "";
+}
+function _typeof(o) {
+  "@babel/helpers - typeof";
+
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+    return typeof o;
+  } : function (o) {
+    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+  }, _typeof(o);
+}
+function _defineProperty(obj, key, value) {
+  key = _toPropertyKey(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+var jsonDiff = new Diff();
+// Discriminate between two lines of pretty-printed, serialized JSON where one of them has a
+// dangling comma and the other doesn't. Turns out including the dangling comma yields the nicest output:
+jsonDiff.useLongestToken = true;
+jsonDiff.tokenize = lineDiff.tokenize;
+jsonDiff.castInput = function (value, options) {
+  var undefinedReplacement = options.undefinedReplacement,
+    _options$stringifyRep = options.stringifyReplacer,
+    stringifyReplacer = _options$stringifyRep === void 0 ? function (k, v) {
+      return typeof v === 'undefined' ? undefinedReplacement : v;
+    } : _options$stringifyRep;
+  return typeof value === 'string' ? value : JSON.stringify(canonicalize(value, null, null, stringifyReplacer), stringifyReplacer, '  ');
+};
+jsonDiff.equals = function (left, right, options) {
+  return Diff.prototype.equals.call(jsonDiff, left.replace(/,([\r\n])/g, '$1'), right.replace(/,([\r\n])/g, '$1'), options);
+};
+function diffJson(oldObj, newObj, options) {
+  return jsonDiff.diff(oldObj, newObj, options);
+}
+
+// This function handles the presence of circular references by bailing out when encountering an
+// object that is already on the "stack" of items being processed. Accepts an optional replacer
+function canonicalize(obj, stack, replacementStack, replacer, key) {
+  stack = stack || [];
+  replacementStack = replacementStack || [];
+  if (replacer) {
+    obj = replacer(key, obj);
+  }
+  var i;
+  for (i = 0; i < stack.length; i += 1) {
+    if (stack[i] === obj) {
+      return replacementStack[i];
+    }
+  }
+  var canonicalizedObj;
+  if ('[object Array]' === Object.prototype.toString.call(obj)) {
+    stack.push(obj);
+    canonicalizedObj = new Array(obj.length);
+    replacementStack.push(canonicalizedObj);
+    for (i = 0; i < obj.length; i += 1) {
+      canonicalizedObj[i] = canonicalize(obj[i], stack, replacementStack, replacer, key);
+    }
+    stack.pop();
+    replacementStack.pop();
+    return canonicalizedObj;
+  }
+  if (obj && obj.toJSON) {
+    obj = obj.toJSON();
+  }
+  if (_typeof(obj) === 'object' && obj !== null) {
+    stack.push(obj);
+    canonicalizedObj = {};
+    replacementStack.push(canonicalizedObj);
+    var sortedKeys = [],
+      _key;
+    for (_key in obj) {
+      /* istanbul ignore else */
+      if (Object.prototype.hasOwnProperty.call(obj, _key)) {
+        sortedKeys.push(_key);
+      }
+    }
+    sortedKeys.sort();
+    for (i = 0; i < sortedKeys.length; i += 1) {
+      _key = sortedKeys[i];
+      canonicalizedObj[_key] = canonicalize(obj[_key], stack, replacementStack, replacer, _key);
+    }
+    stack.pop();
+    replacementStack.pop();
+  } else {
+    canonicalizedObj = obj;
+  }
+  return canonicalizedObj;
+}
+
+var arrayDiff = new Diff();
+arrayDiff.tokenize = function (value) {
+  return value.slice();
+};
+arrayDiff.join = arrayDiff.removeEmpty = function (value) {
+  return value;
+};
+function diffArrays(oldArr, newArr, callback) {
+  return arrayDiff.diff(oldArr, newArr, callback);
+}
+
+function unixToWin(patch) {
+  if (Array.isArray(patch)) {
+    return patch.map(unixToWin);
+  }
+  return _objectSpread2(_objectSpread2({}, patch), {}, {
+    hunks: patch.hunks.map(function (hunk) {
+      return _objectSpread2(_objectSpread2({}, hunk), {}, {
+        lines: hunk.lines.map(function (line, i) {
+          var _hunk$lines;
+          return line.startsWith('\\') || line.endsWith('\r') || (_hunk$lines = hunk.lines[i + 1]) !== null && _hunk$lines !== void 0 && _hunk$lines.startsWith('\\') ? line : line + '\r';
+        })
+      });
+    })
+  });
+}
+function winToUnix(patch) {
+  if (Array.isArray(patch)) {
+    return patch.map(winToUnix);
+  }
+  return _objectSpread2(_objectSpread2({}, patch), {}, {
+    hunks: patch.hunks.map(function (hunk) {
+      return _objectSpread2(_objectSpread2({}, hunk), {}, {
+        lines: hunk.lines.map(function (line) {
+          return line.endsWith('\r') ? line.substring(0, line.length - 1) : line;
+        })
+      });
+    })
+  });
+}
+
+/**
+ * Returns true if the patch consistently uses Unix line endings (or only involves one line and has
+ * no line endings).
+ */
+function isUnix(patch) {
+  if (!Array.isArray(patch)) {
+    patch = [patch];
+  }
+  return !patch.some(function (index) {
+    return index.hunks.some(function (hunk) {
+      return hunk.lines.some(function (line) {
+        return !line.startsWith('\\') && line.endsWith('\r');
+      });
+    });
+  });
+}
+
+/**
+ * Returns true if the patch uses Windows line endings and only Windows line endings.
+ */
+function isWin(patch) {
+  if (!Array.isArray(patch)) {
+    patch = [patch];
+  }
+  return patch.some(function (index) {
+    return index.hunks.some(function (hunk) {
+      return hunk.lines.some(function (line) {
+        return line.endsWith('\r');
+      });
+    });
+  }) && patch.every(function (index) {
+    return index.hunks.every(function (hunk) {
+      return hunk.lines.every(function (line, i) {
+        var _hunk$lines2;
+        return line.startsWith('\\') || line.endsWith('\r') || ((_hunk$lines2 = hunk.lines[i + 1]) === null || _hunk$lines2 === void 0 ? void 0 : _hunk$lines2.startsWith('\\'));
+      });
+    });
+  });
+}
+
+function parsePatch(uniDiff) {
+  var diffstr = uniDiff.split(/\n/),
+    list = [],
+    i = 0;
+  function parseIndex() {
+    var index = {};
+    list.push(index);
+
+    // Parse diff metadata
+    while (i < diffstr.length) {
+      var line = diffstr[i];
+
+      // File header found, end parsing diff metadata
+      if (/^(\-\-\-|\+\+\+|@@)\s/.test(line)) {
+        break;
+      }
+
+      // Diff index
+      var header = /^(?:Index:|diff(?: -r \w+)+)\s+(.+?)\s*$/.exec(line);
+      if (header) {
+        index.index = header[1];
+      }
+      i++;
+    }
+
+    // Parse file headers if they are defined. Unified diff requires them, but
+    // there's no technical issues to have an isolated hunk without file header
+    parseFileHeader(index);
+    parseFileHeader(index);
+
+    // Parse hunks
+    index.hunks = [];
+    while (i < diffstr.length) {
+      var _line = diffstr[i];
+      if (/^(Index:\s|diff\s|\-\-\-\s|\+\+\+\s|===================================================================)/.test(_line)) {
+        break;
+      } else if (/^@@/.test(_line)) {
+        index.hunks.push(parseHunk());
+      } else if (_line) {
+        throw new Error('Unknown line ' + (i + 1) + ' ' + JSON.stringify(_line));
+      } else {
+        i++;
+      }
+    }
+  }
+
+  // Parses the --- and +++ headers, if none are found, no lines
+  // are consumed.
+  function parseFileHeader(index) {
+    var fileHeader = /^(---|\+\+\+)\s+(.*)\r?$/.exec(diffstr[i]);
+    if (fileHeader) {
+      var keyPrefix = fileHeader[1] === '---' ? 'old' : 'new';
+      var data = fileHeader[2].split('\t', 2);
+      var fileName = data[0].replace(/\\\\/g, '\\');
+      if (/^".*"$/.test(fileName)) {
+        fileName = fileName.substr(1, fileName.length - 2);
+      }
+      index[keyPrefix + 'FileName'] = fileName;
+      index[keyPrefix + 'Header'] = (data[1] || '').trim();
+      i++;
+    }
+  }
+
+  // Parses a hunk
+  // This assumes that we are at the start of a hunk.
+  function parseHunk() {
+    var chunkHeaderIndex = i,
+      chunkHeaderLine = diffstr[i++],
+      chunkHeader = chunkHeaderLine.split(/@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@/);
+    var hunk = {
+      oldStart: +chunkHeader[1],
+      oldLines: typeof chunkHeader[2] === 'undefined' ? 1 : +chunkHeader[2],
+      newStart: +chunkHeader[3],
+      newLines: typeof chunkHeader[4] === 'undefined' ? 1 : +chunkHeader[4],
+      lines: []
+    };
+
+    // Unified Diff Format quirk: If the chunk size is 0,
+    // the first number is one lower than one would expect.
+    // https://www.artima.com/weblogs/viewpost.jsp?thread=164293
+    if (hunk.oldLines === 0) {
+      hunk.oldStart += 1;
+    }
+    if (hunk.newLines === 0) {
+      hunk.newStart += 1;
+    }
+    var addCount = 0,
+      removeCount = 0;
+    for (; i < diffstr.length && (removeCount < hunk.oldLines || addCount < hunk.newLines || (_diffstr$i = diffstr[i]) !== null && _diffstr$i !== void 0 && _diffstr$i.startsWith('\\')); i++) {
+      var _diffstr$i;
+      var operation = diffstr[i].length == 0 && i != diffstr.length - 1 ? ' ' : diffstr[i][0];
+      if (operation === '+' || operation === '-' || operation === ' ' || operation === '\\') {
+        hunk.lines.push(diffstr[i]);
+        if (operation === '+') {
+          addCount++;
+        } else if (operation === '-') {
+          removeCount++;
+        } else if (operation === ' ') {
+          addCount++;
+          removeCount++;
+        }
+      } else {
+        throw new Error("Hunk at line ".concat(chunkHeaderIndex + 1, " contained invalid line ").concat(diffstr[i]));
+      }
+    }
+
+    // Handle the empty block count case
+    if (!addCount && hunk.newLines === 1) {
+      hunk.newLines = 0;
+    }
+    if (!removeCount && hunk.oldLines === 1) {
+      hunk.oldLines = 0;
+    }
+
+    // Perform sanity checking
+    if (addCount !== hunk.newLines) {
+      throw new Error('Added line count did not match for hunk at line ' + (chunkHeaderIndex + 1));
+    }
+    if (removeCount !== hunk.oldLines) {
+      throw new Error('Removed line count did not match for hunk at line ' + (chunkHeaderIndex + 1));
+    }
+    return hunk;
+  }
+  while (i < diffstr.length) {
+    parseIndex();
+  }
+  return list;
+}
+
+// Iterator that traverses in the range of [min, max], stepping
+// by distance from a given start position. I.e. for [0, 4], with
+// start of 2, this will iterate 2, 3, 1, 4, 0.
+function distanceIterator (start, minLine, maxLine) {
+  var wantForward = true,
+    backwardExhausted = false,
+    forwardExhausted = false,
+    localOffset = 1;
+  return function iterator() {
+    if (wantForward && !forwardExhausted) {
+      if (backwardExhausted) {
+        localOffset++;
+      } else {
+        wantForward = false;
+      }
+
+      // Check if trying to fit beyond text length, and if not, check it fits
+      // after offset location (or desired location on first iteration)
+      if (start + localOffset <= maxLine) {
+        return start + localOffset;
+      }
+      forwardExhausted = true;
+    }
+    if (!backwardExhausted) {
+      if (!forwardExhausted) {
+        wantForward = true;
+      }
+
+      // Check if trying to fit before text beginning, and if not, check it fits
+      // before offset location
+      if (minLine <= start - localOffset) {
+        return start - localOffset++;
+      }
+      backwardExhausted = true;
+      return iterator();
+    }
+
+    // We tried to fit hunk before text beginning and beyond text length, then
+    // hunk can't fit on the text. Return undefined
+  };
+}
+
+function applyPatch(source, uniDiff) {
+  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  if (typeof uniDiff === 'string') {
+    uniDiff = parsePatch(uniDiff);
+  }
+  if (Array.isArray(uniDiff)) {
+    if (uniDiff.length > 1) {
+      throw new Error('applyPatch only works with a single input.');
+    }
+    uniDiff = uniDiff[0];
+  }
+  if (options.autoConvertLineEndings || options.autoConvertLineEndings == null) {
+    if (hasOnlyWinLineEndings(source) && isUnix(uniDiff)) {
+      uniDiff = unixToWin(uniDiff);
+    } else if (hasOnlyUnixLineEndings(source) && isWin(uniDiff)) {
+      uniDiff = winToUnix(uniDiff);
+    }
+  }
+
+  // Apply the diff to the input
+  var lines = source.split('\n'),
+    hunks = uniDiff.hunks,
+    compareLine = options.compareLine || function (lineNumber, line, operation, patchContent) {
+      return line === patchContent;
+    },
+    fuzzFactor = options.fuzzFactor || 0,
+    minLine = 0;
+  if (fuzzFactor < 0 || !Number.isInteger(fuzzFactor)) {
+    throw new Error('fuzzFactor must be a non-negative integer');
+  }
+
+  // Special case for empty patch.
+  if (!hunks.length) {
+    return source;
+  }
+
+  // Before anything else, handle EOFNL insertion/removal. If the patch tells us to make a change
+  // to the EOFNL that is redundant/impossible - i.e. to remove a newline that's not there, or add a
+  // newline that already exists - then we either return false and fail to apply the patch (if
+  // fuzzFactor is 0) or simply ignore the problem and do nothing (if fuzzFactor is >0).
+  // If we do need to remove/add a newline at EOF, this will always be in the final hunk:
+  var prevLine = '',
+    removeEOFNL = false,
+    addEOFNL = false;
+  for (var i = 0; i < hunks[hunks.length - 1].lines.length; i++) {
+    var line = hunks[hunks.length - 1].lines[i];
+    if (line[0] == '\\') {
+      if (prevLine[0] == '+') {
+        removeEOFNL = true;
+      } else if (prevLine[0] == '-') {
+        addEOFNL = true;
+      }
+    }
+    prevLine = line;
+  }
+  if (removeEOFNL) {
+    if (addEOFNL) {
+      // This means the final line gets changed but doesn't have a trailing newline in either the
+      // original or patched version. In that case, we do nothing if fuzzFactor > 0, and if
+      // fuzzFactor is 0, we simply validate that the source file has no trailing newline.
+      if (!fuzzFactor && lines[lines.length - 1] == '') {
+        return false;
+      }
+    } else if (lines[lines.length - 1] == '') {
+      lines.pop();
+    } else if (!fuzzFactor) {
+      return false;
+    }
+  } else if (addEOFNL) {
+    if (lines[lines.length - 1] != '') {
+      lines.push('');
+    } else if (!fuzzFactor) {
+      return false;
+    }
+  }
+
+  /**
+   * Checks if the hunk can be made to fit at the provided location with at most `maxErrors`
+   * insertions, substitutions, or deletions, while ensuring also that:
+   * - lines deleted in the hunk match exactly, and
+   * - wherever an insertion operation or block of insertion operations appears in the hunk, the
+   *   immediately preceding and following lines of context match exactly
+   *
+   * `toPos` should be set such that lines[toPos] is meant to match hunkLines[0].
+   *
+   * If the hunk can be applied, returns an object with properties `oldLineLastI` and
+   * `replacementLines`. Otherwise, returns null.
+   */
+  function applyHunk(hunkLines, toPos, maxErrors) {
+    var hunkLinesI = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+    var lastContextLineMatched = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
+    var patchedLines = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
+    var patchedLinesLength = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+    var nConsecutiveOldContextLines = 0;
+    var nextContextLineMustMatch = false;
+    for (; hunkLinesI < hunkLines.length; hunkLinesI++) {
+      var hunkLine = hunkLines[hunkLinesI],
+        operation = hunkLine.length > 0 ? hunkLine[0] : ' ',
+        content = hunkLine.length > 0 ? hunkLine.substr(1) : hunkLine;
+      if (operation === '-') {
+        if (compareLine(toPos + 1, lines[toPos], operation, content)) {
+          toPos++;
+          nConsecutiveOldContextLines = 0;
+        } else {
+          if (!maxErrors || lines[toPos] == null) {
+            return null;
+          }
+          patchedLines[patchedLinesLength] = lines[toPos];
+          return applyHunk(hunkLines, toPos + 1, maxErrors - 1, hunkLinesI, false, patchedLines, patchedLinesLength + 1);
+        }
+      }
+      if (operation === '+') {
+        if (!lastContextLineMatched) {
+          return null;
+        }
+        patchedLines[patchedLinesLength] = content;
+        patchedLinesLength++;
+        nConsecutiveOldContextLines = 0;
+        nextContextLineMustMatch = true;
+      }
+      if (operation === ' ') {
+        nConsecutiveOldContextLines++;
+        patchedLines[patchedLinesLength] = lines[toPos];
+        if (compareLine(toPos + 1, lines[toPos], operation, content)) {
+          patchedLinesLength++;
+          lastContextLineMatched = true;
+          nextContextLineMustMatch = false;
+          toPos++;
+        } else {
+          if (nextContextLineMustMatch || !maxErrors) {
+            return null;
+          }
+
+          // Consider 3 possibilities in sequence:
+          // 1. lines contains a *substitution* not included in the patch context, or
+          // 2. lines contains an *insertion* not included in the patch context, or
+          // 3. lines contains a *deletion* not included in the patch context
+          // The first two options are of course only possible if the line from lines is non-null -
+          // i.e. only option 3 is possible if we've overrun the end of the old file.
+          return lines[toPos] && (applyHunk(hunkLines, toPos + 1, maxErrors - 1, hunkLinesI + 1, false, patchedLines, patchedLinesLength + 1) || applyHunk(hunkLines, toPos + 1, maxErrors - 1, hunkLinesI, false, patchedLines, patchedLinesLength + 1)) || applyHunk(hunkLines, toPos, maxErrors - 1, hunkLinesI + 1, false, patchedLines, patchedLinesLength);
+        }
+      }
+    }
+
+    // Before returning, trim any unmodified context lines off the end of patchedLines and reduce
+    // toPos (and thus oldLineLastI) accordingly. This allows later hunks to be applied to a region
+    // that starts in this hunk's trailing context.
+    patchedLinesLength -= nConsecutiveOldContextLines;
+    toPos -= nConsecutiveOldContextLines;
+    patchedLines.length = patchedLinesLength;
+    return {
+      patchedLines: patchedLines,
+      oldLineLastI: toPos - 1
+    };
+  }
+  var resultLines = [];
+
+  // Search best fit offsets for each hunk based on the previous ones
+  var prevHunkOffset = 0;
+  for (var _i = 0; _i < hunks.length; _i++) {
+    var hunk = hunks[_i];
+    var hunkResult = void 0;
+    var maxLine = lines.length - hunk.oldLines + fuzzFactor;
+    var toPos = void 0;
+    for (var maxErrors = 0; maxErrors <= fuzzFactor; maxErrors++) {
+      toPos = hunk.oldStart + prevHunkOffset - 1;
+      var iterator = distanceIterator(toPos, minLine, maxLine);
+      for (; toPos !== undefined; toPos = iterator()) {
+        hunkResult = applyHunk(hunk.lines, toPos, maxErrors);
+        if (hunkResult) {
+          break;
+        }
+      }
+      if (hunkResult) {
+        break;
+      }
+    }
+    if (!hunkResult) {
+      return false;
+    }
+
+    // Copy everything from the end of where we applied the last hunk to the start of this hunk
+    for (var _i2 = minLine; _i2 < toPos; _i2++) {
+      resultLines.push(lines[_i2]);
+    }
+
+    // Add the lines produced by applying the hunk:
+    for (var _i3 = 0; _i3 < hunkResult.patchedLines.length; _i3++) {
+      var _line = hunkResult.patchedLines[_i3];
+      resultLines.push(_line);
+    }
+
+    // Set lower text limit to end of the current hunk, so next ones don't try
+    // to fit over already patched text
+    minLine = hunkResult.oldLineLastI + 1;
+
+    // Note the offset between where the patch said the hunk should've applied and where we
+    // applied it, so we can adjust future hunks accordingly:
+    prevHunkOffset = toPos + 1 - hunk.oldStart;
+  }
+
+  // Copy over the rest of the lines from the old text
+  for (var _i4 = minLine; _i4 < lines.length; _i4++) {
+    resultLines.push(lines[_i4]);
+  }
+  return resultLines.join('\n');
+}
+
+// Wrapper that supports multiple file patches via callbacks.
+function applyPatches(uniDiff, options) {
+  if (typeof uniDiff === 'string') {
+    uniDiff = parsePatch(uniDiff);
+  }
+  var currentIndex = 0;
+  function processIndex() {
+    var index = uniDiff[currentIndex++];
+    if (!index) {
+      return options.complete();
+    }
+    options.loadFile(index, function (err, data) {
+      if (err) {
+        return options.complete(err);
+      }
+      var updatedContent = applyPatch(data, index, options);
+      options.patched(index, updatedContent, function (err) {
+        if (err) {
+          return options.complete(err);
+        }
+        processIndex();
+      });
+    });
+  }
+  processIndex();
+}
+
+function structuredPatch(oldFileName, newFileName, oldStr, newStr, oldHeader, newHeader, options) {
+  if (!options) {
+    options = {};
+  }
+  if (typeof options === 'function') {
+    options = {
+      callback: options
+    };
+  }
+  if (typeof options.context === 'undefined') {
+    options.context = 4;
+  }
+  if (options.newlineIsToken) {
+    throw new Error('newlineIsToken may not be used with patch-generation functions, only with diffing functions');
+  }
+  if (!options.callback) {
+    return diffLinesResultToPatch(diffLines(oldStr, newStr, options));
+  } else {
+    var _options = options,
+      _callback = _options.callback;
+    diffLines(oldStr, newStr, _objectSpread2(_objectSpread2({}, options), {}, {
+      callback: function callback(diff) {
+        var patch = diffLinesResultToPatch(diff);
+        _callback(patch);
+      }
+    }));
+  }
+  function diffLinesResultToPatch(diff) {
+    // STEP 1: Build up the patch with no "\ No newline at end of file" lines and with the arrays
+    //         of lines containing trailing newline characters. We'll tidy up later...
+
+    if (!diff) {
+      return;
+    }
+    diff.push({
+      value: '',
+      lines: []
+    }); // Append an empty value to make cleanup easier
+
+    function contextLines(lines) {
+      return lines.map(function (entry) {
+        return ' ' + entry;
+      });
+    }
+    var hunks = [];
+    var oldRangeStart = 0,
+      newRangeStart = 0,
+      curRange = [],
+      oldLine = 1,
+      newLine = 1;
+    var _loop = function _loop() {
+      var current = diff[i],
+        lines = current.lines || splitLines(current.value);
+      current.lines = lines;
+      if (current.added || current.removed) {
+        var _curRange;
+        // If we have previous context, start with that
+        if (!oldRangeStart) {
+          var prev = diff[i - 1];
+          oldRangeStart = oldLine;
+          newRangeStart = newLine;
+          if (prev) {
+            curRange = options.context > 0 ? contextLines(prev.lines.slice(-options.context)) : [];
+            oldRangeStart -= curRange.length;
+            newRangeStart -= curRange.length;
+          }
+        }
+
+        // Output our changes
+        (_curRange = curRange).push.apply(_curRange, _toConsumableArray(lines.map(function (entry) {
+          return (current.added ? '+' : '-') + entry;
+        })));
+
+        // Track the updated file position
+        if (current.added) {
+          newLine += lines.length;
+        } else {
+          oldLine += lines.length;
+        }
+      } else {
+        // Identical context lines. Track line changes
+        if (oldRangeStart) {
+          // Close out any changes that have been output (or join overlapping)
+          if (lines.length <= options.context * 2 && i < diff.length - 2) {
+            var _curRange2;
+            // Overlapping
+            (_curRange2 = curRange).push.apply(_curRange2, _toConsumableArray(contextLines(lines)));
+          } else {
+            var _curRange3;
+            // end the range and output
+            var contextSize = Math.min(lines.length, options.context);
+            (_curRange3 = curRange).push.apply(_curRange3, _toConsumableArray(contextLines(lines.slice(0, contextSize))));
+            var _hunk = {
+              oldStart: oldRangeStart,
+              oldLines: oldLine - oldRangeStart + contextSize,
+              newStart: newRangeStart,
+              newLines: newLine - newRangeStart + contextSize,
+              lines: curRange
+            };
+            hunks.push(_hunk);
+            oldRangeStart = 0;
+            newRangeStart = 0;
+            curRange = [];
+          }
+        }
+        oldLine += lines.length;
+        newLine += lines.length;
+      }
+    };
+    for (var i = 0; i < diff.length; i++) {
+      _loop();
+    }
+
+    // Step 2: eliminate the trailing `\n` from each line of each hunk, and, where needed, add
+    //         "\ No newline at end of file".
+    for (var _i = 0, _hunks = hunks; _i < _hunks.length; _i++) {
+      var hunk = _hunks[_i];
+      for (var _i2 = 0; _i2 < hunk.lines.length; _i2++) {
+        if (hunk.lines[_i2].endsWith('\n')) {
+          hunk.lines[_i2] = hunk.lines[_i2].slice(0, -1);
+        } else {
+          hunk.lines.splice(_i2 + 1, 0, '\\ No newline at end of file');
+          _i2++; // Skip the line we just added, then continue iterating
+        }
+      }
+    }
+    return {
+      oldFileName: oldFileName,
+      newFileName: newFileName,
+      oldHeader: oldHeader,
+      newHeader: newHeader,
+      hunks: hunks
+    };
+  }
+}
+function formatPatch(diff) {
+  if (Array.isArray(diff)) {
+    return diff.map(formatPatch).join('\n');
+  }
+  var ret = [];
+  if (diff.oldFileName == diff.newFileName) {
+    ret.push('Index: ' + diff.oldFileName);
+  }
+  ret.push('===================================================================');
+  ret.push('--- ' + diff.oldFileName + (typeof diff.oldHeader === 'undefined' ? '' : '\t' + diff.oldHeader));
+  ret.push('+++ ' + diff.newFileName + (typeof diff.newHeader === 'undefined' ? '' : '\t' + diff.newHeader));
+  for (var i = 0; i < diff.hunks.length; i++) {
+    var hunk = diff.hunks[i];
+    // Unified Diff Format quirk: If the chunk size is 0,
+    // the first number is one lower than one would expect.
+    // https://www.artima.com/weblogs/viewpost.jsp?thread=164293
+    if (hunk.oldLines === 0) {
+      hunk.oldStart -= 1;
+    }
+    if (hunk.newLines === 0) {
+      hunk.newStart -= 1;
+    }
+    ret.push('@@ -' + hunk.oldStart + ',' + hunk.oldLines + ' +' + hunk.newStart + ',' + hunk.newLines + ' @@');
+    ret.push.apply(ret, hunk.lines);
+  }
+  return ret.join('\n') + '\n';
+}
+function createTwoFilesPatch(oldFileName, newFileName, oldStr, newStr, oldHeader, newHeader, options) {
+  var _options2;
+  if (typeof options === 'function') {
+    options = {
+      callback: options
+    };
+  }
+  if (!((_options2 = options) !== null && _options2 !== void 0 && _options2.callback)) {
+    var patchObj = structuredPatch(oldFileName, newFileName, oldStr, newStr, oldHeader, newHeader, options);
+    if (!patchObj) {
+      return;
+    }
+    return formatPatch(patchObj);
+  } else {
+    var _options3 = options,
+      _callback2 = _options3.callback;
+    structuredPatch(oldFileName, newFileName, oldStr, newStr, oldHeader, newHeader, _objectSpread2(_objectSpread2({}, options), {}, {
+      callback: function callback(patchObj) {
+        if (!patchObj) {
+          _callback2();
+        } else {
+          _callback2(formatPatch(patchObj));
+        }
+      }
+    }));
+  }
+}
+function createPatch(fileName, oldStr, newStr, oldHeader, newHeader, options) {
+  return createTwoFilesPatch(fileName, fileName, oldStr, newStr, oldHeader, newHeader, options);
+}
+
+/**
+ * Split `text` into an array of lines, including the trailing newline character (where present)
+ */
+function splitLines(text) {
+  var hasTrailingNl = text.endsWith('\n');
+  var result = text.split('\n').map(function (line) {
+    return line + '\n';
+  });
+  if (hasTrailingNl) {
+    result.pop();
+  } else {
+    result.push(result.pop().slice(0, -1));
+  }
+  return result;
+}
+
+function arrayEqual(a, b) {
+  if (a.length !== b.length) {
+    return false;
+  }
+  return arrayStartsWith(a, b);
+}
+function arrayStartsWith(array, start) {
+  if (start.length > array.length) {
+    return false;
+  }
+  for (var i = 0; i < start.length; i++) {
+    if (start[i] !== array[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function calcLineCount(hunk) {
+  var _calcOldNewLineCount = calcOldNewLineCount(hunk.lines),
+    oldLines = _calcOldNewLineCount.oldLines,
+    newLines = _calcOldNewLineCount.newLines;
+  if (oldLines !== undefined) {
+    hunk.oldLines = oldLines;
+  } else {
+    delete hunk.oldLines;
+  }
+  if (newLines !== undefined) {
+    hunk.newLines = newLines;
+  } else {
+    delete hunk.newLines;
+  }
+}
+function merge(mine, theirs, base) {
+  mine = loadPatch(mine, base);
+  theirs = loadPatch(theirs, base);
+  var ret = {};
+
+  // For index we just let it pass through as it doesn't have any necessary meaning.
+  // Leaving sanity checks on this to the API consumer that may know more about the
+  // meaning in their own context.
+  if (mine.index || theirs.index) {
+    ret.index = mine.index || theirs.index;
+  }
+  if (mine.newFileName || theirs.newFileName) {
+    if (!fileNameChanged(mine)) {
+      // No header or no change in ours, use theirs (and ours if theirs does not exist)
+      ret.oldFileName = theirs.oldFileName || mine.oldFileName;
+      ret.newFileName = theirs.newFileName || mine.newFileName;
+      ret.oldHeader = theirs.oldHeader || mine.oldHeader;
+      ret.newHeader = theirs.newHeader || mine.newHeader;
+    } else if (!fileNameChanged(theirs)) {
+      // No header or no change in theirs, use ours
+      ret.oldFileName = mine.oldFileName;
+      ret.newFileName = mine.newFileName;
+      ret.oldHeader = mine.oldHeader;
+      ret.newHeader = mine.newHeader;
+    } else {
+      // Both changed... figure it out
+      ret.oldFileName = selectField(ret, mine.oldFileName, theirs.oldFileName);
+      ret.newFileName = selectField(ret, mine.newFileName, theirs.newFileName);
+      ret.oldHeader = selectField(ret, mine.oldHeader, theirs.oldHeader);
+      ret.newHeader = selectField(ret, mine.newHeader, theirs.newHeader);
+    }
+  }
+  ret.hunks = [];
+  var mineIndex = 0,
+    theirsIndex = 0,
+    mineOffset = 0,
+    theirsOffset = 0;
+  while (mineIndex < mine.hunks.length || theirsIndex < theirs.hunks.length) {
+    var mineCurrent = mine.hunks[mineIndex] || {
+        oldStart: Infinity
+      },
+      theirsCurrent = theirs.hunks[theirsIndex] || {
+        oldStart: Infinity
+      };
+    if (hunkBefore(mineCurrent, theirsCurrent)) {
+      // This patch does not overlap with any of the others, yay.
+      ret.hunks.push(cloneHunk(mineCurrent, mineOffset));
+      mineIndex++;
+      theirsOffset += mineCurrent.newLines - mineCurrent.oldLines;
+    } else if (hunkBefore(theirsCurrent, mineCurrent)) {
+      // This patch does not overlap with any of the others, yay.
+      ret.hunks.push(cloneHunk(theirsCurrent, theirsOffset));
+      theirsIndex++;
+      mineOffset += theirsCurrent.newLines - theirsCurrent.oldLines;
+    } else {
+      // Overlap, merge as best we can
+      var mergedHunk = {
+        oldStart: Math.min(mineCurrent.oldStart, theirsCurrent.oldStart),
+        oldLines: 0,
+        newStart: Math.min(mineCurrent.newStart + mineOffset, theirsCurrent.oldStart + theirsOffset),
+        newLines: 0,
+        lines: []
+      };
+      mergeLines(mergedHunk, mineCurrent.oldStart, mineCurrent.lines, theirsCurrent.oldStart, theirsCurrent.lines);
+      theirsIndex++;
+      mineIndex++;
+      ret.hunks.push(mergedHunk);
+    }
+  }
+  return ret;
+}
+function loadPatch(param, base) {
+  if (typeof param === 'string') {
+    if (/^@@/m.test(param) || /^Index:/m.test(param)) {
+      return parsePatch(param)[0];
+    }
+    if (!base) {
+      throw new Error('Must provide a base reference or pass in a patch');
+    }
+    return structuredPatch(undefined, undefined, base, param);
+  }
+  return param;
+}
+function fileNameChanged(patch) {
+  return patch.newFileName && patch.newFileName !== patch.oldFileName;
+}
+function selectField(index, mine, theirs) {
+  if (mine === theirs) {
+    return mine;
+  } else {
+    index.conflict = true;
+    return {
+      mine: mine,
+      theirs: theirs
+    };
+  }
+}
+function hunkBefore(test, check) {
+  return test.oldStart < check.oldStart && test.oldStart + test.oldLines < check.oldStart;
+}
+function cloneHunk(hunk, offset) {
+  return {
+    oldStart: hunk.oldStart,
+    oldLines: hunk.oldLines,
+    newStart: hunk.newStart + offset,
+    newLines: hunk.newLines,
+    lines: hunk.lines
+  };
+}
+function mergeLines(hunk, mineOffset, mineLines, theirOffset, theirLines) {
+  // This will generally result in a conflicted hunk, but there are cases where the context
+  // is the only overlap where we can successfully merge the content here.
+  var mine = {
+      offset: mineOffset,
+      lines: mineLines,
+      index: 0
+    },
+    their = {
+      offset: theirOffset,
+      lines: theirLines,
+      index: 0
+    };
+
+  // Handle any leading content
+  insertLeading(hunk, mine, their);
+  insertLeading(hunk, their, mine);
+
+  // Now in the overlap content. Scan through and select the best changes from each.
+  while (mine.index < mine.lines.length && their.index < their.lines.length) {
+    var mineCurrent = mine.lines[mine.index],
+      theirCurrent = their.lines[their.index];
+    if ((mineCurrent[0] === '-' || mineCurrent[0] === '+') && (theirCurrent[0] === '-' || theirCurrent[0] === '+')) {
+      // Both modified ...
+      mutualChange(hunk, mine, their);
+    } else if (mineCurrent[0] === '+' && theirCurrent[0] === ' ') {
+      var _hunk$lines;
+      // Mine inserted
+      (_hunk$lines = hunk.lines).push.apply(_hunk$lines, _toConsumableArray(collectChange(mine)));
+    } else if (theirCurrent[0] === '+' && mineCurrent[0] === ' ') {
+      var _hunk$lines2;
+      // Theirs inserted
+      (_hunk$lines2 = hunk.lines).push.apply(_hunk$lines2, _toConsumableArray(collectChange(their)));
+    } else if (mineCurrent[0] === '-' && theirCurrent[0] === ' ') {
+      // Mine removed or edited
+      removal(hunk, mine, their);
+    } else if (theirCurrent[0] === '-' && mineCurrent[0] === ' ') {
+      // Their removed or edited
+      removal(hunk, their, mine, true);
+    } else if (mineCurrent === theirCurrent) {
+      // Context identity
+      hunk.lines.push(mineCurrent);
+      mine.index++;
+      their.index++;
+    } else {
+      // Context mismatch
+      conflict(hunk, collectChange(mine), collectChange(their));
+    }
+  }
+
+  // Now push anything that may be remaining
+  insertTrailing(hunk, mine);
+  insertTrailing(hunk, their);
+  calcLineCount(hunk);
+}
+function mutualChange(hunk, mine, their) {
+  var myChanges = collectChange(mine),
+    theirChanges = collectChange(their);
+  if (allRemoves(myChanges) && allRemoves(theirChanges)) {
+    // Special case for remove changes that are supersets of one another
+    if (arrayStartsWith(myChanges, theirChanges) && skipRemoveSuperset(their, myChanges, myChanges.length - theirChanges.length)) {
+      var _hunk$lines3;
+      (_hunk$lines3 = hunk.lines).push.apply(_hunk$lines3, _toConsumableArray(myChanges));
+      return;
+    } else if (arrayStartsWith(theirChanges, myChanges) && skipRemoveSuperset(mine, theirChanges, theirChanges.length - myChanges.length)) {
+      var _hunk$lines4;
+      (_hunk$lines4 = hunk.lines).push.apply(_hunk$lines4, _toConsumableArray(theirChanges));
+      return;
+    }
+  } else if (arrayEqual(myChanges, theirChanges)) {
+    var _hunk$lines5;
+    (_hunk$lines5 = hunk.lines).push.apply(_hunk$lines5, _toConsumableArray(myChanges));
+    return;
+  }
+  conflict(hunk, myChanges, theirChanges);
+}
+function removal(hunk, mine, their, swap) {
+  var myChanges = collectChange(mine),
+    theirChanges = collectContext(their, myChanges);
+  if (theirChanges.merged) {
+    var _hunk$lines6;
+    (_hunk$lines6 = hunk.lines).push.apply(_hunk$lines6, _toConsumableArray(theirChanges.merged));
+  } else {
+    conflict(hunk, swap ? theirChanges : myChanges, swap ? myChanges : theirChanges);
+  }
+}
+function conflict(hunk, mine, their) {
+  hunk.conflict = true;
+  hunk.lines.push({
+    conflict: true,
+    mine: mine,
+    theirs: their
+  });
+}
+function insertLeading(hunk, insert, their) {
+  while (insert.offset < their.offset && insert.index < insert.lines.length) {
+    var line = insert.lines[insert.index++];
+    hunk.lines.push(line);
+    insert.offset++;
+  }
+}
+function insertTrailing(hunk, insert) {
+  while (insert.index < insert.lines.length) {
+    var line = insert.lines[insert.index++];
+    hunk.lines.push(line);
+  }
+}
+function collectChange(state) {
+  var ret = [],
+    operation = state.lines[state.index][0];
+  while (state.index < state.lines.length) {
+    var line = state.lines[state.index];
+
+    // Group additions that are immediately after subtractions and treat them as one "atomic" modify change.
+    if (operation === '-' && line[0] === '+') {
+      operation = '+';
+    }
+    if (operation === line[0]) {
+      ret.push(line);
+      state.index++;
+    } else {
+      break;
+    }
+  }
+  return ret;
+}
+function collectContext(state, matchChanges) {
+  var changes = [],
+    merged = [],
+    matchIndex = 0,
+    contextChanges = false,
+    conflicted = false;
+  while (matchIndex < matchChanges.length && state.index < state.lines.length) {
+    var change = state.lines[state.index],
+      match = matchChanges[matchIndex];
+
+    // Once we've hit our add, then we are done
+    if (match[0] === '+') {
+      break;
+    }
+    contextChanges = contextChanges || change[0] !== ' ';
+    merged.push(match);
+    matchIndex++;
+
+    // Consume any additions in the other block as a conflict to attempt
+    // to pull in the remaining context after this
+    if (change[0] === '+') {
+      conflicted = true;
+      while (change[0] === '+') {
+        changes.push(change);
+        change = state.lines[++state.index];
+      }
+    }
+    if (match.substr(1) === change.substr(1)) {
+      changes.push(change);
+      state.index++;
+    } else {
+      conflicted = true;
+    }
+  }
+  if ((matchChanges[matchIndex] || '')[0] === '+' && contextChanges) {
+    conflicted = true;
+  }
+  if (conflicted) {
+    return changes;
+  }
+  while (matchIndex < matchChanges.length) {
+    merged.push(matchChanges[matchIndex++]);
+  }
+  return {
+    merged: merged,
+    changes: changes
+  };
+}
+function allRemoves(changes) {
+  return changes.reduce(function (prev, change) {
+    return prev && change[0] === '-';
+  }, true);
+}
+function skipRemoveSuperset(state, removeChanges, delta) {
+  for (var i = 0; i < delta; i++) {
+    var changeContent = removeChanges[removeChanges.length - delta + i].substr(1);
+    if (state.lines[state.index + i] !== ' ' + changeContent) {
+      return false;
+    }
+  }
+  state.index += delta;
+  return true;
+}
+function calcOldNewLineCount(lines) {
+  var oldLines = 0;
+  var newLines = 0;
+  lines.forEach(function (line) {
+    if (typeof line !== 'string') {
+      var myCount = calcOldNewLineCount(line.mine);
+      var theirCount = calcOldNewLineCount(line.theirs);
+      if (oldLines !== undefined) {
+        if (myCount.oldLines === theirCount.oldLines) {
+          oldLines += myCount.oldLines;
+        } else {
+          oldLines = undefined;
+        }
+      }
+      if (newLines !== undefined) {
+        if (myCount.newLines === theirCount.newLines) {
+          newLines += myCount.newLines;
+        } else {
+          newLines = undefined;
+        }
+      }
+    } else {
+      if (newLines !== undefined && (line[0] === '+' || line[0] === ' ')) {
+        newLines++;
+      }
+      if (oldLines !== undefined && (line[0] === '-' || line[0] === ' ')) {
+        oldLines++;
+      }
+    }
+  });
+  return {
+    oldLines: oldLines,
+    newLines: newLines
+  };
+}
+
+function reversePatch(structuredPatch) {
+  if (Array.isArray(structuredPatch)) {
+    return structuredPatch.map(reversePatch).reverse();
+  }
+  return _objectSpread2(_objectSpread2({}, structuredPatch), {}, {
+    oldFileName: structuredPatch.newFileName,
+    oldHeader: structuredPatch.newHeader,
+    newFileName: structuredPatch.oldFileName,
+    newHeader: structuredPatch.oldHeader,
+    hunks: structuredPatch.hunks.map(function (hunk) {
+      return {
+        oldLines: hunk.newLines,
+        oldStart: hunk.newStart,
+        newLines: hunk.oldLines,
+        newStart: hunk.oldStart,
+        lines: hunk.lines.map(function (l) {
+          if (l.startsWith('-')) {
+            return "+".concat(l.slice(1));
+          }
+          if (l.startsWith('+')) {
+            return "-".concat(l.slice(1));
+          }
+          return l;
+        })
+      };
+    })
+  });
+}
+
+// See: http://code.google.com/p/google-diff-match-patch/wiki/API
+function convertChangesToDMP(changes) {
+  var ret = [],
+    change,
+    operation;
+  for (var i = 0; i < changes.length; i++) {
+    change = changes[i];
+    if (change.added) {
+      operation = 1;
+    } else if (change.removed) {
+      operation = -1;
+    } else {
+      operation = 0;
+    }
+    ret.push([operation, change.value]);
+  }
+  return ret;
+}
+
+function convertChangesToXML(changes) {
+  var ret = [];
+  for (var i = 0; i < changes.length; i++) {
+    var change = changes[i];
+    if (change.added) {
+      ret.push('<ins>');
+    } else if (change.removed) {
+      ret.push('<del>');
+    }
+    ret.push(escapeHTML(change.value));
+    if (change.added) {
+      ret.push('</ins>');
+    } else if (change.removed) {
+      ret.push('</del>');
+    }
+  }
+  return ret.join('');
+}
+function escapeHTML(s) {
+  var n = s;
+  n = n.replace(/&/g, '&amp;');
+  n = n.replace(/</g, '&lt;');
+  n = n.replace(/>/g, '&gt;');
+  n = n.replace(/"/g, '&quot;');
+  return n;
+}
+
+
 
 
 /***/ }),
@@ -82769,7 +85879,7 @@ function isUrl(fileUrlOrPath) {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("0e95d7a1244c8268cf1b")
+/******/ 		__webpack_require__.h = () => ("1427c7e5026065c35a77")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
@@ -83838,7 +86948,7 @@ function isUrl(fileUrlOrPath) {
 /******/ 	__webpack_require__("./node_modules/webpack-dev-server/client/index.js?protocol=ws%3A&hostname=localhost&port=3000&pathname=%2Fws&logging=info&overlay=true&reconnect=10&hot=true&live-reload=false");
 /******/ 	__webpack_require__("./node_modules/webpack/hot/dev-server.js");
 /******/ 	__webpack_require__("./node_modules/@pmmmwh/react-refresh-webpack-plugin/client/ErrorOverlayEntry.js");
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/pages/Content/index.ts");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/pages/Content/index.tsx");
 /******/ 	
 /******/ })()
 ;

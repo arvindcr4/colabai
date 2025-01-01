@@ -1,4 +1,4 @@
-// Structure to represent a notebook cell
+import CodeSimplifier from "./code-simplifier";
 
 interface NotebookCellConstructorParams {
     id: string;
@@ -92,8 +92,6 @@ export class NotebookChangeTracker {
         // Update state
         this.lastState = newState;
         this.cellOrder = newOrder;
-
-        console.log('Changes:', changes);
 
         return this.formatChangesForAI(changes);
     }
@@ -207,7 +205,23 @@ export class NotebookChangeTracker {
         });
 
         changeLog += '@END_CHANGELOG';
-        console.log('Change log:', changeLog);
         return changeLog;
+    }
+
+    getLastState(referencedCellIds: string[] = [], reduced = true): string {
+        // Create a summarized version of each cell
+        const summarizedCells = Array.from(this.lastState.values()).map(cell => {
+            const isReferenced = referencedCellIds.includes(cell.id);
+            const content = isReferenced ? cell.content : (reduced && cell.type === 'code' ? CodeSimplifier.simplifyCode(cell.content) : cell.content);
+
+            return {
+                id: cell.id,
+                type: cell.type,
+                // Include full content for referenced cells, preview for others
+                content: content
+            };
+        });
+
+        return JSON.stringify(summarizedCells);
     }
 }

@@ -42,12 +42,14 @@ var options = {
     options: path.join(__dirname, 'src', 'pages', 'Options', 'index.jsx'),
     popup: path.join(__dirname, 'src', 'pages', 'Popup', 'index.jsx'),
     background: path.join(__dirname, 'src', 'pages', 'Background', 'index.ts'),
-    contentScript: path.join(__dirname, 'src', 'pages', 'Content', 'index.ts'),
+    contentScript: path.join(__dirname, 'src', 'pages', 'Content', 'index.tsx'),
     devtools: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.js'),
     panel: path.join(__dirname, 'src', 'pages', 'Panel', 'index.jsx'),
+    subscription: path.join(__dirname, 'src', 'pages', 'Subscription', 'index.tsx'),
+    paymentSuccess: path.join(__dirname, 'src', 'pages', 'PaymentSuccess', 'index.tsx')
   },
   chromeExtensionBoilerplate: {
-    notHotReload: ['background', 'contentScript', 'devtools'],
+    notHotReload: ['background', 'contentScript', 'devtools', 'subscription', 'paymentSuccess'],
   },
   output: {
     filename: '[name].bundle.js',
@@ -157,7 +159,7 @@ var options = {
               })
             );
           },
-        },
+        }
       ],
     }),
     new CopyWebpackPlugin({
@@ -172,7 +174,7 @@ var options = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/assets/img/icon-128.png',
+          from: 'src/assets/img/icon128.png',
           to: path.join(__dirname, 'build'),
           force: true,
         },
@@ -181,7 +183,7 @@ var options = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/assets/img/icon-34.png',
+          from: 'src/assets/img/icon48.png',
           to: path.join(__dirname, 'build'),
           force: true,
         },
@@ -190,7 +192,34 @@ var options = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/pages/Content/pageScript.js',
+          from: 'src/assets/img/icon32.png',
+          to: path.join(__dirname, 'build'),
+          force: true,
+        },
+      ],
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'src/assets/img/icon16.png',
+          to: path.join(__dirname, 'build'),
+          force: true,
+        },
+      ],
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'src/pages/Content/modules/pageScript.js',
+          to: path.join(__dirname, 'build'),
+          force: true,
+        },
+      ],
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'public/payment-cancel.html',
           to: path.join(__dirname, 'build'),
           force: true,
         },
@@ -226,6 +255,18 @@ var options = {
       chunks: ['panel'],
       cache: false,
     }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'src', 'pages', 'Subscription', 'index.html'),
+      filename: 'subscription.html',
+      chunks: ['subscription'],
+      cache: false,
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'src', 'pages', 'PaymentSuccess', 'index.html'),
+      filename: 'payment-success.html',
+      chunks: ['paymentSuccess'],
+      cache: false,
+    })
   ].filter(Boolean),
   infrastructureLogging: {
     level: 'info',
