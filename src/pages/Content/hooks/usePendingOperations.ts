@@ -1,40 +1,93 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Operation, Pending } from '../parser';
+import { Operation, Pending } from '../../../utils/operations';
 import { acceptChange, rejectChange } from '../notebookUpdater';
+import { deepCopyPendingOperation } from '../../../utils/deep-copy';
 
-export const usePendingOperations = () => {
+export const usePendingOperations = (onDoneDiff: () => void) => {
     
     const [pendingOperations, setPendingOperations] = useState<Map<string, Pending<Operation>>>(new Map());
     
-    const anyPendingChanges = () => {
+    const anyPendingOperations = () => {
         return pendingOperations.size > 0;
     };
   
-    function acceptAllChanges() {
+    function acceptAllOperations() {
         pendingOperations.forEach((operation, cellId) => {
             if (operation.pending) {
-                operation.accept?.();
+                acceptChange(operation);
                 setPendingOperations((prev) => {
-                    const newMap = new Map(prev);
+                    const newMap = new Map(
+                        Array.from(prev.entries()).map(
+                            ([key, value]) => [key, deepCopyPendingOperation(value)]
+                        )
+                    );
                     newMap.delete(cellId);
                     return newMap;
                 });
             }
         });
+
+        onDoneDiff();
     }
     
-    function rejectAllChanges() {
+    function rejectAllOperations() {
         pendingOperations.forEach((operation, cellId) => {
             if (operation.pending) {
-                operation.reject?.();
+                rejectChange(operation);
                 setPendingOperations((prev) => {
-                    const newMap = new Map(prev);
+                    const newMap = new Map(
+                        Array.from(prev.entries()).map(
+                            ([key, value]) => [key, deepCopyPendingOperation(value)]
+                        )
+                    );
                     newMap.delete(cellId);
                     return newMap;
                 });
             }
         });
+
+        onDoneDiff();
     }
 
-    return { pendingOperations, setPendingOperations, anyPendingChanges, acceptAllChanges, rejectAllChanges };
+    function acceptOperation(cellId: string) {
+        const operation = pendingOperations.get(cellId);
+        if (operation) {
+            acceptChange(operation);
+            setPendingOperations((prev) => {
+                const newMap = new Map(
+                    Array.from(prev.entries()).map(
+                        ([key, value]) => [key, deepCopyPendingOperation(value)]
+                    )
+                );
+                newMap.delete(cellId);
+                return newMap;
+            });
+        }
+
+        if (!anyPendingOperations()) {
+            onDoneDiff();
+        }
+    }
+
+    function rejectOperation(cellId: string) {
+        const operation = pendingOperations.get(cellId);
+        if (operation) {
+            rejectChange(operation);
+            setPendingOperations((prev) => {
+                const newMap = new Map(
+                    Array.from(prev.entries()).map(
+                        ([key, value]) => [key, deepCopyPendingOperation(value)]
+                    )
+                );
+                newMap.delete(cellId);
+                return newMap;
+            });
+        }
+
+        if (!anyPendingOperations()) {
+            onDoneDiff();
+        }
+    }
+
+    return { pendingOperations, setPendingOperations, anyPendingOperations, acceptOperation, rejectOperation, acceptAllOperations, rejectAllOperations };
 };

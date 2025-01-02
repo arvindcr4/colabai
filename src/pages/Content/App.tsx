@@ -10,6 +10,7 @@ import { useAI } from './hooks/useAI';
 import { openSubscriptionWindow } from './utils/openSubscriptionWindow';
 import { Message } from './Message';
 import CellActions from './CellActions';
+import { subscriptionPlans } from '../../utils/subscriptions';
 
 const [minWidth, maxWidth, defaultWidth] = [200, 500, 350];
 
@@ -18,6 +19,8 @@ const App = () => {
 
     const [prompt, setPrompt] = useState('');
     const [model, setModel] = useState('gpt-4o-mini');
+
+    const [availableModels, setAvailableModels] = useState<string[]>([]);
 
     const actionTextAreaRef = useRef<ActionTextAreaRef>(null);
 
@@ -33,8 +36,10 @@ const App = () => {
         generationState,
         messageManager,
         pendingOperations,
-        acceptAllChanges,
-        rejectAllChanges,
+        acceptOperation,
+        rejectOperation,
+        acceptAllOperations,
+        rejectAllOperations,
         generateAndInsertContent,
         restartAI
     } = useAI(openSubscriptionWindow, setPrompt, actionTextAreaRef, authState);
@@ -42,6 +47,11 @@ const App = () => {
     useEffect(() => {
         refreshAuthState();
     }, []);
+
+    useEffect(() => {
+        availableModels.length > 0 ? setModel(availableModels[0]) : setModel('gpt-4o-mini');
+        setAvailableModels(subscriptionPlans.find((plan) => plan.id === authState.subscriptionPlan)?.limits.availableModels || []);
+    }, [authState.subscriptionPlan]);
 
     if (!authState.user) {
         return (
@@ -132,14 +142,17 @@ const App = () => {
                             value={model}
                             onChange={(e) => setModel(e.target.value)}
                         >
-                            <option value="gpt-4o-mini">GPT-4o Mini</option>
-                            {authState.subscriptionPlan == 'pro' && <option value="gpt-4o">GPT-4o</option>}
+                            {availableModels.map((model) => (
+                                <option key={model} value={model}>
+                                    {model}
+                                </option>
+                            ))}
                         </select>
                     </div>
                     {pendingOperations.size > 0 ? (
                         <div className="flex space-x-2">
                             <button className="flex-1 px-4 py-2 text-sm font-medium text-white bg-orange-600 rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors flex items-center justify-center gap-2"
-                                onClick={acceptAllChanges}>
+                                onClick={acceptAllOperations}>
                                 {/* Accept */}
                                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
@@ -147,7 +160,7 @@ const App = () => {
                                 Accept All
                             </button>
                             <button className="flex-1 px-4 py-2 text-sm font-medium text-white bg-orange-600 rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors flex items-center justify-center gap-2"
-                                onClick={rejectAllChanges}>
+                                onClick={rejectAllOperations}>
                                 {/* Reject */}
                                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -201,7 +214,7 @@ const App = () => {
                     )}
                 </div>
             </div >
-            <CellActions diffCells={pendingOperations} handleAccept={acceptAllChanges} handleReject={rejectAllChanges} />
+            <CellActions diffCells={pendingOperations} handleAccept={acceptOperation} handleReject={rejectOperation} />
         </>
     )
 }

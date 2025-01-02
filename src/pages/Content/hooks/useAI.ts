@@ -1,89 +1,53 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { applyOperation, requestContent } from '../notebookUpdater';
+import { acceptChange, applyOperation, rejectChange, requestContent } from '../notebookUpdater';
 import { ErrorType, AIError } from "../../../../src/utils/errors";
-import { useStreamingState, StreamingState } from "./useStreamingState";
 import { usePendingOperations as usePendingOperations } from "./usePendingOperations";
 import { useGenerationState } from "./useGenerationState";
 import { useMessages } from "./useMessages";
 import { useAIError } from "./useAIError";
+import { useMessageListener } from "./useMessageListener";
+import { Operation, Pending } from "../../../../src/utils/operations";
 
 export const useAI = (openSubscriptionWindow: () => void, setPrompt: (prompt: string) => void, actionTextAreaRef: any, authState: any) => {
 
     const { generationState, dispatch } = useGenerationState();
     const messageManager = useMessages();
-    const {streamingState, updateStreamingContent, resetStreamingState} = useStreamingState();
-    const {pendingOperations, setPendingOperations, acceptAllChanges, rejectAllChanges} = usePendingOperations();
-
+    const {pendingOperations, setPendingOperations, acceptOperation, rejectOperation, acceptAllOperations, rejectAllOperations} = usePendingOperations(() => {
+        dispatch({ type: 'finish_update_notebook' });
+    });
+    
     const { handleAIError } = useAIError(openSubscriptionWindow, (error) => {
         
         messageManager.addErrorMessage(error.message, error.action, error.actionText);
-
+        
         dispatch({ type: 'error', payload: error.message });
     });
-
-
-    // Memoize streamingState.isCodeBlock to prevent unnecessary re-renders
-    const isCodeBlock = streamingState.isCodeBlock;
     
-    const messageListener = useCallback((message: any) => {
-        if (message.action === 'streamed_response') {
-            updateStreamingContent(
-                message.content, 
-                message.done, 
-                messageManager.setCurrentMessage
-            );
+    useMessageListener( 
+        // Handle text content
+        (text: string) => {
+            messageManager.setCurrentMessage(text);
+            dispatch({ type: 'finish_update_notebook' });
+        },
+        // Handle operations
+        (operation: Operation) => {
+            const id = applyOperation(operation);
+            dispatch({ type: 'start_update_notebook' });
+            return id;
+        },
+        // Handle messages remaining
+        (remaining: number) => {
+            messageManager.setMessagesRemaining(remaining <= 5 ? remaining : null);
+        },
+        // Handle done generating
+        (pendingOperations: Map<string, Pending<Operation>>) => {
+            dispatch({ type: 'finish_generation' });
+            setPendingOperations(pendingOperations);
 
-            // Use ref for isCodeBlock to avoid dependency
-            dispatch({ 
-                type: isCodeBlock ? 'start_update_notebook' : 'finish_update_notebook' 
-            });
-            
-            if (!isCodeBlock) {
-                scrollToBottom();
+            if (pendingOperations.size > 0) {
+                dispatch({ type: 'start_diffing' });
             }
-            
-            if (message.done) {
-                dispatch({ type: 'finish_generation' });
-            }
-        } else if (message.action === 'messages_remaining') {
-            const remaining = message.messagesRemaining;
-            if (remaining <= 5) {
-                messageManager.setMessagesRemaining(remaining);
-            } else {
-                messageManager.setMessagesRemaining(null);
-            }
-        } else if (message.action === 'ai_error') {
-            handleAIError(message.error as AIError);
-        }
-    }, [updateStreamingContent, isCodeBlock, messageManager.setCurrentMessage, messageManager.setMessagesRemaining, dispatch, scrollToBottom, handleAIError]);
-
-    // Effect to handle pending operations when streaming state changes
-    useEffect(() => {
-        if (streamingState.appliedOperations.size > 0) {
-
-            setPendingOperations(streamingState.appliedOperations);
-            dispatch({ type: 'start_diffing' });
-
-            // Listen for diff completion
-            const diffListener = (event: any) => {
-                if (event.detail.id === 'diff_complete') {
-                    dispatch({ type: 'finish_diffing' });
-                    document.removeEventListener('diff_complete', diffListener);
-                }
-            };
-            document.addEventListener('diff_complete', diffListener);
-        }
-    }, [streamingState.appliedOperations]);
-
-    useEffect(() => {
-
-        chrome.runtime.onMessage.addListener(messageListener);
-
-        // Cleanup function to remove the listener
-        return () => {
-            chrome.runtime.onMessage.removeListener(messageListener);
-        };
-    }, [messageListener]);
+        }, handleAIError);
 
     const generateAndInsertContent = async (prompt: string, model: string) => {
         if (!prompt.trim()) return;
@@ -97,12 +61,8 @@ export const useAI = (openSubscriptionWindow: () => void, setPrompt: (prompt: st
 
             const content = await requestContent();
 
-            resetStreamingState(content);
-
             messageManager.addMessage({ type: 'user', content: prompt });
             messageManager.addMessage({ type: 'ai', content: '' });
-
-            scrollToBottom();
 
             chrome.runtime.sendMessage(
                 { action: "generateAI", prompt: prompt, content: content, model: model, plan: authState.subscriptionPlan }
@@ -114,7 +74,12 @@ export const useAI = (openSubscriptionWindow: () => void, setPrompt: (prompt: st
         }
     };
 
-    
+    useEffect(() => {
+        if (messageManager.messages.length > 0) {
+            scrollToBottom();
+        }
+    }, [messageManager.messages]);
+
     function restartAI() {
         chrome.runtime.sendMessage({ action: "restartAI" });
         messageManager.resetMessages();
@@ -124,8 +89,10 @@ export const useAI = (openSubscriptionWindow: () => void, setPrompt: (prompt: st
         generationState,
         messageManager,
         pendingOperations,
-        acceptAllChanges,
-        rejectAllChanges,
+        acceptOperation,
+        rejectOperation,
+        acceptAllOperations,
+        rejectAllOperations,
         generateAndInsertContent,
         restartAI
     };

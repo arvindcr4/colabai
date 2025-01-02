@@ -1,9 +1,11 @@
 import { AIModel, ModelConfig } from './base.ts';
 import { OpenAIModel } from './openai.ts';
+import { DeepSeekModel } from './deepseek.ts';
 import { ModelType } from '../subscription-plans.ts';
 
 export enum ModelProvider {
   OpenAI = 'openai',
+  DeepSeek = 'deepseek',
   // Add more providers as needed
   // Claude = 'claude',
   // Gemini = 'gemini',
@@ -14,6 +16,8 @@ export class ModelFactory {
     switch (provider) {
       case ModelProvider.OpenAI:
         return new OpenAIModel(config);
+      case ModelProvider.DeepSeek:
+        return new DeepSeekModel(config);
       // Add more cases as you add more providers
       // case ModelProvider.Claude:
       //   return new ClaudeModel(config);
@@ -31,6 +35,11 @@ export class ModelFactory {
     // Handle standard OpenAI models
     if (modelName.startsWith('gpt-')) {
       return ModelProvider.OpenAI;
+    }
+
+    // Handle DeepSeek models
+    if (modelName.startsWith('deepseek-')) {
+      return ModelProvider.DeepSeek;
     }
     
     // Add more model name patterns as you add more providers

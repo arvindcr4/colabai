@@ -120,29 +120,27 @@
         // Create mutation observer with performance optimizations
         const observer = new MutationObserver((mutations) => {
             // Use requestAnimationFrame to batch DOM updates
-            requestAnimationFrame(() => {
 
-                // Check if we need to stop observing
-                if (mutations.some(mutation =>
-                    mutation.type === 'attributes' &&
-                    mutation.attributeName === 'data-diff' &&
-                    mutation.target.getAttribute('data-diff') === 'false'
-                )) {
-                    observer.disconnect();
-                    cell.querySelectorAll('.view-line').forEach(line => line.classList.remove('bg-green-800', 'bg-red-800'));
-                    return;
-                }
+            // Only apply highlighting if there are relevant changes
+            const hasRelevantChanges = mutations.some(mutation =>
+                mutation.type === 'childList' ||
+                (mutation.type === 'attributes' && mutation.attributeName === 'class')
+            );
 
-                // Only apply highlighting if there are relevant changes
-                const hasRelevantChanges = mutations.some(mutation =>
-                    mutation.type === 'childList' ||
-                    (mutation.type === 'attributes' && mutation.attributeName === 'class')
-                );
+            if (hasRelevantChanges) {
+                applyHighlighting();
+            }
 
-                if (hasRelevantChanges) {
-                    applyHighlighting();
-                }
-            });
+            // Check if we need to stop observing
+            if (mutations.some(mutation =>
+                mutation.type === 'attributes' &&
+                mutation.attributeName === 'data-diff' &&
+                mutation.target.getAttribute('data-diff') === 'false'
+            )) {
+                observer.disconnect();
+                cell.querySelectorAll('.view-line').forEach(line => line.classList.remove('bg-green-800', 'bg-red-800'));
+                return;
+            }
         });
 
         // Observe with more specific options
@@ -196,8 +194,6 @@
 
         cell.focusCell_();
 
-        setTimeout(() => {
-            document.querySelector('colab-cell-toolbar').shadowRoot.getElementById('button-delete-cell-or-selection').click();
-        }, 400);
+        document.querySelector('colab-cell-toolbar').shadowRoot.getElementById('button-delete-cell-or-selection').click();
     });
 })();

@@ -1,23 +1,23 @@
 import { NotebookCell } from './types';
-import { CreateOperation, DeleteOperation, DiffOperation, EditOperation } from '../pages/Content/parser';
-import { Operation, Pending } from '../pages/Content/parser';
-import { StreamingState } from '../pages/Content/hooks/useStreamingState';
+import { Operation, Pending, CreateOperation, DeleteOperation, DiffOperation, EditOperation } from './operations';
+import { StreamingState } from '../pages/Background/Parsing/streaming-state';
 
 /**
  * Creates a deep copy of a NotebookCell object
  */
-function deepCopyNotebookCell(cell: NotebookCell): NotebookCell {
+export function deepCopyNotebookCell(cell: NotebookCell): NotebookCell {
     return {
         id: cell.id,
         type: cell.type,
-        content: cell.content
+        content: cell.content,
+        index: cell.index
     };
 }
 
 /**
  * Creates a deep copy of an Operation object
  */
-function deepCopyOperation(operation: Operation): Operation {
+export function deepCopyOperation(operation: Operation): Operation {
     const baseCopy = { ...operation };
     
     switch (operation.type) {
@@ -57,12 +57,10 @@ function deepCopyOperation(operation: Operation): Operation {
 /**
  * Creates a deep copy of a Pending<Operation> object
  */
-function deepCopyPendingOperation<T extends Operation>(pending: Pending<T>): Pending<T> {
+export function deepCopyPendingOperation<T extends Operation>(pending: Pending<T>): Pending<T> {
     return {
         ...deepCopyOperation(pending),
-        pending: pending.pending,
-        accept: pending.accept,
-        reject: pending.reject
+        pending: pending.pending
     } as Pending<T & Operation>;
 }
 

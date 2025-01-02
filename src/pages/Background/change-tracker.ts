@@ -1,25 +1,5 @@
 import CodeSimplifier from "./code-simplifier";
-
-interface NotebookCellConstructorParams {
-    id: string;
-    type: 'code' | 'text';
-    content: string;
-    index: number;
-}
-
-export class NotebookCell {
-    id: string;
-    type: 'code' | 'text';
-    content: string;
-    index: number;
-
-    constructor({ id, type, content, index }: NotebookCellConstructorParams) {
-        this.id = id;
-        this.type = type;    // 'code' or 'markdown'
-        this.content = content;
-        this.index = index;
-    }
-}
+import { NotebookCell } from "../../utils/types";
 
 interface CellChange {
     type: 'add' | 'remove' | 'modify' | 'move';
@@ -72,12 +52,12 @@ export class NotebookChangeTracker {
 
         // Create new state map and order
         currentCells.forEach((cell, index) => {
-            newState.set(cell.id, new NotebookCell({
+            newState.set(cell.id, {
                 id: cell.id,
                 type: cell.type,
                 content: cell.content,
                 index: index
-            }));
+            });
             newOrder.push(cell.id);
         });
 

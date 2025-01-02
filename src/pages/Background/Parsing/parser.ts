@@ -1,9 +1,10 @@
-import { getCellContent, requestContent } from "./notebookUpdater";
-import { NotebookCell } from "../../utils/types";
-import { applyOperation, acceptChange, rejectChange } from "./notebookUpdater";
-import { StreamingState } from "./hooks/useStreamingState";
+import { getCellContent, requestContent } from "../../Content/notebookUpdater";
+import { NotebookCell } from "../../../utils/types";
+import { StreamingState } from "./streaming-state";
+import { sendOperation } from "../content-messager";
+import { CreateOperation, DeleteOperation, EditOperation, DiffOperation, Operation, Pending } from "../../../utils/operations";
 
-export function parseLines(streamingState: StreamingState, lines: string[]): StreamingState {
+export async function parseLines(streamingState: StreamingState, lines: string[]): Promise<StreamingState> {
 
     const createRegex = /@CREATE\[type=(markdown|code),\s*position=(top|bottom|after:(cell-[^\]]+)|before:(cell-[^\]]+))\]/;
     const editRegex = /@EDIT\[(cell-[^\]]+)\]/;
@@ -56,9 +57,9 @@ export function parseLines(streamingState: StreamingState, lines: string[]): Str
                     const lastOperation = previousOperations[previousOperations.length - 1];
                     position = `after:${lastOperation.cellId}`;
                 }
-                id = applyOperation({ ...operation, position } as CreateOperation);
+                id = await sendOperation({ ...operation, position } as CreateOperation);
             } else {
-                id = applyOperation(operation as CreateOperation);
+                id = await sendOperation(operation as CreateOperation);
             }
 
             if (!id || id === '') {
@@ -81,7 +82,7 @@ export function parseLines(streamingState: StreamingState, lines: string[]): Str
             }
 
             streamingState.currentOperations.set(cellId, operation as EditOperation);
-            applyOperation(operation as EditOperation);
+            await sendOperation(operation as EditOperation);
 
             console.log('[Parser] Edit operation:', operation);
         } else if (deleteMatch) {
@@ -93,13 +94,11 @@ export function parseLines(streamingState: StreamingState, lines: string[]): Str
                 originalContent
             };
 
-            applyOperation(operation);
+            await sendOperation(operation);
 
             streamingState.appliedOperations.set(cellId, {
                 ...operation,
-                pending: true,
-                reject: rejectChange(operation),
-                accept: acceptChange(operation)
+                pending: true
             });
             
             console.log('[Parser] Delete operation:', cellId);
@@ -113,12 +112,10 @@ export function parseLines(streamingState: StreamingState, lines: string[]): Str
                     const pendingOperation = {
                         ...operation,
                         pending: true,
-                        reject: rejectChange(operation),
-                        accept: acceptChange(operation)
                     };
                     streamingState.appliedOperations.set(operation.cellId, pendingOperation);
                     
-                    applyOperation({
+                    await sendOperation({
                         type: 'diff',
                         cellId: operation.cellId,
                         originalContent: operation.type === 'edit' ? (operation as EditOperation).originalContent : '',
@@ -134,7 +131,7 @@ export function parseLines(streamingState: StreamingState, lines: string[]): Str
                     operation.contentArray?.push(line);
                     operation.content = operation.contentArray.join('\n');
 
-                    applyOperation({
+                    await sendOperation({
                         type: 'edit',
                         cellId: operation.cellId,
                         contentArray: operation.contentArray,
@@ -149,38 +146,3 @@ export function parseLines(streamingState: StreamingState, lines: string[]): Str
     return streamingState;
 }
 
-
-export interface CreateOperation {
-    type: 'create';
-    cellType: 'markdown' | 'code';
-    cellId: string;
-    position: 'top' | 'bottom' | `after:${string}` | `before:${string}`;
-    contentArray: string[];
-    content: string;
-}
-
-export interface EditOperation {
-    type: 'edit';
-    cellId: string;
-    contentArray: string[];
-    content: string;
-    originalContent: string;
-}
-
-export interface DeleteOperation {
-    type: 'delete';
-    cellId: string;
-    originalContent: string;
-}
-
-export interface DiffOperation {
-    type: 'diff';
-    cellId: string;
-    originalContent: string;
-    content: string;
-}
-
-export type Operation = CreateOperation | EditOperation | DeleteOperation | DiffOperation;
-
-// Add a pending attribute to the operation type
-export type Pending<T extends Operation> = T & { pending: boolean, accept: () => void, reject: () => void };

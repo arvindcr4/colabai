@@ -15224,6 +15224,289 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
+/***/ "./src/pages/Background/Parsing/parser.ts":
+/*!************************************************!*\
+  !*** ./src/pages/Background/Parsing/parser.ts ***!
+  \************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   parseLines: () => (/* binding */ parseLines)
+/* harmony export */ });
+/* harmony import */ var _content_messager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../content-messager */ "./src/pages/Background/content-messager.ts");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+function parseLines(streamingState, lines) {
+    var _a, _b, _c;
+    return __awaiter(this, void 0, void 0, function* () {
+        const createRegex = /@CREATE\[type=(markdown|code),\s*position=(top|bottom|after:(cell-[^\]]+)|before:(cell-[^\]]+))\]/;
+        const editRegex = /@EDIT\[(cell-[^\]]+)\]/;
+        const deleteRegex = /@DELETE\[(cell-[^\]]+)\]/;
+        const endRegex = /@END/;
+        const startCodeRegex = /@START_CODE/;
+        const endCodeRegex = /@END_CODE/;
+        for (const line of lines) {
+            // Handle code block markers
+            if (line.match(startCodeRegex)) {
+                streamingState.isCodeBlock = true;
+                return streamingState;
+            }
+            if (line.match(endCodeRegex)) {
+                streamingState.isCodeBlock = false;
+                return streamingState;
+            }
+            // Process operations
+            const createMatch = line.match(createRegex);
+            const editMatch = line.match(editRegex);
+            const deleteMatch = line.match(deleteRegex);
+            if (createMatch) {
+                const operationId = `create-${Date.now()}-${Math.random()}`;
+                const operation = {
+                    type: 'create',
+                    cellType: createMatch[1],
+                    cellId: '',
+                    position: createMatch[2],
+                    contentArray: [],
+                    content: ''
+                };
+                let id;
+                // If the operation is after a specific cell, find the last operation that was created after that cell (this is needed to ensure that cells are inserted in the correct order)
+                if (operation.position.startsWith('after:')) {
+                    let position = operation.position;
+                    // Find all previous operations that were created after this same cell
+                    const previousOperations = Array.from(streamingState.appliedOperations.values())
+                        .filter(op => op.type === 'create' && op.position === operation.position);
+                    if (previousOperations.length > 0) {
+                        // Get the last operation in the chain
+                        const lastOperation = previousOperations[previousOperations.length - 1];
+                        position = `after:${lastOperation.cellId}`;
+                    }
+                    id = yield (0,_content_messager__WEBPACK_IMPORTED_MODULE_0__.sendOperation)(Object.assign(Object.assign({}, operation), { position }));
+                }
+                else {
+                    id = yield (0,_content_messager__WEBPACK_IMPORTED_MODULE_0__.sendOperation)(operation);
+                }
+                if (!id || id === '') {
+                    console.log('[Parser] Failed to apply operation:', operation);
+                    return streamingState;
+                }
+                operation.cellId = id;
+                streamingState.currentOperations.set(operation.cellId, operation);
+                console.log('[Parser] Create operation:', operation);
+            }
+            else if (editMatch) {
+                const cellId = editMatch[1];
+                const operation = {
+                    type: 'edit',
+                    cellId,
+                    contentArray: [],
+                    content: '',
+                    originalContent: ((_a = streamingState.originalContent.find(cell => cell.id === cellId)) === null || _a === void 0 ? void 0 : _a.content) || ''
+                };
+                streamingState.currentOperations.set(cellId, operation);
+                yield (0,_content_messager__WEBPACK_IMPORTED_MODULE_0__.sendOperation)(operation);
+                console.log('[Parser] Edit operation:', operation);
+            }
+            else if (deleteMatch) {
+                const cellId = deleteMatch[1];
+                const originalContent = ((_b = streamingState.originalContent.find(cell => cell.id === cellId)) === null || _b === void 0 ? void 0 : _b.content) || '';
+                const operation = {
+                    type: 'delete',
+                    cellId,
+                    originalContent
+                };
+                yield (0,_content_messager__WEBPACK_IMPORTED_MODULE_0__.sendOperation)(operation);
+                streamingState.appliedOperations.set(cellId, Object.assign(Object.assign({}, operation), { pending: true }));
+                console.log('[Parser] Delete operation:', cellId);
+            }
+            else if (line.match(endRegex)) {
+                // Finalize current operation
+                for (const [id, operation] of streamingState.currentOperations.entries()) {
+                    if (operation.type === 'create' || operation.type === 'edit') {
+                        console.log('[Parser] Applied operation:', operation);
+                        const pendingOperation = Object.assign(Object.assign({}, operation), { pending: true });
+                        streamingState.appliedOperations.set(operation.cellId, pendingOperation);
+                        yield (0,_content_messager__WEBPACK_IMPORTED_MODULE_0__.sendOperation)({
+                            type: 'diff',
+                            cellId: operation.cellId,
+                            originalContent: operation.type === 'edit' ? operation.originalContent : '',
+                            content: operation.content
+                        });
+                    }
+                }
+                streamingState.currentOperations.clear();
+            }
+            else {
+                // Add content to current operations
+                for (const operation of streamingState.currentOperations.values()) {
+                    if (operation.type !== 'delete' && 'contentArray' in operation && operation.contentArray) {
+                        (_c = operation.contentArray) === null || _c === void 0 ? void 0 : _c.push(line);
+                        operation.content = operation.contentArray.join('\n');
+                        yield (0,_content_messager__WEBPACK_IMPORTED_MODULE_0__.sendOperation)({
+                            type: 'edit',
+                            cellId: operation.cellId,
+                            contentArray: operation.contentArray,
+                            content: operation.content,
+                            originalContent: operation.type === 'edit' ? operation.originalContent : ''
+                        });
+                    }
+                }
+            }
+        }
+        return streamingState;
+    });
+}
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Background/Parsing/streaming-state.ts":
+/*!*********************************************************!*\
+  !*** ./src/pages/Background/Parsing/streaming-state.ts ***!
+  \*********************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   resetStreamingState: () => (/* binding */ resetStreamingState),
+/* harmony export */   updateStreamingContent: () => (/* binding */ updateStreamingContent)
+/* harmony export */ });
+/* harmony import */ var _Background_Parsing_parser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Background/Parsing/parser */ "./src/pages/Background/Parsing/parser.ts");
+/* harmony import */ var _content_messager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../content-messager */ "./src/pages/Background/content-messager.ts");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+const streamingState = {
+    buffer: '',
+    textContent: '',
+    fullResponse: '',
+    appliedOperations: new Map(),
+    currentOperations: new Map(),
+    isCodeBlock: false,
+    originalContent: []
+};
+function resetStreamingState(content) {
+    streamingState.buffer = '';
+    streamingState.textContent = '';
+    streamingState.fullResponse = '';
+    streamingState.appliedOperations = new Map();
+    streamingState.currentOperations = new Map();
+    streamingState.isCodeBlock = false;
+    streamingState.originalContent = content;
+}
+function updateStreamingContent(newContent, done) {
+    return __awaiter(this, void 0, void 0, function* () {
+        streamingState.buffer = streamingState.buffer + newContent;
+        streamingState.fullResponse = streamingState.fullResponse + newContent;
+        // Process complete lines
+        const lines = streamingState.buffer.split(/\r?\n/);
+        streamingState.buffer = lines.pop() || '';
+        if (!streamingState.isCodeBlock) {
+            const newTextContent = streamingState.textContent + newContent;
+            streamingState.textContent = newTextContent;
+            //setMessageText(newTextContent);
+            (0,_content_messager__WEBPACK_IMPORTED_MODULE_1__.sendTextContent)(newTextContent);
+        }
+        yield (0,_Background_Parsing_parser__WEBPACK_IMPORTED_MODULE_0__.parseLines)(streamingState, lines);
+        if (done) {
+            (0,_content_messager__WEBPACK_IMPORTED_MODULE_1__.doneGenerating)(streamingState.appliedOperations);
+        }
+        return streamingState;
+    });
+}
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
 /***/ "./src/pages/Background/ai-agent.ts":
 /*!******************************************!*\
   !*** ./src/pages/Background/ai-agent.ts ***!
@@ -15238,7 +15521,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _change_tracker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./change-tracker */ "./src/pages/Background/change-tracker.ts");
 /* harmony import */ var _utils_errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/errors */ "./src/utils/errors.ts");
-/* harmony import */ var _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @supabase/supabase-js */ "./node_modules/@supabase/functions-js/dist/module/types.js");
+/* harmony import */ var _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @supabase/supabase-js */ "./node_modules/@supabase/functions-js/dist/module/types.js");
+/* harmony import */ var _Parsing_streaming_state__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Parsing/streaming-state */ "./src/pages/Background/Parsing/streaming-state.ts");
+/* harmony import */ var _content_messager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./content-messager */ "./src/pages/Background/content-messager.ts");
 /* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
 /* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
@@ -15255,6 +15540,8 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
+
+
 let notebookTracker;
 const changeLogs = [];
 const prompts = [];
@@ -15268,6 +15555,7 @@ function generateAIContent(prompt, content, supabase, model = "gpt-4o-mini", pla
     var _a;
     return __awaiter(this, void 0, void 0, function* () {
         trackNotebookChanges(content);
+        (0,_Parsing_streaming_state__WEBPACK_IMPORTED_MODULE_2__.resetStreamingState)(content);
         // Get current notebook state with full content for referenced cells
         let notebookState = notebookTracker.getLastState([], false);
         const shouldReduceContent = plan === 'free' ? notebookState.length > 20000 : notebookState.length > 200000;
@@ -15316,13 +15604,7 @@ function generateAIContent(prompt, content, supabase, model = "gpt-4o-mini", pla
                     details: error
                 };
             }
-            // Ensure the error is propagated to the content script
-            chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-                chrome.tabs.sendMessage(tabs[0].id, {
-                    action: 'ai_error',
-                    error
-                });
-            });
+            (0,_content_messager__WEBPACK_IMPORTED_MODULE_3__.sendError)(error);
         }
     });
 }
@@ -15351,13 +15633,7 @@ function sendToContextEnhancer(supabase, prompt, model = "gpt-4o-mini") {
                     details: error
                 };
             }
-            // Ensure the error is propagated to the content script
-            chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-                chrome.tabs.sendMessage(tabs[0].id, {
-                    action: 'ai_error',
-                    error
-                });
-            });
+            (0,_content_messager__WEBPACK_IMPORTED_MODULE_3__.sendError)(error);
         }
         return [];
     });
@@ -15372,19 +15648,19 @@ function sendAI(supabase, messages, model = "gpt-4o-mini", contextEnhancer = fal
             }
         });
         console.log(`Sent to ${contextEnhancer ? "context enhancer" : "AI agent"}:`, messages);
-        if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_2__.FunctionsHttpError) {
+        if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_4__.FunctionsHttpError) {
             const errorMessage = yield error.context.json();
             console.error('Supabase function error:', errorMessage);
             throw errorMessage.error;
         }
-        else if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_2__.FunctionsRelayError) {
+        else if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_4__.FunctionsRelayError) {
             throw {
                 type: _utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType.SERVER,
                 message: 'Error during content streaming',
                 details: error
             };
         }
-        else if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_2__.FunctionsFetchError) {
+        else if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_4__.FunctionsFetchError) {
             throw {
                 type: _utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType.SERVER,
                 message: 'Error during content streaming',
@@ -15425,21 +15701,10 @@ function getStreamedResponse(data) {
                                 throw data.error;
                             }
                             if (data.messages_remaining !== undefined) {
-                                chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-                                    chrome.tabs.sendMessage(tabs[0].id, {
-                                        action: 'messages_remaining',
-                                        messagesRemaining: data.messages_remaining
-                                    });
-                                });
+                                (0,_content_messager__WEBPACK_IMPORTED_MODULE_3__.sendMessagesRemaining)(data.messages_remaining);
                             }
                             else if (data.content !== undefined) {
-                                chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-                                    chrome.tabs.sendMessage(tabs[0].id, {
-                                        action: 'streamed_response',
-                                        content: data.content,
-                                        done: data.done
-                                    });
-                                });
+                                yield (0,_Parsing_streaming_state__WEBPACK_IMPORTED_MODULE_2__.updateStreamingContent)(data.content, data.done);
                                 console.log('Response:', data.content);
                                 response += data.content;
                             }
@@ -15473,13 +15738,7 @@ function getStreamedResponse(data) {
                     throw data.error;
                 }
                 if (data.content !== undefined) {
-                    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-                        chrome.tabs.sendMessage(tabs[0].id, {
-                            action: 'streamed_response',
-                            content: data.content,
-                            done: data.done
-                        });
-                    });
+                    yield (0,_Parsing_streaming_state__WEBPACK_IMPORTED_MODULE_2__.updateStreamingContent)(data.content, data.done);
                 }
             }
             catch (error) {
@@ -15544,7 +15803,6 @@ if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Pr
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   NotebookCell: () => (/* binding */ NotebookCell),
 /* harmony export */   NotebookChangeTracker: () => (/* binding */ NotebookChangeTracker)
 /* harmony export */ });
 /* harmony import */ var _code_simplifier__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./code-simplifier */ "./src/pages/Background/code-simplifier.ts");
@@ -15553,14 +15811,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
 
 
-class NotebookCell {
-    constructor({ id, type, content, index }) {
-        this.id = id;
-        this.type = type; // 'code' or 'markdown'
-        this.content = content;
-        this.index = index;
-    }
-}
 // Class to track and generate notebook changes
 class NotebookChangeTracker {
     constructor() {
@@ -15574,12 +15824,12 @@ class NotebookChangeTracker {
         const changes = [];
         // Create new state map and order
         currentCells.forEach((cell, index) => {
-            newState.set(cell.id, new NotebookCell({
+            newState.set(cell.id, {
                 id: cell.id,
                 type: cell.type,
                 content: cell.content,
                 index: index
-            }));
+            });
             newOrder.push(cell.id);
         });
         this.cellOrder = newOrder;
@@ -15817,6 +16067,113 @@ class CodeSimplifier {
             .join('\n');
     }
 }
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Background/content-messager.ts":
+/*!**************************************************!*\
+  !*** ./src/pages/Background/content-messager.ts ***!
+  \**************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   doneGenerating: () => (/* binding */ doneGenerating),
+/* harmony export */   sendError: () => (/* binding */ sendError),
+/* harmony export */   sendMessagesRemaining: () => (/* binding */ sendMessagesRemaining),
+/* harmony export */   sendOperation: () => (/* binding */ sendOperation),
+/* harmony export */   sendTextContent: () => (/* binding */ sendTextContent)
+/* harmony export */ });
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+const sendError = (error) => {
+    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+        chrome.tabs.sendMessage(tabs[0].id, {
+            action: 'ai_error',
+            error
+        });
+    });
+};
+const sendTextContent = (text) => {
+    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+        chrome.tabs.sendMessage(tabs[0].id, {
+            action: 'ai_text_content',
+            content: text
+        });
+    });
+};
+// Send operation and return cell id
+function sendOperation(operation) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const tabs = yield chrome.tabs.query({ active: true, currentWindow: true });
+        const response = yield chrome.tabs.sendMessage(tabs[0].id, {
+            action: 'ai_operation',
+            operation
+        });
+        return response.data.id;
+    });
+}
+;
+const sendMessagesRemaining = (remaining) => {
+    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+        chrome.tabs.sendMessage(tabs[0].id, {
+            action: 'ai_messages_remaining',
+            messagesRemaining: remaining
+        });
+    });
+};
+const doneGenerating = (pendingOperations) => {
+    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+        chrome.tabs.sendMessage(tabs[0].id, {
+            action: 'ai_done_generating',
+            pendingOperations: [...pendingOperations.entries()]
+        });
+    });
+};
 
 
 const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
@@ -20589,7 +20946,7 @@ const {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("6d5af0ff16906f5cc688")
+/******/ 		__webpack_require__.h = () => ("ea68d1b64b50d5a95a99")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

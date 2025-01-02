@@ -1,8 +1,11 @@
-import { NotebookChangeTracker, NotebookCell } from './change-tracker';
+import { NotebookChangeTracker } from './change-tracker';
+import { NotebookCell } from '../../utils/types';
 import { ErrorType, type AIError } from '../../utils/errors';
 import { FunctionsHttpError, FunctionsRelayError, FunctionsFetchError } from "@supabase/supabase-js";
 import CodeSimplifier from './code-simplifier';
 import { ModelType } from '../../../src/utils/types';
+import { updateStreamingContent, resetStreamingState } from './Parsing/streaming-state';
+import { sendError, sendMessagesRemaining } from './content-messager';
 
 let notebookTracker: NotebookChangeTracker;
 const changeLogs: string[] = [];
@@ -19,6 +22,7 @@ function trackNotebookChanges(currentCells: NotebookCell[]) {
 export async function generateAIContent(prompt: string, content: NotebookCell[], supabase: any, model = "gpt-4o-mini", plan = 'free') {
     
     trackNotebookChanges(content);
+    resetStreamingState(content);
 
     // Get current notebook state with full content for referenced cells
     let notebookState = notebookTracker.getLastState([], false);
@@ -52,7 +56,6 @@ export async function generateAIContent(prompt: string, content: NotebookCell[],
     }
     prompts.push(prompt);
 
-
     const messages: { role: string; content: string; }[] = [];
 
     for (let i = 0; i < prompts.length-1; i++) {
@@ -83,15 +86,8 @@ export async function generateAIContent(prompt: string, content: NotebookCell[],
             };
         }
         
-        // Ensure the error is propagated to the content script
-        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-            chrome.tabs.sendMessage(tabs[0].id!, {
-                action: 'ai_error',
-                error
-            });
-        });
+        sendError(error);
     }
-
 }
 
 async function sendToContextEnhancer(supabase: any, prompt: string, model = "gpt-4o-mini") {
@@ -124,13 +120,7 @@ async function sendToContextEnhancer(supabase: any, prompt: string, model = "gpt
             };
         }
         
-        // Ensure the error is propagated to the content script
-        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-            chrome.tabs.sendMessage(tabs[0].id!, {
-                action: 'ai_error',
-                error
-            });
-        });
+        sendError(error);
     }
 
     return [];
@@ -203,20 +193,10 @@ async function getStreamedResponse(data: any) {
                         }
                         
                         if (data.messages_remaining !== undefined) {
-                            chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-                                chrome.tabs.sendMessage(tabs[0].id!, {
-                                    action: 'messages_remaining',
-                                    messagesRemaining: data.messages_remaining
-                                });
-                            });
+                            sendMessagesRemaining(data.messages_remaining);
                         } else if (data.content !== undefined) {
-                            chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-                                chrome.tabs.sendMessage(tabs[0].id!, {
-                                    action: 'streamed_response',
-                                    content: data.content,
-                                    done: data.done
-                                });
-                            });
+                            
+                            await updateStreamingContent(data.content, data.done);
 
                             console.log('Response:', data.content);
 
@@ -253,13 +233,7 @@ async function getStreamedResponse(data: any) {
                 throw data.error;
             }
             if (data.content !== undefined) {
-                chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-                    chrome.tabs.sendMessage(tabs[0].id!, {
-                        action: 'streamed_response',
-                        content: data.content,
-                        done: data.done
-                    });
-                });
+                await updateStreamingContent(data.content, data.done);
             }
         } catch (error) {
             console.error('Error parsing final buffer:', error);

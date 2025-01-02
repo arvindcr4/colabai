@@ -1,7 +1,7 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { CellDiff } from './CellDiff';
-import { Operation, Pending } from './parser';
+import { Operation, Pending } from '../../utils/operations';
 
 import { useEffect, useState } from 'react';
 

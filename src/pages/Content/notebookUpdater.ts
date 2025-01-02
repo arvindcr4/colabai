@@ -1,4 +1,4 @@
-import { Operation, Pending } from './parser';
+import { Operation, Pending } from '../../utils/operations';
 import { NotebookCell } from '../../utils/types';
 import { diffLines } from 'diff';
 
@@ -100,13 +100,6 @@ export function deleteCell(id: string, originalContent: string) {
     const mainContent = cell.querySelector('.main-content') as HTMLElement;
     if(mainContent)
         mainContent.style.opacity = '0.5';
-    
-    // injectCellActions(
-    //     id, 
-    //     true,
-    //     () => acceptChange(id),
-    //     () => rejectChange(id)
-    // );
 
     return id;
 }
@@ -123,83 +116,54 @@ function diffCell(id: string, originalContent: string, newContent: string) {
     document.dispatchEvent(customEvent);
 
     cell.setAttribute('data-diff', 'true');
-    
-    // injectCellActions(
-    //     id, 
-    //     true,
-    //     () => acceptChange(id),
-    //     () => rejectChange(id)
-    // );
 
     return id;
 }
 
 
-export function acceptChange(change: Operation): () => void {
-
-    //injectCellActions(change.cellId, false, () => {}, () => {});
+export function acceptChange(change: Operation): void {
 
     if (change.type === 'delete') {
         const customEvent = new CustomEvent('deleteCell', { 
             detail: { id: change.cellId } 
         });
-        return () => document.dispatchEvent(customEvent);
+        document.dispatchEvent(customEvent);
     } else {
         const customEvent = new CustomEvent('setMonacoValue', {
             detail: { id: change.cellId, content: change.content }
         });
 
-        return () => {
-            stopDiff(change.cellId);
-            document.dispatchEvent(customEvent);
-        }
+        stopDiff(change.cellId);
+        document.dispatchEvent(customEvent);
     }
-
-    // if (pendingChanges.size === 0) {
-    //     const customEvent = new CustomEvent('diff_complete', { detail: { id: 'diff_complete' } });
-    //     document.dispatchEvent(customEvent);
-    // }
 }
 
-export function rejectChange(change: Operation): () => void {
-
-    //injectCellActions(change.cellId, false, () => {}, () => {});
+export function rejectChange(change: Operation): void {
 
     if (change.type === 'create') {
         const customEvent = new CustomEvent('deleteCell', { 
             detail: { id: change.cellId } 
         });
 
-        return () => {
-            stopDiff(change.cellId);
-            document.dispatchEvent(customEvent);
-        }
-    } else if (change.type === 'edit' && change.originalContent) {
+        stopDiff(change.cellId);
+        document.dispatchEvent(customEvent);
+        
+    } else if (change.type === 'edit') {
         const customEvent = new CustomEvent('setMonacoValue', {
             detail: { id: change.cellId, content: change.originalContent }
         });
 
-        return () => {
-            stopDiff(change.cellId);
-            document.dispatchEvent(customEvent);
-        }
+        stopDiff(change.cellId);
+        document.dispatchEvent(customEvent);
+
     } else if (change.type === 'delete') {
-        return () => {
-            const cell = document.getElementById(change.cellId);
-            if (cell) {
-                const mainContent = cell.querySelector('.main-content') as HTMLElement;
-                if(mainContent)
-                    mainContent.style.opacity = '1';
-            }
-        };
+        const cell = document.getElementById(change.cellId);
+        if (cell) {
+            const mainContent = cell.querySelector('.main-content') as HTMLElement;
+            if(mainContent)
+                mainContent.style.opacity = '1';
+        }
     }
-
-    return () => {};
-
-    // if (pendingChanges.size === 0) {
-    //     const customEvent = new CustomEvent('diff_complete', { detail: { id: 'diff_complete' } });
-    //     document.dispatchEvent(customEvent);
-    // }
 }
 
 const stopDiff = (cellId: string) => {

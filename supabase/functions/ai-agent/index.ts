@@ -8,7 +8,7 @@ import { corsHeaders } from '../_shared/cors.ts'
 import { subscriptionPlans, ModelType } from '../_shared/subscription-plans.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.3'
 import { ErrorType, createErrorResponse } from '../_shared/errors.ts';
-import { ModelFactory } from '../_shared/models/factory.ts';
+import { ModelFactory, ModelProvider } from '../_shared/models/factory.ts';
 import { Message } from '../_shared/models/base.ts';
 
 // Add helper function to check and update message count
@@ -165,10 +165,18 @@ Deno.serve(async (req) => {
 
     try {
         const provider = ModelFactory.getProviderFromModel(usedModel);
+        const apiKey = provider === ModelProvider.DeepSeek 
+            ? Deno.env.get("DEEPSEEK_API_KEY") 
+            : Deno.env.get("OPENAI_API_KEY");
+            
+        if (!apiKey) {
+            throw new Error(`Missing API key for provider: ${provider}`);
+        }
+
         const aiModel = ModelFactory.createModel(provider, {
-            apiKey: Deno.env.get("OPENAI_API_KEY") || '',
+            apiKey,
             model: usedModel,
-            temperature: 0.7,
+            temperature: 0.3,
         });
 
         if (!aiModel.validateConfig()) {

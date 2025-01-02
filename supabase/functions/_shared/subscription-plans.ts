@@ -1,6 +1,7 @@
 export enum ModelType {
   GPT4O = 'gpt-4o',
-  GPT4O_MINI = 'gpt-4o-mini'
+  GPT4O_MINI = 'gpt-4o-mini',
+  DEEPSEEK_CHAT = 'deepseek-chat'
 }
 
 export interface SubscriptionPlan {
@@ -12,7 +13,7 @@ export interface SubscriptionPlan {
   features: string[];
   limits: {
     messagesPerDay: number;
-    model: ModelType;
+    availableModels: ModelType[];
     contextWindow: number;
     maxOutputSize: number;
     errorAnalysis: boolean;
@@ -39,7 +40,7 @@ export const subscriptionPlans: SubscriptionPlan[] = [
       maxOutputSize: 500,
       errorAnalysis: false,
       outputAnalysis: false,
-      model: ModelType.GPT4O_MINI
+      availableModels: [ModelType.DEEPSEEK_CHAT, ModelType.GPT4O_MINI]
     },
     popular: false,
     paypalPlanId: 'P-XXXXXXXXXXXX'
@@ -51,7 +52,7 @@ export const subscriptionPlans: SubscriptionPlan[] = [
     popular: true,
     description: 'Enhanced experience with advanced features',
     features: [
-      'GPT-4O Mini with larger context',
+      'DeepSeek Chat with larger context',
       '50 messages per day',
       'Manage your notebook (add, delete, edit cells)',
       'Extended context window (70,000 tokens)',
@@ -62,7 +63,7 @@ export const subscriptionPlans: SubscriptionPlan[] = [
       maxOutputSize: 1000,
       errorAnalysis: true,
       outputAnalysis: true,
-      model: ModelType.GPT4O_MINI
+      availableModels: [ModelType.DEEPSEEK_CHAT, ModelType.GPT4O_MINI]
     },
     paypalPlanId: 'P-96764306DU999431NM5GB4XI'
   },
@@ -85,7 +86,7 @@ export const subscriptionPlans: SubscriptionPlan[] = [
       maxOutputSize: 2000,
       errorAnalysis: true,
       outputAnalysis: true,
-      model: ModelType.GPT4O
+      availableModels: [ModelType.DEEPSEEK_CHAT, ModelType.GPT4O_MINI, ModelType.GPT4O]
     },
     popular: false,
     paypalPlanId: 'P-150966115D107033GM5GB57I'

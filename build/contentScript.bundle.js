@@ -43843,6 +43843,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_openSubscriptionWindow__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./utils/openSubscriptionWindow */ "./src/pages/Content/utils/openSubscriptionWindow.ts");
 /* harmony import */ var _Message__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Message */ "./src/pages/Content/Message.tsx");
 /* harmony import */ var _CellActions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./CellActions */ "./src/pages/Content/CellActions.tsx");
+/* harmony import */ var _utils_subscriptions__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../utils/subscriptions */ "./src/utils/subscriptions.ts");
 /* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
 /* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
@@ -43861,12 +43862,14 @@ _b = __webpack_require__.$Refresh$.signature();
 
 
 
+
 const [minWidth, maxWidth, defaultWidth] = [200, 500, 350];
 const App = () => {
     _b();
     const [width, setWidth] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(defaultWidth);
     const [prompt, setPrompt] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
     const [model, setModel] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('gpt-4o-mini');
+    const [availableModels, setAvailableModels] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
     const actionTextAreaRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
     // Function to get focused cell ID
     const getFocusedCellId = () => {
@@ -43874,10 +43877,15 @@ const App = () => {
         return (focusedCell === null || focusedCell === void 0 ? void 0 : focusedCell.getAttribute('id')) || null;
     };
     const { authState, refreshAuthState } = (0,_utils_useAuthState__WEBPACK_IMPORTED_MODULE_3__.useAuthState)();
-    const { generationState, messageManager, pendingOperations, acceptAllChanges, rejectAllChanges, generateAndInsertContent, restartAI } = (0,_hooks_useAI__WEBPACK_IMPORTED_MODULE_7__.useAI)(_utils_openSubscriptionWindow__WEBPACK_IMPORTED_MODULE_8__.openSubscriptionWindow, setPrompt, actionTextAreaRef, authState);
+    const { generationState, messageManager, pendingOperations, acceptOperation, rejectOperation, acceptAllOperations, rejectAllOperations, generateAndInsertContent, restartAI } = (0,_hooks_useAI__WEBPACK_IMPORTED_MODULE_7__.useAI)(_utils_openSubscriptionWindow__WEBPACK_IMPORTED_MODULE_8__.openSubscriptionWindow, setPrompt, actionTextAreaRef, authState);
     (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
         refreshAuthState();
     }, []);
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+        var _c;
+        availableModels.length > 0 ? setModel(availableModels[0]) : setModel('gpt-4o-mini');
+        setAvailableModels(((_c = _utils_subscriptions__WEBPACK_IMPORTED_MODULE_11__.subscriptionPlans.find((plan) => plan.id === authState.subscriptionPlan)) === null || _c === void 0 ? void 0 : _c.limits.availableModels) || []);
+    }, [authState.subscriptionPlan]);
     if (!authState.user) {
         return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "fixed right-0 top-1/4 transform -translate-y-1/4 mr-4 z-50 w-80" },
             react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_LoginPrompt__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
@@ -43910,15 +43918,13 @@ const App = () => {
                             { label: 'Mention focused cell', action: () => getFocusedCellId(), id: 'mention-cell' },
                         ], onInput: setPrompt, ref: actionTextAreaRef })),
                 react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "space-y-2" },
-                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", { id: "model", className: "w-full px-3 py-2 text-sm text-gray-100 border border-gray-700 rounded-lg focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-gray-800 cursor-pointer", value: model, onChange: (e) => setModel(e.target.value) },
-                        react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", { value: "gpt-4o-mini" }, "GPT-4o Mini"),
-                        authState.subscriptionPlan == 'pro' && react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", { value: "gpt-4o" }, "GPT-4o"))),
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", { id: "model", className: "w-full px-3 py-2 text-sm text-gray-100 border border-gray-700 rounded-lg focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 bg-gray-800 cursor-pointer", value: model, onChange: (e) => setModel(e.target.value) }, availableModels.map((model) => (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", { key: model, value: model }, model))))),
                 pendingOperations.size > 0 ? (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex space-x-2" },
-                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", { className: "flex-1 px-4 py-2 text-sm font-medium text-white bg-orange-600 rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors flex items-center justify-center gap-2", onClick: acceptAllChanges },
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", { className: "flex-1 px-4 py-2 text-sm font-medium text-white bg-orange-600 rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors flex items-center justify-center gap-2", onClick: acceptAllOperations },
                         react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-5 h-5 text-white", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" },
                             react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M5 13l4 4L19 7" })),
                         "Accept All"),
-                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", { className: "flex-1 px-4 py-2 text-sm font-medium text-white bg-orange-600 rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors flex items-center justify-center gap-2", onClick: rejectAllChanges },
+                    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", { className: "flex-1 px-4 py-2 text-sm font-medium text-white bg-orange-600 rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors flex items-center justify-center gap-2", onClick: rejectAllOperations },
                         react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", { className: "w-5 h-5 text-white", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" },
                             react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M6 18L18 6M6 6l12 12" })),
                         "Reject All"))) :
@@ -43933,11 +43939,11 @@ const App = () => {
                 generationState.error && (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "p-3 bg-red-900/50 text-red-400 rounded border border-red-500/20 text-sm" }, generationState.error === 'QUOTA_EXCEEDED' ? (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: "flex flex-col space-y-2" },
                     react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "You've reached your daily message limit."),
                     react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", { onClick: _utils_openSubscriptionWindow__WEBPACK_IMPORTED_MODULE_8__.openSubscriptionWindow, className: "text-orange-600 hover:text-orange-500 font-medium text-left" }, "Upgrade your plan for more messages \u2192"))) : (generationState.error))))),
-        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CellActions__WEBPACK_IMPORTED_MODULE_10__["default"], { diffCells: pendingOperations, handleAccept: acceptAllChanges, handleReject: rejectAllChanges })));
+        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CellActions__WEBPACK_IMPORTED_MODULE_10__["default"], { diffCells: pendingOperations, handleAccept: acceptOperation, handleReject: rejectOperation })));
 };
 _a = App;
 __webpack_require__.$Refresh$.register(_a, "App");
-_b(App, "da6qJV2JBRm2DHrUxhve6jjenaY=", false, () => [_utils_useAuthState__WEBPACK_IMPORTED_MODULE_3__.useAuthState, _hooks_useAI__WEBPACK_IMPORTED_MODULE_7__.useAI]);
+_b(App, "km+r8lEW0V6t9kmtwgNCWM87zso=", false, () => [_utils_useAuthState__WEBPACK_IMPORTED_MODULE_3__.useAuthState, _hooks_useAI__WEBPACK_IMPORTED_MODULE_7__.useAI]);
 // Inject the page script
 const script = document.createElement('script');
 script.src = chrome.runtime.getURL('pageScript.js');
@@ -45340,11 +45346,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _notebookUpdater__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../notebookUpdater */ "./src/pages/Content/notebookUpdater.ts");
-/* harmony import */ var _useStreamingState__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useStreamingState */ "./src/pages/Content/hooks/useStreamingState.ts");
-/* harmony import */ var _usePendingOperations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./usePendingOperations */ "./src/pages/Content/hooks/usePendingOperations.ts");
-/* harmony import */ var _useGenerationState__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./useGenerationState */ "./src/pages/Content/hooks/useGenerationState.ts");
-/* harmony import */ var _useMessages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./useMessages */ "./src/pages/Content/hooks/useMessages.ts");
-/* harmony import */ var _useAIError__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./useAIError */ "./src/pages/Content/hooks/useAIError.ts");
+/* harmony import */ var _usePendingOperations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./usePendingOperations */ "./src/pages/Content/hooks/usePendingOperations.ts");
+/* harmony import */ var _useGenerationState__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./useGenerationState */ "./src/pages/Content/hooks/useGenerationState.ts");
+/* harmony import */ var _useMessages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./useMessages */ "./src/pages/Content/hooks/useMessages.ts");
+/* harmony import */ var _useAIError__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./useAIError */ "./src/pages/Content/hooks/useAIError.ts");
+/* harmony import */ var _useMessageListener__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./useMessageListener */ "./src/pages/Content/hooks/useMessageListener.ts");
 /* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
 /* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
@@ -45369,65 +45375,39 @@ _a = __webpack_require__.$Refresh$.signature();
 
 const useAI = (openSubscriptionWindow, setPrompt, actionTextAreaRef, authState) => {
     _a();
-    const { generationState, dispatch } = (0,_useGenerationState__WEBPACK_IMPORTED_MODULE_4__.useGenerationState)();
-    const messageManager = (0,_useMessages__WEBPACK_IMPORTED_MODULE_5__.useMessages)();
-    const { streamingState, updateStreamingContent, resetStreamingState } = (0,_useStreamingState__WEBPACK_IMPORTED_MODULE_2__.useStreamingState)();
-    const { pendingOperations, setPendingOperations, acceptAllChanges, rejectAllChanges } = (0,_usePendingOperations__WEBPACK_IMPORTED_MODULE_3__.usePendingOperations)();
-    const { handleAIError } = (0,_useAIError__WEBPACK_IMPORTED_MODULE_6__.useAIError)(openSubscriptionWindow, (error) => {
+    const { generationState, dispatch } = (0,_useGenerationState__WEBPACK_IMPORTED_MODULE_3__.useGenerationState)();
+    const messageManager = (0,_useMessages__WEBPACK_IMPORTED_MODULE_4__.useMessages)();
+    const { pendingOperations, setPendingOperations, acceptOperation, rejectOperation, acceptAllOperations, rejectAllOperations } = (0,_usePendingOperations__WEBPACK_IMPORTED_MODULE_2__.usePendingOperations)(() => {
+        dispatch({ type: 'finish_update_notebook' });
+    });
+    const { handleAIError } = (0,_useAIError__WEBPACK_IMPORTED_MODULE_5__.useAIError)(openSubscriptionWindow, (error) => {
         messageManager.addErrorMessage(error.message, error.action, error.actionText);
         dispatch({ type: 'error', payload: error.message });
     });
-    // Memoize streamingState.isCodeBlock to prevent unnecessary re-renders
-    const isCodeBlock = streamingState.isCodeBlock;
-    const messageListener = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((message) => {
-        if (message.action === 'streamed_response') {
-            updateStreamingContent(message.content, message.done, messageManager.setCurrentMessage);
-            // Use ref for isCodeBlock to avoid dependency
-            dispatch({
-                type: isCodeBlock ? 'start_update_notebook' : 'finish_update_notebook'
-            });
-            if (!isCodeBlock) {
-                scrollToBottom();
-            }
-            if (message.done) {
-                dispatch({ type: 'finish_generation' });
-            }
-        }
-        else if (message.action === 'messages_remaining') {
-            const remaining = message.messagesRemaining;
-            if (remaining <= 5) {
-                messageManager.setMessagesRemaining(remaining);
-            }
-            else {
-                messageManager.setMessagesRemaining(null);
-            }
-        }
-        else if (message.action === 'ai_error') {
-            handleAIError(message.error);
-        }
-    }, [updateStreamingContent, isCodeBlock, messageManager.setCurrentMessage, messageManager.setMessagesRemaining, dispatch, scrollToBottom, handleAIError]);
-    // Effect to handle pending operations when streaming state changes
-    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-        if (streamingState.appliedOperations.size > 0) {
-            setPendingOperations(streamingState.appliedOperations);
+    (0,_useMessageListener__WEBPACK_IMPORTED_MODULE_6__.useMessageListener)(
+    // Handle text content
+    (text) => {
+        messageManager.setCurrentMessage(text);
+        dispatch({ type: 'finish_update_notebook' });
+    }, 
+    // Handle operations
+    (operation) => {
+        const id = (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_1__.applyOperation)(operation);
+        dispatch({ type: 'start_update_notebook' });
+        return id;
+    }, 
+    // Handle messages remaining
+    (remaining) => {
+        messageManager.setMessagesRemaining(remaining <= 5 ? remaining : null);
+    }, 
+    // Handle done generating
+    (pendingOperations) => {
+        dispatch({ type: 'finish_generation' });
+        setPendingOperations(pendingOperations);
+        if (pendingOperations.size > 0) {
             dispatch({ type: 'start_diffing' });
-            // Listen for diff completion
-            const diffListener = (event) => {
-                if (event.detail.id === 'diff_complete') {
-                    dispatch({ type: 'finish_diffing' });
-                    document.removeEventListener('diff_complete', diffListener);
-                }
-            };
-            document.addEventListener('diff_complete', diffListener);
         }
-    }, [streamingState.appliedOperations]);
-    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-        chrome.runtime.onMessage.addListener(messageListener);
-        // Cleanup function to remove the listener
-        return () => {
-            chrome.runtime.onMessage.removeListener(messageListener);
-        };
-    }, [messageListener]);
+    }, handleAIError);
     const generateAndInsertContent = (prompt, model) => __awaiter(void 0, void 0, void 0, function* () {
         var _b;
         if (!prompt.trim())
@@ -45438,10 +45418,8 @@ const useAI = (openSubscriptionWindow, setPrompt, actionTextAreaRef, authState) 
             (_b = actionTextAreaRef.current) === null || _b === void 0 ? void 0 : _b.clear();
             setPrompt('');
             const content = yield (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_1__.requestContent)();
-            resetStreamingState(content);
             messageManager.addMessage({ type: 'user', content: prompt });
             messageManager.addMessage({ type: 'ai', content: '' });
-            scrollToBottom();
             chrome.runtime.sendMessage({ action: "generateAI", prompt: prompt, content: content, model: model, plan: authState.subscriptionPlan });
         }
         catch (error) {
@@ -45449,6 +45427,11 @@ const useAI = (openSubscriptionWindow, setPrompt, actionTextAreaRef, authState) 
             dispatch({ type: 'error', payload: 'Failed to generate content. Please try again.' });
         }
     });
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+        if (messageManager.messages.length > 0) {
+            scrollToBottom();
+        }
+    }, [messageManager.messages]);
     function restartAI() {
         chrome.runtime.sendMessage({ action: "restartAI" });
         messageManager.resetMessages();
@@ -45457,13 +45440,15 @@ const useAI = (openSubscriptionWindow, setPrompt, actionTextAreaRef, authState) 
         generationState,
         messageManager,
         pendingOperations,
-        acceptAllChanges,
-        rejectAllChanges,
+        acceptOperation,
+        rejectOperation,
+        acceptAllOperations,
+        rejectAllOperations,
         generateAndInsertContent,
         restartAI
     };
 };
-_a(useAI, "AIy8VdhfPhZLCZUiNWFaawNmykM=", false, () => [_useGenerationState__WEBPACK_IMPORTED_MODULE_4__.useGenerationState, _useMessages__WEBPACK_IMPORTED_MODULE_5__.useMessages, _useStreamingState__WEBPACK_IMPORTED_MODULE_2__.useStreamingState, _usePendingOperations__WEBPACK_IMPORTED_MODULE_3__.usePendingOperations, _useAIError__WEBPACK_IMPORTED_MODULE_6__.useAIError]);
+_a(useAI, "Ifm/ouz/nZdNa3rnkoMjnDCw0+M=", false, () => [_useGenerationState__WEBPACK_IMPORTED_MODULE_3__.useGenerationState, _useMessages__WEBPACK_IMPORTED_MODULE_4__.useMessages, _usePendingOperations__WEBPACK_IMPORTED_MODULE_2__.usePendingOperations, _useAIError__WEBPACK_IMPORTED_MODULE_5__.useAIError, _useMessageListener__WEBPACK_IMPORTED_MODULE_6__.useMessageListener]);
 const scrollToBottom = () => {
     const messageContainer = document.getElementById('message-container'); // Replace with your actual container ID
     if (messageContainer) {
@@ -45672,6 +45657,90 @@ if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Pr
 
 /***/ }),
 
+/***/ "./src/pages/Content/hooks/useMessageListener.ts":
+/*!*******************************************************!*\
+  !*** ./src/pages/Content/hooks/useMessageListener.ts ***!
+  \*******************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useMessageListener: () => (/* binding */ useMessageListener)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _a;
+_a = __webpack_require__.$Refresh$.signature();
+
+const useMessageListener = (handleTextContent, handleOperation, handleMessagesRemaining, handleDoneGenerating, handleAIError) => {
+    _a();
+    const messageListener = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((message, sender, sendResponse) => {
+        if (message.action === 'ai_text_content') {
+            handleTextContent(message.content);
+        }
+        else if (message.action === 'ai_operation') {
+            const id = handleOperation(message.operation);
+            sendResponse({ success: true, data: { id } });
+        }
+        else if (message.action === 'ai_error') {
+            handleAIError(message.error);
+        }
+        else if (message.action === 'ai_messages_remaining') {
+            handleMessagesRemaining(message.messagesRemaining);
+        }
+        else if (message.action === 'ai_done_generating') {
+            handleDoneGenerating(new Map(message.pendingOperations));
+        }
+    }, [handleTextContent, handleOperation, handleAIError, handleMessagesRemaining, handleDoneGenerating]);
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+        chrome.runtime.onMessage.addListener(messageListener);
+        // Cleanup function to remove the listener
+        return () => {
+            chrome.runtime.onMessage.removeListener(messageListener);
+        };
+    }, [messageListener]);
+};
+_a(useMessageListener, "vXVu0Ou/46yZK2AJXFqRCWfPbRk=");
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
 /***/ "./src/pages/Content/hooks/useMessages.ts":
 /*!************************************************!*\
   !*** ./src/pages/Content/hooks/useMessages.ts ***!
@@ -45801,97 +45870,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
-/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
-__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
-
-var _a;
-_a = __webpack_require__.$Refresh$.signature();
-
-const usePendingOperations = () => {
-    _a();
-    const [pendingOperations, setPendingOperations] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(new Map());
-    const anyPendingChanges = () => {
-        return pendingOperations.size > 0;
-    };
-    function acceptAllChanges() {
-        pendingOperations.forEach((operation, cellId) => {
-            var _b;
-            if (operation.pending) {
-                (_b = operation.accept) === null || _b === void 0 ? void 0 : _b.call(operation);
-                setPendingOperations((prev) => {
-                    const newMap = new Map(prev);
-                    newMap.delete(cellId);
-                    return newMap;
-                });
-            }
-        });
-    }
-    function rejectAllChanges() {
-        pendingOperations.forEach((operation, cellId) => {
-            var _b;
-            if (operation.pending) {
-                (_b = operation.reject) === null || _b === void 0 ? void 0 : _b.call(operation);
-                setPendingOperations((prev) => {
-                    const newMap = new Map(prev);
-                    newMap.delete(cellId);
-                    return newMap;
-                });
-            }
-        });
-    }
-    return { pendingOperations, setPendingOperations, anyPendingChanges, acceptAllChanges, rejectAllChanges };
-};
-_a(usePendingOperations, "sz0IHa7Dp1RfuiV1zg9tnH0SeUg=");
-
-
-const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
-const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
-	$ReactRefreshModuleId$
-);
-
-function $ReactRefreshModuleRuntime$(exports) {
-	if (true) {
-		let errorOverlay;
-		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
-			errorOverlay = __react_refresh_error_overlay__;
-		}
-		let testMode;
-		if (typeof __react_refresh_test__ !== 'undefined') {
-			testMode = __react_refresh_test__;
-		}
-		return __react_refresh_utils__.executeRuntime(
-			exports,
-			$ReactRefreshModuleId$,
-			module.hot,
-			errorOverlay,
-			testMode
-		);
-	}
-}
-
-if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
-	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
-} else {
-	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
-}
-
-/***/ }),
-
-/***/ "./src/pages/Content/hooks/useStreamingState.ts":
-/*!******************************************************!*\
-  !*** ./src/pages/Content/hooks/useStreamingState.ts ***!
-  \******************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   useStreamingState: () => (/* binding */ useStreamingState)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _parser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../parser */ "./src/pages/Content/parser.ts");
+/* harmony import */ var _notebookUpdater__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../notebookUpdater */ "./src/pages/Content/notebookUpdater.ts");
 /* harmony import */ var _utils_deep_copy__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../utils/deep-copy */ "./src/utils/deep-copy.ts");
 /* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
 /* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
@@ -45902,56 +45881,69 @@ _a = __webpack_require__.$Refresh$.signature();
 
 
 
-function useStreamingState() {
+const usePendingOperations = (onDoneDiff) => {
     _a();
-    const [streamingState, setStreamingState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-        buffer: '',
-        textContent: '',
-        fullResponse: '',
-        appliedOperations: new Map(),
-        currentOperations: new Map(),
-        isCodeBlock: false,
-        originalContent: []
-    });
-    const updateStreamingContent = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((newContent, done, setMessageText) => {
-        setStreamingState(prevState => {
-            // If nothing changed or content is already in buffer, return same state
-            if (!newContent || prevState.fullResponse.endsWith(newContent)) {
-                return prevState;
+    const [pendingOperations, setPendingOperations] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(new Map());
+    const anyPendingOperations = () => {
+        return pendingOperations.size > 0;
+    };
+    function acceptAllOperations() {
+        pendingOperations.forEach((operation, cellId) => {
+            if (operation.pending) {
+                (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_1__.acceptChange)(operation);
+                setPendingOperations((prev) => {
+                    const newMap = new Map(Array.from(prev.entries()).map(([key, value]) => [key, (0,_utils_deep_copy__WEBPACK_IMPORTED_MODULE_2__.deepCopyPendingOperation)(value)]));
+                    newMap.delete(cellId);
+                    return newMap;
+                });
             }
-            const nextState = (0,_utils_deep_copy__WEBPACK_IMPORTED_MODULE_2__.deepCopyStreamingState)(prevState);
-            nextState.buffer = prevState.buffer + newContent;
-            nextState.fullResponse = prevState.fullResponse + newContent;
-            // Process complete lines
-            const lines = nextState.buffer.split(/\r?\n/);
-            nextState.buffer = lines.pop() || '';
-            if (!nextState.isCodeBlock) {
-                const newTextContent = prevState.textContent + newContent;
-                nextState.textContent = newTextContent;
-                setMessageText(newTextContent);
-            }
-            // Only parse and create new Maps if we have lines to process
-            if (lines.length > 0) {
-                const processedState = (0,_parser__WEBPACK_IMPORTED_MODULE_1__.parseLines)(nextState, lines);
-                return processedState;
-            }
-            return nextState;
         });
-    }, []); // No dependencies needed since we use functional updates
-    const resetStreamingState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((content) => {
-        setStreamingState({
-            buffer: '',
-            textContent: '',
-            fullResponse: '',
-            appliedOperations: new Map(),
-            currentOperations: new Map(),
-            isCodeBlock: false,
-            originalContent: content
+        onDoneDiff();
+    }
+    function rejectAllOperations() {
+        pendingOperations.forEach((operation, cellId) => {
+            if (operation.pending) {
+                (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_1__.rejectChange)(operation);
+                setPendingOperations((prev) => {
+                    const newMap = new Map(Array.from(prev.entries()).map(([key, value]) => [key, (0,_utils_deep_copy__WEBPACK_IMPORTED_MODULE_2__.deepCopyPendingOperation)(value)]));
+                    newMap.delete(cellId);
+                    return newMap;
+                });
+            }
         });
-    }, []);
-    return { streamingState, updateStreamingContent, resetStreamingState };
-}
-_a(useStreamingState, "gzm8VjoC/K4Cocq1Pi1yRf3NFws=");
+        onDoneDiff();
+    }
+    function acceptOperation(cellId) {
+        const operation = pendingOperations.get(cellId);
+        if (operation) {
+            (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_1__.acceptChange)(operation);
+            setPendingOperations((prev) => {
+                const newMap = new Map(Array.from(prev.entries()).map(([key, value]) => [key, (0,_utils_deep_copy__WEBPACK_IMPORTED_MODULE_2__.deepCopyPendingOperation)(value)]));
+                newMap.delete(cellId);
+                return newMap;
+            });
+        }
+        if (!anyPendingOperations()) {
+            onDoneDiff();
+        }
+    }
+    function rejectOperation(cellId) {
+        const operation = pendingOperations.get(cellId);
+        if (operation) {
+            (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_1__.rejectChange)(operation);
+            setPendingOperations((prev) => {
+                const newMap = new Map(Array.from(prev.entries()).map(([key, value]) => [key, (0,_utils_deep_copy__WEBPACK_IMPORTED_MODULE_2__.deepCopyPendingOperation)(value)]));
+                newMap.delete(cellId);
+                return newMap;
+            });
+        }
+        if (!anyPendingOperations()) {
+            onDoneDiff();
+        }
+    }
+    return { pendingOperations, setPendingOperations, anyPendingOperations, acceptOperation, rejectOperation, acceptAllOperations, rejectAllOperations };
+};
+_a(usePendingOperations, "sz0IHa7Dp1RfuiV1zg9tnH0SeUg=");
 
 
 const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
@@ -46185,12 +46177,6 @@ function deleteCell(id, originalContent) {
     const mainContent = cell.querySelector('.main-content');
     if (mainContent)
         mainContent.style.opacity = '0.5';
-    // injectCellActions(
-    //     id, 
-    //     true,
-    //     () => acceptChange(id),
-    //     () => rejectChange(id)
-    // );
     return id;
 }
 function diffCell(id, originalContent, newContent) {
@@ -46203,63 +46189,46 @@ function diffCell(id, originalContent, newContent) {
     });
     document.dispatchEvent(customEvent);
     cell.setAttribute('data-diff', 'true');
-    // injectCellActions(
-    //     id, 
-    //     true,
-    //     () => acceptChange(id),
-    //     () => rejectChange(id)
-    // );
     return id;
 }
 function acceptChange(change) {
-    //injectCellActions(change.cellId, false, () => {}, () => {});
     if (change.type === 'delete') {
         const customEvent = new CustomEvent('deleteCell', {
             detail: { id: change.cellId }
         });
-        return () => document.dispatchEvent(customEvent);
+        document.dispatchEvent(customEvent);
     }
     else {
         const customEvent = new CustomEvent('setMonacoValue', {
             detail: { id: change.cellId, content: change.content }
         });
-        return () => {
-            stopDiff(change.cellId);
-            document.dispatchEvent(customEvent);
-        };
+        stopDiff(change.cellId);
+        document.dispatchEvent(customEvent);
     }
 }
 function rejectChange(change) {
-    //injectCellActions(change.cellId, false, () => {}, () => {});
     if (change.type === 'create') {
         const customEvent = new CustomEvent('deleteCell', {
             detail: { id: change.cellId }
         });
-        return () => {
-            stopDiff(change.cellId);
-            document.dispatchEvent(customEvent);
-        };
+        stopDiff(change.cellId);
+        document.dispatchEvent(customEvent);
     }
-    else if (change.type === 'edit' && change.originalContent) {
+    else if (change.type === 'edit') {
         const customEvent = new CustomEvent('setMonacoValue', {
             detail: { id: change.cellId, content: change.originalContent }
         });
-        return () => {
-            stopDiff(change.cellId);
-            document.dispatchEvent(customEvent);
-        };
+        stopDiff(change.cellId);
+        document.dispatchEvent(customEvent);
     }
     else if (change.type === 'delete') {
-        return () => {
-            const cell = document.getElementById(change.cellId);
-            if (cell) {
-                const mainContent = cell.querySelector('.main-content');
-                if (mainContent)
-                    mainContent.style.opacity = '1';
-            }
-        };
+        const cell = document.getElementById(change.cellId);
+        if (cell) {
+            const mainContent = cell.querySelector('.main-content');
+            if (mainContent)
+                mainContent.style.opacity = '1';
+        }
     }
-    return () => { };
 }
 const stopDiff = (cellId) => {
     const cell = document.getElementById(cellId);
@@ -46319,176 +46288,6 @@ function getCellIndexFromRelativePosition(position) {
     else {
         return -1;
     }
-}
-
-
-const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
-const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
-	$ReactRefreshModuleId$
-);
-
-function $ReactRefreshModuleRuntime$(exports) {
-	if (true) {
-		let errorOverlay;
-		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
-			errorOverlay = __react_refresh_error_overlay__;
-		}
-		let testMode;
-		if (typeof __react_refresh_test__ !== 'undefined') {
-			testMode = __react_refresh_test__;
-		}
-		return __react_refresh_utils__.executeRuntime(
-			exports,
-			$ReactRefreshModuleId$,
-			module.hot,
-			errorOverlay,
-			testMode
-		);
-	}
-}
-
-if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
-	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
-} else {
-	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
-}
-
-/***/ }),
-
-/***/ "./src/pages/Content/parser.ts":
-/*!*************************************!*\
-  !*** ./src/pages/Content/parser.ts ***!
-  \*************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   parseLines: () => (/* binding */ parseLines)
-/* harmony export */ });
-/* harmony import */ var _notebookUpdater__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./notebookUpdater */ "./src/pages/Content/notebookUpdater.ts");
-/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
-/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
-__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
-
-
-function parseLines(streamingState, lines) {
-    var _a, _b, _c;
-    const createRegex = /@CREATE\[type=(markdown|code),\s*position=(top|bottom|after:(cell-[^\]]+)|before:(cell-[^\]]+))\]/;
-    const editRegex = /@EDIT\[(cell-[^\]]+)\]/;
-    const deleteRegex = /@DELETE\[(cell-[^\]]+)\]/;
-    const endRegex = /@END/;
-    const startCodeRegex = /@START_CODE/;
-    const endCodeRegex = /@END_CODE/;
-    for (const line of lines) {
-        // Handle code block markers
-        if (line.match(startCodeRegex)) {
-            streamingState.isCodeBlock = true;
-            return streamingState;
-        }
-        if (line.match(endCodeRegex)) {
-            streamingState.isCodeBlock = false;
-            return streamingState;
-        }
-        // Process operations
-        const createMatch = line.match(createRegex);
-        const editMatch = line.match(editRegex);
-        const deleteMatch = line.match(deleteRegex);
-        if (createMatch) {
-            const operationId = `create-${Date.now()}-${Math.random()}`;
-            const operation = {
-                type: 'create',
-                cellType: createMatch[1],
-                cellId: '',
-                position: createMatch[2],
-                contentArray: [],
-                content: ''
-            };
-            let id;
-            // If the operation is after a specific cell, find the last operation that was created after that cell (this is needed to ensure that cells are inserted in the correct order)
-            if (operation.position.startsWith('after:')) {
-                let position = operation.position;
-                // Find all previous operations that were created after this same cell
-                const previousOperations = Array.from(streamingState.appliedOperations.values())
-                    .filter(op => op.type === 'create' && op.position === operation.position);
-                if (previousOperations.length > 0) {
-                    // Get the last operation in the chain
-                    const lastOperation = previousOperations[previousOperations.length - 1];
-                    position = `after:${lastOperation.cellId}`;
-                }
-                id = (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)(Object.assign(Object.assign({}, operation), { position }));
-            }
-            else {
-                id = (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)(operation);
-            }
-            if (!id || id === '') {
-                console.log('[Parser] Failed to apply operation:', operation);
-                return streamingState;
-            }
-            operation.cellId = id;
-            streamingState.currentOperations.set(operation.cellId, operation);
-            console.log('[Parser] Create operation:', operation);
-        }
-        else if (editMatch) {
-            const cellId = editMatch[1];
-            const operation = {
-                type: 'edit',
-                cellId,
-                contentArray: [],
-                content: '',
-                originalContent: ((_a = streamingState.originalContent.find(cell => cell.id === cellId)) === null || _a === void 0 ? void 0 : _a.content) || ''
-            };
-            streamingState.currentOperations.set(cellId, operation);
-            (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)(operation);
-            console.log('[Parser] Edit operation:', operation);
-        }
-        else if (deleteMatch) {
-            const cellId = deleteMatch[1];
-            const originalContent = ((_b = streamingState.originalContent.find(cell => cell.id === cellId)) === null || _b === void 0 ? void 0 : _b.content) || '';
-            const operation = {
-                type: 'delete',
-                cellId,
-                originalContent
-            };
-            (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)(operation);
-            streamingState.appliedOperations.set(cellId, Object.assign(Object.assign({}, operation), { pending: true, reject: (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.rejectChange)(operation), accept: (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.acceptChange)(operation) }));
-            console.log('[Parser] Delete operation:', cellId);
-        }
-        else if (line.match(endRegex)) {
-            // Finalize current operation
-            for (const [id, operation] of streamingState.currentOperations.entries()) {
-                if (operation.type === 'create' || operation.type === 'edit') {
-                    console.log('[Parser] Applied operation:', operation);
-                    const pendingOperation = Object.assign(Object.assign({}, operation), { pending: true, reject: (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.rejectChange)(operation), accept: (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.acceptChange)(operation) });
-                    streamingState.appliedOperations.set(operation.cellId, pendingOperation);
-                    (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)({
-                        type: 'diff',
-                        cellId: operation.cellId,
-                        originalContent: operation.type === 'edit' ? operation.originalContent : '',
-                        content: operation.content
-                    });
-                }
-            }
-            streamingState.currentOperations.clear();
-        }
-        else {
-            // Add content to current operations
-            for (const operation of streamingState.currentOperations.values()) {
-                if (operation.type !== 'delete' && 'contentArray' in operation && operation.contentArray) {
-                    (_c = operation.contentArray) === null || _c === void 0 ? void 0 : _c.push(line);
-                    operation.content = operation.contentArray.join('\n');
-                    (0,_notebookUpdater__WEBPACK_IMPORTED_MODULE_0__.applyOperation)({
-                        type: 'edit',
-                        cellId: operation.cellId,
-                        contentArray: operation.contentArray,
-                        content: operation.content,
-                        originalContent: operation.type === 'edit' ? operation.originalContent : ''
-                    });
-                }
-            }
-        }
-    }
-    return streamingState;
 }
 
 
@@ -46670,6 +46469,9 @@ if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Pr
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   deepCopyNotebookCell: () => (/* binding */ deepCopyNotebookCell),
+/* harmony export */   deepCopyOperation: () => (/* binding */ deepCopyOperation),
+/* harmony export */   deepCopyPendingOperation: () => (/* binding */ deepCopyPendingOperation),
 /* harmony export */   deepCopyStreamingState: () => (/* binding */ deepCopyStreamingState)
 /* harmony export */ });
 /* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
@@ -46683,7 +46485,8 @@ function deepCopyNotebookCell(cell) {
     return {
         id: cell.id,
         type: cell.type,
-        content: cell.content
+        content: cell.content,
+        index: cell.index
     };
 }
 /**
@@ -46706,7 +46509,7 @@ function deepCopyOperation(operation) {
  * Creates a deep copy of a Pending<Operation> object
  */
 function deepCopyPendingOperation(pending) {
-    return Object.assign(Object.assign({}, deepCopyOperation(pending)), { pending: pending.pending, accept: pending.accept, reject: pending.reject });
+    return Object.assign(Object.assign({}, deepCopyOperation(pending)), { pending: pending.pending });
 }
 /**
  * Creates a deep copy of a StreamingState object
@@ -46776,6 +46579,103 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
 
 
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/utils/subscriptions.ts":
+/*!************************************!*\
+  !*** ./src/utils/subscriptions.ts ***!
+  \************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   activateSubscription: () => (/* binding */ activateSubscription),
+/* harmony export */   createSubscription: () => (/* binding */ createSubscription),
+/* harmony export */   subscriptionPlans: () => (/* reexport safe */ _supabase_functions_shared_subscription_plans__WEBPACK_IMPORTED_MODULE_0__.subscriptionPlans)
+/* harmony export */ });
+/* harmony import */ var _supabase_functions_shared_subscription_plans__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../supabase/functions/_shared/subscription-plans */ "./supabase/functions/_shared/subscription-plans.ts");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+function createSubscription(plan) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield chrome.runtime.sendMessage({
+            type: 'SUPABASE_REQUEST',
+            payload: {
+                operation: 'INVOKE_FUNCTION',
+                functionName: 'payment',
+                functionData: {
+                    planId: plan.id,
+                    successUrl: chrome.runtime.getURL('payment-success.html'),
+                    cancelUrl: chrome.runtime.getURL('payment-cancel.html')
+                }
+            }
+        });
+        if (!response || response.error) {
+            throw new Error((response === null || response === void 0 ? void 0 : response.error) || 'Failed to create subscription');
+        }
+        return response.data.approvalUrl; // PayPal approval URL
+    });
+}
+function activateSubscription(subscriptionId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield chrome.runtime.sendMessage({
+            type: 'SUPABASE_REQUEST',
+            payload: {
+                operation: 'ACTIVATE_SUBSCRIPTION',
+                data: {
+                    subscriptionId
+                }
+            }
+        });
+        return response.data.data.isActive;
+    });
+}
 
 
 const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
@@ -47060,6 +46960,133 @@ function createErrorResponse(errorType, message, details) {
         headers: _cors_ts__WEBPACK_IMPORTED_MODULE_0__.corsHeaders
     });
 }
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./supabase/functions/_shared/subscription-plans.ts":
+/*!**********************************************************!*\
+  !*** ./supabase/functions/_shared/subscription-plans.ts ***!
+  \**********************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ModelType: () => (/* binding */ ModelType),
+/* harmony export */   subscriptionPlans: () => (/* binding */ subscriptionPlans)
+/* harmony export */ });
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var ModelType;
+(function (ModelType) {
+    ModelType["GPT4O"] = "gpt-4o";
+    ModelType["GPT4O_MINI"] = "gpt-4o-mini";
+    ModelType["DEEPSEEK_CHAT"] = "deepseek-chat";
+})(ModelType || (ModelType = {}));
+const subscriptionPlans = [
+    {
+        id: 'free',
+        name: 'Free',
+        priceUSD: 0,
+        description: 'Basic AI assistance for your notebooks',
+        features: [
+            'GPT-4O Mini for code assistance',
+            '10 messages per day',
+            'Manage your notebook (add, delete, edit cells)',
+            'Limited context window (7,000 tokens)'
+        ],
+        limits: {
+            messagesPerDay: 10,
+            contextWindow: 7000,
+            maxOutputSize: 500,
+            errorAnalysis: false,
+            outputAnalysis: false,
+            availableModels: [ModelType.DEEPSEEK_CHAT, ModelType.GPT4O_MINI]
+        },
+        popular: false,
+        paypalPlanId: 'P-XXXXXXXXXXXX'
+    },
+    {
+        id: 'basic',
+        name: 'Basic',
+        priceUSD: 4.99,
+        popular: true,
+        description: 'Enhanced experience with advanced features',
+        features: [
+            'DeepSeek Chat with larger context',
+            '50 messages per day',
+            'Manage your notebook (add, delete, edit cells)',
+            'Extended context window (70,000 tokens)',
+        ],
+        limits: {
+            messagesPerDay: 50,
+            contextWindow: 70000,
+            maxOutputSize: 1000,
+            errorAnalysis: true,
+            outputAnalysis: true,
+            availableModels: [ModelType.DEEPSEEK_CHAT, ModelType.GPT4O_MINI]
+        },
+        paypalPlanId: 'P-96764306DU999431NM5GB4XI'
+    },
+    {
+        id: 'pro',
+        name: 'Pro',
+        priceUSD: 14.99,
+        description: 'Full-featured AI pair programming experience',
+        features: [
+            'Full GPT-4O access',
+            '200 messages per day',
+            'Advanced error analysis & fixes',
+            'Real-time output analysis',
+            'Maximum context window (100,000 tokens)',
+            'Early access to new features'
+        ],
+        limits: {
+            messagesPerDay: 200,
+            contextWindow: 100000,
+            maxOutputSize: 2000,
+            errorAnalysis: true,
+            outputAnalysis: true,
+            availableModels: [ModelType.DEEPSEEK_CHAT, ModelType.GPT4O_MINI, ModelType.GPT4O]
+        },
+        popular: false,
+        paypalPlanId: 'P-150966115D107033GM5GB57I'
+    }
+];
 
 
 const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
@@ -85875,7 +85902,7 @@ function isUrl(fileUrlOrPath) {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("6d5af0ff16906f5cc688")
+/******/ 		__webpack_require__.h = () => ("ea68d1b64b50d5a95a99")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

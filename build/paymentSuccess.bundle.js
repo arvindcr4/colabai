@@ -41322,6 +41322,7 @@ var ModelType;
 (function (ModelType) {
     ModelType["GPT4O"] = "gpt-4o";
     ModelType["GPT4O_MINI"] = "gpt-4o-mini";
+    ModelType["DEEPSEEK_CHAT"] = "deepseek-chat";
 })(ModelType || (ModelType = {}));
 const subscriptionPlans = [
     {
@@ -41341,7 +41342,7 @@ const subscriptionPlans = [
             maxOutputSize: 500,
             errorAnalysis: false,
             outputAnalysis: false,
-            model: ModelType.GPT4O_MINI
+            availableModels: [ModelType.DEEPSEEK_CHAT, ModelType.GPT4O_MINI]
         },
         popular: false,
         paypalPlanId: 'P-XXXXXXXXXXXX'
@@ -41353,7 +41354,7 @@ const subscriptionPlans = [
         popular: true,
         description: 'Enhanced experience with advanced features',
         features: [
-            'GPT-4O Mini with larger context',
+            'DeepSeek Chat with larger context',
             '50 messages per day',
             'Manage your notebook (add, delete, edit cells)',
             'Extended context window (70,000 tokens)',
@@ -41364,7 +41365,7 @@ const subscriptionPlans = [
             maxOutputSize: 1000,
             errorAnalysis: true,
             outputAnalysis: true,
-            model: ModelType.GPT4O_MINI
+            availableModels: [ModelType.DEEPSEEK_CHAT, ModelType.GPT4O_MINI]
         },
         paypalPlanId: 'P-96764306DU999431NM5GB4XI'
     },
@@ -41387,7 +41388,7 @@ const subscriptionPlans = [
             maxOutputSize: 2000,
             errorAnalysis: true,
             outputAnalysis: true,
-            model: ModelType.GPT4O
+            availableModels: [ModelType.DEEPSEEK_CHAT, ModelType.GPT4O_MINI, ModelType.GPT4O]
         },
         popular: false,
         paypalPlanId: 'P-150966115D107033GM5GB57I'
@@ -45501,7 +45502,7 @@ module.exports = getWDSMetadata;
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("6d5af0ff16906f5cc688")
+/******/ 		__webpack_require__.h = () => ("ea68d1b64b50d5a95a99")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
