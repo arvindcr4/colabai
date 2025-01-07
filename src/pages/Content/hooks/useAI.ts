@@ -37,7 +37,7 @@ export const useAI = (openSubscriptionWindow: () => void, setPrompt: (prompt: st
         },
         // Handle messages remaining
         (remaining: number) => {
-            messageManager.setMessagesRemaining(remaining <= 5 ? remaining : null);
+            messageManager.setMessagesRemaining(remaining);
         },
         // Handle done generating
         (pendingOperations: Map<string, Pending<Operation>>) => {

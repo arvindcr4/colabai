@@ -6,11 +6,12 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.3'
 import { corsHeaders } from '../_shared/cors.ts'
 
-const PAYPAL_WEBHOOK_ID = Deno.env.get('PAYPAL_WEBHOOK_ID') || '';
+const PAYPAL_MODE = Deno.env.get('PAYPAL_MODE') || 'sandbox';
+const PAYPAL_CLIENT_ID = PAYPAL_MODE === 'sandbox' ? Deno.env.get('PAYPAL_SANDBOX_CLIENT_ID') || '' : Deno.env.get('PAYPAL_CLIENT_ID') || '';
+const PAYPAL_SECRET = PAYPAL_MODE === 'sandbox' ? Deno.env.get('PAYPAL_SANDBOX_SECRET') || '' : Deno.env.get('PAYPAL_SECRET') || '';
+const PAYPAL_API_URL = PAYPAL_MODE === 'sandbox' ? Deno.env.get('PAYPAL_SANDBOX_API_URL') || 'https://api-m.sandbox.paypal.com' : Deno.env.get('PAYPAL_API_URL') || 'https://api-m.paypal.com'; // Use https://api-m.paypal.com for production
 
-const PAYPAL_CLIENT_ID = Deno.env.get('PAYPAL_CLIENT_ID') || '';
-const PAYPAL_SECRET = Deno.env.get('PAYPAL_SECRET') || '';
-const PAYPAL_API_URL = Deno.env.get('PAYPAL_API_URL') || 'https://api-m.sandbox.paypal.com'; // Use https://api-m.paypal.com for production
+const PAYPAL_WEBHOOK_ID = PAYPAL_MODE === 'sandbox' ? Deno.env.get('PAYPAL_SANDBOX_WEBHOOK_ID') || '' : Deno.env.get('PAYPAL_WEBHOOK_ID') || '';
 
 async function getPayPalAccessToken(): Promise<string> {
   const auth = btoa(`${PAYPAL_CLIENT_ID}:${PAYPAL_SECRET}`);

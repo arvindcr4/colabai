@@ -7,7 +7,8 @@ export enum ErrorType {
     RATE_LIMIT = 'RATE_LIMIT',
     NETWORK = 'NETWORK',
     SERVER = 'SERVER',
-    UNKNOWN = 'UNKNOWN'
+    UNKNOWN = 'UNKNOWN',
+    GENERATION_IN_PROGRESS = 'generation_in_progress'
   }
 
 // Error status codes

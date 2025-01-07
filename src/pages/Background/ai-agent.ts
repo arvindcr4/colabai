@@ -6,6 +6,7 @@ import CodeSimplifier from './code-simplifier';
 import { ModelType } from '../../../src/utils/types';
 import { updateStreamingContent, resetStreamingState } from './Parsing/streaming-state';
 import { sendError, sendMessagesRemaining } from './content-messager';
+import { clearActiveConversationTab } from './conversation-manager';
 
 let notebookTracker: NotebookChangeTracker;
 const changeLogs: string[] = [];
@@ -20,73 +21,78 @@ function trackNotebookChanges(currentCells: NotebookCell[]) {
 }
 
 export async function generateAIContent(prompt: string, content: NotebookCell[], supabase: any, model = "gpt-4o-mini", plan = 'free') {
-    
-    trackNotebookChanges(content);
-    resetStreamingState(content);
-
-    // Get current notebook state with full content for referenced cells
-    let notebookState = notebookTracker.getLastState([], false);
-    const shouldReduceContent = plan === 'free' ? notebookState.length > 20_000 : notebookState.length > 200_000;
-
-    console.log('Should reduce content:', shouldReduceContent);
-
-    if (shouldReduceContent) {
-        const requiredCellIds = await sendToContextEnhancer(supabase, prompt, model);
-
-        // Extract cell IDs from focused and surrounding cell tags
-        const focusedCellRegex = /(cell-\S+)/g;
-
-        prompt.match(focusedCellRegex)?.forEach((cellId: string) => {
-            if (!requiredCellIds.includes(cellId)) {
-                requiredCellIds.push(cellId);
-            }
-        });
-
-        notebookState = notebookTracker.getLastState(requiredCellIds, true);
-    }
-
-    // Keep only the last 3 interactions to manage context size
-    // if (changeLogs.length > 3) {
-    //     changeLogs.shift();
-    // }
-    // changeLogs.push(changeLog);
-
-    if (prompts.length > 3) {
-        prompts.shift();
-    }
-    prompts.push(prompt);
-
-    const messages: { role: string; content: string; }[] = [];
-
-    for (let i = 0; i < prompts.length-1; i++) {
-        if(prompts[i])
-            messages.push({ role: 'user', content: prompts[i] });
-        
-        if(responses[i])
-            messages.push({ role: 'assistant', content: responses[i] });
-    }
-    
-    messages.push({ 
-        role: 'user', 
-        content: `This is the current notebook state for reference: <notebook_state>${notebookState}</notebook_state>. ${prompt}`
-    });
-    
     try {
+        trackNotebookChanges(content);
+        resetStreamingState(content);
+
+        // Get current notebook state with full content for referenced cells
+        let notebookState = notebookTracker.getLastState([], false);
+        const shouldReduceContent = plan === 'free' ? notebookState.length > 20_000 : notebookState.length > 200_000;
+
+        console.log('Should reduce content:', shouldReduceContent);
+
+        if (shouldReduceContent) {
+            const requiredCellIds = await sendToContextEnhancer(supabase, prompt, model);
+
+            // Extract cell IDs from focused and surrounding cell tags
+            const focusedCellRegex = /(cell-\S+)/g;
+
+            prompt.match(focusedCellRegex)?.forEach((cellId: string) => {
+                if (!requiredCellIds.includes(cellId)) {
+                    requiredCellIds.push(cellId);
+                }
+            });
+
+            notebookState = notebookTracker.getLastState(requiredCellIds, true);
+        }
+
+        // Keep only the last 3 interactions to manage context size
+        // if (changeLogs.length > 3) {
+        //     changeLogs.shift();
+        // }
+        // changeLogs.push(changeLog);
+
+        if (prompts.length > 3) {
+            prompts.shift();
+        }
+        prompts.push(prompt);
+
+        const messages: { role: string; content: string; }[] = [];
+
+        for (let i = 0; i < prompts.length-1; i++) {
+            if(prompts[i])
+                messages.push({ role: 'user', content: prompts[i] });
+            
+            if(responses[i])
+                messages.push({ role: 'assistant', content: responses[i] });
+        }
+        
+        messages.push({ 
+            role: 'user', 
+            content: `This is the current notebook state for reference: <notebook_state>${notebookState}</notebook_state>. ${prompt}`
+        });
+    
         
         const data = await sendAI(supabase, messages, model);
         await getStreamedResponse(data);
 
     } catch (error: any) {
+        clearActiveConversationTab(); // Clear the lock if there's an error
+
         // Convert network errors to our error type
         if (error instanceof TypeError && error.message.includes('network')) {
-            error = {
+            sendError({
                 type: ErrorType.NETWORK,
                 message: 'Network connection error',
                 details: error
-            };
+            });
+        } 
+
+        if (error.type && Object.values(ErrorType).includes(error.type)) {
+            sendError(error);
         }
-        
-        sendError(error);
+
+        throw error;
     }
 }
 
@@ -198,8 +204,6 @@ async function getStreamedResponse(data: any) {
                             
                             await updateStreamingContent(data.content, data.done);
 
-                            console.log('Response:', data.content);
-
                             response += data.content;
                         }
                     } catch (error: any) {
@@ -247,8 +251,9 @@ async function getStreamedResponse(data: any) {
 }
 
 export async function restartAI() {
-    prompts.length = 0;
-    changeLogs.length = 0;
-    
     notebookTracker = new NotebookChangeTracker();
+    changeLogs.length = 0;
+    prompts.length = 0;
+    responses.length = 0;
+    clearActiveConversationTab();
 }

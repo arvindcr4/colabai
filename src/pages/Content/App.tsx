@@ -49,9 +49,10 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        availableModels.length > 0 ? setModel(availableModels[0]) : setModel('gpt-4o-mini');
-        setAvailableModels(subscriptionPlans.find((plan) => plan.id === authState.subscriptionPlan)?.limits.availableModels || []);
-    }, [authState.subscriptionPlan]);
+        const models = subscriptionPlans.find((plan) => plan.id === authState.subscriptionPlan)?.limits.availableModels || [];
+        setAvailableModels(models);
+        models.length > 0 ? setModel(models[0]) : setModel('gpt-4o-mini');
+    }, [authState.subscriptionDetails]);
 
     if (!authState.user) {
         return (
@@ -125,7 +126,7 @@ const App = () => {
 
                 <div className="space-y-4">
                     {/* Input Area */}
-                    {messageManager.messagesRemaining && authState && <MessageQuota messagesRemaining={messageManager.messagesRemaining} />}
+                    {messageManager.messagesRemaining && authState && <MessageQuota messagesRemaining={messageManager.messagesRemaining} freePlan={authState.subscriptionPlan === 'free'} />}
 
                     <div className="space-y-2">
 

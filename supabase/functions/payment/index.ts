@@ -6,12 +6,13 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.3'
 import { z } from 'https://deno.land/x/zod@v3.22.4/mod.ts'
 import { corsHeaders } from '../_shared/cors.ts'
-import { subscriptionPlans } from '../_shared/subscription-plans.ts'
+import { subscriptionPlans, sandboxSubscriptionPlans } from '../_shared/subscription-plans.ts'
 import { ErrorType, createErrorResponse } from '../_shared/errors.ts';
 
-const PAYPAL_CLIENT_ID = Deno.env.get('PAYPAL_CLIENT_ID') || '';
-const PAYPAL_SECRET = Deno.env.get('PAYPAL_SECRET') || '';
-const PAYPAL_API_URL = Deno.env.get('PAYPAL_API_URL') || 'https://api-m.sandbox.paypal.com'; // Use https://api-m.paypal.com for production
+const PAYPAL_MODE = Deno.env.get('PAYPAL_MODE') || 'sandbox';
+const PAYPAL_CLIENT_ID = PAYPAL_MODE === 'sandbox' ? Deno.env.get('PAYPAL_SANDBOX_CLIENT_ID') || '' : Deno.env.get('PAYPAL_CLIENT_ID') || '';
+const PAYPAL_SECRET = PAYPAL_MODE === 'sandbox' ? Deno.env.get('PAYPAL_SANDBOX_SECRET') || '' : Deno.env.get('PAYPAL_SECRET') || '';
+const PAYPAL_API_URL = PAYPAL_MODE === 'sandbox' ? Deno.env.get('PAYPAL_SANDBOX_API_URL') || 'https://api-m.sandbox.paypal.com' : Deno.env.get('PAYPAL_API_URL') || 'https://api-m.paypal.com'; // Use https://api-m.paypal.com for production
 
 
 // Request validation schema
@@ -73,8 +74,8 @@ async function cancelSubscription(subscriptionId: string, supabaseAdmin: any) {
     })
   });
 
-  if (!cancelResponse.ok) {
-    throw new Error('Failed to cancel subscription with PayPal');
+  if (!cancelResponse.ok && cancelResponse.status !== 404) {
+    throw new Error('Failed to cancel subscription with PayPal, error: ' + await cancelResponse.text());
   }
 
   // Update subscription status in database
@@ -228,7 +229,7 @@ Deno.serve(async (req) => {
     const { planId, successUrl, cancelUrl } = paymentRequestSchema.parse(requestData);
 
     // Get the subscription plan
-    const plan = subscriptionPlans.find(p => p.id === planId);
+    const plan = PAYPAL_MODE === 'sandbox' ? sandboxSubscriptionPlans.find(p => p.id === planId) : subscriptionPlans.find(p => p.id === planId);
     if (!plan) {
       throw new Error('Invalid plan ID');
     }
@@ -259,6 +260,7 @@ Deno.serve(async (req) => {
     });
 
     if (!response.ok) {
+      console.error('Failed to create PayPal subscription:', response);
       throw new Error('Failed to create PayPal subscription ' + response.statusText);
     }
 

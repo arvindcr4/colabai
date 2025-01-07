@@ -320,7 +320,7 @@ async function getUserAuthState(session: Session): Promise<AuthState> {
       subscriptionPlan = subscriptionDetails.plan_id;
     }
   }
-
+  
   const authState = {
     user,
     session,

@@ -1,3 +1,5 @@
+import { User } from '@supabase/supabase-js';
+
 export { subscriptionPlans, type SubscriptionPlan, type ModelType } from '../../supabase/functions/_shared/subscription-plans'; 
 
 export interface SubscriptionDetails {
@@ -11,7 +13,7 @@ export interface SubscriptionDetails {
 }
 
 export interface AuthState {
-  user: any;
+  user: User | null;
   session: any;
   subscriptionPlan: string;
   subscriptionDetails: SubscriptionDetails | null;

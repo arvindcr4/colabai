@@ -186,14 +186,21 @@
     });
 
     document.addEventListener('deleteCell', function (event) {
-        const notebook = document.querySelector('colab-shaded-scroller');
-        const cells = notebook.querySelectorAll('.cell');
+        // const notebook = document.querySelector('colab-shaded-scroller');
+        // const cells = notebook.querySelectorAll('.cell');
 
         // get cell from id
-        const cell = Array.from(cells).find(cell => cell.getAttribute('id') === event.detail.id);
+        // const cell = document.getElementById(event.detail.id);
+        // if (cell) {
+        //     time.sleep(400).then(() => {
+        //         cell.querySelector('colab-cell-toolbar').shadowRoot.getElementById('button-delete-cell-or-selection').click();
+        //     });
+        // }
 
-        cell.focusCell_();
-
-        document.querySelector('colab-cell-toolbar').shadowRoot.getElementById('button-delete-cell-or-selection').click();
+        //cell.focusCell_();
+        // console.log("Deleted cell:", event.detail.id);
+        const notebook = document.querySelector('colab-notebook-toolbar').notebook;
+        const cell = notebook.getCells().filter(cell => `cell-${cell.getId()}` === event.detail.id)[0];
+        notebook.removeCells([cell])
     });
 })();

@@ -56,10 +56,49 @@ const initialMessages = [
     //     type: 'user',
     //     content: 'Generate content about...'
     // },
-    // {
-    //     type: 'ai',
-    //     content: `Sure! Here is some content about...
-    //     @START_CODE
-    //     Let me know if you need any more help!`
-    // }
+//     {
+//         type: 'ai',
+//         content: `This notebook is a comprehensive guide for **face editing using StyleGAN**, specifically focusing on encoding real face images into StyleGAN's latent space. Here's what you can achieve with it:
+
+// ### Key Features:
+// 1. **Encoding Real Faces into StyleGAN Latent Space**:
+//    - Upload or capture images of faces.
+//    - Automatically align and preprocess the images.
+//    - Encode the images into StyleGAN's latent space using a pretrained ResNet encoder and optimization techniques.
+
+// 2. **Generate and Manipulate Faces**:
+//    - Generate high-quality face images from the encoded latent vectors.
+//    - Compare the generated images with the original ones.
+//    - Save the latent vectors for further manipulation in a second notebook.
+
+// 3. **Customization and Optimization**:
+//    - Adjust encoding parameters (e.g., optimizer, learning rate, iterations) to improve results.
+//    - Use face masks to preserve specific features like hair during optimization.
+
+// 4. **Interactive Workflow**:
+//    - Upload images manually or capture them using your webcam.
+//    - Visualize and clean up the aligned images before encoding.
+//    - Download the latent vectors and optimization videos for offline use.
+
+// ### Use Cases:
+// - **Face Editing**: Modify facial attributes (e.g., age, expression, hairstyle) by manipulating latent vectors.
+// - **Creative Projects**: Generate unique faces for art, design, or storytelling.
+// - **Research**: Experiment with GANs and latent space representations.
+// - **Education**: Learn about StyleGAN, latent space optimization, and image generation.
+
+// ### Next Steps:
+// 1. **Run the Notebook**:
+//    - Enable GPU acceleration for faster processing.
+//    - Follow the instructions to upload or capture images.
+//    - Execute the encoding process and generate results.
+
+// 2. **Manipulate Latent Vectors**:
+//    - Use the saved latent vectors (\`output_vectors.npy\`) in the second notebook for advanced face editing.
+
+// 3. **Experiment**:
+//    - Play with encoding parameters to achieve better results.
+//    - Explore the StyleGAN latent space for creative applications.
+
+// Let me know if you'd like help with any specific part of the notebook!`
+//     }
 ] as Message[];

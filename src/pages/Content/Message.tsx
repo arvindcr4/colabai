@@ -61,7 +61,7 @@ export const Message = ({ message, index, isUpdatingNotebook }: { message: Messa
                                     <p><strong>Updating Notebook</strong></p>
                                 </div>
                             )}
-                            {content.trim().length > 0 && <Markdown components={components} remarkPlugins={[remarkGfm]}>{content}</Markdown>}
+                            {content.trim().length > 0 && <Markdown remarkPlugins={[remarkGfm]} className='prose prose-sm prose-zinc prose-invert'>{content}</Markdown>}
                             {message.content.trim().length === 0 && message.type === 'ai' && (
                                 <div className='flex space-x-1 items-center justify-center'>
                                     <span className='sr-only'>Loading...</span>
@@ -98,7 +98,7 @@ const components = {
         return <ul className="list-inside list-disc">{children}</ul>;
     },
     li({ children }: { children?: any; }) {
-        return <li className="my-1 list-item list-inside">{children}</li>;
+        return <li className="my-1 list-item list-inside first:inline size-sm">{children}</li>;
     },
     blockquote({ children }: { children?: any; }) {
         return (

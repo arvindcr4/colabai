@@ -15521,9 +15521,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _change_tracker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./change-tracker */ "./src/pages/Background/change-tracker.ts");
 /* harmony import */ var _utils_errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/errors */ "./src/utils/errors.ts");
-/* harmony import */ var _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @supabase/supabase-js */ "./node_modules/@supabase/functions-js/dist/module/types.js");
+/* harmony import */ var _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @supabase/supabase-js */ "./node_modules/@supabase/functions-js/dist/module/types.js");
 /* harmony import */ var _Parsing_streaming_state__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Parsing/streaming-state */ "./src/pages/Background/Parsing/streaming-state.ts");
 /* harmony import */ var _content_messager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./content-messager */ "./src/pages/Background/content-messager.ts");
+/* harmony import */ var _conversation_manager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./conversation-manager */ "./src/pages/Background/conversation-manager.ts");
 /* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
 /* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
@@ -15542,6 +15543,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
+
 let notebookTracker;
 const changeLogs = [];
 const prompts = [];
@@ -15554,57 +15556,61 @@ function trackNotebookChanges(currentCells) {
 function generateAIContent(prompt, content, supabase, model = "gpt-4o-mini", plan = 'free') {
     var _a;
     return __awaiter(this, void 0, void 0, function* () {
-        trackNotebookChanges(content);
-        (0,_Parsing_streaming_state__WEBPACK_IMPORTED_MODULE_2__.resetStreamingState)(content);
-        // Get current notebook state with full content for referenced cells
-        let notebookState = notebookTracker.getLastState([], false);
-        const shouldReduceContent = plan === 'free' ? notebookState.length > 20000 : notebookState.length > 200000;
-        console.log('Should reduce content:', shouldReduceContent);
-        if (shouldReduceContent) {
-            const requiredCellIds = yield sendToContextEnhancer(supabase, prompt, model);
-            // Extract cell IDs from focused and surrounding cell tags
-            const focusedCellRegex = /(cell-\S+)/g;
-            (_a = prompt.match(focusedCellRegex)) === null || _a === void 0 ? void 0 : _a.forEach((cellId) => {
-                if (!requiredCellIds.includes(cellId)) {
-                    requiredCellIds.push(cellId);
-                }
-            });
-            notebookState = notebookTracker.getLastState(requiredCellIds, true);
-        }
-        // Keep only the last 3 interactions to manage context size
-        // if (changeLogs.length > 3) {
-        //     changeLogs.shift();
-        // }
-        // changeLogs.push(changeLog);
-        if (prompts.length > 3) {
-            prompts.shift();
-        }
-        prompts.push(prompt);
-        const messages = [];
-        for (let i = 0; i < prompts.length - 1; i++) {
-            if (prompts[i])
-                messages.push({ role: 'user', content: prompts[i] });
-            if (responses[i])
-                messages.push({ role: 'assistant', content: responses[i] });
-        }
-        messages.push({
-            role: 'user',
-            content: `This is the current notebook state for reference: <notebook_state>${notebookState}</notebook_state>. ${prompt}`
-        });
         try {
+            trackNotebookChanges(content);
+            (0,_Parsing_streaming_state__WEBPACK_IMPORTED_MODULE_2__.resetStreamingState)(content);
+            // Get current notebook state with full content for referenced cells
+            let notebookState = notebookTracker.getLastState([], false);
+            const shouldReduceContent = plan === 'free' ? notebookState.length > 20000 : notebookState.length > 200000;
+            console.log('Should reduce content:', shouldReduceContent);
+            if (shouldReduceContent) {
+                const requiredCellIds = yield sendToContextEnhancer(supabase, prompt, model);
+                // Extract cell IDs from focused and surrounding cell tags
+                const focusedCellRegex = /(cell-\S+)/g;
+                (_a = prompt.match(focusedCellRegex)) === null || _a === void 0 ? void 0 : _a.forEach((cellId) => {
+                    if (!requiredCellIds.includes(cellId)) {
+                        requiredCellIds.push(cellId);
+                    }
+                });
+                notebookState = notebookTracker.getLastState(requiredCellIds, true);
+            }
+            // Keep only the last 3 interactions to manage context size
+            // if (changeLogs.length > 3) {
+            //     changeLogs.shift();
+            // }
+            // changeLogs.push(changeLog);
+            if (prompts.length > 3) {
+                prompts.shift();
+            }
+            prompts.push(prompt);
+            const messages = [];
+            for (let i = 0; i < prompts.length - 1; i++) {
+                if (prompts[i])
+                    messages.push({ role: 'user', content: prompts[i] });
+                if (responses[i])
+                    messages.push({ role: 'assistant', content: responses[i] });
+            }
+            messages.push({
+                role: 'user',
+                content: `This is the current notebook state for reference: <notebook_state>${notebookState}</notebook_state>. ${prompt}`
+            });
             const data = yield sendAI(supabase, messages, model);
             yield getStreamedResponse(data);
         }
         catch (error) {
+            (0,_conversation_manager__WEBPACK_IMPORTED_MODULE_4__.clearActiveConversationTab)(); // Clear the lock if there's an error
             // Convert network errors to our error type
             if (error instanceof TypeError && error.message.includes('network')) {
-                error = {
+                (0,_content_messager__WEBPACK_IMPORTED_MODULE_3__.sendError)({
                     type: _utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType.NETWORK,
                     message: 'Network connection error',
                     details: error
-                };
+                });
             }
-            (0,_content_messager__WEBPACK_IMPORTED_MODULE_3__.sendError)(error);
+            if (error.type && Object.values(_utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType).includes(error.type)) {
+                (0,_content_messager__WEBPACK_IMPORTED_MODULE_3__.sendError)(error);
+            }
+            throw error;
         }
     });
 }
@@ -15648,19 +15654,19 @@ function sendAI(supabase, messages, model = "gpt-4o-mini", contextEnhancer = fal
             }
         });
         console.log(`Sent to ${contextEnhancer ? "context enhancer" : "AI agent"}:`, messages);
-        if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_4__.FunctionsHttpError) {
+        if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_5__.FunctionsHttpError) {
             const errorMessage = yield error.context.json();
             console.error('Supabase function error:', errorMessage);
             throw errorMessage.error;
         }
-        else if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_4__.FunctionsRelayError) {
+        else if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_5__.FunctionsRelayError) {
             throw {
                 type: _utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType.SERVER,
                 message: 'Error during content streaming',
                 details: error
             };
         }
-        else if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_4__.FunctionsFetchError) {
+        else if (error instanceof _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_5__.FunctionsFetchError) {
             throw {
                 type: _utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType.SERVER,
                 message: 'Error during content streaming',
@@ -15705,7 +15711,6 @@ function getStreamedResponse(data) {
                             }
                             else if (data.content !== undefined) {
                                 yield (0,_Parsing_streaming_state__WEBPACK_IMPORTED_MODULE_2__.updateStreamingContent)(data.content, data.done);
-                                console.log('Response:', data.content);
                                 response += data.content;
                             }
                         }
@@ -15754,9 +15759,11 @@ function getStreamedResponse(data) {
 }
 function restartAI() {
     return __awaiter(this, void 0, void 0, function* () {
-        prompts.length = 0;
-        changeLogs.length = 0;
         notebookTracker = new _change_tracker__WEBPACK_IMPORTED_MODULE_0__.NotebookChangeTracker();
+        changeLogs.length = 0;
+        prompts.length = 0;
+        responses.length = 0;
+        (0,_conversation_manager__WEBPACK_IMPORTED_MODULE_4__.clearActiveConversationTab)();
     });
 }
 
@@ -16117,6 +16124,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   sendOperation: () => (/* binding */ sendOperation),
 /* harmony export */   sendTextContent: () => (/* binding */ sendTextContent)
 /* harmony export */ });
+/* harmony import */ var _conversation_manager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./conversation-manager */ "./src/pages/Background/conversation-manager.ts");
+/* harmony import */ var _utils_errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/errors */ "./src/utils/errors.ts");
 /* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
 /* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
@@ -16130,49 +16139,147 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+
+
+const sendMessageToTab = (message) => __awaiter(void 0, void 0, void 0, function* () {
+    let tabId = (0,_conversation_manager__WEBPACK_IMPORTED_MODULE_0__.getActiveConversationTab)();
+    if (!tabId) {
+        try {
+            // If no active conversation, get the current active tab
+            const tabs = yield chrome.tabs.query({ active: true, currentWindow: true });
+            if (tabs.length > 0 && tabs[0].id) {
+                tabId = tabs[0].id;
+                (0,_conversation_manager__WEBPACK_IMPORTED_MODULE_0__.setActiveConversationTab)(tabId);
+            }
+        }
+        catch (error) {
+            if (error instanceof Error && error.message === 'Another tab is currently generating content') {
+                sendError({
+                    type: _utils_errors__WEBPACK_IMPORTED_MODULE_1__.ErrorType.GENERATION_IN_PROGRESS,
+                    message: 'Please wait for the current generation to complete before starting a new one.'
+                });
+                return;
+            }
+            throw error;
+        }
+    }
+    if (tabId) {
+        try {
+            return yield chrome.tabs.sendMessage(tabId, message);
+        }
+        catch (error) {
+            console.error('Error sending message to tab:', error);
+        }
+    }
+});
 const sendError = (error) => {
-    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-        chrome.tabs.sendMessage(tabs[0].id, {
-            action: 'ai_error',
-            error
-        });
+    sendMessageToTab({
+        action: 'ai_error',
+        error
     });
 };
 const sendTextContent = (text) => {
-    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-        chrome.tabs.sendMessage(tabs[0].id, {
-            action: 'ai_text_content',
-            content: text
-        });
+    sendMessageToTab({
+        action: 'ai_text_content',
+        content: text
     });
 };
 // Send operation and return cell id
 function sendOperation(operation) {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
-        const tabs = yield chrome.tabs.query({ active: true, currentWindow: true });
-        const response = yield chrome.tabs.sendMessage(tabs[0].id, {
+        const response = yield sendMessageToTab({
             action: 'ai_operation',
             operation
         });
-        return response.data.id;
+        return (_a = response === null || response === void 0 ? void 0 : response.data) === null || _a === void 0 ? void 0 : _a.id;
     });
 }
 ;
 const sendMessagesRemaining = (remaining) => {
-    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-        chrome.tabs.sendMessage(tabs[0].id, {
-            action: 'ai_messages_remaining',
-            messagesRemaining: remaining
-        });
+    sendMessageToTab({
+        action: 'ai_messages_remaining',
+        messagesRemaining: remaining
     });
 };
 const doneGenerating = (pendingOperations) => {
-    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-        chrome.tabs.sendMessage(tabs[0].id, {
-            action: 'ai_done_generating',
-            pendingOperations: [...pendingOperations.entries()]
-        });
+    sendMessageToTab({
+        action: 'ai_done_generating',
+        pendingOperations: [...pendingOperations.entries()]
     });
+};
+
+
+const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
+const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
+	$ReactRefreshModuleId$
+);
+
+function $ReactRefreshModuleRuntime$(exports) {
+	if (true) {
+		let errorOverlay;
+		if (typeof __react_refresh_error_overlay__ !== 'undefined') {
+			errorOverlay = __react_refresh_error_overlay__;
+		}
+		let testMode;
+		if (typeof __react_refresh_test__ !== 'undefined') {
+			testMode = __react_refresh_test__;
+		}
+		return __react_refresh_utils__.executeRuntime(
+			exports,
+			$ReactRefreshModuleId$,
+			module.hot,
+			errorOverlay,
+			testMode
+		);
+	}
+}
+
+if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
+	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
+} else {
+	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
+}
+
+/***/ }),
+
+/***/ "./src/pages/Background/conversation-manager.ts":
+/*!******************************************************!*\
+  !*** ./src/pages/Background/conversation-manager.ts ***!
+  \******************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   clearActiveConversationTab: () => (/* binding */ clearActiveConversationTab),
+/* harmony export */   getActiveConversationTab: () => (/* binding */ getActiveConversationTab),
+/* harmony export */   isActivelyGenerating: () => (/* binding */ isActivelyGenerating),
+/* harmony export */   setActiveConversationTab: () => (/* binding */ setActiveConversationTab)
+/* harmony export */ });
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+/* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+// Store the active conversation tab ID
+let activeConversationTabId = null;
+let isGenerating = false;
+const setActiveConversationTab = (tabId) => {
+    if (isGenerating) {
+        throw new Error('Another tab is currently generating content');
+    }
+    activeConversationTabId = tabId;
+    isGenerating = true;
+};
+const getActiveConversationTab = () => {
+    return activeConversationTabId;
+};
+const clearActiveConversationTab = () => {
+    activeConversationTabId = null;
+    isGenerating = false;
+};
+const isActivelyGenerating = () => {
+    return isGenerating;
 };
 
 
@@ -16716,6 +16823,7 @@ var ErrorType;
     ErrorType["NETWORK"] = "NETWORK";
     ErrorType["SERVER"] = "SERVER";
     ErrorType["UNKNOWN"] = "UNKNOWN";
+    ErrorType["GENERATION_IN_PROGRESS"] = "generation_in_progress";
 })(ErrorType || (ErrorType = {}));
 // Error status codes
 const errorStatusCodes = {
@@ -20946,7 +21054,7 @@ const {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("ea68d1b64b50d5a95a99")
+/******/ 		__webpack_require__.h = () => ("e675e2b5a7b698227233")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

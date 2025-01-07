@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "ColabAI",
   "version": "1.0.0",
-  "description": "Enhance Google Colab with AI-driven code, smart cell management, and context-aware suggestions for seamless productivity.",
+  "description": "Enhance Google Colab with AI-driven code, smart cell management, and full context-awareness for seamless productivity.",
   "background": {
     "service_worker": "background.bundle.js"
   },
@@ -31,8 +31,10 @@
   ],
   "permissions": [
     "storage",
-    "identity",
-    "tabs"
+    "identity"
+  ],
+  "host_permissions": [
+    "https://*.paypal.com/*"
   ],
   "oauth2": {
     "client_id": "806817844762-hl28c6ub5fci33c2ich9kbqh2himo0lf.apps.googleusercontent.com",
@@ -51,12 +53,20 @@
         "icon128.png",
         "icon48.png",
         "icon16.png",
-        "icon32.png",
+        "icon32.png"
+      ],
+      "matches": [
+        "https://colab.research.google.com/*"
+      ]
+    },
+    {
+      "resources": [
         "payment-success.html",
         "payment-cancel.html"
       ],
       "matches": [
-        "<all_urls>"
+        "https://colab.research.google.com/*",
+        "https://*.paypal.com/*"
       ]
     }
   ],
