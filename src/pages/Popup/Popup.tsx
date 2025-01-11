@@ -143,7 +143,7 @@ const Popup = () => {
         <div className="text-center space-y-4">
           <div className="text-red-500">{error}</div>
           <button
-            onClick={refreshAuthState}
+            onClick={() => refreshAuthState()}
             className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-lg hover:bg-gray-700"
           >
             Retry

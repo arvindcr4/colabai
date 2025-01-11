@@ -1,4 +1,8 @@
-import { corsHeaders } from "./cors.ts";
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, X-Messages-Remaining',
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, DELETE"
+}
 
 export enum ErrorType {
     AUTHENTICATION = 'AUTHENTICATION',
@@ -12,14 +16,15 @@ export enum ErrorType {
   }
 
 // Error status codes
-export const errorStatusCodes = {
+export const errorStatusCodes: Record<ErrorType, number> = {
     [ErrorType.AUTHENTICATION]: 401,
     [ErrorType.QUOTA_EXCEEDED]: 429,
     [ErrorType.MODEL_ACCESS]: 403,
     [ErrorType.RATE_LIMIT]: 429,
     [ErrorType.NETWORK]: 500,
     [ErrorType.SERVER]: 500,
-    [ErrorType.UNKNOWN]: 500
+    [ErrorType.UNKNOWN]: 500,
+    [ErrorType.GENERATION_IN_PROGRESS]: 500
   };
   
   export interface AIError {
