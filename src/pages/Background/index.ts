@@ -48,9 +48,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 console.error('Error in handleSupabaseRequest:', error);
                 sendResponse({ 
                     success: false, 
-                    error: {
-                        message: error instanceof Error ? error.message : 'Unknown error occurred'
-                    }
+                    error: error
                 });
             });
         return true;  // Indicate we will send response asynchronously

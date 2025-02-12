@@ -228,6 +228,10 @@ Deno.serve(async (req) => {
     const requestData = await req.json();
     const { planId, successUrl, cancelUrl } = paymentRequestSchema.parse(requestData);
 
+    return new Response(JSON.stringify({ success: false, error: 'Plans are temporarily unavailable, if you would like to extend your limits (free of charge) please contact me at mx.zahir2@gmail.com. Apologies for the inconvenience.' }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      status: 500,
+    });
+
     // Get the subscription plan
     const plan = PAYPAL_MODE === 'sandbox' ? sandboxSubscriptionPlans.find(p => p.id === planId) : subscriptionPlans.find(p => p.id === planId);
     if (!plan) {

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ColabAI",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Enhance Google Colab with AI-driven code, smart cell management, and full context-awareness for seamless productivity.",
   "background": {
     "service_worker": "background.bundle.js"
@@ -18,24 +18,13 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "https://colab.research.google.com/*"
-      ],
-      "js": [
-        "contentScript.bundle.js"
-      ],
-      "css": [
-        "content.styles.css"
-      ]
+      "matches": ["https://colab.research.google.com/*"],
+      "js": ["contentScript.bundle.js"],
+      "css": ["content.styles.css"]
     }
   ],
-  "permissions": [
-    "storage",
-    "identity"
-  ],
-  "host_permissions": [
-    "https://*.paypal.com/*"
-  ],
+  "permissions": ["storage", "identity"],
+  "host_permissions": ["https://*.paypal.com/*"],
   "oauth2": {
     "client_id": "806817844762-hl28c6ub5fci33c2ich9kbqh2himo0lf.apps.googleusercontent.com",
     "scopes": [
@@ -55,15 +44,10 @@
         "icon16.png",
         "icon32.png"
       ],
-      "matches": [
-        "https://colab.research.google.com/*"
-      ]
+      "matches": ["https://colab.research.google.com/*"]
     },
     {
-      "resources": [
-        "payment-success.html",
-        "payment-cancel.html"
-      ],
+      "resources": ["payment-success.html", "payment-cancel.html"],
       "matches": [
         "https://colab.research.google.com/*",
         "https://*.paypal.com/*"
