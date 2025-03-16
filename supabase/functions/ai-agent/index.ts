@@ -176,6 +176,7 @@ Deno.serve(async (req) => {
         const aiModel = ModelFactory.createModel(provider, {
             apiKey,
             model: usedModel,
+            // model: "deepseek-reasoner",
             temperature: 0.3,
         });
 

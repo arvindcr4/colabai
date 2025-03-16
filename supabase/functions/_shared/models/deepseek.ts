@@ -42,7 +42,7 @@ export class DeepSeekModel extends BaseModel {
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
-
+          
           // Decode the chunk and add it to the buffer
           buffer += decoder.decode(value, { stream: !done });
 
