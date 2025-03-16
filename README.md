@@ -1,150 +1,106 @@
+# ColabAI: AI Assistant for Google Colab
+
 <img src="src/assets/img/icon-128.png" width="64"/>
 
-# Chrome Extension (MV3) Boilerplate with React 18 and Webpack 5
+## Overview
 
-[![npm](https://img.shields.io/npm/v/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)
-[![npm-download](https://img.shields.io/npm/dw/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)
-[![npm](https://img.shields.io/npm/dm/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)
-
-## Announcements
-
-- Recently updated from **[React](https://reactjs.org)** ~~17~~ to **18**!
-- **_This boilerplate adopts [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-overview/)!_**
-  - For V2 users, please check out the [manifest-v2](https://github.com/lxieyang/chrome-extension-boilerplate-react/tree/manifest-v2) branch, or use version [3.x](https://www.npmjs.com/package/chrome-extension-boilerplate-react/v/3.3.0).
-  - Check out the [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/).
-- Recently added [devtools](https://developer.chrome.com/docs/extensions/mv3/devtools/) Support! Thanks [GeekaholicLin](https://github.com/lxieyang/chrome-extension-boilerplate-react/issues/17)!
-- Recently updated from **[Webpack Dev Server](https://webpack.js.org/configuration/dev-server/)** ~~3.x~~ to **4.x** and **[Webpack](https://webpack.js.org/)** ~~4~~ to **5**!
-- Recently added [TypeScript](https://www.typescriptlang.org/) Support!
+ColabAI is an open-source Chrome extension that provides AI-powered assistance for Google Colab notebooks. The extension helps users with their Python code, data analysis, machine learning projects, and other tasks directly within the Colab interface.
 
 ## Features
 
-This is a basic Chrome Extensions boilerplate to help you write modular and modern Javascript code, load CSS easily and [automatic reload the browser on code changes](https://webpack.github.io/docs/webpack-dev-server.html#automatic-refresh).
+- **AI-Powered Code Assistance**: Get suggestions for code improvements, bug fixes, and optimizations.
+- **Interactive Chat Interface**: Ask questions about your code and get real-time responses.
+- **Context-Aware Suggestions**: The AI understands your notebook context to provide relevant assistance.
+- **Support for Multiple OpenAI Models**: Choose from different OpenAI models based on your needs.
+- **User-Controlled API Keys**: Use your own OpenAI API key for complete control over usage.
 
-This boilerplate is updated with:
+## Getting Started
 
-- [Chrome Extension Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-overview/)
-- [React 18](https://reactjs.org)
-- [Webpack 5](https://webpack.js.org/)
-- [Webpack Dev Server 4](https://webpack.js.org/configuration/dev-server/)
-- [React Refresh](https://www.npmjs.com/package/react-refresh)
-- [react-refresh-webpack-plugin](https://github.com/pmmmwh/react-refresh-webpack-plugin)
-- [eslint-config-react-app](https://www.npmjs.com/package/eslint-config-react-app)
-- [Prettier](https://prettier.io/)
-- [TypeScript](https://www.typescriptlang.org/)
+### Installation
 
-This boilerplate is heavily inspired by and adapted from [https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate), with additional support for React 18 features, Webpack 5, and Webpack Dev Server 4.
+1. Clone this repository:
+   ```
+   git clone https://github.com/yourusername/colabai.git
+   cd colabai
+   ```
 
-Please open up an issue to nudge me to keep the npm packages up-to-date. FYI, it takes time to make different packages with different versions work together nicely.
+2. Install dependencies:
+   ```
+   npm install
+   ```
 
-## Installing and Running
+3. Build the extension:
+   ```
+   npm run build
+   ```
 
-### Procedures:
+4. Load the extension in Chrome:
+   - Open Chrome and navigate to `chrome://extensions/`
+   - Enable "Developer mode" at the top right
+   - Click "Load unpacked" and select the `build` folder from this project
 
-1. Check if your [Node.js](https://nodejs.org/) version is >= **18**.
-2. Clone this repository.
-3. Change the package's `name`, `description`, and `repository` fields in `package.json`.
-4. Change the name of your extension on `src/manifest.json`.
-5. Run `npm install` to install the dependencies.
-6. Run `npm start`
-7. Load your extension on Chrome following:
-   1. Access `chrome://extensions/`
-   2. Check `Developer mode`
-   3. Click on `Load unpacked extension`
-   4. Select the `build` folder.
-8. Happy hacking.
+### Configuration
 
-## Structure
+1. After installing the extension, click on the ColabAI icon in your Chrome toolbar.
+2. Enter your OpenAI API key in the settings page.
+3. Select your preferred model (default is gpt-4o-mini).
+4. Your settings will be saved locally and used for all AI requests.
 
-All your extension's code must be placed in the `src` folder.
+## Usage
 
-The boilerplate is already prepared to have a popup, an options page, a background page, and a new tab page (which replaces the new tab page of your browser). But feel free to customize these.
+1. Open any Google Colab notebook.
+2. Click the ColabAI icon in the notebook interface or use the keyboard shortcut to open the AI panel.
+3. Type your question or request help with specific code.
+4. The AI will analyze your notebook context and provide relevant assistance.
 
-## TypeScript
+## Technical Details
 
-This boilerplate now supports TypeScript! The `Options` Page is implemented using TypeScript. Please refer to `src/pages/Options/` for example usages.
+### Architecture
 
-## Webpack auto-reload and HRM
+The extension consists of several components:
 
-To make your workflow much more efficient this boilerplate uses the [webpack server](https://webpack.github.io/docs/webpack-dev-server.html) to development (started with `npm start`) with auto reload feature that reloads the browser automatically every time that you save some file in your editor.
+- **Popup**: Settings interface for OpenAI API key and model selection.
+- **Content Script**: Injects the AI panel into Google Colab's interface.
+- **Background Service Worker**: Handles API calls to OpenAI.
+- **AI Agent**: Manages context, changes, and conversations.
 
-You can run the dev mode on other port if you want. Just specify the env var `port` like this:
+### Privacy & Security
 
-```
-$ PORT=6002 npm run start
-```
+- Your API key is stored locally in Chrome's storage and never sent to any server besides OpenAI.
+- All AI requests are made directly from your browser to OpenAI using your API key.
+- No authentication or user data is collected.
 
-## Content Scripts
+## Development
 
-Although this boilerplate uses the webpack dev server, it's also prepared to write all your bundles files on the disk at every code change, so you can point, on your extension manifest, to your bundles that you want to use as [content scripts](https://developer.chrome.com/extensions/content_scripts), but you need to exclude these entry points from hot reloading [(why?)](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate/issues/4#issuecomment-261788690). To do so you need to expose which entry points are content scripts on the `webpack.config.js` using the `chromeExtensionBoilerplate -> notHotReload` config. Look the example below.
-
-Let's say that you want use the `myContentScript` entry point as content script, so on your `webpack.config.js` you will configure the entry point and exclude it from hot reloading, like this:
-
-```js
-{
-  …
-  entry: {
-    myContentScript: "./src/js/myContentScript.js"
-  },
-  chromeExtensionBoilerplate: {
-    notHotReload: ["myContentScript"]
-  }
-  …
-}
-```
-
-and on your `src/manifest.json`:
-
-```json
-{
-  "content_scripts": [
-    {
-      "matches": ["https://www.google.com/*"],
-      "js": ["myContentScript.bundle.js"]
-    }
-  ]
-}
-```
-
-## Intelligent Code Completion
-
-Thanks to [@hudidit](https://github.com/lxieyang/chrome-extension-boilerplate-react/issues/4)'s kind suggestions, this boilerplate supports chrome-specific intelligent code completion using [@types/chrome](https://www.npmjs.com/package/@types/chrome).
-
-## Packing
-
-After the development of your extension run the command
+### Running in Development Mode
 
 ```
-$ NODE_ENV=production npm run build
+npm start
 ```
 
-Now, the content of `build` folder will be the extension ready to be submitted to the Chrome Web Store. Just take a look at the [official guide](https://developer.chrome.com/webstore/publish) to more infos about publishing.
+This will start the webpack dev server with hot reloading.
 
-## Secrets
+### Building for Production
 
-If you are developing an extension that talks with some API you probably are using different keys for testing and production. Is a good practice you not commit your secret keys and expose to anyone that have access to the repository.
-
-To this task this boilerplate import the file `./secrets.<THE-NODE_ENV>.js` on your modules through the module named as `secrets`, so you can do things like this:
-
-_./secrets.development.js_
-
-```js
-export default { key: '123' };
+```
+npm run build
 ```
 
-_./src/popup.js_
+### Project Structure
 
-```js
-import secrets from 'secrets';
-ApiCall({ key: secrets.key });
-```
+- `src/pages/Background`: Background service worker code
+- `src/pages/Content`: Content script for Google Colab integration
+- `src/pages/Popup`: Settings page UI
+- `src/utils`: Shared utilities
 
-:point_right: The files with name `secrets.*.js` already are ignored on the repository.
+## Contributing
 
-## Resources:
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-- [Webpack documentation](https://webpack.js.org/concepts/)
-- [Chrome Extension documentation](https://developer.chrome.com/extensions/getstarted)
+## License
 
----
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-Michael Xieyang Liu | [Website](https://lxieyang.github.io)
+## Acknowledgments
+
+This project was built using the [Chrome Extension Boilerplate with React 18 and Webpack 5](https://github.com/lxieyang/chrome-extension-boilerplate-react).

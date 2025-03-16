@@ -3,7 +3,6 @@ import { Message } from "../Message";
 
 export const useMessages = () => {
     const [messages, setMessages] = useState(initialMessages);
-    const [messagesRemaining, setMessagesRemaining] = useState<number | null>(null);
   
     const addMessage = (message: Message) => {
       setMessages(prev => [...prev, message]);
@@ -37,12 +36,10 @@ export const useMessages = () => {
   
     return {
         messages,
-        messagesRemaining,
         addMessage,
         addErrorMessage,
         setCurrentMessage,
         resetMessages,
-        setMessagesRemaining
     };
   };
 

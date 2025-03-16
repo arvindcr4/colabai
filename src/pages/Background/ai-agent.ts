@@ -1,12 +1,14 @@
 import { NotebookChangeTracker } from './change-tracker';
 import { NotebookCell } from '../../utils/types';
-import { ErrorType, type AIError } from '../../utils/errors';
-import { FunctionsHttpError, FunctionsRelayError, FunctionsFetchError } from "@supabase/supabase-js";
+import { ErrorType, AIServiceError } from '../../utils/errors';
 import CodeSimplifier from './code-simplifier';
-import { ModelType } from '../../../src/utils/types';
 import { updateStreamingContent, resetStreamingState } from './Parsing/streaming-state';
-import { sendError, sendMessagesRemaining } from './content-messager';
+import { sendError } from './content-messager';
 import { clearActiveConversationTab } from './conversation-manager';
+import { ModelFactory } from '../../utils/models/model-factory';
+import { Message } from '../../utils/models/model-interface';
+import { getModelById, ModelProvider } from '../../utils/models/types';
+import { system_prompt, context_enhancer_prompt } from './prompts';
 
 let notebookTracker: NotebookChangeTracker;
 const changeLogs: string[] = [];
@@ -20,19 +22,23 @@ function trackNotebookChanges(currentCells: NotebookCell[]) {
     return tracker.updateState(currentCells);
 }
 
-export async function generateAIContent(prompt: string, content: NotebookCell[], supabase: any, model = "gpt-4o-mini", plan = 'free') {
+
+export async function generateAIContent(prompt: string, content: NotebookCell[], modelId = "gpt-4o-mini") {
     try {
         trackNotebookChanges(content);
         resetStreamingState(content);
 
         // Get current notebook state with full content for referenced cells
         let notebookState = notebookTracker.getLastState([], false);
-        const shouldReduceContent = plan === 'free' ? notebookState.length > 20_000 : notebookState.length > 200_000;
+
+        const { allow_reduce_content } = await chrome.storage.local.get('allow_reduce_content');
+
+        const shouldReduceContent = allow_reduce_content && notebookState.length > 100_000; // Simplified content reduction decision
 
         console.log('Should reduce content:', shouldReduceContent);
 
         if (shouldReduceContent) {
-            const requiredCellIds = await sendToContextEnhancer(supabase, prompt, model);
+            const requiredCellIds = await getRequiredCellIds(prompt, modelId);
 
             // Extract cell IDs from focused and surrounding cell tags
             const focusedCellRegex = /(cell-\S+)/g;
@@ -46,19 +52,17 @@ export async function generateAIContent(prompt: string, content: NotebookCell[],
             notebookState = notebookTracker.getLastState(requiredCellIds, true);
         }
 
-        // Keep only the last 3 interactions to manage context size
-        // if (changeLogs.length > 3) {
-        //     changeLogs.shift();
-        // }
-        // changeLogs.push(changeLog);
-
         if (prompts.length > 3) {
             prompts.shift();
         }
         prompts.push(prompt);
 
-        const messages: { role: string; content: string; }[] = [];
+        const messages: Message[] = [];
 
+        // Add system prompt
+        messages.push({ role: 'system', content: system_prompt });
+
+        // Add previous conversation context (up to last 3 interactions)
         for (let i = 0; i < prompts.length-1; i++) {
             if(prompts[i])
                 messages.push({ role: 'user', content: prompts[i] });
@@ -67,14 +71,14 @@ export async function generateAIContent(prompt: string, content: NotebookCell[],
                 messages.push({ role: 'assistant', content: responses[i] });
         }
         
+        // Add current prompt with notebook state
         messages.push({ 
             role: 'user', 
             content: `This is the current notebook state for reference: <notebook_state>${notebookState}</notebook_state>. ${prompt}`
         });
     
-        
-        const data = await sendAI(supabase, messages, model);
-        await getStreamedResponse(data);
+        // Get appropriate API key and model information, then stream the response
+        await streamModelResponse(messages, modelId);
 
     } catch (error: any) {
         clearActiveConversationTab(); // Clear the lock if there's an error
@@ -96,157 +100,130 @@ export async function generateAIContent(prompt: string, content: NotebookCell[],
     }
 }
 
-async function sendToContextEnhancer(supabase: any, prompt: string, model = "gpt-4o-mini") {
-    
+async function getRequiredCellIds(prompt: string, modelId = "gpt-4o-mini"): Promise<string[]> {
     try {
-        const requiredCellIds: string[] = [];
-        const notebookState = notebookTracker.getLastState();
+        const notebookState = notebookTracker.getLastState([], true);
         
-        const data = await sendAI(supabase, [
-            { role: 'user', content: `Current notebook state: ${notebookState}
-            Prompt: ${prompt}` },
-        ], model, true);
-
-        const ids = JSON.parse(data).cellIds;
-        console.log('Required cell IDs:', ids);
-
-        if (ids && ids.length > 0) {
-            requiredCellIds.push(...ids);
+        const messages: Message[] = [
+            { role: 'system', content: context_enhancer_prompt },
+            { role: 'user', content: `Current notebook state: ${notebookState}\nPrompt: ${prompt}` }
+        ];
+        
+        const modelResponse = await callModel(messages, modelId);
+        
+        try {
+            // Parse the response as JSON to get cell IDs
+            const ids = JSON.parse(modelResponse);
+            console.log('Required cell IDs:', ids);
+            
+            if (Array.isArray(ids) && ids.length > 0) {
+                return ids;
+            }
+        } catch (parseError) {
+            console.error('Error parsing cell IDs from response:', parseError);
+            // Try to extract cell IDs from the text using regex
+            const cellIdRegex = /(cell-\S+)/g;
+            const matches = modelResponse.match(cellIdRegex);
+            if (matches && matches.length > 0) {
+                return matches;
+            }
         }
-
-        return requiredCellIds;
-
     } catch (error: any) {
-        // Convert network errors to our error type
-        if (error instanceof TypeError && error.message.includes('network')) {
-            error = {
-                type: ErrorType.NETWORK,
-                message: 'Network connection error',
-                details: error
-            };
-        }
-        
-        sendError(error);
+        console.error('Error getting required cell IDs:', error);
     }
 
     return [];
 }
 
-async function sendAI(supabase: any, messages: { role: string; content: string; }[], model = "gpt-4o-mini", contextEnhancer = false) {
-    const { data, error } = await supabase.functions.invoke('ai-agent', {
-        body: {
-            messages,
-            model,
-            contextEnhancer
-        }
-    });
-
-    console.log(`Sent to ${contextEnhancer? "context enhancer" : "AI agent"}:`, messages);
-
-    if (error instanceof FunctionsHttpError) {
-        const errorMessage = await error.context.json()
-        console.error('Supabase function error:', errorMessage);
-        throw errorMessage.error;
-    } else if (error instanceof FunctionsRelayError) {
-        throw {
-            type: ErrorType.SERVER,
-            message: 'Error during content streaming',
-            details: error
-        };
-    } else if (error instanceof FunctionsFetchError) {
-        throw {
-            type: ErrorType.SERVER,
-            message: 'Error during content streaming',
-            details: error
-        };
+async function callModel(messages: Message[], modelId: string): Promise<string> {
+    const modelInfo = getModelById(modelId);
+    if (!modelInfo) {
+        throw new AIServiceError({
+            type: ErrorType.CONFIGURATION,
+            message: `Unknown model ID: ${modelId}. Please select a valid model in the settings.`
+        });
     }
-
-    return data;
+    
+    // Get appropriate API key based on the model provider
+    const provider = modelInfo.provider;
+    const storageKey = provider === ModelProvider.OPENAI ? 'openai_api_key' : 'deepseek_api_key';
+    
+    const result = await chrome.storage.local.get(storageKey);
+    const apiKey = result[storageKey];
+    
+    if (!apiKey) {
+        throw new AIServiceError({
+            type: ErrorType.CONFIGURATION,
+            message: `API key for ${provider} is not configured. Please set it in the extension options.`
+        });
+    }
+    
+    // Create model instance using the factory
+    const model = ModelFactory.createModelFromId(modelId, apiKey, 0.2);
+    
+    try {
+        // Call the model's non-streaming method
+        return await model.generate(messages);
+    } catch (error: any) {
+        console.error(`${provider} API error:`, error);
+        throw error;
+    }
 }
 
-async function getStreamedResponse(data: any) {
-    const reader = data.body?.getReader();
-    const decoder = new TextDecoder("utf-8");
-    let done = false;
-    let buffer = ''; // Buffer to store incomplete lines
-    let response = '';
-
-    if (reader == null) {
-        throw {
-            type: ErrorType.SERVER,
-            message: "Response body is null"
-        };
+async function streamModelResponse(messages: Message[], modelId: string): Promise<void> {
+    const modelInfo = getModelById(modelId);
+    if (!modelInfo) {
+        throw new AIServiceError({
+            type: ErrorType.CONFIGURATION,
+            message: `Unknown model ID: ${modelId}. Please select a valid model in the settings.`
+        });
     }
-
-    while (!done) {
-        const { value, done: chunkDone } = await reader.read();
-        if (value) {
-            // Append new chunk to buffer and split by newlines
-            buffer += decoder.decode(value, { stream: true });
-            const lines = buffer.split('\n');
-            
-            // Process all complete lines (keeping the last potentially incomplete line in buffer)
-            buffer = lines.pop() || '';
-            
-            for (const line of lines) {
-                if (line.trim()) {
-                    try {
-                        const data = JSON.parse(line);
-                        
-                        // Check if this is an error message
-                        if (data.error) {
-                            throw data.error;
-                        }
-                        
-                        if (data.messages_remaining !== undefined) {
-                            sendMessagesRemaining(data.messages_remaining);
-                        } else if (data.content !== undefined) {
-                            
-                            await updateStreamingContent(data.content, data.done);
-
-                            response += data.content;
-                        }
-                    } catch (error: any) {
-                        // If this is a structured error from the server, propagate it
-                        if (error.type && Object.values(ErrorType).includes(error.type)) {
-                            throw error;
-                        }
-                        console.error('Error parsing JSON:', error, 'Line:', line);
-                        throw {
-                            type: ErrorType.SERVER,
-                            message: 'Error parsing server response',
-                            details: { error, line }
-                        };
-                    }
-                }
-            }
-        }
-        done = chunkDone;
-
-        if (done) {
-            console.log('Response:', response);
-            responses.push(response);
-        }
+    
+    // Get appropriate API key based on the model provider
+    const provider = modelInfo.provider;
+    const storageKey = provider === ModelProvider.OPENAI ? 'openai_api_key' : 'deepseek_api_key';
+    
+    const result = await chrome.storage.local.get(storageKey);
+    const apiKey = result[storageKey];
+    
+    if (!apiKey) {
+        throw new AIServiceError({
+            type: ErrorType.CONFIGURATION,
+            message: `API key for ${provider} is not configured. Please set it in the extension options.`
+        });
     }
-
-    // Process any remaining complete line in buffer
-    if (buffer.trim()) {
-        try {
-            const data = JSON.parse(buffer);
-            if (data.error) {
-                throw data.error;
+    
+    // Create model instance using the factory
+    const model = ModelFactory.createModelFromId(modelId, apiKey, 0.7);
+    
+    try {
+        let fullResponse = '';
+        
+        // Use the streaming generator pattern
+        const responseStream = model.generateStream(messages);
+        
+        for await (const chunk of responseStream) {
+            if (chunk.content) {
+                // Process the chunk and update streaming content
+                await updateStreamingContent(chunk.content, false);
+                fullResponse += chunk.content;
             }
-            if (data.content !== undefined) {
-                await updateStreamingContent(data.content, data.done);
+            
+            if (chunk.isComplete) {
+                break;
             }
-        } catch (error) {
-            console.error('Error parsing final buffer:', error);
-            throw {
-                type: ErrorType.SERVER,
-                message: 'Error parsing final server response',
-                details: { error, buffer }
-            };
         }
+        
+        // Mark streaming as done
+        await updateStreamingContent('', true);
+        
+        // Save the full response for conversation history
+        responses.push(fullResponse);
+        
+        console.log('Response:', fullResponse);
+    } catch (error: any) {
+        console.error(`${provider} streaming error:`, error);
+        throw error;
     }
 }
 

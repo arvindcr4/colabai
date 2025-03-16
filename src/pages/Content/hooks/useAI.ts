@@ -1,14 +1,13 @@
-import { useState, useEffect, useCallback, useRef } from "react";
-import { acceptChange, applyOperation, rejectChange, requestContent } from '../notebookUpdater';
-import { ErrorType, AIError } from "../../../../src/utils/errors";
-import { usePendingOperations as usePendingOperations } from "./usePendingOperations";
+import { useEffect } from "react";
+import { applyOperation, requestContent } from '../notebookUpdater';
+import { usePendingOperations } from "./usePendingOperations";
 import { useGenerationState } from "./useGenerationState";
 import { useMessages } from "./useMessages";
 import { useAIError } from "./useAIError";
 import { useMessageListener } from "./useMessageListener";
 import { Operation, Pending } from "../../../../src/utils/operations";
 
-export const useAI = (openSubscriptionWindow: () => void, setPrompt: (prompt: string) => void, actionTextAreaRef: any, authState: any) => {
+export const useAI = (setPrompt: (prompt: string) => void, actionTextAreaRef: any) => {
 
     const { generationState, dispatch } = useGenerationState();
     const messageManager = useMessages();
@@ -16,7 +15,7 @@ export const useAI = (openSubscriptionWindow: () => void, setPrompt: (prompt: st
         dispatch({ type: 'finish_update_notebook' });
     });
     
-    const { handleAIError } = useAIError(openSubscriptionWindow, (error) => {
+    const { handleAIError } = useAIError((error) => {
         
         messageManager.addErrorMessage(error.message, error.action, error.actionText);
         
@@ -34,10 +33,6 @@ export const useAI = (openSubscriptionWindow: () => void, setPrompt: (prompt: st
             const id = applyOperation(operation);
             dispatch({ type: 'start_update_notebook' });
             return id;
-        },
-        // Handle messages remaining
-        (remaining: number) => {
-            messageManager.setMessagesRemaining(remaining);
         },
         // Handle done generating
         (pendingOperations: Map<string, Pending<Operation>>) => {
@@ -65,7 +60,7 @@ export const useAI = (openSubscriptionWindow: () => void, setPrompt: (prompt: st
             messageManager.addMessage({ type: 'ai', content: '' });
 
             chrome.runtime.sendMessage(
-                { action: "generateAI", prompt: prompt, content: content, model: model, plan: authState.subscriptionPlan }
+                { action: "generateAI", prompt: prompt, content: content, model: model }
             );
 
         } catch (error) {
@@ -83,6 +78,7 @@ export const useAI = (openSubscriptionWindow: () => void, setPrompt: (prompt: st
     function restartAI() {
         chrome.runtime.sendMessage({ action: "restartAI" });
         messageManager.resetMessages();
+        dispatch({ type: 'reset' });
     }
 
     return {

@@ -1,6 +1,6 @@
 import App from './App';
 import { createRoot } from 'react-dom/client';
-import React, { StrictMode } from 'react';
+import React from 'react';
 
 if (document.readyState !== 'loading') {
     waitForNotebook();
@@ -23,6 +23,11 @@ function waitForNotebook() {
         childList: true,
         subtree: true
     });
+  
+    // Set a timeout to stop observing if no Colab notebook is found after 10 seconds
+    setTimeout(() => {
+        observer.disconnect();
+    }, 10000);
 }
 
 function init(notebook: Element) {
@@ -31,9 +36,8 @@ function init(notebook: Element) {
     container.style.display = 'flex';
     notebook.appendChild(container as Node);
 
-    const root = createRoot(container!); // createRoot(container!) if you use TypeScript
+    const root = createRoot(container);
     root.render(
         <App />
     );
-
 }

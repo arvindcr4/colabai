@@ -1,130 +1,86 @@
 import React, { useEffect, useState } from 'react';
+import {
+  AVAILABLE_MODELS,
+  ModelProvider,
+  ModelType,
+} from '../../utils/models/types';
 import '../../styles.css';
-import { AuthTokenResponse } from '@supabase/supabase-js';
-import { useAuthState } from '../../utils/useAuthState';
-import { AuthState } from '../../utils/types';
-
-const manifest = chrome.runtime.getManifest();
-
-const url = new URL('https://accounts.google.com/o/oauth2/auth');
-
-if (manifest && manifest.oauth2 && manifest.oauth2.scopes) {
-  url.searchParams.set('client_id', manifest.oauth2.client_id);
-  url.searchParams.set('response_type', 'id_token');
-  url.searchParams.set('access_type', 'offline');
-  url.searchParams.set('redirect_uri', `https://${chrome.runtime.id}.chromiumapp.org/`);
-  url.searchParams.set('scope', manifest.oauth2.scopes.join(' '));
-}
 
 const Popup = () => {
-  const { authState, refreshAuthState } = useAuthState();
-
+  const [openaiApiKey, setOpenaiApiKey] = useState('');
+  const [deepseekApiKey, setDeepseekApiKey] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [savedMessage, setSavedMessage] = useState<string | null>(null);
+  const [selectedModel, setSelectedModel] = useState('deepseek-chat');
+  const [allow_reduce_content, setAllowReduceContent] = useState(false);
 
   useEffect(() => {
-    // Initial auth check
-    refreshAuthState().then(() => {
-      setLoading(false);
-    }).catch((error) => {
-      setError('Failed to check authentication status');
-      setLoading(false);
-    });
+    // Load saved API keys and selected model from storage
+    chrome.storage.local.get(
+      [
+        'openai_api_key',
+        'deepseek_api_key',
+        'selected_model',
+        'allow_reduce_content',
+      ],
+      (result) => {
+        if (result.openai_api_key) {
+          setOpenaiApiKey(result.openai_api_key);
+        }
+
+        if (result.deepseek_api_key) {
+          setDeepseekApiKey(result.deepseek_api_key);
+        }
+
+        if (result.selected_model) {
+          setSelectedModel(result.selected_model);
+        }
+
+        if (result.allow_reduce_content) {
+          setAllowReduceContent(result.allow_reduce_content);
+        }
+
+        setLoading(false);
+      }
+    );
   }, []);
 
-  const handleSignOut = async () => {
+  const handleSave = async () => {
     try {
-
       setLoading(true);
       setError(null);
-      await signOut();
-      setLoading(false);
 
+      // Save settings to chrome storage
+      await chrome.storage.local.set({
+        openai_api_key: openaiApiKey,
+        deepseek_api_key: deepseekApiKey,
+        selected_model: selectedModel,
+        allow_reduce_content: allow_reduce_content,
+      });
+
+      setSavedMessage('Settings saved successfully!');
+      setTimeout(() => setSavedMessage(null), 3000);
+      setLoading(false);
     } catch (error) {
-      console.error('Error signing out:', error);
-      setError('Failed to sign out');
+      console.error('Error saving settings:', error);
+      setError('Failed to save settings');
       setLoading(false);
     }
   };
 
-  async function signInWithGoogle() {
-    setLoading(true);
-    setError(null);
-    try {
-      await chrome.identity.launchWebAuthFlow(
-        {
-          url: url.href,
-          interactive: true,
-        },
-        async (redirectedTo) => {
-          if (chrome.runtime.lastError) {
-            console.error('Auth Error:', chrome.runtime.lastError);
-            setError('Failed to authenticate with Google');
-            setLoading(false);
-            return;
-          }
+  // Group models by provider
+  const modelsByProvider = AVAILABLE_MODELS.reduce((acc, model) => {
+    const providerKey =
+      model.provider === ModelProvider.OPENAI ? 'OpenAI' : 'DeepSeek';
 
-          try {
-            const url = new URL(redirectedTo || '');
-            const params = new URLSearchParams(url.hash.substring(1));
-
-            const idToken = params.get('id_token');
-            if (!idToken) {
-              setError('Failed to authenticate with Google');
-              setLoading(false);
-              return;
-            }
-
-            const response = await chrome.runtime.sendMessage({
-              type: 'SUPABASE_REQUEST',
-              payload: {
-                operation: 'SIGN_IN_WITH_GOOGLE',
-                data: {
-                  token: idToken,
-                }
-              },
-            });
-
-            if (response.error) {
-              setError(response.error.message);
-              setLoading(false);
-              return;
-            }
-
-          } catch (error) {
-            console.error('Error in auth flow:', error);
-            setError('Authentication failed');
-          } finally {
-            setLoading(false);
-          }
-        }
-      );
-    } catch (error) {
-      console.error('Error launching auth flow:', error);
-      setError('Failed to start authentication');
-      setLoading(false);
+    if (!acc[providerKey]) {
+      acc[providerKey] = [];
     }
-  }
 
-  // Function to clear auth state (logout)
-  async function signOut() {
-    try {
-      // First sign out from Supabase
-      await chrome.runtime.sendMessage({
-        type: 'SUPABASE_REQUEST',
-        payload: {
-          operation: 'SIGN_OUT'
-        }
-      });
-
-      // Clear session from storage in all contexts
-      await chrome.storage.local.remove(['sb-*', 'session']); // Clear all Supabase-related storage
-
-    } catch (error) {
-      console.error('Error clearing auth state:', error);
-      throw error;
-    }
-  }
+    acc[providerKey].push(model);
+    return acc;
+  }, {} as Record<string, ModelType[]>);
 
   if (loading) {
     return (
@@ -137,22 +93,6 @@ const Popup = () => {
     );
   }
 
-  if (error) {
-    return (
-      <div className="w-[350px] min-h-[300px] bg-gray-900 text-gray-100 p-6 flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="text-red-500">{error}</div>
-          <button
-            onClick={() => refreshAuthState()}
-            className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-lg hover:bg-gray-700"
-          >
-            Retry
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="w-[350px] min-h-[300px] bg-gray-900 text-gray-100 p-6">
       <div className="flex flex-col h-full">
@@ -160,8 +100,18 @@ const Popup = () => {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-3">
             <div className="bg-gray-800 p-2 rounded-lg">
-              <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              <svg
+                className="w-6 h-6 text-orange-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                ></path>
               </svg>
             </div>
             <h1 className="text-xl font-semibold">ColabAI</h1>
@@ -170,71 +120,141 @@ const Popup = () => {
 
         {/* Content */}
         <div className="flex-1">
-          {authState.user ? (
-            <div className="space-y-6">
-              <div className="bg-gray-800 rounded-lg p-4 space-y-2">
-                <div className="flex items-center space-x-3">
-                  <div className="bg-gray-700 p-2 rounded-full">
-                    {authState.user.user_metadata?.avatar_url ? (
-                      <img
-                        src={authState.user.user_metadata.avatar_url}
-                        alt="Profile"
-                        className="w-8 h-8 rounded-full"
-                      />
-                    ) : (
-                      <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                      </svg>
+          <div className="space-y-6">
+            <div className="bg-gray-800 rounded-lg p-4 space-y-4">
+              <h2 className="text-lg font-medium">API Settings</h2>
+
+              <div className="space-y-3">
+                <div>
+                  <label
+                    htmlFor="openaiApiKey"
+                    className="block text-sm font-medium text-gray-400 mb-1"
+                  >
+                    OpenAI API Key
+                  </label>
+                  <input
+                    type="password"
+                    id="openaiApiKey"
+                    value={openaiApiKey}
+                    onChange={(e) => setOpenaiApiKey(e.target.value)}
+                    placeholder="sk-..."
+                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md 
+                           text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  />
+                  <p className="mt-1 text-xs text-gray-400">
+                    Required for OpenAI models
+                  </p>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="deepseekApiKey"
+                    className="block text-sm font-medium text-gray-400 mb-1"
+                  >
+                    DeepSeek API Key
+                  </label>
+                  <input
+                    type="password"
+                    id="deepseekApiKey"
+                    value={deepseekApiKey}
+                    onChange={(e) => setDeepseekApiKey(e.target.value)}
+                    placeholder="sk-..."
+                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md 
+                           text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  />
+                  <p className="mt-1 text-xs text-gray-400">
+                    Required for DeepSeek models
+                  </p>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="selectedModel"
+                    className="block text-sm font-medium text-gray-400 mb-1"
+                  >
+                    Default Model
+                  </label>
+                  <select
+                    id="selectedModel"
+                    value={selectedModel}
+                    onChange={(e) => setSelectedModel(e.target.value)}
+                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md 
+                           text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  >
+                    {Object.entries(modelsByProvider).map(
+                      ([providerName, models]) => (
+                        <optgroup key={providerName} label={providerName}>
+                          {models.map((model) => (
+                            <option key={model.id} value={model.id}>
+                              {model.name}{' '}
+                              {model.description
+                                ? `- ${model.description}`
+                                : ''}
+                            </option>
+                          ))}
+                        </optgroup>
+                      )
                     )}
-                  </div>
-                  <div>
-                    <p className="font-medium">{authState.user.user_metadata?.name || 'User'}</p>
-                    <p className="text-sm text-gray-400">{authState.user.email}</p>
-                  </div>
+                  </select>
+                  <p className="mt-1 text-xs text-gray-400">
+                    Select the default model to use with the extension
+                  </p>
                 </div>
               </div>
 
-              <button
-                onClick={handleSignOut}
-                className="w-full px-4 py-2 text-sm font-medium text-white bg-gray-800 
-                         border border-gray-700 rounded-lg hover:bg-gray-700 
-                         focus:outline-none focus:ring-2 focus:ring-orange-500 
-                         focus:ring-offset-2 focus:ring-offset-gray-900 
-                         transition-colors"
-              >
-                Sign Out
-              </button>
-            </div>
-          ) : (
-            <div className="flex flex-col items-center justify-center space-y-6 py-8">
-              <div className="text-center space-y-2">
-                <h2 className="text-xl font-semibold">Welcome Back</h2>
-                <p className="text-gray-400 text-sm">Sign in to access all features</p>
-              </div>
-
-              <button
-                onClick={signInWithGoogle}
-                className="w-full px-4 py-3 text-sm font-medium text-white bg-orange-600 
-                         rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 
-                         focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900 
-                         transition-colors flex items-center justify-center space-x-2"
-              >
-                <svg className="w-5 h-5" viewBox="0 0 24 24">
-                  <path
-                    fill="currentColor"
-                    d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032 s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2 C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"
+              <div>
+                <div className="flex flex-row items-center justify-between">
+                  <label
+                    htmlFor="allow_reduce_content"
+                    className="block text-sm font-medium text-gray-400 mb-1"
+                  >
+                    Allow content reduction
+                  </label>
+                  <input
+                    type="checkbox"
+                    id="allow_reduce_content"
+                    checked={allow_reduce_content}
+                    onChange={(e) => setAllowReduceContent(e.target.checked)}
+                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md 
+                           text-gray-100 focus:outline-none basis-0"
                   />
-                </svg>
-                <span>Continue with Google</span>
-              </button>
+                </div>
+                <p className="mt-1 text-xs text-gray-400">
+                  Use a context reduction strategy to reduce token usage
+                  (requires OpenAI API key)
+                </p>
+              </div>
             </div>
-          )}
+
+            {error && (
+              <div className="bg-red-900/30 border border-red-800 text-red-300 p-3 rounded-md text-sm">
+                {error}
+              </div>
+            )}
+
+            {savedMessage && (
+              <div className="bg-green-900/30 border border-green-800 text-green-300 p-3 rounded-md text-sm">
+                {savedMessage}
+              </div>
+            )}
+
+            <button
+              onClick={handleSave}
+              disabled={loading}
+              className="w-full px-4 py-2 text-sm font-medium text-white bg-orange-600 
+                       rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 
+                       focus:ring-orange-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? 'Saving...' : 'Save Settings'}
+            </button>
+          </div>
         </div>
 
         {/* Footer */}
-        <div className="mt-6 pt-4 border-t border-gray-800">
-          <p className="text-xs text-center text-gray-500">
-            Powered by ColabAI Assistant
+        <div className="pt-4 mt-6 border-t border-gray-800">
+          <p className="text-xs text-gray-400 text-center">
+            ColabAI is an open-source extension that provides AI assistance for
+            Google Colab.
           </p>
         </div>
       </div>

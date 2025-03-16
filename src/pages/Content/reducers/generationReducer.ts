@@ -42,6 +42,14 @@ export const generationReducer = (state: GenerationState, action: GenerationActi
         isUpdatingNotebook: false,
         error: action.payload
         };
+    case 'reset':
+        return {
+            ...state,
+            isGenerating: false,
+            isDiffing: false,
+            isUpdatingNotebook: false,
+            error: null
+        };
     default:
         return state;
     }
@@ -54,4 +62,5 @@ export type GenerationAction =
     | { type: 'finish_update_notebook' }
     | { type: 'start_diffing' }
     | { type: 'finish_diffing' }
-    | { type: 'error'; payload: string };
+    | { type: 'error'; payload: string }
+    | { type: 'reset' };
