@@ -6,6 +6,8 @@
 
 ColabAI is an open-source Chrome extension that provides AI-powered assistance for Google Colab notebooks. The extension helps users with their Python code, data analysis, machine learning projects, and other tasks directly within the Colab interface.
 
+You can find the extension on the Chrome Web Store: [ColabAI](https://chromewebstore.google.com/detail/lmlnapmafcnbkhnhjmieckaceddajbkm?utm_source=item-share-cb)
+
 ## Features
 
 - **AI-Powered Code Assistance**: Get suggestions for code improvements, bug fixes, and optimizations.
