@@ -1,4 +1,4 @@
-# ColabAI: AI Assistant for Google Colab
+# ColabAI: A Better AI Assistant for Google Colab
 
 <img src="src/assets/img/icon128.png" width="64"/>
 
