@@ -1,6 +1,6 @@
 # ColabAI: AI Assistant for Google Colab
 
-<img src="src/assets/img/icon-128.png" width="64"/>
+<img src="src/assets/img/icon128.png" width="64"/>
 
 ## Overview
 
@@ -19,17 +19,20 @@ ColabAI is an open-source Chrome extension that provides AI-powered assistance f
 ### Installation
 
 1. Clone this repository:
+
    ```
    git clone https://github.com/yourusername/colabai.git
    cd colabai
    ```
 
 2. Install dependencies:
+
    ```
    npm install
    ```
 
 3. Build the extension:
+
    ```
    npm run build
    ```
@@ -42,8 +45,8 @@ ColabAI is an open-source Chrome extension that provides AI-powered assistance f
 ### Configuration
 
 1. After installing the extension, click on the ColabAI icon in your Chrome toolbar.
-2. Enter your OpenAI API key in the settings page.
-3. Select your preferred model (default is gpt-4o-mini).
+2. Enter your API keys in the popup.
+3. Select your preferred model.
 4. Your settings will be saved locally and used for all AI requests.
 
 ## Usage
@@ -61,13 +64,13 @@ The extension consists of several components:
 
 - **Popup**: Settings interface for OpenAI API key and model selection.
 - **Content Script**: Injects the AI panel into Google Colab's interface.
-- **Background Service Worker**: Handles API calls to OpenAI.
+- **Background Service Worker**: Handles API calls.
 - **AI Agent**: Manages context, changes, and conversations.
 
 ### Privacy & Security
 
-- Your API key is stored locally in Chrome's storage and never sent to any server besides OpenAI.
-- All AI requests are made directly from your browser to OpenAI using your API key.
+- Your API key is stored locally in Chrome's storage and never sent to any server besides the LLM providers.
+- All AI requests are made directly from your browser to the LLM providers using your API key.
 - No authentication or user data is collected.
 
 ## Development
@@ -100,7 +103,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-This project was built using the [Chrome Extension Boilerplate with React 18 and Webpack 5](https://github.com/lxieyang/chrome-extension-boilerplate-react).
