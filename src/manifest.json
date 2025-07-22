@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "ColabAI",
-  "version": "2.0.0",
-  "description": "Open-source AI assistant for Google Colab with direct integration for OpenAI and DeepSeek models.",
+  "version": "5.1.0",
+  "description": "Open-source AI assistant for Google Colab with support for OpenAI, DeepSeek, Anthropic Claude, Mistral, and OpenRouter (200+ models).",
   "background": {
     "service_worker": "background.bundle.js"
   },
