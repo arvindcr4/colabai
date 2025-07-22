@@ -11,7 +11,10 @@ export interface ActionTextAreaRef {
   clear: () => void;
 }
 
-export const ActionTextArea = forwardRef<ActionTextAreaRef, { onInput: (text: string) => void }>(({ onInput }, ref) => {
+export const ActionTextArea = forwardRef<ActionTextAreaRef, { 
+  onInput: (text: string) => void;
+  onSubmit?: () => void;
+}>(({ onInput, onSubmit }, ref) => {
   const editorRef = useRef<HTMLDivElement>(null);
   const { filteredActions } = useAction();
 
@@ -49,7 +52,8 @@ export const ActionTextArea = forwardRef<ActionTextAreaRef, { onInput: (text: st
     selectedIndex,
     setSelectedIndex,
     filteredActions,
-    insertAction
+    insertAction,
+    onSubmit
   });
 
   const handleBackspace = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -123,7 +127,7 @@ export const ActionTextArea = forwardRef<ActionTextAreaRef, { onInput: (text: st
     <div className="relative w-full">
       <div
         ref={editorRef}
-        className="ai-scrollbar w-full overflow-y-auto max-h-24 bg-gray-800 text-gray-100 rounded-lg p-2 focus:outline-none ring-1 ring-gray-900 focus:ring-1 focus:ring-orange-600"
+        className="ai-scrollbar w-full overflow-y-auto min-h-[2.5rem] max-h-24 bg-gray-800 text-gray-100 rounded-lg p-2 focus:outline-none ring-1 ring-gray-900 focus:ring-1 focus:ring-orange-600"
         contentEditable
         suppressContentEditableWarning
         onInput={handleInput}
@@ -134,7 +138,7 @@ export const ActionTextArea = forwardRef<ActionTextAreaRef, { onInput: (text: st
         }}
         role="textbox"
         aria-label="Colab AI assistant text area"
-        placeholder="Ask me anything..."
+        data-placeholder="Ask me anything..."
       />
 
       {showSuggestions && (

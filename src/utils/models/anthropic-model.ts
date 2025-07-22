@@ -213,6 +213,8 @@ export class AnthropicModel implements ModelInterface {
 
   private async handleResponseError(response: Response): Promise<never> {
     const errorData = await response.json().catch(() => ({}));
+    
+    console.error(`Anthropic API error - Status: ${response.status}, Model: ${this.config.model}, Response:`, errorData);
 
     if (response.status === 401) {
       throw new AIServiceError({
@@ -228,6 +230,19 @@ export class AnthropicModel implements ModelInterface {
       throw new AIServiceError({
         type: ErrorType.MODEL_ACCESS,
         message: `The requested model "${this.config.model}" is not available with your API key.`,
+      });
+    } else if (response.status === 400 && errorData.error?.type === 'invalid_request_error') {
+      // Handle model not found or invalid model name
+      if (errorData.error?.message?.includes('model')) {
+        throw new AIServiceError({
+          type: ErrorType.MODEL_ACCESS,
+          message: `The model "${this.config.model}" is not available. Please try Claude 3.5 Sonnet instead.`,
+        });
+      }
+      throw new AIServiceError({
+        type: ErrorType.SERVER,
+        message: `Invalid request: ${errorData.error?.message || 'Unknown error'}`,
+        details: errorData
       });
     } else {
       throw new AIServiceError({

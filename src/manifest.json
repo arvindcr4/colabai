@@ -24,6 +24,14 @@
     }
   ],
   "permissions": ["storage"],
+  "host_permissions": [
+    "https://api.openai.com/*",
+    "https://api.deepseek.com/*", 
+    "https://api.anthropic.com/*",
+    "https://api.mistral.ai/*",
+    "https://openrouter.ai/*",
+    "https://generativelanguage.googleapis.com/*"
+  ],
   "web_accessible_resources": [
     {
       "resources": [

@@ -8,6 +8,7 @@ interface KeyboardNavigationProps {
   setSelectedIndex: (index: React.SetStateAction<number>) => void;
   filteredActions: TextAction[];
   insertAction: (action: TextAction) => void;
+  onSubmit?: () => void;
 }
 
 export function useKeyboardNavigation({
@@ -16,7 +17,8 @@ export function useKeyboardNavigation({
   selectedIndex,
   setSelectedIndex,
   filteredActions,
-  insertAction
+  insertAction,
+  onSubmit
 }: KeyboardNavigationProps) {
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (showSuggestions) {
@@ -45,6 +47,14 @@ export function useKeyboardNavigation({
           event.preventDefault();
           setShowSuggestions(false);
           break;
+      }
+    } else {
+      // Handle Enter key when no suggestions are shown
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        if (onSubmit) {
+          onSubmit();
+        }
       }
     }
   };

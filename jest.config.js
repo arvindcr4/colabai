@@ -13,7 +13,7 @@ module.exports = {
     '!src/pages/*/index.{js,jsx,ts,tsx}',
   ],
   coverageReporters: ['text', 'lcov', 'html'],
-  moduleNameMapping: {
+  moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '^@/(.*)$': '<rootDir>/src/$1'
   },

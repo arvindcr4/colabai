@@ -20,6 +20,7 @@ async function getApiKeyForProvider(provider: ModelProvider): Promise<string> {
         [ModelProvider.ANTHROPIC]: 'anthropic_api_key',
         [ModelProvider.MISTRAL]: 'mistral_api_key',
         [ModelProvider.OPENROUTER]: 'openrouter_api_key',
+        [ModelProvider.GEMINI]: 'gemini_api_key',
     };
 
     const storageKey = storageKeyMap[provider];
@@ -33,6 +34,8 @@ async function getApiKeyForProvider(provider: ModelProvider): Promise<string> {
 
     const result = await chrome.storage.local.get(storageKey);
     const apiKey = result[storageKey];
+    
+    console.log(`Retrieving API key for ${provider} with storage key ${storageKey}:`, apiKey ? `[Key present: ${apiKey.substring(0, 10)}...]` : '[No key found]');
 
     if (!apiKey) {
         throw new AIServiceError({
@@ -117,6 +120,14 @@ export async function generateAIContent(prompt: string, content: NotebookCell[],
     } catch (error: any) {
         clearActiveConversationTab(); // Clear the lock if there's an error
 
+        console.error('AI generation error:', error);
+
+        // Check if it's already an AIServiceError
+        if (error.type && Object.values(ErrorType).includes(error.type)) {
+            sendError(error);
+            return;
+        }
+
         // Convert network errors to our error type
         if (error instanceof TypeError && error.message.includes('network')) {
             sendError({
@@ -124,13 +135,15 @@ export async function generateAIContent(prompt: string, content: NotebookCell[],
                 message: 'Network connection error',
                 details: error
             });
-        } 
-
-        if (error.type && Object.values(ErrorType).includes(error.type)) {
-            sendError(error);
+            return;
         }
 
-        throw error;
+        // Handle any other errors
+        sendError({
+            type: ErrorType.SERVER,
+            message: error.message || 'An unexpected error occurred. Please try again.',
+            details: error
+        });
     }
 }
 
@@ -196,6 +209,8 @@ async function callModel(messages: Message[], modelId: string): Promise<string> 
 
 async function streamModelResponse(messages: Message[], modelId: string): Promise<void> {
     const modelInfo = getModelById(modelId);
+    console.log(`Streaming response for model: ${modelId}, Provider: ${modelInfo?.provider}`);
+    
     if (!modelInfo) {
         throw new AIServiceError({
             type: ErrorType.CONFIGURATION,

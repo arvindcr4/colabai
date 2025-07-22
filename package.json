@@ -1,7 +1,7 @@
 {
   "name": "chrome-extension-boilerplate-react",
   "version": "5.1.0",
-  "description": "A chrome extension boilerplate built with React 18, Webpack 5, and Webpack Dev Server 4",
+  "description": "Open-source AI assistant for Google Colab with support for OpenAI, DeepSeek, Anthropic Claude, Mistral, and OpenRouter (200+ models).",
   "license": "MIT",
   "repository": {
     "type": "git",

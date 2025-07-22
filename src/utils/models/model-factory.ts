@@ -4,7 +4,8 @@ import { OpenAIModel } from './openai-model';
 import { DeepSeekModel } from './deepseek-model';
 import { AnthropicModel } from './anthropic-model';
 import { OpenRouterModel } from './openrouter-model';
-import { ModelConfig, ModelProvider, OpenAIModelConfig, DeepSeekModelConfig, MistralModelConfig, AnthropicModelConfig, OpenRouterModelConfig, getModelById } from './types';
+import { GeminiModel } from './gemini-model';
+import { ModelConfig, ModelProvider, OpenAIModelConfig, DeepSeekModelConfig, MistralModelConfig, AnthropicModelConfig, OpenRouterModelConfig, GeminiModelConfig, getModelById } from './types';
 import { AIServiceError, ErrorType } from '../errors';
 
 /**
@@ -26,6 +27,8 @@ export class ModelFactory {
         return new AnthropicModel(config as AnthropicModelConfig);
       case ModelProvider.OPENROUTER:
         return new OpenRouterModel(config as OpenRouterModelConfig);
+      case ModelProvider.GEMINI:
+        return new GeminiModel(config as GeminiModelConfig);
       default:
         throw new AIServiceError({
           type: ErrorType.CONFIGURATION,

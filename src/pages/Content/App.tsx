@@ -124,6 +124,11 @@ const App = () => {
                 },
               ]}
               onInput={setPrompt}
+              onSubmit={() => {
+                if (prompt && !generationState.isGenerating) {
+                  generateAndInsertContent(prompt, model);
+                }
+              }}
               ref={actionTextAreaRef}
             />
           </div>

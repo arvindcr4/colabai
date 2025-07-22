@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import {
   AVAILABLE_MODELS,
   ModelProvider,
@@ -12,10 +12,11 @@ const Popup = () => {
   const [anthropicApiKey, setAnthropicApiKey] = useState('');
   const [mistralApiKey, setMistralApiKey] = useState('');
   const [openrouterApiKey, setOpenrouterApiKey] = useState('');
+  const [geminiApiKey, setGeminiApiKey] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [savedMessage, setSavedMessage] = useState<string | null>(null);
-  const [selectedModel, setSelectedModel] = useState('deepseek-chat');
+  const [selectedModel, setSelectedModel] = useState('gpt-4.1-mini');
   const [allow_reduce_content, setAllowReduceContent] = useState(false);
 
   useEffect(() => {
@@ -27,10 +28,18 @@ const Popup = () => {
         'anthropic_api_key',
         'mistral_api_key',
         'openrouter_api_key',
+        'gemini_api_key',
         'selected_model',
         'allow_reduce_content',
       ],
       (result) => {
+        if (chrome.runtime.lastError) {
+          console.error('Failed to load settings:', chrome.runtime.lastError);
+          setError('Failed to load settings');
+          setLoading(false);
+          return;
+        }
+
         if (result.openai_api_key) {
           setOpenaiApiKey(result.openai_api_key);
         }
@@ -51,8 +60,20 @@ const Popup = () => {
           setOpenrouterApiKey(result.openrouter_api_key);
         }
 
+        if (result.gemini_api_key) {
+          setGeminiApiKey(result.gemini_api_key);
+        }
+
         if (result.selected_model) {
-          setSelectedModel(result.selected_model);
+          // Validate that the model exists
+          const modelExists = AVAILABLE_MODELS.some(m => m.id === result.selected_model);
+          if (modelExists) {
+            setSelectedModel(result.selected_model);
+          } else {
+            // Fallback to first available model
+            const defaultModel = AVAILABLE_MODELS[0]?.id || 'gpt-4o-mini';
+            setSelectedModel(defaultModel);
+          }
         }
 
         if (result.allow_reduce_content) {
@@ -76,6 +97,7 @@ const Popup = () => {
         anthropic_api_key: anthropicApiKey,
         mistral_api_key: mistralApiKey,
         openrouter_api_key: openrouterApiKey,
+        gemini_api_key: geminiApiKey,
         selected_model: selectedModel,
         allow_reduce_content: allow_reduce_content,
       });
@@ -90,37 +112,42 @@ const Popup = () => {
     }
   };
 
-  // Group models by provider
-  const modelsByProvider = AVAILABLE_MODELS.reduce((acc, model) => {
-    let providerKey: string;
-    
-    switch (model.provider) {
-      case ModelProvider.OPENAI:
-        providerKey = 'OpenAI';
-        break;
-      case ModelProvider.DEEPSEEK:
-        providerKey = 'DeepSeek';
-        break;
-      case ModelProvider.ANTHROPIC:
-        providerKey = 'Anthropic';
-        break;
-      case ModelProvider.MISTRAL:
-        providerKey = 'Mistral';
-        break;
-      case ModelProvider.OPENROUTER:
-        providerKey = 'OpenRouter';
-        break;
-      default:
-        providerKey = 'Other';
-    }
+  // Group models by provider - memoized for performance
+  const modelsByProvider = useMemo(() => {
+    return AVAILABLE_MODELS.reduce((acc, model) => {
+      let providerKey: string;
+      
+      switch (model.provider) {
+        case ModelProvider.OPENAI:
+          providerKey = 'OpenAI';
+          break;
+        case ModelProvider.DEEPSEEK:
+          providerKey = 'DeepSeek';
+          break;
+        case ModelProvider.ANTHROPIC:
+          providerKey = 'Anthropic';
+          break;
+        case ModelProvider.MISTRAL:
+          providerKey = 'Mistral';
+          break;
+        case ModelProvider.OPENROUTER:
+          providerKey = 'OpenRouter';
+          break;
+        case ModelProvider.GEMINI:
+          providerKey = 'Gemini';
+          break;
+        default:
+          providerKey = 'Other';
+      }
 
-    if (!acc[providerKey]) {
-      acc[providerKey] = [];
-    }
+      if (!acc[providerKey]) {
+        acc[providerKey] = [];
+      }
 
-    acc[providerKey].push(model);
-    return acc;
-  }, {} as Record<string, ModelType[]>);
+      acc[providerKey].push(model);
+      return acc;
+    }, {} as Record<string, ModelType[]>);
+  }, []);
 
   if (loading) {
     return (
@@ -134,7 +161,7 @@ const Popup = () => {
   }
 
   return (
-    <div className="w-[350px] min-h-[300px] bg-gray-900 text-gray-100 p-6">
+    <div className="w-[400px] min-h-[500px] bg-gray-900 text-gray-100 p-6 overflow-y-auto">
       <div className="flex flex-col h-full">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
@@ -267,6 +294,27 @@ const Popup = () => {
                   />
                   <p className="mt-1 text-xs text-gray-400">
                     Required for OpenRouter models (access to 200+ models)
+                  </p>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="geminiApiKey"
+                    className="block text-sm font-medium text-gray-400 mb-1"
+                  >
+                    Gemini API Key
+                  </label>
+                  <input
+                    type="password"
+                    id="geminiApiKey"
+                    value={geminiApiKey}
+                    onChange={(e) => setGeminiApiKey(e.target.value)}
+                    placeholder="AI..."
+                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md 
+                           text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  />
+                  <p className="mt-1 text-xs text-gray-400">
+                    Required for Google Gemini models
                   </p>
                 </div>
 

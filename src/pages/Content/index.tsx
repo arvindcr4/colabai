@@ -31,13 +31,17 @@ function waitForNotebook() {
 }
 
 function init(notebook: Element) {
-    const container = document.createElement('div');
-    container.id = 'colab-assistant-root';
-    container.style.display = 'flex';
-    notebook.appendChild(container as Node);
+    try {
+        const container = document.createElement('div');
+        container.id = 'colab-assistant-root';
+        container.style.display = 'flex';
+        notebook.appendChild(container as Node);
 
-    const root = createRoot(container);
-    root.render(
-        <App />
-    );
+        const root = createRoot(container);
+        root.render(
+            <App />
+        );
+    } catch (error) {
+        console.error('[ColabAI] Error initializing extension:', error);
+    }
 }

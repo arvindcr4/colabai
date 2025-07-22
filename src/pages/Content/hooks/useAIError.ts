@@ -13,15 +13,44 @@ export const useAIError = ( onError: (error: { type: ErrorType, message: string,
                 break;
 
             case ErrorType.RATE_LIMIT:
-                errorMessage = 'Too many requests. Please wait a moment and try again.';
+            case ErrorType.QUOTA_EXCEEDED:
+                errorMessage = 'Too many requests or quota exceeded. Please wait a moment and try again.';
                 break;
 
             case ErrorType.NETWORK:
                 errorMessage = 'Network connection error. Please check your internet connection.';
                 break;
 
+            case ErrorType.AUTHENTICATION:
+                errorMessage = error.message || 'Authentication failed. Please check your API key in the extension settings.';
+                action = () => chrome.runtime.openOptionsPage();
+                actionText = 'Open Settings';
+                break;
+
+            case ErrorType.CONFIGURATION:
+                errorMessage = error.message || 'Configuration error. Please check your API key and model selection in the extension settings.';
+                action = () => chrome.runtime.openOptionsPage();
+                actionText = 'Open Settings';
+                break;
+
+            case ErrorType.MODEL_ACCESS:
+                errorMessage = error.message || 'The selected model is not available with your API key. Please check your subscription or try a different model.';
+                break;
+
+            case ErrorType.INVALID_REQUEST:
+                errorMessage = 'Invalid request. Please try rephrasing your message or try again.';
+                break;
+
+            case ErrorType.SERVER:
+                errorMessage = error.message || 'Server error from AI provider. Please try again in a moment.';
+                break;
+
             default:
                 console.error('Unhandled error:', error);
+                // If we have a specific error message, use it instead of the generic one
+                if (error.message && error.message.trim()) {
+                    errorMessage = error.message;
+                }
         }
 
         onError({

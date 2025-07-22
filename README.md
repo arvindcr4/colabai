@@ -14,7 +14,7 @@ You can find the extension on the Chrome Web Store: [ColabAI](https://chromewebs
 - **Interactive Chat Interface**: Ask questions about your code and get real-time responses.
 - **Context-Aware Suggestions**: The AI understands your notebook context to provide relevant assistance.
 - **Multiple AI Providers**: Support for OpenAI, DeepSeek, Anthropic Claude, Mistral, and OpenRouter with access to 200+ models.
-- **Flexible Model Selection**: Choose from a wide range of models including GPT-4o, Claude 3.5 Sonnet, DeepSeek R1, Mistral Large, Llama, Gemini, and many more.
+- **Flexible Model Selection**: Choose from a wide range of models including OpenAI o3-mini, Claude Opus 4, Gemini 2.5 Pro, DeepSeek R1, Mistral Large, Llama, and many more.
 - **User-Controlled API Keys**: Use your own API keys for complete control over usage and costs.
 - **Context Reduction**: Optional intelligent context reduction to optimize token usage and reduce costs.
 
@@ -59,7 +59,7 @@ You can find the extension on the Chrome Web Store: [ColabAI](https://chromewebs
 ColabAI supports multiple AI providers. You only need to configure API keys for the providers you want to use:
 
 ### OpenAI
-- **Models**: GPT-4o, GPT-4o Mini, GPT-4 Turbo, GPT-4, GPT-3.5 Turbo
+- **Models**: o3-mini, o3-mini (High), GPT-4o, GPT-4o Mini
 - **API Key Format**: `sk-...`
 - **Get API Key**: [OpenAI Platform](https://platform.openai.com/account/api-keys)
 - **Required for**: OpenAI models and context reduction feature
@@ -71,7 +71,7 @@ ColabAI supports multiple AI providers. You only need to configure API keys for 
 - **Note**: Excellent for coding tasks and reasoning
 
 ### Anthropic
-- **Models**: Claude 3.5 Sonnet, Claude 3.5 Haiku, Claude 3 Opus, Claude 3 Sonnet, Claude 3 Haiku
+- **Models**: Claude 3.5 Sonnet, Claude 3.5 Haiku, Claude Opus 4 (Preview), Claude Sonnet 4 (Preview)
 - **API Key Format**: `sk-ant-...`
 - **Get API Key**: [Anthropic Console](https://console.anthropic.com/)
 - **Note**: Excellent for analysis, writing, and complex reasoning

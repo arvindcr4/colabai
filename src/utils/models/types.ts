@@ -8,7 +8,8 @@ export enum ModelProvider {
   DEEPSEEK = 'deepseek',
   ANTHROPIC = 'anthropic',
   MISTRAL = 'mistral',
-  OPENROUTER = 'openrouter'
+  OPENROUTER = 'openrouter',
+  GEMINI = 'gemini'
 }
 
 /**
@@ -62,6 +63,14 @@ export interface OpenRouterModelConfig extends ModelConfig {
 }
 
 /**
+ * Gemini specific model configuration
+ */
+export interface GeminiModelConfig extends ModelConfig {
+  provider: ModelProvider.GEMINI;
+  model: string; // e.g., 'gemini-2.5-pro', 'gemini-2.5-flash', etc.
+}
+
+/**
  * Model type with provider information
  */
 export interface ModelType {
@@ -75,218 +84,184 @@ export interface ModelType {
  * Available model definitions
  */
 export const AVAILABLE_MODELS: ModelType[] = [
-  // OpenAI Models
+  // OpenAI Models (Current Available Models - January 2025)
+  {
+    id: 'o3-mini',
+    name: 'OpenAI o3-mini',
+    provider: ModelProvider.OPENAI,
+    description: 'Latest reasoning model optimized for coding, math, and science'
+  },
+  {
+    id: 'o3-mini-high',
+    name: 'OpenAI o3-mini (High)',
+    provider: ModelProvider.OPENAI,
+    description: 'Higher-intelligence version of o3-mini with superior reasoning'
+  },
   {
     id: 'gpt-4o',
     name: 'GPT-4o',
     provider: ModelProvider.OPENAI,
-    description: 'Latest OpenAI multimodal model with enhanced capabilities'
+    description: 'Most capable GPT-4 model with multimodal capabilities'
   },
   {
     id: 'gpt-4o-mini',
     name: 'GPT-4o Mini',
     provider: ModelProvider.OPENAI,
-    description: 'Smaller, faster version of GPT-4o'
-  },
-  {
-    id: 'gpt-4-turbo',
-    name: 'GPT-4 Turbo',
-    provider: ModelProvider.OPENAI,
-    description: 'Enhanced GPT-4 with improved speed and capabilities'
-  },
-  {
-    id: 'gpt-4',
-    name: 'GPT-4',
-    provider: ModelProvider.OPENAI,
-    description: 'Advanced reasoning and complex task completion'
-  },
-  {
-    id: 'gpt-3.5-turbo',
-    name: 'GPT-3.5 Turbo',
-    provider: ModelProvider.OPENAI,
-    description: 'Fast and efficient model for general tasks'
+    description: 'Smaller, faster, and cheaper GPT-4 model'
   },
   
-  // DeepSeek Models
+  // DeepSeek Models (Current Available Models)
   {
-    id: 'deepseek-r1',
+    id: 'deepseek-reasoner',
     name: 'DeepSeek R1',
     provider: ModelProvider.DEEPSEEK,
-    description: 'Latest reasoning model with enhanced logical capabilities'
+    description: 'Latest reasoning model with enhanced problem-solving capabilities'
   },
   {
     id: 'deepseek-chat',
-    name: 'DeepSeek Chat',
+    name: 'DeepSeek V3',
     provider: ModelProvider.DEEPSEEK,
-    description: 'General purpose conversational AI model'
-  },
-  {
-    id: 'deepseek-coder',
-    name: 'DeepSeek Coder',
-    provider: ModelProvider.DEEPSEEK,
-    description: 'Specialized model for code generation and programming tasks'
+    description: 'General chat model with strong coding and reasoning abilities'
   },
   
-  // Anthropic Claude Models
+  // Anthropic Claude Models (January 2025)
   {
     id: 'claude-3-5-sonnet-20241022',
-    name: 'Claude 3.5 Sonnet (New)',
-    provider: ModelProvider.ANTHROPIC,
-    description: 'Latest Claude 3.5 Sonnet with improved computer use and coding'
-  },
-  {
-    id: 'claude-3-5-sonnet-20240620',
     name: 'Claude 3.5 Sonnet',
     provider: ModelProvider.ANTHROPIC,
-    description: 'Most intelligent Claude model with best-in-class performance'
+    description: 'Excellent Claude model for complex reasoning and coding tasks'
+  },
+  {
+    id: 'claude-3-7-sonnet-20250219',
+    name: 'Claude 3.7 Sonnet (New)',
+    provider: ModelProvider.ANTHROPIC,
+    description: 'Latest Claude 3.7 model with enhanced capabilities'
   },
   {
     id: 'claude-3-5-haiku-20241022',
     name: 'Claude 3.5 Haiku',
     provider: ModelProvider.ANTHROPIC,
-    description: 'Fast and affordable model with improved capabilities'
+    description: 'Fastest Claude model for quick tasks and real-time responses'
   },
   {
-    id: 'claude-3-opus-20240229',
-    name: 'Claude 3 Opus',
+    id: 'claude-opus-4-20250514',
+    name: 'Claude Opus 4 (Preview)',
     provider: ModelProvider.ANTHROPIC,
-    description: 'Most powerful Claude 3 model for complex tasks'
+    description: 'Most intelligent Claude model for the most complex tasks (limited availability)'
   },
   {
-    id: 'claude-3-sonnet-20240229',
-    name: 'Claude 3 Sonnet',
+    id: 'claude-sonnet-4-20250514',
+    name: 'Claude Sonnet 4 (Preview)',
     provider: ModelProvider.ANTHROPIC,
-    description: 'Balanced Claude 3 model for general use'
-  },
-  {
-    id: 'claude-3-haiku-20240307',
-    name: 'Claude 3 Haiku',
-    provider: ModelProvider.ANTHROPIC,
-    description: 'Fastest and most affordable Claude 3 model'
+    description: 'Advanced Claude model balancing intelligence and speed (limited availability)'
   },
   
-  // Mistral Models
+  // Mistral Models (Updated July 2025)
   {
-    id: 'mistral-large-2411',
-    name: 'Mistral Large (2411)',
+    id: 'mistral-large-latest',
+    name: 'Mistral Large 2.1',
     provider: ModelProvider.MISTRAL,
-    description: 'Latest flagship model with enhanced reasoning and coding'
+    description: 'Latest flagship model with enhanced reasoning (Nov 2024)'
   },
   {
-    id: 'mistral-large-2407',
-    name: 'Mistral Large (2407)',
+    id: 'pixtral-large-latest',
+    name: 'Pixtral Large',
     provider: ModelProvider.MISTRAL,
-    description: 'High-performance model for complex tasks'
-  },
-  {
-    id: 'mistral-small-2409',
-    name: 'Mistral Small (2409)',
-    provider: ModelProvider.MISTRAL,
-    description: 'Cost-effective model with good performance'
-  },
-  {
-    id: 'pixtral-12b-2409',
-    name: 'Pixtral 12B',
-    provider: ModelProvider.MISTRAL,
-    description: 'Multimodal model capable of processing images and text'
-  },
-  {
-    id: 'mixtral-8x7b-instruct',
-    name: 'Mixtral 8x7B Instruct',
-    provider: ModelProvider.MISTRAL,
-    description: 'Mixture of experts model for efficient performance'
-  },
-  {
-    id: 'mixtral-8x22b-instruct',
-    name: 'Mixtral 8x22B Instruct',
-    provider: ModelProvider.MISTRAL,
-    description: 'Large mixture of experts model for complex reasoning'
+    description: '124B multimodal, 69.4% MathVista, best open-weights vision model'
   },
   
-  // OpenRouter Models - Popular and Recent
+  // Gemini Models (Current Available Models - January 2025)
   {
-    id: 'meta-llama/llama-3.3-70b-instruct',
-    name: 'Llama 3.3 70B Instruct',
-    provider: ModelProvider.OPENROUTER,
-    description: 'Latest Meta Llama model with improved capabilities'
+    id: 'gemini-2.5-pro',
+    name: 'Gemini 2.5 Pro',
+    provider: ModelProvider.GEMINI,
+    description: 'Advanced reasoning, multimodal understanding, and complex programming'
   },
   {
-    id: 'meta-llama/llama-3.2-90b-vision-instruct',
-    name: 'Llama 3.2 90B Vision Instruct',
-    provider: ModelProvider.OPENROUTER,
-    description: 'Large multimodal model with vision capabilities'
+    id: 'gemini-2.5-flash',
+    name: 'Gemini 2.5 Flash',
+    provider: ModelProvider.GEMINI,
+    description: 'Cost-effective, full-featured with adaptive reasoning'
   },
   {
-    id: 'meta-llama/llama-3.2-11b-vision-instruct',
-    name: 'Llama 3.2 11B Vision Instruct',
-    provider: ModelProvider.OPENROUTER,
-    description: 'Efficient multimodal model with vision capabilities'
+    id: 'gemini-2.0-flash',
+    name: 'Gemini 2.0 Flash',
+    provider: ModelProvider.GEMINI,
+    description: 'Next-generation features with enhanced capabilities and 1M token context'
   },
   {
-    id: 'meta-llama/llama-3.1-405b-instruct',
-    name: 'Llama 3.1 405B Instruct',
+    id: 'gemini-1.5-pro',
+    name: 'Gemini 1.5 Pro',
+    provider: ModelProvider.GEMINI,
+    description: 'Multimodal model optimized for reasoning tasks (deprecated Sept 2025)'
+  },
+  
+  // OpenRouter Models - Latest and Popular (July 2025)
+  {
+    id: 'meta-llama/llama-4-maverick',
+    name: 'Llama 4 Maverick',
     provider: ModelProvider.OPENROUTER,
-    description: 'Largest open-source language model'
+    description: 'MoE 400B (17B active), 256K context, sliding window (Apr 2025)'
   },
   {
-    id: 'meta-llama/llama-3.1-70b-instruct',
-    name: 'Llama 3.1 70B Instruct',
+    id: 'openai/o3-mini',
+    name: 'OpenAI o3-mini (OR)',
     provider: ModelProvider.OPENROUTER,
-    description: 'High-performance open-source model'
+    description: 'OpenAI o3-mini via OpenRouter'
   },
   {
-    id: 'google/gemini-pro-1.5',
-    name: 'Gemini Pro 1.5',
+    id: 'google/gemini-2.5-pro',
+    name: 'Gemini 2.5 Pro (OR)',
     provider: ModelProvider.OPENROUTER,
-    description: 'Google\'s advanced multimodal AI model'
+    description: 'Google\'s latest multimodal AI model via OpenRouter'
   },
   {
-    id: 'google/gemini-flash-1.5',
-    name: 'Gemini Flash 1.5',
+    id: 'google/gemini-2.0-flash',
+    name: 'Gemini 2.0 Flash (OR)',
     provider: ModelProvider.OPENROUTER,
-    description: 'Fast and efficient Google model'
+    description: 'Gemini 2.0 Flash via OpenRouter'
   },
   {
     id: 'anthropic/claude-3.5-sonnet',
-    name: 'Claude 3.5 Sonnet (OpenRouter)',
+    name: 'Claude 3.5 Sonnet (OR)',
     provider: ModelProvider.OPENROUTER,
-    description: 'Claude 3.5 Sonnet via OpenRouter routing'
+    description: 'Claude 3.5 Sonnet via OpenRouter'
   },
   {
-    id: 'anthropic/claude-3-opus',
-    name: 'Claude 3 Opus (OpenRouter)',
+    id: 'anthropic/claude-opus-4',
+    name: 'Claude Opus 4 (OR)',
     provider: ModelProvider.OPENROUTER,
-    description: 'Claude 3 Opus via OpenRouter routing'
+    description: 'Claude Opus 4 via OpenRouter'
   },
   {
-    id: 'mistralai/mistral-large',
-    name: 'Mistral Large (OpenRouter)',
+    id: 'anthropic/claude-sonnet-4',
+    name: 'Claude Sonnet 4 (OR)',
     provider: ModelProvider.OPENROUTER,
-    description: 'Mistral Large via OpenRouter routing'
+    description: 'Claude Sonnet 4 via OpenRouter'
   },
   {
-    id: 'cohere/command-r-plus',
-    name: 'Command R+',
+    id: 'qwen/qwen-3-235b-a22b-instruct',
+    name: 'Qwen3 235B',
     provider: ModelProvider.OPENROUTER,
-    description: 'Cohere\'s flagship model for complex reasoning'
+    description: 'Qwen3 flagship MoE, 256K context, updated July 2025'
   },
   {
-    id: 'qwen/qwen-2.5-72b-instruct',
-    name: 'Qwen 2.5 72B Instruct',
+    id: 'deepseek/deepseek-r1-0528',
+    name: 'DeepSeek R1-0528 (OR)',
     provider: ModelProvider.OPENROUTER,
-    description: 'Alibaba\'s advanced multilingual model'
+    description: 'Latest DeepSeek reasoning via OpenRouter'
   },
   {
-    id: 'deepseek/deepseek-r1',
-    name: 'DeepSeek R1 (OpenRouter)',
+    id: 'x-ai/grok-4',
+    name: 'Grok-4',
     provider: ModelProvider.OPENROUTER,
-    description: 'DeepSeek R1 via OpenRouter routing'
+    description: 'Most intelligent xAI model with tool use & search (July 2025)'
   },
   {
-    id: 'x-ai/grok-2',
-    name: 'Grok-2',
+    id: 'moonshot/kimi-k2',
+    name: 'Kimi K2',
     provider: ModelProvider.OPENROUTER,
-    description: 'X.AI\'s conversational AI model'
+    description: '1T params MoE, 32B active, agentic AI with MCP support (July 2025)'
   }
 ];
 

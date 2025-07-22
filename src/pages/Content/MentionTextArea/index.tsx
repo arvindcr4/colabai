@@ -6,11 +6,12 @@ import './style.css';
 
 export const ActionTextAreaWrapper = forwardRef<ActionTextAreaRef, { 
   actions: TextAction[], 
-  onInput: (text: string) => void 
+  onInput: (text: string) => void,
+  onSubmit?: () => void
 }>((props, ref) => {
   return (
     <ActionProvider actions={props.actions}>
-      <ActionTextArea ref={ref} onInput={props.onInput} />
+      <ActionTextArea ref={ref} onInput={props.onInput} onSubmit={props.onSubmit} />
     </ActionProvider>
   );
 });
