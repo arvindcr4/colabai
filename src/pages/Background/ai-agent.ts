@@ -10,6 +10,40 @@ import { Message } from '../../utils/models/model-interface';
 import { getModelById, ModelProvider } from '../../utils/models/types';
 import { system_prompt, context_enhancer_prompt } from './prompts';
 
+/**
+ * Get API key for a given model provider from storage
+ */
+async function getApiKeyForProvider(provider: ModelProvider): Promise<string> {
+    const storageKeyMap: Record<ModelProvider, string> = {
+        [ModelProvider.OPENAI]: 'openai_api_key',
+        [ModelProvider.DEEPSEEK]: 'deepseek_api_key',
+        [ModelProvider.ANTHROPIC]: 'anthropic_api_key',
+        [ModelProvider.MISTRAL]: 'mistral_api_key',
+        [ModelProvider.OPENROUTER]: 'openrouter_api_key',
+    };
+
+    const storageKey = storageKeyMap[provider];
+
+    if (!storageKey) {
+        throw new AIServiceError({
+            type: ErrorType.CONFIGURATION,
+            message: `No storage key mapping found for provider: ${provider}`
+        });
+    }
+
+    const result = await chrome.storage.local.get(storageKey);
+    const apiKey = result[storageKey];
+
+    if (!apiKey) {
+        throw new AIServiceError({
+            type: ErrorType.CONFIGURATION,
+            message: `API key for ${provider} is not configured. Please set it in the extension options.`
+        });
+    }
+
+    return apiKey;
+}
+
 let notebookTracker: NotebookChangeTracker;
 const changeLogs: string[] = [];
 const prompts: string[] = [];
@@ -146,17 +180,7 @@ async function callModel(messages: Message[], modelId: string): Promise<string> 
     
     // Get appropriate API key based on the model provider
     const provider = modelInfo.provider;
-    const storageKey = provider === ModelProvider.OPENAI ? 'openai_api_key' : 'deepseek_api_key';
-    
-    const result = await chrome.storage.local.get(storageKey);
-    const apiKey = result[storageKey];
-    
-    if (!apiKey) {
-        throw new AIServiceError({
-            type: ErrorType.CONFIGURATION,
-            message: `API key for ${provider} is not configured. Please set it in the extension options.`
-        });
-    }
+    const apiKey = await getApiKeyForProvider(provider);
     
     // Create model instance using the factory
     const model = ModelFactory.createModelFromId(modelId, apiKey, 0.2);
@@ -181,17 +205,7 @@ async function streamModelResponse(messages: Message[], modelId: string): Promis
     
     // Get appropriate API key based on the model provider
     const provider = modelInfo.provider;
-    const storageKey = provider === ModelProvider.OPENAI ? 'openai_api_key' : 'deepseek_api_key';
-    
-    const result = await chrome.storage.local.get(storageKey);
-    const apiKey = result[storageKey];
-    
-    if (!apiKey) {
-        throw new AIServiceError({
-            type: ErrorType.CONFIGURATION,
-            message: `API key for ${provider} is not configured. Please set it in the extension options.`
-        });
-    }
+    const apiKey = await getApiKeyForProvider(provider);
     
     // Create model instance using the factory
     const model = ModelFactory.createModelFromId(modelId, apiKey, 0.7);

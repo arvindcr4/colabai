@@ -1,7 +1,10 @@
 import { ModelInterface } from './model-interface';
+import { MistralModel } from './mistral-model';
 import { OpenAIModel } from './openai-model';
 import { DeepSeekModel } from './deepseek-model';
-import { ModelConfig, ModelProvider, OpenAIModelConfig, DeepSeekModelConfig, getModelById } from './types';
+import { AnthropicModel } from './anthropic-model';
+import { OpenRouterModel } from './openrouter-model';
+import { ModelConfig, ModelProvider, OpenAIModelConfig, DeepSeekModelConfig, MistralModelConfig, AnthropicModelConfig, OpenRouterModelConfig, getModelById } from './types';
 import { AIServiceError, ErrorType } from '../errors';
 
 /**
@@ -17,6 +20,12 @@ export class ModelFactory {
         return new OpenAIModel(config as OpenAIModelConfig);
       case ModelProvider.DEEPSEEK:
         return new DeepSeekModel(config as DeepSeekModelConfig);
+      case ModelProvider.MISTRAL:
+        return new MistralModel(config as MistralModelConfig);
+      case ModelProvider.ANTHROPIC:
+        return new AnthropicModel(config as AnthropicModelConfig);
+      case ModelProvider.OPENROUTER:
+        return new OpenRouterModel(config as OpenRouterModelConfig);
       default:
         throw new AIServiceError({
           type: ErrorType.CONFIGURATION,
@@ -35,6 +44,13 @@ export class ModelFactory {
       throw new AIServiceError({
         type: ErrorType.CONFIGURATION,
         message: `Unknown model ID: ${modelId}`
+      });
+    }
+
+    if (!apiKey || apiKey.trim() === '') {
+      throw new AIServiceError({
+        type: ErrorType.CONFIGURATION,
+        message: `API key is required for ${modelInfo.provider} provider`
       });
     }
 

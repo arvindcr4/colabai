@@ -9,6 +9,9 @@ import '../../styles.css';
 const Popup = () => {
   const [openaiApiKey, setOpenaiApiKey] = useState('');
   const [deepseekApiKey, setDeepseekApiKey] = useState('');
+  const [anthropicApiKey, setAnthropicApiKey] = useState('');
+  const [mistralApiKey, setMistralApiKey] = useState('');
+  const [openrouterApiKey, setOpenrouterApiKey] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [savedMessage, setSavedMessage] = useState<string | null>(null);
@@ -21,6 +24,9 @@ const Popup = () => {
       [
         'openai_api_key',
         'deepseek_api_key',
+        'anthropic_api_key',
+        'mistral_api_key',
+        'openrouter_api_key',
         'selected_model',
         'allow_reduce_content',
       ],
@@ -31,6 +37,18 @@ const Popup = () => {
 
         if (result.deepseek_api_key) {
           setDeepseekApiKey(result.deepseek_api_key);
+        }
+
+        if (result.anthropic_api_key) {
+          setAnthropicApiKey(result.anthropic_api_key);
+        }
+
+        if (result.mistral_api_key) {
+          setMistralApiKey(result.mistral_api_key);
+        }
+
+        if (result.openrouter_api_key) {
+          setOpenrouterApiKey(result.openrouter_api_key);
         }
 
         if (result.selected_model) {
@@ -55,6 +73,9 @@ const Popup = () => {
       await chrome.storage.local.set({
         openai_api_key: openaiApiKey,
         deepseek_api_key: deepseekApiKey,
+        anthropic_api_key: anthropicApiKey,
+        mistral_api_key: mistralApiKey,
+        openrouter_api_key: openrouterApiKey,
         selected_model: selectedModel,
         allow_reduce_content: allow_reduce_content,
       });
@@ -71,8 +92,27 @@ const Popup = () => {
 
   // Group models by provider
   const modelsByProvider = AVAILABLE_MODELS.reduce((acc, model) => {
-    const providerKey =
-      model.provider === ModelProvider.OPENAI ? 'OpenAI' : 'DeepSeek';
+    let providerKey: string;
+    
+    switch (model.provider) {
+      case ModelProvider.OPENAI:
+        providerKey = 'OpenAI';
+        break;
+      case ModelProvider.DEEPSEEK:
+        providerKey = 'DeepSeek';
+        break;
+      case ModelProvider.ANTHROPIC:
+        providerKey = 'Anthropic';
+        break;
+      case ModelProvider.MISTRAL:
+        providerKey = 'Mistral';
+        break;
+      case ModelProvider.OPENROUTER:
+        providerKey = 'OpenRouter';
+        break;
+      default:
+        providerKey = 'Other';
+    }
 
     if (!acc[providerKey]) {
       acc[providerKey] = [];
@@ -164,6 +204,69 @@ const Popup = () => {
                   />
                   <p className="mt-1 text-xs text-gray-400">
                     Required for DeepSeek models
+                  </p>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="anthropicApiKey"
+                    className="block text-sm font-medium text-gray-400 mb-1"
+                  >
+                    Anthropic API Key
+                  </label>
+                  <input
+                    type="password"
+                    id="anthropicApiKey"
+                    value={anthropicApiKey}
+                    onChange={(e) => setAnthropicApiKey(e.target.value)}
+                    placeholder="sk-ant-..."
+                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md 
+                           text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  />
+                  <p className="mt-1 text-xs text-gray-400">
+                    Required for Anthropic Claude models
+                  </p>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="mistralApiKey"
+                    className="block text-sm font-medium text-gray-400 mb-1"
+                  >
+                    Mistral API Key
+                  </label>
+                  <input
+                    type="password"
+                    id="mistralApiKey"
+                    value={mistralApiKey}
+                    onChange={(e) => setMistralApiKey(e.target.value)}
+                    placeholder="..."
+                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md 
+                           text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  />
+                  <p className="mt-1 text-xs text-gray-400">
+                    Required for Mistral models
+                  </p>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="openrouterApiKey"
+                    className="block text-sm font-medium text-gray-400 mb-1"
+                  >
+                    OpenRouter API Key
+                  </label>
+                  <input
+                    type="password"
+                    id="openrouterApiKey"
+                    value={openrouterApiKey}
+                    onChange={(e) => setOpenrouterApiKey(e.target.value)}
+                    placeholder="sk-or-v1-..."
+                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md 
+                           text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  />
+                  <p className="mt-1 text-xs text-gray-400">
+                    Required for OpenRouter models (access to 200+ models)
                   </p>
                 </div>
 
