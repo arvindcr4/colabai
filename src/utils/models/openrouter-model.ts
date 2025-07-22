@@ -142,6 +142,14 @@ export class OpenRouterModel implements ModelInterface {
   private async handleResponseError(response: Response): Promise<never> {
     const errorData = await response.json().catch(() => ({}));
     
+    // Enhanced logging for debugging
+    console.error(`OpenRouter API Error for model ${this.config.model}:`, {
+      status: response.status,
+      statusText: response.statusText,
+      errorData,
+      model: this.config.model
+    });
+    
     if (response.status === 401) {
       throw new AIServiceError({
         type: ErrorType.AUTHENTICATION,
@@ -156,6 +164,12 @@ export class OpenRouterModel implements ModelInterface {
       throw new AIServiceError({
         type: ErrorType.MODEL_ACCESS,
         message: `The requested model "${this.config.model}" is not available with your API key.`,
+      });
+    } else if (response.status === 400) {
+      throw new AIServiceError({
+        type: ErrorType.MODEL_ACCESS,
+        message: `Bad request for model "${this.config.model}". Model may not be available or properly configured: ${errorData.error?.message || 'Unknown error'}`,
+        details: errorData
       });
     } else {
       throw new AIServiceError({

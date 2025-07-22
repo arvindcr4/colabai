@@ -145,8 +145,9 @@ export class AnthropicModel implements ModelInterface {
                   // Content block stopped
                   continue;
                 } else if (parsed.type === 'message_delta') {
-                  // Message delta with stop reason
-                  const isComplete = parsed.delta?.stop_reason === 'end_turn';
+                  // Message delta with stop reason - handle Claude 4 refusal stop reason
+                  const stopReason = parsed.delta?.stop_reason;
+                  const isComplete = stopReason === 'end_turn' || stopReason === 'refusal';
                   if (isComplete) {
                     yield {
                       content: '',
@@ -214,7 +215,14 @@ export class AnthropicModel implements ModelInterface {
   private async handleResponseError(response: Response): Promise<never> {
     const errorData = await response.json().catch(() => ({}));
     
-    console.error(`Anthropic API error - Status: ${response.status}, Model: ${this.config.model}, Response:`, errorData);
+    // Enhanced logging for Claude 4 debugging
+    console.error(`Anthropic API Error for model ${this.config.model}:`, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: Object.fromEntries(response.headers.entries()),
+      errorData,
+      model: this.config.model
+    });
 
     if (response.status === 401) {
       throw new AIServiceError({
